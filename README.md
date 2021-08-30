@@ -7,7 +7,7 @@ This script for Adobe InDesign allows you to quickly test the OpenType features 
 
 
 ## Website
-https://www.rolanddreger.net/de/503/x-hoehe-ermittlen
+
 
 ## License
 
