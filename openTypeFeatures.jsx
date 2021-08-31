@@ -49,6 +49,8 @@ __showOTFWindow();
  */
 function __showOTFWindow() {
 	
+	var _appliedFontsStatictext;
+	var _otfDiscretionaryLigatureCheckbox;
 	var _cancelButton;
 
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
@@ -56,16 +58,35 @@ function __showOTFWindow() {
 		alignChildren = ["fill","fill"];
 		margins = [15,20,20,15]; 
 		spacing = 25;
-		var _appliedFontsGroup = add("group");
-		with(_appliedFontsGroup) {
-			alignChildren = ["center","top"];
-			var _appliedFontsStatictext = add('statictext', undefined, "");
-			with(_appliedFontsStatictext) {
-				characters = 60;
-				justify = "center";
-			} /* END _appliedFontsStatictext */
-		} /* END _appliedFontsGroup */
-		
+		var _headerGroup = add("group");
+		with(_headerGroup) {
+			alignChildren = ["fill","fill"];
+			var _appliedFontsGroup = add("group");
+			with(_appliedFontsGroup) {
+				alignChildren = ["center","top"];
+				_appliedFontsStatictext = add('statictext', undefined, "");
+				with(_appliedFontsStatictext) {
+					characters = 60;
+					justify = "center";
+				} /* END _appliedFontsStatictext */
+			} /* END _appliedFontsGroup */
+		} /* END _headerGroup */
+		var _otfFeatureGroup = add("group");
+		with(_otfFeatureGroup) {
+			alignChildren = ["fill","fill"];
+			var _otfDiscretionaryLigatureGroup = add("group");
+			with(_otfDiscretionaryLigatureGroup) {
+				margins = [10,10,10,5];
+				_otfDiscretionaryLigatureCheckbox = add("checkbox", undefined, "Bedingte Ligaturen");
+			} /* END _otfDiscretionaryLigatureGroup */
+
+
+
+
+
+
+
+		} /* END _otfFeatureGroup */
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
 			spacing = 10;
@@ -85,8 +106,23 @@ function __showOTFWindow() {
  
  
 	/* Callbacks */
+	_otfDiscretionaryLigatureCheckbox.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		_selection["otfDiscretionaryLigature"] = this.value;
+	};
+
+
+
+
+
+
+
+
+
+
 	_testButton.onClick = function() {
-		
+		var _selection = __getSelection(_otfWindow);
+		__checkInputs(_selection);
 	};
 
 	_cancelButton.onClick = function() {
@@ -103,6 +139,14 @@ function __showOTFWindow() {
 	var _appliedFonts = __getAppliedFonts(_otfWindow, _selection);
 	_appliedFontsStatictext.text = _appliedFonts;
 
+	
+	/* Eingaben überprüfen */
+	__checkInputs(_selection);
+
+	function __checkInputs(_selection) {
+		__checkOTFFeature("otfDiscretionaryLigature", _selection, _otfWindow, _otfDiscretionaryLigatureCheckbox);
+	} /* END function __checkInputs */ 
+	
 
 	/* Show main dialog */
 	_otfWindow.show();
@@ -112,11 +156,155 @@ function __showOTFWindow() {
 } /* END function __showOTFWindow */
 
 
+/**
+ * Check OpenType Feature
+ * @param {String} _otfFeatureName 
+ * @param {Text} _selection 
+ * @param {Window} _window 
+ * @param {ScriptUiItem} _suiItem 
+ * @returns {Boolean}
+ */
+function __checkOTFFeature(_otfFeatureName, _selection, _window, _suiItem) {
 
-/* 
-	Font.checkOpenTypeFeature()
+	if(!_otfFeatureName || _otfFeatureName.constructor !== String) {
+		throw new Error("Argument [_otfFeatureName] must be an String.");
+	}
+	if(!_window || !(_window instanceof Window)) {
+		throw new Error("Argument [_window] must be a Window object.");
+	}
+	if(!_suiItem || !_suiItem.hasOwnProperty("value")) {
+		throw new Error("Argument [_suiItem] must be a ScriptUIItem.");
+	}
 
-*/
+	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { 
+		_window.text = localize(_global.selectionNotValidAlert);
+		return false;
+	}
+	
+	const RED_COLOR = [1,0.35,0.35,1];
+	const DIMMED_BLACK_COLOR = [0,0,0,0.05];
+	const TRANSPARENT_WHITE_COLOR = [1,1,1,0];
+
+	const _squareBracketRegExp = new RegExp("[\\[\\]]","g");
+
+	const _otfTypeObj = {
+		// "":OpenTypeFeature.ALL_SMALL_CAPS_FEATURE, /* "Provides authentic small caps rather than scaled-down versions of the font's regular caps." */
+		"otfContextualAlternate":OpenTypeFeature.CONTEXTUAL_ALTERNATES_FEATURE, /* Activates contextual ligatures and connecting alternates. */
+		"otfFigureStyle":OpenTypeFeature.DEFAULT_FIGURE_STYLE_FEATURE, /* Applies the default figure style of the current font to figure glyphs. */
+		// "":OpenTypeFeature.DENOMINATOR_FEATURE, /* In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the second number as a denominator. */
+		"otfDiscretionaryLigature":OpenTypeFeature.DISCRETIONARY_LIGATURES_FEATURE, /* Allows the use of optional discretionary ligatures. */
+		"otfFraction":OpenTypeFeature.FRACTIONS_FEATURE, /* Reformats numbers separated by a slash, such as 1/2, as fractions. Note: In some fonts, the fractions feature reformats only standard fractions. For information on reformatting non-standard fractions such as 4/13, see denominator feature and numerator feature. */
+		"otfJustificationAlternate":OpenTypeFeature.JUSTIFICATION_ALTERNATE, /* Justification alternate */
+		// "":OpenTypeFeature.LOW, /* Low. */
+		// "":OpenTypeFeature.NUMERATOR_FEATURE, /* In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the first number as a numerator. */
+		"otfOrdinal":OpenTypeFeature.ORDINAL_FEATURE, /* Superscripts the alpha characters in ordinal numbers. */
+		"otfOverlapSwash":OpenTypeFeature.OVERLAP_SWASH, /* Overlap swash */
+		// "":OpenTypeFeature.PROPORTIONAL_LINING_FEATURE, /* Gives full-height figures varying widths. */
+		// "":OpenTypeFeature.PROPORTIONAL_OLDSTYLE_FEATURE, /* Gives varying-height figures varying widths. */
+		"otfStretchedAlternate":OpenTypeFeature.STRETCHED_ALTERNATE, /* Stretched alternate */
+		"otfStylisticAlternate":OpenTypeFeature.STYLISTIC_ALTERNATE, /* Stylistic alternate */
+		// "":OpenTypeFeature.SUBSCRIPT_FEATURE, /* Sizes lowered glyphs correctly relative to the surrounding characters. */
+		// "":OpenTypeFeature.SUPERSCRIPT_FEATURE, /* Sizes raised glyphs correctly relative to the surrounding characters. */
+		"otfSwash":OpenTypeFeature.SWASH_FEATURE, /* Provides regular and contextual swashes, which may include alternate caps and end-of-word alternatives. */
+		// "":OpenTypeFeature.TABULAR_LINING_FEATURE, /* Gives full-height figures fixed, equal width. */
+		// "":OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE, /* Gives varying-height figures fixed, equal widths. */
+		"otfTitling":OpenTypeFeature.TITLING_FEATURE /* Activates alternative characters used for uppercase titles. */
+	}; 
+
+	/* Reset values */
+	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
+	_suiItem.parent.isBackgroundSet = false;
+	_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
+	_suiItem.value = false;
+
+
+	/* Upadate values */
+	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
+
+	var _prevOTFFeatureValue;
+	var _prevOTFFeatureAvailability;
+	
+	for(var i=0; i<_textStyleRangeArray.length; i+=1) {
+
+		var _curTextStyleRange = _textStyleRangeArray[i];
+		if(!_curTextStyleRange || !_curTextStyleRange.hasOwnProperty(_otfFeatureName) || !_curTextStyleRange.isValid) {
+			continue;
+		}
+		
+		var _otfFeatureValue = _curTextStyleRange[_otfFeatureName];
+		if(_otfFeatureValue === true) {
+			_suiItem.value = true;
+		}
+
+		if(_prevOTFFeatureValue !== undefined && _otfFeatureValue !== _prevOTFFeatureValue) {
+			__applyBackgroundColor(_suiItem.parent, RED_COLOR);
+			_suiItem.parent.helpTip = localize(_global.multipleFeatureValuesAlert);
+			_suiItem.parent.isBackgroundSet = true;
+		}
+
+		var _appliedFont = _curTextStyleRange.appliedFont;
+		if(!_appliedFont || !(_appliedFont instanceof Font) || !_appliedFont.isValid) {
+			continue;
+		}
+
+		var _otfFeatureAvailability = _otfTypeObj.hasOwnProperty(_otfFeatureName) && _appliedFont.checkOpenTypeFeature(_otfTypeObj[_otfFeatureName]);
+		if(_otfFeatureAvailability === true) {
+			_suiItem.text = _suiItem.text.replace(_squareBracketRegExp, "");
+		} 
+
+		if(_suiItem.parent.isBackgroundSet !== true && _prevOTFFeatureAvailability !== undefined && _otfFeatureAvailability !== _prevOTFFeatureAvailability) {
+			__applyBackgroundColor(_suiItem.parent, DIMMED_BLACK_COLOR);
+			_suiItem.parent.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
+		}
+
+		_prevOTFFeatureAvailability = _otfFeatureAvailability;
+		_prevOTFFeatureValue = _otfFeatureValue;
+	}
+	
+	return true;
+} /* END function __checkOTFFeature */
+
+
+
+/**
+ * Hintergrundfarbe für Skript-UI-Item im Dialog zuweisen
+ * @param {SUIItem} _suiItem 
+ * @param {Boolean} _flag 
+ * @returns {Boolean}
+ */
+function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
+
+	if (!_suiItem || !_suiItem.hasOwnProperty("graphics")) { return false; }
+	if (!_bgColorArray || !(_bgColorArray instanceof Array) || _bgColorArray.length !== 4) { return false; }
+
+	const _transparentBGColorArray = [1, 1, 1, 0];
+
+	if (_flag === false) {
+		_suiItem.graphics.backgroundColor = _suiItem.graphics.newBrush(
+			_suiItem.graphics.BrushType.SOLID_COLOR,
+			_transparentBGColorArray
+		);
+	} else {
+		_suiItem.graphics.backgroundColor = _suiItem.graphics.newBrush(
+			_suiItem.graphics.BrushType.SOLID_COLOR,
+			_bgColorArray
+		);
+	}
+
+	return true;
+} /* END function __applyBackgroundColor */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -331,4 +519,14 @@ function __defineLocalizeStrings() {
 		en:"Selection not valid!",
 		de:"Auswahl nicht (mehr) valide!"
 	};
+
+	_global.multipleFeatureValuesAlert = {
+		en:"The selection has different values for this OpenType feature.",
+		de:"Die Auswahl weist unterschiedliche Werte für diese OpenType-Funktion auf."
+	}
+
+	_global.multipleFeatureAvailabilityAlert = {
+		en:"The selection has different availability for this OpenType feature.",
+		de:"Die Auswahl weist unterschiedliche Verfügbarkeit für diese OpenType-Funktion auf."
+	}
 } /* END function __defineLocalizeStrings */
