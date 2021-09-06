@@ -113,7 +113,7 @@ function __showOTFWindow() {
 
 
 
-
+	/* Button for creating character style */
 
 
 
@@ -166,15 +166,9 @@ function __showOTFWindow() {
  */
 function __checkOTFFeature(_otfFeatureName, _selection, _window, _suiItem) {
 
-	if(!_otfFeatureName || _otfFeatureName.constructor !== String) {
-		throw new Error("Argument [_otfFeatureName] must be an String.");
-	}
-	if(!_window || !(_window instanceof Window)) {
-		throw new Error("Argument [_window] must be a Window object.");
-	}
-	if(!_suiItem || !_suiItem.hasOwnProperty("value")) {
-		throw new Error("Argument [_suiItem] must be a ScriptUIItem.");
-	}
+	if(!_otfFeatureName || _otfFeatureName.constructor !== String) { return false; }
+	if(!_window || !(_window instanceof Window)) { return false; }
+	if(!_suiItem || !_suiItem.hasOwnProperty("value")) { return false; }
 
 	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { 
 		_window.text = localize(_global.selectionNotValidAlert);
@@ -314,12 +308,8 @@ function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
  */
 function __getSelection(_window) {
 
-	if(!_global) {
-		throw new Error("Variable [_global] not defined.");
-	}
-	if(!_window || !(_window instanceof Window)) {
-		throw new Error("Argument [_window] must be a Window object.");
-	}
+	if(!_global) { return null; }
+	if(!_window || !(_window instanceof Window)) { return null; }
 
 	_window.text = localize(_global.uiHeadLabel);
 
@@ -352,14 +342,11 @@ function __getSelection(_window) {
  */
 function __getAppliedFonts(_window, _selection) {
 
-	if(!_global) {
-		throw new Error("Variable [_global] not defined.");
-	}
-	if(!_window || !(_window instanceof Window)) {
-		throw new Error("Argument [_window] must be a Window object.");
-	}
-
-	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { 
+	if(
+		!_global || 
+		!_window || !(_window instanceof Window) ||
+		!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid
+	) { 
 		return localize(_global.fontNotEvaluableAlert); 
 	}
 
@@ -407,12 +394,8 @@ function __getAppliedFonts(_window, _selection) {
  */
 function __isFontInstalled(_font) {
 	
-	if(!_font || !(_font instanceof Font) || !_font.isValid) { 
-		return false;
-	}
-	if(app.documents.length === 0 || app.layoutWindows.length === 0) {
-		return false; 
-	}
+	if(!_font || !(_font instanceof Font) || !_font.isValid) { return false; }
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { return false; }
 
 	var _doc = app.documents.firstItem();
 	if(!_doc.isValid) {
@@ -463,7 +446,7 @@ function __uniqueArray(_inputArray) {
 
 	for(var _key in _tempObj) { 
 		if(!_tempObj.hasOwnProperty(_key)) {
-			return;
+			continue;
 		}
 		_outputArray.push(_tempObj[_key]); 
 	}
