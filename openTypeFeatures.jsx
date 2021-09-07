@@ -7,6 +7,29 @@
 		+	Datum: 30. August 2021
 		
 		+	Zuletzt aktualisiert: 7. September 2021
+
+			OpenTypeFeatures:
+			DISCRETIONARY_LIGATURES_FEATURE  ->  Allows the use of optional discretionary ligatures.
+			FRACTIONS_FEATURE  ->  Reformats numbers separated by a slash, such as 1/2, as fractions. Note: In some fonts, the fractions feature reformats only standard fractions. For information on reformatting non-standard fractions such as 4/13, see denominator feature and numerator feature.
+			ORDINAL_FEATURE  ->  Superscripts the alpha characters in ordinal numbers.
+			SWASH_FEATURE  ->  Provides regular and contextual swashes, which may include alternate caps and end-of-word alternatives.
+			TITLING_FEATURE  ->  Activates alternative characters used for uppercase titles.
+			CONTEXTUAL_ALTERNATES_FEATURE  ->  Activates contextual ligatures and connecting alternates.
+			ALL_SMALL_CAPS_FEATURE  ->  "Provides authentic small caps rather than scaled-down versions of the font's regular caps."
+			DEFAULT_FIGURE_STYLE_FEATURE  ->  Applies the default figure style of the current font to figure glyphs.
+			DENOMINATOR_FEATURE  ->  In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the second number as a denominator.
+			JUSTIFICATION_ALTERNATE  ->  Justification alternate
+			LOW  ->  Low.
+			NUMERATOR_FEATURE  ->  In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the first number as a numerator.
+			OVERLAP_SWASH  ->  Overlap swash
+			PROPORTIONAL_LINING_FEATURE  ->  Gives full-height figures varying widths.
+			PROPORTIONAL_OLDSTYLE_FEATURE  ->  Gives varying-height figures varying widths.
+			STRETCHED_ALTERNATE  ->  Stretched alternate
+			STYLISTIC_ALTERNATE  ->  Stylistic alternate
+			SUBSCRIPT_FEATURE  ->  Sizes lowered glyphs correctly relative to the surrounding characters.
+			SUPERSCRIPT_FEATURE  ->  Sizes raised glyphs correctly relative to the surrounding characters.
+			TABULAR_LINING_FEATURE  ->  Gives full-height figures fixed, equal width.
+			TABULAR_OLDSTYLE_FEATURE  ->  Gives varying-height figures fixed, equal widths.
 		
 
 		+	License (MIT)
@@ -62,12 +85,17 @@ function __showOTFWindow() {
 	var _otfTitlingCheckbox;
 	var _otfContextualAlternateCheckbox;
 	var _capitalizationCheckbox;
+
 	var _positionSuperscriptCheckbox;
 	var _positionSubscriptCheckbox;
 	var _positionNumeratorCheckbox;
 	var _positionDenominatorCheckbox;
-			
-
+	
+	var _digitTabularLiningCheckbox;
+	var _digitProportionalOldstyleCheckbox;
+	var _digitProportionalLiningCheckbox;
+	var _digitTabularOldstyleCheckbox;
+	var _digitDefaultFigureStyleCheckbox;
 
 	var _cancelButton;
 
@@ -101,7 +129,7 @@ function __showOTFWindow() {
 				alignChildren = ["fill","fill"];
 				var _otfFeaturePanel = add("panel", undefined, localize(_global.oftFeaturePanelLabel));
 				with(_otfFeaturePanel) {
-					alignChildren = "left";
+					alignChildren = ["fill","top"];
 					margins = PANEL_MARGINS;
 					spacing = 0;
 					var _otfDiscretionaryLigatureGroup = add("group");
@@ -150,44 +178,30 @@ function __showOTFWindow() {
 				alignChildren = ["fill","fill"];
 				var _otfPositionPanel = add("panel", undefined,localize(_global.otfPositionPanelLabel)); 
 				with(_otfPositionPanel) {
-					alignChildren = "left";
+					alignChildren = ["fill","top"];
 					margins = PANEL_MARGINS;
 					spacing = 0;
 					var _positionSuperscriptGroup = add("group");
 					with(_positionSuperscriptGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_positionSuperscriptCheckbox = add("checkbox", undefined, localize(_global.superscriptListLabel));
+						_positionSuperscriptCheckbox = add("checkbox", undefined, localize(_global.positionSuperscriptCheckboxLabel));
 					} /* END _positionSuperscriptGroup */
 					var _positionSubscriptGroup = add("group");
 					with(_positionSubscriptGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_positionSubscriptCheckbox = add("checkbox", undefined, localize(_global.subscriptListLabel));
+						_positionSubscriptCheckbox = add("checkbox", undefined, localize(_global.positionSubscriptCheckboxLabel));
 					} /* END _positionSubscriptGroup */
 					var _positionNumeratorGroup = add("group");
 					with(_positionNumeratorGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_positionNumeratorCheckbox = add("checkbox", undefined, localize(_global.numeratorListLabel));
+						_positionNumeratorCheckbox = add("checkbox", undefined, localize(_global.positionNumeratorCheckboxLabel));
 					} /* END _positionNumeratorGroup */
 					var _positionDenominatorGroup = add("group");
 					with(_positionDenominatorGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_positionDenominatorCheckbox = add("checkbox", undefined, localize(_global.denominatorListLabel));
+						_positionDenominatorCheckbox = add("checkbox", undefined, localize(_global.positionDenominatorCheckboxLabel));
 					} /* END _positionDenominatorGroup */
 				} /* END _positionGroup */
-				var _otfDigitPanel = add("panel", undefined,localize(_global.otfDigitPanelLabel));
-				with(_otfDigitPanel) {
-					alignChildren = "left";
-					margins = PANEL_MARGINS;
-					spacing = 0;
-
-
-
-
-
-
-
-
-				} /* END _otfDigitPanel */
 			} /* END _column2Group */
 			/* ++++++++++++ */
 			/* + Column 3 + */
@@ -196,7 +210,37 @@ function __showOTFWindow() {
 			with(_column3Group) {
 				orientation = "column";
 				alignChildren = ["fill","fill"];
-
+				var _otfDigitPanel = add("panel", undefined,localize(_global.otfDigitPanelLabel));
+				with(_otfDigitPanel) {
+					alignChildren = ["fill","top"];
+					margins = PANEL_MARGINS;
+					spacing = 0;
+					var _digitTabularLiningGroup = add("group");
+					with(_digitTabularLiningGroup) {
+						margins = FEATURE_GROUP_MARGINS;
+						_digitTabularLiningCheckbox = add("checkbox", undefined, localize(_global.digitTabularLiningCheckboxLabel));
+					} /* END _digitTabularLiningGroup */
+					var _digitProportionalOldstyleGroup = add("group");
+					with(_digitProportionalOldstyleGroup) {
+						margins = FEATURE_GROUP_MARGINS;
+						_digitProportionalOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitProportionalOldstyleCheckboxLabel));
+					} /* END _digitProportionalOldstyleGroup */
+					var _digitProportionalLiningGroup = add("group");
+					with(_digitProportionalLiningGroup) {
+						margins = FEATURE_GROUP_MARGINS;
+						_digitProportionalLiningCheckbox = add("checkbox", undefined, localize(_global.digitProportionalLiningCheckboxLabel));
+					} /* END _digitProportionalLiningGroup */
+					var _digitTabularOldstyleGroup = add("group");
+					with(_digitTabularOldstyleGroup) {
+						margins = FEATURE_GROUP_MARGINS;
+						_digitTabularOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitTabularOldstyleCheckboxLabel));
+					} /* END _digitTabularOldstyleGroup */
+					var _digitDefaultFigureStyleGroup = add("group");
+					with(_digitDefaultFigureStyleGroup) {
+						margins = FEATURE_GROUP_MARGINS;
+						_digitDefaultFigureStyleCheckbox = add("checkbox", undefined, localize(_global.digitDefaultFigureStyleCheckboxLabel));
+					} /* END _digitDefaultFigureStyleGroup */
+				} /* END _otfDigitPanel */
 			} /* END _column3Group */
 		} /* END _selectionGroup */
 		var _buttonGroup = add("group");
@@ -238,46 +282,82 @@ function __showOTFWindow() {
 		__setValue("otfContextualAlternate", this.value, _otfWindow);
 	};
 	_capitalizationCheckbox.onClick = function() {
-		var _value = (this.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL;
+		var _value = (this.value && Capitalization.CAP_TO_SMALL_CAP) || Capitalization.NORMAL;
 		__setValue("capitalization", _value, _otfWindow);
 	};
 	/* Position */
 	_positionSuperscriptCheckbox.onClick = function() {
-		var _value = (this.value) ?	_value = Position.OT_SUPERSCRIPT : Position.NORMAL;
-		if(this.value) {
-			_positionSubscriptCheckbox.value = false;
-			_positionNumeratorCheckbox.value = false;
-			_positionDenominatorCheckbox.value = false;
-		}
+		_positionSubscriptCheckbox.value = false;
+		_positionNumeratorCheckbox.value = false;
+		_positionDenominatorCheckbox.value = false;
+		var _value = (this.value && Position.OT_SUPERSCRIPT) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
 	};
 	_positionSubscriptCheckbox.onClick = function() {
-		var _value = (this.value) ?	_value = Position.OT_SUBSCRIPT : Position.NORMAL;
-		if(this.value) {
-			_positionSuperscriptCheckbox.value = false;
-			_positionNumeratorCheckbox.value = false;
-			_positionDenominatorCheckbox.value = false;
-		}
+		_positionSuperscriptCheckbox.value = false;
+		_positionNumeratorCheckbox.value = false;
+		_positionDenominatorCheckbox.value = false;
+		var _value = (this.value && Position.OT_SUBSCRIPT) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
 	};
 	_positionNumeratorCheckbox.onClick = function() {
-		var _value = (this.value) ?	_value = Position.OT_NUMERATOR : Position.NORMAL;
-		if(this.value) {
-			_positionSuperscriptCheckbox.value = false;
-			_positionSubscriptCheckbox.value = false;
-			_positionDenominatorCheckbox.value = false;
-		}
+		_positionSuperscriptCheckbox.value = false;
+		_positionSubscriptCheckbox.value = false;
+		_positionDenominatorCheckbox.value = false;
+		var _value = (this.value && Position.OT_NUMERATOR) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
 	};
 	_positionDenominatorCheckbox.onClick = function() {
-		var _value = (this.value) ?	_value = Position.OT_DENOMINATOR : Position.NORMAL;
-		if(this.value) {
-			_positionSuperscriptCheckbox.value = false;
-			_positionSubscriptCheckbox.value = false;
-			_positionNumeratorCheckbox.value = false;
-		}
+		_positionSuperscriptCheckbox.value = false;
+		_positionSubscriptCheckbox.value = false;
+		_positionNumeratorCheckbox.value = false;
+		var _value = (this.value && Position.OT_DENOMINATOR) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
 	};
+	/* Digits */
+	_digitTabularLiningCheckbox.onClick = function() {
+		_digitProportionalOldstyleCheckbox.value = false;
+		_digitProportionalLiningCheckbox.value = false;
+		_digitTabularOldstyleCheckbox.value = false;
+		_digitDefaultFigureStyleCheckbox.value = !this.value;
+		var _value = (this.value &&	OTFFigureStyle.TABULAR_LINING) || OTFFigureStyle.DEFAULT_VALUE;
+		__setValue("otfFigureStyle", _value, _otfWindow);
+	};
+	_digitProportionalOldstyleCheckbox.onClick = function() {
+		_digitTabularLiningCheckbox.value = false;
+		_digitProportionalLiningCheckbox.value = false;
+		_digitTabularOldstyleCheckbox.value = false;
+		_digitDefaultFigureStyleCheckbox.value = !this.value;
+		var _value = (this.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) || OTFFigureStyle.DEFAULT_VALUE;
+		__setValue("otfFigureStyle", _value, _otfWindow);
+	};
+	_digitProportionalLiningCheckbox.onClick = function() {
+		_digitTabularLiningCheckbox.value = false;
+		_digitProportionalOldstyleCheckbox.value = false;
+		_digitTabularOldstyleCheckbox.value = false;
+		_digitDefaultFigureStyleCheckbox.value = !this.value;
+		var _value = (this.value && OTFFigureStyle.PROPORTIONAL_LINING) || OTFFigureStyle.DEFAULT_VALUE;
+		__setValue("otfFigureStyle", _value, _otfWindow);
+	};
+	_digitTabularOldstyleCheckbox.onClick = function() {
+		_digitTabularLiningCheckbox.value = false;
+		_digitProportionalOldstyleCheckbox.value = false;
+		_digitProportionalLiningCheckbox.value = false;
+		_digitDefaultFigureStyleCheckbox.value = !this.value;
+		var _value = (this.value && OTFFigureStyle.TABULAR_OLDSTYLE) || OTFFigureStyle.DEFAULT_VALUE;
+		__setValue("otfFigureStyle", _value, _otfWindow);
+	};
+	_digitDefaultFigureStyleCheckbox.onClick = function() {
+		_digitTabularLiningCheckbox.value = false;
+		_digitProportionalOldstyleCheckbox.value = false;
+		_digitProportionalLiningCheckbox.value = false;
+		_digitTabularOldstyleCheckbox.value = false;
+		this.value = true;
+		var _value = OTFFigureStyle.DEFAULT_VALUE;
+		__setValue("otfFigureStyle", _value, _otfWindow);
+	};
+
+
 
 
 
@@ -326,52 +406,17 @@ function __showOTFWindow() {
 		__checkOTFFeature("position", "SUBSCRIPT_FEATURE", _selection, _otfWindow, _positionSubscriptCheckbox);
 		__checkOTFFeature("position", "NUMERATOR_FEATURE", _selection, _otfWindow, _positionNumeratorCheckbox);
 		__checkOTFFeature("position", "DENOMINATOR_FEATURE", _selection, _otfWindow, _positionDenominatorCheckbox);
-		
+		__checkOTFFeature("otfFigureStyle", "TABULAR_LINING_FEATURE", _selection, _otfWindow, _digitTabularLiningCheckbox);
+		__checkOTFFeature("otfFigureStyle", "PROPORTIONAL_OLDSTYLE_FEATURE", _selection, _otfWindow, _digitProportionalOldstyleCheckbox);
+		__checkOTFFeature("otfFigureStyle", "PROPORTIONAL_LINING_FEATURE", _selection, _otfWindow, _digitProportionalLiningCheckbox);
+		__checkOTFFeature("otfFigureStyle", "TABULAR_OLDSTYLE_FEATURE", _selection, _otfWindow, _digitTabularOldstyleCheckbox);
+		__checkOTFFeature("otfFigureStyle", "DEFAULT_FIGURE_STYLE_FEATURE", _selection, _otfWindow, _digitDefaultFigureStyleCheckbox);
+
 
 		/* ... */
 		_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	} /* END function __checkInputs */ 
 	
-
-	const _otfTypeObj = {
-		"otfDiscretionaryLigature":OpenTypeFeature.DISCRETIONARY_LIGATURES_FEATURE, /* Allows the use of optional discretionary ligatures. */
-		"otfFraction":OpenTypeFeature.FRACTIONS_FEATURE, /* Reformats numbers separated by a slash, such as 1/2, as fractions. Note: In some fonts, the fractions feature reformats only standard fractions. For information on reformatting non-standard fractions such as 4/13, see denominator feature and numerator feature. */
-		"otfOrdinal":OpenTypeFeature.ORDINAL_FEATURE, /* Superscripts the alpha characters in ordinal numbers. */
-		"otfSwash":OpenTypeFeature.SWASH_FEATURE, /* Provides regular and contextual swashes, which may include alternate caps and end-of-word alternatives. */
-		"otfTitling":OpenTypeFeature.TITLING_FEATURE, /* Activates alternative characters used for uppercase titles. */
-		"otfContextualAlternate":OpenTypeFeature.CONTEXTUAL_ALTERNATES_FEATURE, /* Activates contextual ligatures and connecting alternates. */
-		"capitalization":OpenTypeFeature.ALL_SMALL_CAPS_FEATURE, /* "Provides authentic small caps rather than scaled-down versions of the font's regular caps." */
-		
-
-
-		"otfFigureStyle":OpenTypeFeature.DEFAULT_FIGURE_STYLE_FEATURE, /* Applies the default figure style of the current font to figure glyphs. */
-		// "":OpenTypeFeature.DENOMINATOR_FEATURE, /* In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the second number as a denominator. */
-		"otfJustificationAlternate":OpenTypeFeature.JUSTIFICATION_ALTERNATE, /* Justification alternate */
-		// "":OpenTypeFeature.LOW, /* Low. */
-		// "":OpenTypeFeature.NUMERATOR_FEATURE, /* In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the first number as a numerator. */
-		"otfOverlapSwash":OpenTypeFeature.OVERLAP_SWASH, /* Overlap swash */
-		// "":OpenTypeFeature.PROPORTIONAL_LINING_FEATURE, /* Gives full-height figures varying widths. */
-		// "":OpenTypeFeature.PROPORTIONAL_OLDSTYLE_FEATURE, /* Gives varying-height figures varying widths. */
-		"otfStretchedAlternate":OpenTypeFeature.STRETCHED_ALTERNATE, /* Stretched alternate */
-		"otfStylisticAlternate":OpenTypeFeature.STYLISTIC_ALTERNATE, /* Stylistic alternate */
-		// "":OpenTypeFeature.SUBSCRIPT_FEATURE, /* Sizes lowered glyphs correctly relative to the surrounding characters. */
-		// "":OpenTypeFeature.SUPERSCRIPT_FEATURE, /* Sizes raised glyphs correctly relative to the surrounding characters. */
-		// "":OpenTypeFeature.TABULAR_LINING_FEATURE, /* Gives full-height figures fixed, equal width. */
-		// "":OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE, /* Gives varying-height figures fixed, equal widths. */
-	}; 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/* Show main dialog */
 	_otfWindow.show();
@@ -385,12 +430,20 @@ function __showOTFWindow() {
 		"otfTitling":_otfTitlingCheckbox.value,
 		"otfContextualAlternate":_otfContextualAlternateCheckbox.value,
 		"capitalization":(_capitalizationCheckbox.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL,
-		"position": ((_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
-								(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
-								(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
-								(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
-								Position.NORMAL),
-
+		"position": (
+			(_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
+			(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
+			(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
+			(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
+			Position.NORMAL
+		),
+		"otfFigureStyle":(
+			(_digitTabularLiningCheckbox.value && OTFFigureStyle.TABULAR_LINING) ||
+			(_digitProportionalOldstyleCheckbox.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
+			(_digitProportionalLiningCheckbox.value && OTFFigureStyle.PROPORTIONAL_LINING) ||
+			(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
+			OTFFigureStyle.DEFAULT_VALUE
+		),
 
 
 		/* ... */
@@ -455,12 +508,24 @@ function __checkOTFFeature(_propertyName, _otfFeatureName, _selection, _window, 
 					_suiItem.value = true;
 				}
 				break;
+			/* Checkboxes: Position */
 			case "position":
 				if(
 					(_otfFeatureName === "SUPERSCRIPT_FEATURE" && _otfFeatureValue === Position.OT_SUPERSCRIPT) || 
 					(_otfFeatureName === "SUBSCRIPT_FEATURE" && _otfFeatureValue === Position.OT_SUBSCRIPT) ||
 					(_otfFeatureName === "NUMERATOR_FEATURE" && _otfFeatureValue === Position.OT_NUMERATOR) ||
 					(_otfFeatureName === "DENOMINATOR_FEATURE" && _otfFeatureValue === Position.OT_DENOMINATOR)
+					) {
+					_suiItem.value = true;
+				}
+				break;
+			case "otfFigureStyle":
+				if(
+					(_otfFeatureName === "TABULAR_LINING_FEATURE" && _otfFeatureValue === OTFFigureStyle.TABULAR_LINING) || 
+					(_otfFeatureName === "PROPORTIONAL_OLDSTYLE_FEATURE" && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
+					(_otfFeatureName === "PROPORTIONAL_LINING_FEATURE" && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_LINING) ||
+					(_otfFeatureName === "TABULAR_OLDSTYLE_FEATURE" && _otfFeatureValue === OTFFigureStyle.TABULAR_OLDSTYLE) ||
+					(_otfFeatureName === "DEFAULT_FIGURE_STYLE_FEATURE" && _otfFeatureValue === OTFFigureStyle.DEFAULT_VALUE)
 					) {
 					_suiItem.value = true;
 				}
@@ -821,43 +886,59 @@ function __defineLocalizeStrings() {
 		de:"Alles in Kapitälchen"
 	};
 
-	_global.superscriptListLabel = {
-		en:"Superscript/Superior",
-		de:"Hochgestellt"
-	};
-
-	_global.subscriptListLabel = {
-		en:"Subscript/Inferior",
-		de:"Tiefgestellt"
-	};
-	
-	_global.numeratorListLabel = {
-		en:"Numerator",
-		de:"Zähler"
-	};
-	
-	_global.denominatorListLabel = {
-		en:"Denominator",
-		de:"Nenner"
-	};
-	
-
-
-
-
-
-
-
-
-
 	_global.otfPositionPanelLabel = {
 		en:"Position",
 		de:"Position"
 	};
 
+	_global.positionSuperscriptCheckboxLabel = {
+		en:"Superscript/Superior",
+		de:"Hochgestellt"
+	};
+
+	_global.positionSubscriptCheckboxLabel = {
+		en:"Subscript/Inferior",
+		de:"Tiefgestellt"
+	};
+	
+	_global.positionNumeratorCheckboxLabel = {
+		en:"Numerator",
+		de:"Zähler"
+	};
+	
+	_global.positionDenominatorCheckboxLabel = {
+		en:"Denominator",
+		de:"Nenner"
+	};
+	
 	_global.otfDigitPanelLabel = {
 		en:"Digit",
 		de:"Ziffern"
+	};
+
+	_global.digitTabularLiningCheckboxLabel = {
+		en:"Tabular Lining",
+		de:"Versalziffern für Tabellen"
+	};
+
+	_global.digitProportionalOldstyleCheckboxLabel = {
+		en:"Proportional Oldstyle",
+		de:"Proportionale Mediävalziffern"
+	};
+
+	_global.digitProportionalLiningCheckboxLabel = {
+		en:"Proportional Lining",
+		de:"Proportionale Versalziffern"
+	};
+
+	_global.digitTabularOldstyleCheckboxLabel = {
+		en:"Tabular Oldstyle",
+		de:"Mediävalziffern für Tabellen"
+	};
+
+	_global.digitDefaultFigureStyleCheckboxLabel = {
+		en:"Default Figure Style",
+		de:"Standardzahlenformat"
 	};
 
 	_global.setValueAlert = {
