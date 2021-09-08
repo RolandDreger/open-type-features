@@ -97,6 +97,27 @@ function __showOTFWindow() {
 	var _digitTabularOldstyleCheckbox;
 	var _digitDefaultFigureStyleCheckbox;
 
+	var _otfStylisticSet1Checkbox;
+	var _otfStylisticSet2Checkbox;
+	var _otfStylisticSet3Checkbox;
+	var _otfStylisticSet4Checkbox;
+	var _otfStylisticSet5Checkbox;
+	var _otfStylisticSet6Checkbox;
+	var _otfStylisticSet7Checkbox;
+	var _otfStylisticSet8Checkbox;
+	var _otfStylisticSet9Checkbox;
+	var _otfStylisticSet10Checkbox;
+	var _otfStylisticSet11Checkbox;
+	var _otfStylisticSet12Checkbox;
+	var _otfStylisticSet13Checkbox;
+	var _otfStylisticSet14Checkbox;
+	var _otfStylisticSet15Checkbox;
+	var _otfStylisticSet16Checkbox;
+	var _otfStylisticSet17Checkbox;
+	var _otfStylisticSet18Checkbox;
+	var _otfStylisticSet19Checkbox;
+	var _otfStylisticSet20Checkbox;
+	
 	var _cancelButton;
 
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
@@ -242,6 +263,153 @@ function __showOTFWindow() {
 					} /* END _digitDefaultFigureStyleGroup */
 				} /* END _otfDigitPanel */
 			} /* END _column3Group */
+			/* ++++++++++++ */
+			/* + Column 4 + */
+			/* ++++++++++++ */
+			var _column4Group = add("group");
+			with(_column4Group) {
+				orientation = "column";
+				alignChildren = ["fill","fill"];
+				var _otfStylisticSetsPanel = add("panel", undefined,localize(_global.otfStylisticSetPanelLabel));
+				with(_otfStylisticSetsPanel) {
+					orientation = "row";
+					alignChildren = ["fill","fill"];
+					margins = PANEL_MARGINS;
+					spacing = 0;
+					var _otfStylisticSetColumn1Group = add("group");
+					with(_otfStylisticSetColumn1Group) {
+						orientation = "column";
+						alignChildren = ["fill","top"];
+						spacing = 0;
+						var _otfStylisticSet1Group = add("group");
+						with(_otfStylisticSet1Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet1Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "1"));
+							_otfStylisticSet1Checkbox.code = 2;
+						} /* END _otfStylisticSet1Group */
+						var _otfStylisticSet2Group = add("group");
+						with(_otfStylisticSet2Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet2Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "2"));
+							_otfStylisticSet2Checkbox.code = 4;
+						} /* END _otfStylisticSet2Group */
+						var _otfStylisticSet3Group = add("group");
+						with(_otfStylisticSet3Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet3Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "3"));
+							_otfStylisticSet3Checkbox.code = 8;
+						} /* END _otfStylisticSet3Group */
+						var _otfStylisticSet4Group = add("group");
+						with(_otfStylisticSet4Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet4Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "4"));
+							_otfStylisticSet4Checkbox.code = 16;
+						} /* END _otfStylisticSet4Group */
+						var _otfStylisticSet5Group = add("group");
+						with(_otfStylisticSet5Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet5Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "5"));
+							_otfStylisticSet5Checkbox.code = 32;
+						} /* END _otfStylisticSet5Group */
+						var _otfStylisticSet6Group = add("group");
+						with(_otfStylisticSet6Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet6Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "6"));
+							_otfStylisticSet6Checkbox.code = 64;
+						} /* END _otfStylisticSet6Group */
+						var _otfStylisticSet7Group = add("group");
+						with(_otfStylisticSet7Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet7Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "7"));
+							_otfStylisticSet7Checkbox.code = 128;
+						} /* END _otfStylisticSet7Group */
+						var _otfStylisticSet8Group = add("group");
+						with(_otfStylisticSet8Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet8Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "8"));
+							_otfStylisticSet8Checkbox.code = 256;
+						} /* END _otfStylisticSet8Group */
+						var _otfStylisticSet9Group = add("group");
+						with(_otfStylisticSet9Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet9Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "9"));
+							_otfStylisticSet9Checkbox.code = 512;
+						} /* END _otfStylisticSet9Group */
+						var _otfStylisticSet10Group = add("group");
+						with(_otfStylisticSet10Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet10Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "10"));
+							_otfStylisticSet10Checkbox.code = 1024;
+						} /* END _otfStylisticSet10Group */
+					} /* END _otfStylisticSetColumn1Group */
+					var _otfStylisticSetColumn2Group = add("group");
+					with(_otfStylisticSetColumn2Group) {
+						orientation = "column";
+						alignChildren = ["fill","top"];
+						spacing = 0;
+						var _otfStylisticSet11Group = add("group");
+						with(_otfStylisticSet11Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet11Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "11"));
+							_otfStylisticSet11Checkbox.code = 2048;
+						} /* END _otfStylisticSet11Group */
+						var _otfStylisticSet12Group = add("group");
+						with(_otfStylisticSet12Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet12Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "12"));
+							_otfStylisticSet12Checkbox.code = 4096;
+						} /* END _otfStylisticSet12Group */
+						var _otfStylisticSet13Group = add("group");
+						with(_otfStylisticSet13Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet13Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "13"));
+							_otfStylisticSet13Checkbox.code = 8192;
+						} /* END _otfStylisticSet13Group */
+						var _otfStylisticSet14Group = add("group");
+						with(_otfStylisticSet14Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet14Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "14"));
+							_otfStylisticSet14Checkbox.code = 16384;
+						} /* END _otfStylisticSet14Group */
+						var _otfStylisticSet15Group = add("group");
+						with(_otfStylisticSet15Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet15Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "15"));
+							_otfStylisticSet15Checkbox.code = 32768;
+						} /* END _otfStylisticSet15Group */
+						var _otfStylisticSet16Group = add("group");
+						with(_otfStylisticSet16Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet16Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "16"));
+							_otfStylisticSet16Checkbox.code = 65536;
+						} /* END _otfStylisticSet16Group */
+						var _otfStylisticSet17Group = add("group");
+						with(_otfStylisticSet17Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet17Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "17"));
+							_otfStylisticSet17Checkbox.code = 131072;
+						} /* END _otfStylisticSet17Group */
+						var _otfStylisticSet18Group = add("group");
+						with(_otfStylisticSet18Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet18Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "18"));
+							_otfStylisticSet18Checkbox.code = 262144;
+						} /* END _otfStylisticSet18Group */
+						var _otfStylisticSet19Group = add("group");
+						with(_otfStylisticSet19Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet19Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "19"));
+							_otfStylisticSet19Checkbox.code = 524288;
+						} /* END _otfStylisticSet19Group */
+						var _otfStylisticSet20Group = add("group");
+						with(_otfStylisticSet20Group) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticSet20Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "20"));
+							_otfStylisticSet20Checkbox.code = 1048576;
+						} /* END _otfStylisticSet20Group */
+					} /* END _otfStylisticSetColumn2Group */
+				} /* END _otfStylisticSetsPanel */
+			} /* END _column4Group */
 		} /* END _selectionGroup */
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
@@ -356,8 +524,30 @@ function __showOTFWindow() {
 		var _value = OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
 	};
-
-
+	/* Formsätze */
+	_otfStylisticSet1Checkbox.onClick = 
+	_otfStylisticSet2Checkbox.onClick = 
+	_otfStylisticSet3Checkbox.onClick = 
+	_otfStylisticSet4Checkbox.onClick = 
+	_otfStylisticSet5Checkbox.onClick = 
+	_otfStylisticSet6Checkbox.onClick = 
+	_otfStylisticSet7Checkbox.onClick = 
+	_otfStylisticSet8Checkbox.onClick = 
+	_otfStylisticSet9Checkbox.onClick = 
+	_otfStylisticSet10Checkbox.onClick = 
+	_otfStylisticSet11Checkbox.onClick = 
+	_otfStylisticSet12Checkbox.onClick = 
+	_otfStylisticSet13Checkbox.onClick = 
+	_otfStylisticSet14Checkbox.onClick = 
+	_otfStylisticSet15Checkbox.onClick = 
+	_otfStylisticSet16Checkbox.onClick = 
+	_otfStylisticSet17Checkbox.onClick = 
+	_otfStylisticSet18Checkbox.onClick = 
+	_otfStylisticSet19Checkbox.onClick = 
+	_otfStylisticSet20Checkbox.onClick = function() {
+		var _value = __getOtfSylisticSetValue(_otfStylisticSetsPanel);
+		__setValue("otfStylisticSets", _value, _otfWindow);
+	};
 
 
 
@@ -369,7 +559,7 @@ function __showOTFWindow() {
 	/* Button for creating character style */
 
 
-	_positionSubscriptCheckbox.value = true;
+	
 
 
 
@@ -411,6 +601,26 @@ function __showOTFWindow() {
 		__checkOTFFeature("otfFigureStyle", "PROPORTIONAL_LINING_FEATURE", _selection, _otfWindow, _digitProportionalLiningCheckbox);
 		__checkOTFFeature("otfFigureStyle", "TABULAR_OLDSTYLE_FEATURE", _selection, _otfWindow, _digitTabularOldstyleCheckbox);
 		__checkOTFFeature("otfFigureStyle", "DEFAULT_FIGURE_STYLE_FEATURE", _selection, _otfWindow, _digitDefaultFigureStyleCheckbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet1Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet2Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet3Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet4Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet5Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet6Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet7Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet8Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet9Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet10Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet11Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet12Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet13Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet14Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet15Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet16Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet17Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet18Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet19Checkbox);
+		__checkOTFFeature("otfStylisticSets", "", _selection, _otfWindow, _otfStylisticSet20Checkbox);
 
 
 		/* ... */
@@ -444,7 +654,7 @@ function __showOTFWindow() {
 			(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
 			OTFFigureStyle.DEFAULT_VALUE
 		),
-
+		"otfStylisticSets":__getOtfSylisticSetValue(_otfStylisticSetsPanel),
 
 		/* ... */
 
@@ -465,7 +675,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureName, _selection, _window, 
 
 	if(!_global) { return false; }
 	if(!_propertyName || _propertyName.constructor !== String) { return false; }
-	if(!_otfFeatureName || _otfFeatureName.constructor !== String) { return false; }
+	if(_otfFeatureName === null ||_otfFeatureName === undefined || _otfFeatureName.constructor !== String) { return false; }
 	if(!_window || !(_window instanceof Window)) { return false; }
 	if(!_suiItem || !_suiItem.hasOwnProperty("value")) { return false; }
 
@@ -480,10 +690,15 @@ function __checkOTFFeature(_propertyName, _otfFeatureName, _selection, _window, 
 
 	const _squareBracketRegExp = new RegExp("[\\[\\]]","g");
 
+
 	/* Reset values */
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
 	_suiItem.parent.isBackgroundSet = false;
-	_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
+	if(_propertyName === "otfStylisticSets") {
+		_suiItem.text = _suiItem.text.replace(_squareBracketRegExp, "");
+	} else {
+		_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
+	}
 	_suiItem.value = false;
 
 
@@ -530,6 +745,13 @@ function __checkOTFFeature(_propertyName, _otfFeatureName, _selection, _window, 
 					_suiItem.value = true;
 				}
 				break;
+			/* Formsätze */
+			case "otfStylisticSets":
+				var _setCodeArray = __getStylisticSetsArray(_otfFeatureValue); /* ToDo: Bad performance!!! */
+				if(__isInArray(_suiItem.code, _setCodeArray)) {
+					_suiItem.value = true;
+				}
+				break;
 			/* Checkbox: Standard */
 			default:
 				if(_otfFeatureValue === true) {
@@ -567,6 +789,98 @@ function __checkOTFFeature(_propertyName, _otfFeatureName, _selection, _window, 
 	
 	return true;
 } /* END function __checkOTFFeature */
+
+
+/**
+ * Formsatznummer ermitteln
+ * @param {SUIPanel} _panel 
+ * @returns {Number}
+ */
+function __getOtfSylisticSetValue(_panel) {
+
+	if(!_global) { return null; }
+	if(!_panel || !(_panel instanceof Panel)) { return null; }
+
+	var _setCode = 0;
+	var _panelChildren = _panel.children;
+
+	for( var i=0; i<_panelChildren.length; i+=1) {
+		var _panelChild = _panelChildren[i];
+		var _groupChildren = _panelChild.children;
+		for(var n=0; n<_groupChildren.length; n+=1) {
+			var _checkbox = _groupChildren[n].children[0];
+			if(_checkbox.value === true) {
+				_setCode += _checkbox.code;
+			}
+		}
+	}
+
+	return _setCode;
+} /* END function __getOtfSylisticSetValue */
+
+
+/**
+ * Formatsatzcodes ermitteln
+ * @param {Number} stylisticSetCode 
+ * @returns {Array}
+ */
+ function __getStylisticSetsArray(stylisticSetCode) {
+
+	var stylisticSetsArray = [];
+	var baseArray = [0];
+
+	for (var n = 1; n < 21; n++) {
+		baseArray.push(2 * Math.pow(2, n - 1));
+	}
+
+	subsetSum(baseArray, stylisticSetCode);
+
+	function subsetSum(numbers, target, partial) {
+		partial = partial || [];
+		/* Partielle Summe */
+		var s = 0;
+		for (var j = 0; j < partial.length; j++) {
+			s += partial[j];
+		}
+		/* Check: Partielle Summe gleich Zielwert? */
+		if (s === target) {
+			stylisticSetsArray = partial;
+			return partial;
+		}
+		/* Check: Partielle Summe größer als Zielwert? */
+		if (s >= target) {
+			return [];
+		}
+		for (var i = 0; i < numbers.length; i++) {
+			var n = numbers[i];
+			var remaining = numbers.slice(i + 1);
+			subsetSum(remaining, target, partial.concat([n]));
+		}
+	} /* END function subsetSum */
+
+	return stylisticSetsArray;
+} /* END function getStylisticSetsArray */
+
+
+/**
+ * Check: Is item in Array?
+ * @param {Any} _item 
+ * @param {Array} _array 
+ * @returns 
+ */
+ function __isInArray(_item, _array) {
+
+	if (_item === null || _item === undefined) { return false; }
+	if (!_array || !(_array instanceof Array) || _array.length === 0) { return false; }
+
+	for (var i = 0; i < _array.length; i += 1) {
+		if (_array[i] === _item) {
+			return true;
+		}
+	}
+
+	return false;
+} /* END function __isInArray */
 
 
 
@@ -946,5 +1260,13 @@ function __defineLocalizeStrings() {
 		de:"Wert konnte nicht gesetzt werden"
 	};
 
+	_global.otfStylisticSetPanelLabel = {
+		en:"Stylistic Sets",
+		de:"Formsätze"
+	};
 
+	_global.otfStylisticSetCheckboxLabel = {
+		en:"Set %1",
+		de:"Satz %1"
+	};
 } /* END function __defineLocalizeStrings */
