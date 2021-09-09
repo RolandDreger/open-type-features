@@ -68,7 +68,6 @@ __defineLocalizeStrings();
 __showOTFWindow();
 
 
-
 /**
  * Show Dialog
  * @returns {Boolean}
@@ -77,11 +76,11 @@ function __showOTFWindow() {
 	
 	if(!_global) { return false; }
 
-	const PANEL_MARGINS = [5,10,5,5];
+	const PANEL_MARGINS = [5,10,0,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
-	const FIRST_COLUMN_CHAR_NUM = 24;
-	const SECOND_COLUMN_CHAR_NUM = 24;
-	const THIRD_COLUMN_CHAR_NUM = 7;
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 24 });
+	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 24 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en: 7, de: 8 });
 	
 	var _appliedFontsStatictext;
 
@@ -195,13 +194,13 @@ function __showOTFWindow() {
 					var _otfFractionGroup = add("group");
 					with(_otfFractionGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_otfFractionCheckbox = add("checkbox", undefined, localize(_global.otfFractionCheckboxCheckboxLabel));
+						_otfFractionCheckbox = add("checkbox", undefined, localize(_global.otfFractionCheckboxLabel));
 						_otfFractionCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
 					} /* END _otfFractionGroup */
 					var _otfOrdinalGroup = add("group");
 					with(_otfOrdinalGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_otfOrdinalCheckbox = add("checkbox", undefined, localize(_global.otfOrdinalCheckboxCheckboxLabel));
+						_otfOrdinalCheckbox = add("checkbox", undefined, localize(_global.otfOrdinalCheckboxLabel));
 						_otfOrdinalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
 					} /* END _otfOrdinalGroup */
 					var _otfSwashGroup = add("group");
@@ -213,7 +212,7 @@ function __showOTFWindow() {
 					var _otfTitlingGroup = add("group");
 					with(_otfTitlingGroup) {
 						margins = FEATURE_GROUP_MARGINS;
-						_otfTitlingCheckbox = add("checkbox", undefined, localize(_global.otfTitlingCheckboxCheckboxLabel));
+						_otfTitlingCheckbox = add("checkbox", undefined, localize(_global.otfTitlingCheckboxLabel));
 						_otfTitlingCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
 					} /* END _otfTitlingGroup */
 					var _otfContextualAlternateGroup = add("group");
@@ -832,11 +831,10 @@ function __showOTFWindow() {
 
 	/* Dialog initialisieren */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
-
-	
-	/* Eingaben überprüfen */
 	__checkInputs();
 
+
+	/* Eingaben überprüfen */
 	function __checkInputs() {
 		_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 		var _selection = __getSelection(_otfWindow);
@@ -888,63 +886,67 @@ function __showOTFWindow() {
 		__checkOTFFeature("otfStylisticSets", "ss18", _selection, _otfWindow, _otfStylisticSet18Checkbox);
 		__checkOTFFeature("otfStylisticSets", "ss18", _selection, _otfWindow, _otfStylisticSet19Checkbox);
 		__checkOTFFeature("otfStylisticSets", "ss20", _selection, _otfWindow, _otfStylisticSet20Checkbox);
-		__checkOTFFeature("positionalForm", "opfg", _selection, _otfWindow, _positionalFormsGeneralCheckbox);
-		__checkOTFFeature("positionalForm", "apfm", _selection, _otfWindow, _positionalFormsAutomaticCheckbox);
+		__checkOTFFeature("positionalForm", "opfg", _selection, _otfWindow, _positionalFormsGeneralCheckbox); /* opfg ??? */
+		__checkOTFFeature("positionalForm", "apfm", _selection, _otfWindow, _positionalFormsAutomaticCheckbox); /* apfm ??? */
 		__checkOTFFeature("positionalForm", "init", _selection, _otfWindow, _positionalFormsInitialCheckbox);
 		__checkOTFFeature("positionalForm", "medi", _selection, _otfWindow, _positionalFormsMedialCheckbox);
 		__checkOTFFeature("positionalForm", "fina", _selection, _otfWindow, _positionalFormsFinalCheckbox);
 		__checkOTFFeature("positionalForm", "isol", _selection, _otfWindow, _positionalFormsIsolatedCheckbox);
 	} /* END function __checkInputs */ 
 	
+	/* Eingaben auslesen */
+	function __getOTFeatureValues() {
+		return {
+			"ligatures":_ligaturesCheckbox.value,
+			"otfDiscretionaryLigature":_otfDiscretionaryLigatureCheckbox.value,
+			"otfFraction":_otfFractionCheckbox.value,
+			"otfOrdinal":_otfOrdinalCheckbox.value,
+			"otfSwash":_otfSwashCheckbox.value,
+			"otfTitling":_otfTitlingCheckbox.value,
+			"otfContextualAlternate":_otfContextualAlternateCheckbox.value,
+			"capitalization":(_capitalizationCheckbox.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL,
+			"otfSlashedZero":_otfSlashedZeroCheckbox.value,
+			"otfHistorical":_otfHistoricalCheckbox.value,
+			"otfRomanItalics":_otfRomanItalicsCheckbox.value,
+			"otfLocale":_otfLocaleCheckbox.value,
+			"otfOverlapSwash":_otfOverlapSwashCheckbox.value,
+			"otfMark":_otfMarkCheckbox.value,
+			"otfProportionalMetrics":_otfProportionalMetricsCheckbox.value,
+			"otfJustificationAlternate":_otfJustificationAlternateCheckbox.value,
+			"otfStretchedAlternate":_otfStretchedAlternateCheckbox.value,
+			"otfStylisticAlternate":_otfStylisticAlternateCheckbox.value,
+			"otfHVKana":_otfHVKanaCheckbox.value,
+			"position": (
+				(_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
+				(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
+				(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
+				(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
+				Position.NORMAL
+			),
+			"otfFigureStyle":(
+				(_digitTabularLiningCheckbox.value && OTFFigureStyle.TABULAR_LINING) ||
+				(_digitProportionalOldstyleCheckbox.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
+				(_digitProportionalLiningCheckbox.value && OTFFigureStyle.PROPORTIONAL_LINING) ||
+				(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
+				OTFFigureStyle.DEFAULT_VALUE
+			),
+			"otfStylisticSets":__getOtfSylisticSetValue(_otfStylisticSetsPanel),
+			"positionalForm":(
+				(_positionalFormsAutomaticCheckbox.value && PositionalForms.CALCULATE) ||
+				(_positionalFormsInitialCheckbox.value && PositionalForms.INITIAL) ||
+				(_positionalFormsMedialCheckbox.value && PositionalForms.MEDIAL) ||
+				(_positionalFormsFinalCheckbox.value && PositionalForms.FINAL) ||
+				(_positionalFormsIsolatedCheckbox.value && PositionalForms.ISOLATED) ||
+				PositionalForms.NONE
+			)
+		};
+	} /* END function __getOTFeatureValues */
+
 
 	/* Show OTF Dialog */
 	_otfWindow.show();
 
-
-	return {
-		"ligatures":_ligaturesCheckbox.value,
-		"otfDiscretionaryLigature":_otfDiscretionaryLigatureCheckbox.value,
-		"otfFraction":_otfFractionCheckbox.value,
-		"otfOrdinal":_otfOrdinalCheckbox.value,
-		"otfSwash":_otfSwashCheckbox.value,
-		"otfTitling":_otfTitlingCheckbox.value,
-		"otfContextualAlternate":_otfContextualAlternateCheckbox.value,
-		"capitalization":(_capitalizationCheckbox.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL,
-		"otfSlashedZero":_otfSlashedZeroCheckbox.value,
-		"otfHistorical":_otfHistoricalCheckbox.value,
-		"otfRomanItalics":_otfRomanItalicsCheckbox.value,
-		"otfLocale":_otfLocaleCheckbox.value,
-		"otfOverlapSwash":_otfOverlapSwashCheckbox.value,
-		"otfMark":_otfMarkCheckbox.value,
-		"otfProportionalMetrics":_otfProportionalMetricsCheckbox.value,
-		"otfJustificationAlternate":_otfJustificationAlternateCheckbox.value,
-		"otfStretchedAlternate":_otfStretchedAlternateCheckbox.value,
-		"otfStylisticAlternate":_otfStylisticAlternateCheckbox.value,
-		"otfHVKana":_otfHVKanaCheckbox.value,
-		"position": (
-			(_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
-			(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
-			(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
-			(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
-			Position.NORMAL
-		),
-		"otfFigureStyle":(
-			(_digitTabularLiningCheckbox.value && OTFFigureStyle.TABULAR_LINING) ||
-			(_digitProportionalOldstyleCheckbox.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
-			(_digitProportionalLiningCheckbox.value && OTFFigureStyle.PROPORTIONAL_LINING) ||
-			(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
-			OTFFigureStyle.DEFAULT_VALUE
-		),
-		"otfStylisticSets":__getOtfSylisticSetValue(_otfStylisticSetsPanel),
-		"positionalForm":(
-			(_positionalFormsAutomaticCheckbox.value && PositionalForms.CALCULATE) ||
-			(_positionalFormsInitialCheckbox.value && PositionalForms.INITIAL) ||
-			(_positionalFormsMedialCheckbox.value && PositionalForms.MEDIAL) ||
-			(_positionalFormsFinalCheckbox.value && PositionalForms.FINAL) ||
-			(_positionalFormsIsolatedCheckbox.value && PositionalForms.ISOLATED) ||
-			PositionalForms.NONE
-		)
-	};
+	return true;
 } /* END function __showOTFWindow */
 
 
@@ -1487,22 +1489,22 @@ function __defineLocalizeStrings() {
 		de:"Bedingte Ligaturen"
 	};
 
-	_global.otfFractionCheckboxCheckboxLabel = {
+	_global.otfFractionCheckboxLabel = {
 		en:"Fractions",
 		de:"Brüche"
 	};
 
-	_global.otfOrdinalCheckboxCheckboxLabel = {
+	_global.otfOrdinalCheckboxLabel = {
 		en:"Ordinal",
 		de:"Ordinalzeichen"
 	};
 
-	_global.otfSwashCheckboxCheckboxLabel = {
+	_global.otfSwashCheckboxLabel = {
 		en:"Swash",
 		de:"Schwungschrift"
 	};
 
-	_global.otfTitlingCheckboxCheckboxLabel = {
+	_global.otfTitlingCheckboxLabel = {
 		en:"Titling Alternates",
 		de:"Titelschriftvarianten"
 	};
