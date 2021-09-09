@@ -619,62 +619,81 @@ function __showOTFWindow() {
 	/* General Features */
 	_ligaturesCheckbox.onClick = function() {
 		__setValue("ligatures", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfDiscretionaryLigatureCheckbox.onClick = function() {
 		__setValue("otfDiscretionaryLigature", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfFractionCheckbox.onClick = function() {
 		__setValue("otfFraction", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfOrdinalCheckbox.onClick = function() {
 		__setValue("otfOrdinal", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfSwashCheckbox.onClick = function() {
 		__setValue("otfSwash", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfTitlingCheckbox.onClick = function() {
 		__setValue("otfTitling", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfContextualAlternateCheckbox.onClick = function() {
 		__setValue("otfContextualAlternate", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_capitalizationCheckbox.onClick = function() {
 		var _value = (this.value && Capitalization.CAP_TO_SMALL_CAP) || Capitalization.NORMAL;
 		__setValue("capitalization", _value, _otfWindow);
+		__checkInputs();
 	};
 	_otfSlashedZeroCheckbox.onClick = function() {
 		__setValue("otfSlashedZero", this.value, _otfWindow);
+		__checkInputs();
 	};
 	/* Spezielle Features (NICHT über Benuteroberfläche von InDesign zugänglich) */
 	_otfHistoricalCheckbox.onClick = function() {
 		__setValue("otfHistorical", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfRomanItalicsCheckbox.onClick = function() {
 		__setValue("otfRomanItalics", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfLocaleCheckbox.onClick = function() {
 		__setValue("otfLocale", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfOverlapSwashCheckbox.onClick = function() {
 		__setValue("otfOverlapSwash", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfMarkCheckbox.onClick = function() {
 		__setValue("otfMark", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfProportionalMetricsCheckbox.onClick = function() {
 		__setValue("otfProportionalMetrics", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfJustificationAlternateCheckbox.onClick = function() {
 		__setValue("otfJustificationAlternate", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfStretchedAlternateCheckbox.onClick = function() {
 		__setValue("otfStretchedAlternate", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfStylisticAlternateCheckbox.onClick = function() {
 		__setValue("otfStylisticAlternate", this.value, _otfWindow);
+		__checkInputs();
 	};
 	_otfHVKanaCheckbox.onClick = function() {
 		__setValue("otfHVKana", this.value, _otfWindow);
+		__checkInputs();
 	};
 	/* Position */
 	_positionSuperscriptCheckbox.onClick = function() {
@@ -683,6 +702,7 @@ function __showOTFWindow() {
 		_positionDenominatorCheckbox.value = false;
 		var _value = (this.value && Position.OT_SUPERSCRIPT) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionSubscriptCheckbox.onClick = function() {
 		_positionSuperscriptCheckbox.value = false;
@@ -690,6 +710,7 @@ function __showOTFWindow() {
 		_positionDenominatorCheckbox.value = false;
 		var _value = (this.value && Position.OT_SUBSCRIPT) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionNumeratorCheckbox.onClick = function() {
 		_positionSuperscriptCheckbox.value = false;
@@ -697,6 +718,7 @@ function __showOTFWindow() {
 		_positionDenominatorCheckbox.value = false;
 		var _value = (this.value && Position.OT_NUMERATOR) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionDenominatorCheckbox.onClick = function() {
 		_positionSuperscriptCheckbox.value = false;
@@ -704,6 +726,7 @@ function __showOTFWindow() {
 		_positionNumeratorCheckbox.value = false;
 		var _value = (this.value && Position.OT_DENOMINATOR) || Position.NORMAL;
 		__setValue("position", _value, _otfWindow);
+		__checkInputs();
 	};
 	/* Digits */
 	_digitTabularLiningCheckbox.onClick = function() {
@@ -713,6 +736,7 @@ function __showOTFWindow() {
 		_digitDefaultFigureStyleCheckbox.value = !this.value;
 		var _value = (this.value &&	OTFFigureStyle.TABULAR_LINING) || OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
+		__checkInputs();
 	};
 	_digitProportionalOldstyleCheckbox.onClick = function() {
 		_digitTabularLiningCheckbox.value = false;
@@ -721,6 +745,7 @@ function __showOTFWindow() {
 		_digitDefaultFigureStyleCheckbox.value = !this.value;
 		var _value = (this.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) || OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
+		__checkInputs();
 	};
 	_digitProportionalLiningCheckbox.onClick = function() {
 		_digitTabularLiningCheckbox.value = false;
@@ -729,6 +754,7 @@ function __showOTFWindow() {
 		_digitDefaultFigureStyleCheckbox.value = !this.value;
 		var _value = (this.value && OTFFigureStyle.PROPORTIONAL_LINING) || OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
+		__checkInputs();
 	};
 	_digitTabularOldstyleCheckbox.onClick = function() {
 		_digitTabularLiningCheckbox.value = false;
@@ -737,6 +763,7 @@ function __showOTFWindow() {
 		_digitDefaultFigureStyleCheckbox.value = !this.value;
 		var _value = (this.value && OTFFigureStyle.TABULAR_OLDSTYLE) || OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
+		__checkInputs();
 	};
 	_digitDefaultFigureStyleCheckbox.onClick = function() {
 		_digitTabularLiningCheckbox.value = false;
@@ -746,6 +773,7 @@ function __showOTFWindow() {
 		this.value = true;
 		var _value = OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
+		__checkInputs();
 	};
 	/* Formsätze */
 	_otfStylisticSet1Checkbox.onClick = 
@@ -770,6 +798,7 @@ function __showOTFWindow() {
 	_otfStylisticSet20Checkbox.onClick = function() {
 		var _value = __getOtfSylisticSetValue(_otfStylisticSetsPanel);
 		__setValue("otfStylisticSets", _value, _otfWindow);
+		__checkInputs();
 	};
 	/* Positionalform */
 	_positionalFormsGeneralCheckbox.onClick = function() {
@@ -781,6 +810,7 @@ function __showOTFWindow() {
 		this.value = true;
 		var _value = PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionalFormsAutomaticCheckbox.onClick = function() {
 		_positionalFormsGeneralCheckbox.value =  !this.value;
@@ -790,6 +820,7 @@ function __showOTFWindow() {
 		_positionalFormsIsolatedCheckbox.value = false;
 		var _value = (this.value && PositionalForms.CALCULATE) || PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionalFormsInitialCheckbox.onClick = function() {
 		_positionalFormsGeneralCheckbox.value =  !this.value;
@@ -799,6 +830,7 @@ function __showOTFWindow() {
 		_positionalFormsIsolatedCheckbox.value = false;
 		var _value = (this.value && PositionalForms.INITIAL) || PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionalFormsMedialCheckbox.onClick = function() {
 		_positionalFormsGeneralCheckbox.value =  !this.value;
@@ -808,6 +840,7 @@ function __showOTFWindow() {
 		_positionalFormsIsolatedCheckbox.value = false;
 		var _value = (this.value && PositionalForms.MEDIAL) || PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionalFormsFinalCheckbox.onClick = function() {
 		_positionalFormsGeneralCheckbox.value =  !this.value;
@@ -817,6 +850,7 @@ function __showOTFWindow() {
 		_positionalFormsIsolatedCheckbox.value = false;
 		var _value = (this.value && PositionalForms.FINAL) || PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 	_positionalFormsIsolatedCheckbox.onClick = function() {
 		_positionalFormsGeneralCheckbox.value =  !this.value;
@@ -826,6 +860,7 @@ function __showOTFWindow() {
 		_positionalFormsFinalCheckbox.value = false;
 		var _value = (this.value && PositionalForms.ISOLATED) || PositionalForms.NONE;
 		__setValue("positionalForm", _value, _otfWindow);
+		__checkInputs();
 	};
 
 	_refreshButton.onClick = function() {
@@ -861,6 +896,8 @@ function __showOTFWindow() {
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	__checkInputs();
 
+	/* Add EventListener */
+	app.documents[0].addEventListener(Application.AFTER_SELECTION_CHANGED, __checkInputs);
 
 	/* Eingaben überprüfen */
 	function __checkInputs() {
@@ -1254,8 +1291,8 @@ function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
  */
 function __setValue(_otfFeatureName, _otfFeatureValue, _window) {
 
+	if(!_global) { return false; }
 	if(
-		!_global || 
 		!_otfFeatureName || _otfFeatureName.constructor !== String ||
 		!_window || !(_window instanceof Window) ||
 		_otfFeatureValue === null || _otfFeatureValue === undefined
@@ -1323,7 +1360,8 @@ function __getSelection(_window) {
  */
 function __getAppliedFonts(_window) {
 
-	if(!_global || !_window || !(_window instanceof Window)) { 
+	if(!_global) { return ""; }
+	if(!_window || !(_window instanceof Window)) { 
 		return localize(_global.fontNotEvaluableAlert); 
 	}
 
