@@ -145,6 +145,9 @@ function __showOTFWindow() {
 	var _positionalFormsIsolatedCheckbox;
 
 	var _cancelButton;
+	var _refreshButton;
+	var _cStyleNameEdittext;
+	var _cStyleButton;
 
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
 	with (_otfWindow) { 
@@ -159,7 +162,7 @@ function __showOTFWindow() {
 				alignChildren = ["center","top"];
 				_appliedFontsStatictext = add('statictext', undefined, "");
 				with(_appliedFontsStatictext) {
-					characters = 40;
+					characters = 60;
 					justify = "center";
 				} /* END _appliedFontsStatictext */
 			} /* END _appliedFontsGroup */
@@ -511,6 +514,7 @@ function __showOTFWindow() {
 						orientation = "column";
 						alignChildren = ["fill","top"];
 						spacing = 0;
+						enabled = false;
 						var _otfStylisticSet11Group = add("group");
 						with(_otfStylisticSet11Group) {
 							margins = FEATURE_GROUP_MARGINS;
@@ -588,17 +592,25 @@ function __showOTFWindow() {
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
 			spacing = 10;
-			_cancelButton = add("button", undefined, localize(_global.cancelLabel));
+			_cancelButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel"});
 			with(_cancelButton) {
-				alignment = ["right","bottom"];
+				alignment = ["left","bottom"];
 				helpTip = localize(_global.closeWindowHelpTip);
 			} /* END _cancelButton */
-
-			var _testButton = add("button", undefined, "Testen");
-			with(_testButton) {
+			var _refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
+			with(_refreshButton) {
+				alignment = ["left","bottom"];
+			} /* END _refreshButton */
+			_cStyleNameEdittext = add("edittext", undefined, "");
+			with(_cStyleNameEdittext) {
+				alignment = ["right","middle"];
+				characters = 24;
+			} /* END _cStyleNameEdittext */
+			_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok"});
+			with(_cStyleButton) {
 				alignment = ["right","bottom"];
-			} /* END _testButton */
-
+				helpTip = localize(_global.cStyleButtonHelpTip);
+			} /* END _cStyleButton */
 		} /* END _buttonGroup */
 	} /* END palette _otfWindow */
  
@@ -816,9 +828,25 @@ function __showOTFWindow() {
 		__setValue("positionalForm", _value, _otfWindow);
 	};
 
-	_testButton.onClick = function() {
-		__checkInputs(); /* Test-Button ENTFERNEN +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	_refreshButton.onClick = function() {
+		__checkInputs();
 	};
+
+	_cStyleButton.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		if(!_selection) { return false; }
+		var _cStyleName = _cStyleNameEdittext.text;
+		var _inputObj = __getOTFeatureValues();
+		var _cStyle = __createCStyle(_cStyleName, _inputObj);
+		if(_cStyle) { _cStyleNameEdittext.text = ""; }
+	};
+
+	_cStyleNameEdittext.addEventListener('keydown', function (_event) {
+		if(_event.keyName === "Enter") {
+			_cStyleButton.notify();
+			_cStyleButton.active = true;
+		}
+	}); /* Increment and decrement values with arrow keys */
 
 	_cancelButton.onClick = function() {
 		_otfWindow.close(2);
@@ -941,7 +969,6 @@ function __showOTFWindow() {
 			)
 		};
 	} /* END function __getOTFeatureValues */
-
 
 	/* Show OTF Dialog */
 	_otfWindow.show();
@@ -1189,7 +1216,6 @@ function __getOtfSylisticSetValue(_panel) {
 } /* END function __isInArray */
 
 
-
 /**
  * Hintergrundfarbe für Skript-UI-Item im Dialog zuweisen
  * @param {SUIItem} _suiItem 
@@ -1411,6 +1437,65 @@ function __uniqueArray(_inputArray) {
 } /* END function __uniqueArray */
 
 
+/**
+ * Create Character Style
+ * @param {String} _styleName 
+ * @param {Object} _inputObj
+ * @returns {CharacterStyle} 
+ */
+function __createCStyle(_styleName, _inputObj) {
+
+	if(!_global) { return false; }
+	if(_styleName === null || _styleName === undefined || _styleName.constructor !== String) { return false; }
+	if(!_inputObj || !(_inputObj instanceof Object)) { return false; }
+
+	var _style;
+
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { 
+		return false; 
+	}
+
+	var _doc = app.documents.firstItem();
+	if(!_doc.isValid) {
+		return false;
+	}
+	
+	var _properties = {};
+
+	for(var _key in _inputObj) {
+
+		if(!_inputObj.hasOwnProperty(_key)) {
+			continue;
+		}
+
+		var _value = _inputObj[_key];
+		if(
+			_value === false || 
+			_value === Capitalization.NORMAL ||
+			_value === Position.NORMAL ||
+			_value === 0 ||
+			_value === OTFFigureStyle.DEFAULT_VALUE ||
+			_value === PositionalForms.NONE
+		) {
+			continue;
+		}
+
+		_properties[_key] = _value;
+	}
+
+	try {
+		_style = _doc.characterStyles.add({ "name":_styleName }); /* -> DOC */
+		_style.properties = _properties;
+	} catch(_error) {
+		alert(_error.message);
+		return null;
+	}
+
+	return _style;
+} /* END function __createCStyle */
+
+
+
 
 
 
@@ -1429,11 +1514,26 @@ function __defineLocalizeStrings() {
 		de:"OpenType-Funktionen testen" 
 	};
 	
-	_global.cancelLabel = {
+	_global.cancelButtonLabel = {
 		en:"Close",
 		de:"Schlie\u00dfen"
 	};
 	
+	_global.refreshButtonLabel = {
+		en:"Refresh",
+		de:"Aktualisieren"
+	};
+	
+	_global.cStyleButtonLabel = {
+		en:"Character Style",
+		de:"Zeichenformat"
+	};
+
+	_global.cStyleButtonHelpTip = {
+		en:"Create character style with selected OpenType features",
+		de:"Zeichenformat mit ausgewählten OpenType-Eigenschaften erstellen."
+	};
+
 	_global.closeWindowHelpTip = {
 		en:"Close Window",
 		de:"Fenster schlie\u00dfen"
