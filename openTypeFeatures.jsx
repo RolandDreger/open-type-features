@@ -694,7 +694,7 @@ function __showOTFWindow() {
 		__checkOTFFeature("otfTitling", OpenTypeFeature.TITLING_FEATURE, _selection, _otfWindow, _otfTitlingCheckbox);
 		__checkOTFFeature("otfContextualAlternate", OpenTypeFeature.CONTEXTUAL_ALTERNATES_FEATURE, _selection, _otfWindow, _otfContextualAlternateCheckbox);
 		__checkOTFFeature("capitalization", OpenTypeFeature.ALL_SMALL_CAPS_FEATURE, _selection, _otfWindow, _capitalizationCheckbox);
-		__checkOTFFeature("otfSlashedZero", OpenTypeFeature.STYLISTIC_ALTERNATE, _selection, _otfWindow, _otfSlashedZeroCheckbox);
+		__checkOTFFeature("otfSlashedZero", "szer", _selection, _otfWindow, _otfSlashedZeroCheckbox);
 		__checkOTFFeature("otfHistorical", "hist", _selection, _otfWindow, _otfHistoricalCheckbox);
 		__checkOTFFeature("position", OpenTypeFeature.SUPERSCRIPT_FEATURE, _selection, _otfWindow, _positionSuperscriptCheckbox);
 		__checkOTFFeature("position", OpenTypeFeature.SUBSCRIPT_FEATURE, _selection, _otfWindow, _positionSubscriptCheckbox);
@@ -725,7 +725,7 @@ function __showOTFWindow() {
 		__checkOTFFeature("otfStylisticSets", "ss18", _selection, _otfWindow, _otfStylisticSet18Checkbox);
 		__checkOTFFeature("otfStylisticSets", "ss18", _selection, _otfWindow, _otfStylisticSet19Checkbox);
 		__checkOTFFeature("otfStylisticSets", "ss20", _selection, _otfWindow, _otfStylisticSet20Checkbox);
-		__checkOTFFeature("positionalForm", "none", _selection, _otfWindow, _positionalFormsGeneralCheckbox);
+		__checkOTFFeature("positionalForm", "opfg", _selection, _otfWindow, _positionalFormsGeneralCheckbox);
 		__checkOTFFeature("positionalForm", "apfm", _selection, _otfWindow, _positionalFormsAutomaticCheckbox);
 		__checkOTFFeature("positionalForm", "init", _selection, _otfWindow, _positionalFormsInitialCheckbox);
 		__checkOTFFeature("positionalForm", "medi", _selection, _otfWindow, _positionalFormsMedialCheckbox);
@@ -733,10 +733,6 @@ function __showOTFWindow() {
 		__checkOTFFeature("positionalForm", "isol", _selection, _otfWindow, _positionalFormsIsolatedCheckbox);
 		_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	} /* END function __checkInputs */ 
-	
-
-	/* Show main dialog */
-	_otfWindow.show();
 	
 
 	return {
@@ -865,7 +861,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 			/* Positionalform */
 			case "positionalForm":
 				if( 
-					(_otfFeatureEnum === "none" && _otfFeatureValue === PositionalForms.NONE) ||
+					(_otfFeatureEnum === "opfg" && _otfFeatureValue === PositionalForms.NONE) ||
 					(_otfFeatureEnum === "apfm" && _otfFeatureValue === PositionalForms.CALCULATE) ||
 					(_otfFeatureEnum === "init"  && _otfFeatureValue === PositionalForms.INITIAL) ||
 					(_otfFeatureEnum === "medi"  && _otfFeatureValue === PositionalForms.MEDIAL) ||
