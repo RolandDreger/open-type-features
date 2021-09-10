@@ -1418,7 +1418,7 @@ function __getAppliedFonts(_window) {
 
 	if(!_global) { return ""; }
 	if(!_window || !(_window instanceof Window)) { 
-		return localize(_global.fontNotEvaluableAlert); 
+		return localize(_global.windowNotAvailableAlert); 
 	}
 
 	var _selection = __getSelection(_window);
@@ -1638,6 +1638,11 @@ function __defineLocalizeStrings() {
 		de:"Bitte eine Textstelle ausw\u00e4hlen!"
 	};
 	
+	_global.windowNotAvailableAlert = {
+		en:"Dialog window not available",
+		de:"Dialogfenster nicht verügbar!"
+	};
+
 	_global.fontNotEvaluableAlert = {
 		en:"Font not evaluable!",
 		de:"Schrift nicht auswertbar!"
@@ -1650,7 +1655,7 @@ function __defineLocalizeStrings() {
 
 	_global.selectionNotValidAlert = {
 		en:"Selection not valid!",
-		de:"Auswahl nicht (mehr) valide!"
+		de:"Auswahl nicht verfügbar!"
 	};
 
 	_global.multipleFeatureValuesAlert = {
