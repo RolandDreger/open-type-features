@@ -869,11 +869,15 @@ function __showOTFWindow() {
 
 	_cStyleButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
-		if(!_selection) { return false; }
+		if(!_selection) { 
+			return false; 
+		}
 		var _cStyleName = _cStyleNameEdittext.text;
 		var _inputObj = __getOTFeatureValues();
 		var _cStyle = __createCStyle(_cStyleName, _inputObj);
-		if(_cStyle) { _cStyleNameEdittext.text = ""; }
+		if(_cStyle) { 
+			_cStyleNameEdittext.text = ""; 
+		}
 	};
 
 	_cStyleNameEdittext.addEventListener('keydown', function (_event) {
@@ -907,12 +911,16 @@ function __showOTFWindow() {
 	/* Eingaben überprüfen */
 	function __checkInputs(_flag) {
 		if(_flag instanceof Event) {
+			_flag.stopPropagation();
 			_flag = undefined;
 		}
 		if(!_flag) {
 			_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 		}
 		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			return false;
+		}
 		if(!_flag || _flag === "ligatures") {
 			__checkOTFFeature("ligatures", "liga", _selection, _otfWindow, _ligaturesCheckbox);
 		}
@@ -1358,7 +1366,7 @@ function __setValue(_otfFeatureName, _otfFeatureValue, _window) {
 	}
 
 	var _selection = __getSelection(_window);
-	if(!_selection || !_selection.hasOwnProperty(_otfFeatureName)) {
+	if(!_selection || !_selection.hasOwnProperty(_otfFeatureName) || !_selection.isValid) {
 		return false;
 	}
 
