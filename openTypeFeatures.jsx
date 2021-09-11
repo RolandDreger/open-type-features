@@ -1743,7 +1743,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfLocaleCheckboxLabel = {
 		en:"Localized forms",
-		de:"Regionale Varianten"
+		de:"Ländereinstellung"
 	};
 
 	_global.otfOverlapSwashCheckboxLabel = {
@@ -1753,7 +1753,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfMarkCheckboxLabelCheckboxLabel = {
 		en:"Mark Positioning",
-		de:"Markenpositionierung"
+		de:"Markierte Positionierung"
 	};
 
 	_global.otfProportionalMetricsCheckboxLabel = {
@@ -1777,8 +1777,8 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.otfHVKanaCheckboxLabel = {
-		en:"Hiragana",
-		de:"Hiragana"
+		en:"H/V Kana Alternates",
+		de:"H/V Kana-Varianten"
 	};
 
 	_global.otfPositionPanelLabel = {
