@@ -508,12 +508,6 @@ function __showOTFWindow() {
 							_otfStylisticSet10Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
 							_otfStylisticSet10Checkbox.code = 1024;
 						} /* END _otfStylisticSet10Group */
-					} /* END _otfStylisticSetColumn1Group */
-					var _otfStylisticSetColumn2Group = add("group");
-					with(_otfStylisticSetColumn2Group) {
-						orientation = "column";
-						alignChildren = ["fill","top"];
-						spacing = 0;
 						var _otfStylisticSet11Group = add("group");
 						with(_otfStylisticSet11Group) {
 							margins = FEATURE_GROUP_MARGINS;
@@ -951,10 +945,10 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfHistorical", "hist", _selection, _otfWindow, _otfHistoricalCheckbox);
 		}
 		if(!_flag || _flag === "otfRomanItalics") {
-			__checkOTFFeature("otfRomanItalics", "ital", _selection, _otfWindow, _otfRomanItalicsCheckbox); /* ital ? */
+			__checkOTFFeature("otfRomanItalics", "ital", _selection, _otfWindow, _otfRomanItalicsCheckbox);
 		}
 		if(!_flag || _flag === "otfLocale") {
-			__checkOTFFeature("otfLocale", "loca", _selection, _otfWindow, _otfLocaleCheckbox); /* loca ? */
+			__checkOTFFeature("otfLocale", "locl", _selection, _otfWindow, _otfLocaleCheckbox);
 		}
 		if(!_flag || _flag === "otfOverlapSwash") {
 			__checkOTFFeature("otfOverlapSwash", OpenTypeFeature.OVERLAP_SWASH, _selection, _otfWindow, _otfOverlapSwashCheckbox);
@@ -963,7 +957,7 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfMark", "mark", _selection, _otfWindow, _otfMarkCheckbox);
 		}
 		if(!_flag || _flag === "otfProportionalMetrics") {
-			__checkOTFFeature("otfProportionalMetrics", "pres", _selection, _otfWindow, _otfProportionalMetricsCheckbox); /* pres ??? */
+			__checkOTFFeature("otfProportionalMetrics", "vpal", _selection, _otfWindow, _otfProportionalMetricsCheckbox); /* pres ??? */
 		}
 		if(!_flag || _flag === "otfJustificationAlternate") {
 			__checkOTFFeature("otfJustificationAlternate", OpenTypeFeature.JUSTIFICATION_ALTERNATE, _selection, _otfWindow, _otfJustificationAlternateCheckbox);
@@ -975,7 +969,7 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfStylisticAlternate", OpenTypeFeature.STYLISTIC_ALTERNATE, _selection, _otfWindow, _otfStylisticAlternateCheckbox);
 		}
 		if(!_flag || _flag === "otfHVKana") {
-			__checkOTFFeature("otfHVKana", "hkna", _selection, _otfWindow, _otfHVKanaCheckbox); /* hkna ? */
+			__checkOTFFeature("otfHVKana", "hkna", _selection, _otfWindow, _otfHVKanaCheckbox);
 		}
 		if(!_flag || _flag === "position") {
 			__checkOTFFeature("position", OpenTypeFeature.SUPERSCRIPT_FEATURE, _selection, _otfWindow, _positionSuperscriptCheckbox);
@@ -1122,10 +1116,15 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 	for(var i=0; i<_textStyleRangeArray.length; i+=1) {
 
 		var _curTextStyleRange = _textStyleRangeArray[i];
-		if(!_curTextStyleRange || !_curTextStyleRange.hasOwnProperty(_propertyName) || !_curTextStyleRange.isValid) {
+		if(!_curTextStyleRange || !_curTextStyleRange.isValid) {
 			continue;
 		}
 		
+		/* Check: Feature support in used InDesign version  */
+		if(!_curTextStyleRange.hasOwnProperty(_propertyName)) {
+			break;
+		}
+
 		var _otfFeatureValue = _curTextStyleRange[_propertyName];
 		switch (_propertyName) {
 			/* Checkbox: Alles in Kapitälchen */
@@ -1745,7 +1744,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfLocaleCheckboxLabel = {
 		en:"Localized forms",
-		de:"Ländereinstellung"
+		de:"Lokalisierte Formen"
 	};
 
 	_global.otfOverlapSwashCheckboxLabel = {
@@ -1759,8 +1758,8 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.otfProportionalMetricsCheckboxLabel = {
-		en:"CJK Kerning",
-		de:"CJK Kerning"
+		en:"Proportional Metrics",
+		de:"Proportionale Metriken"
 	};
 
 	_global.otfJustificationAlternateCheckboxLabel = {
