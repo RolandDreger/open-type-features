@@ -6,35 +6,9 @@
 		+	Autor: Roland Dreger
 		+	Datum: 30. August 2021
 		
-		+	Zuletzt aktualisiert: 10. September 2021
+		+	Zuletzt aktualisiert: 11. September 2021
 
-			OpenTypeFeatures:
-			DISCRETIONARY_LIGATURES_FEATURE  ->  Allows the use of optional discretionary ligatures.
-			FRACTIONS_FEATURE  ->  Reformats numbers separated by a slash, such as 1/2, as fractions. Note: In some fonts, the fractions feature reformats only standard fractions. For information on reformatting non-standard fractions such as 4/13, see denominator feature and numerator feature.
-			ORDINAL_FEATURE  ->  Superscripts the alpha characters in ordinal numbers.
-			SWASH_FEATURE  ->  Provides regular and contextual swashes, which may include alternate caps and end-of-word alternatives.
-			TITLING_FEATURE  ->  Activates alternative characters used for uppercase titles.
-			CONTEXTUAL_ALTERNATES_FEATURE  ->  Activates contextual ligatures and connecting alternates.
-			ALL_SMALL_CAPS_FEATURE  ->  "Provides authentic small caps rather than scaled-down versions of the font's regular caps."
-			DEFAULT_FIGURE_STYLE_FEATURE  ->  Applies the default figure style of the current font to figure glyphs.
-			DENOMINATOR_FEATURE  ->  In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the second number as a denominator.
-			NUMERATOR_FEATURE  ->  In a series of two numbers separated by a slash that form a non-standard fraction, such as 4/13, reformats the first number as a numerator.
-			PROPORTIONAL_LINING_FEATURE  ->  Gives full-height figures varying widths.
-			PROPORTIONAL_OLDSTYLE_FEATURE  ->  Gives varying-height figures varying widths.
-			SUBSCRIPT_FEATURE  ->  Sizes lowered glyphs correctly relative to the surrounding characters.
-			SUPERSCRIPT_FEATURE  ->  Sizes raised glyphs correctly relative to the surrounding characters.
-			TABULAR_LINING_FEATURE  ->  Gives full-height figures fixed, equal width.
-			TABULAR_OLDSTYLE_FEATURE  ->  Gives varying-height figures fixed, equal widths.
-			STYLISTIC_ALTERNATE  ->  Stylistic alternate Note: Slashed Zero???
-
-
-			JUSTIFICATION_ALTERNATE  ->  Justification alternate
-			LOW  ->  Low.
-			OVERLAP_SWASH  ->  Overlap swash
-			STRETCHED_ALTERNATE  ->  Stretched alternate
 			
-		
-
 		+	License (MIT)
 
 			Copyright 2021 Roland Dreger
