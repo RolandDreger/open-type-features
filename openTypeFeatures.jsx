@@ -514,7 +514,6 @@ function __showOTFWindow() {
 						orientation = "column";
 						alignChildren = ["fill","top"];
 						spacing = 0;
-						enabled = false;
 						var _otfStylisticSet11Group = add("group");
 						with(_otfStylisticSet11Group) {
 							margins = FEATURE_GROUP_MARGINS;
@@ -1255,45 +1254,48 @@ function __getOtfSylisticSetValue(_panel) {
 
 /**
  * Formatsatzcodes ermitteln
- * @param {Number} stylisticSetCode 
+ * @param {Number} _stylisticSetCode 
  * @returns {Array}
  */
- function __getStylisticSetsArray(stylisticSetCode) {
+function __getStylisticSetsArray(_stylisticSetCode) {
 
-	var stylisticSetsArray = [];
-	var baseArray = [0];
+	var _baseArray = [];
 
 	for (var n = 1; n < 21; n++) {
-		baseArray.push(2 * Math.pow(2, n - 1));
+		_baseArray.push(2 * Math.pow(2, n - 1));
 	}
 
-	subsetSum(baseArray, stylisticSetCode);
+	var _stylisticSetArray = __getSubsetOfSum(_stylisticSetCode, _baseArray);
+	if(!_stylisticSetArray || _stylisticSetArray.length === 0) {
+		_stylisticSetArray = [0];
+	}
 
-	function subsetSum(numbers, target, partial) {
-		partial = partial || [];
-		/* Partielle Summe */
-		var s = 0;
-		for (var j = 0; j < partial.length; j++) {
-			s += partial[j];
-		}
-		/* Check: Partielle Summe gleich Zielwert? */
-		if (s === target) {
-			stylisticSetsArray = partial;
-			return partial;
-		}
-		/* Check: Partielle Summe größer als Zielwert? */
-		if (s >= target) {
-			return [];
-		}
-		for (var i = 0; i < numbers.length; i++) {
-			var n = numbers[i];
-			var remaining = numbers.slice(i + 1);
-			subsetSum(remaining, target, partial.concat([n]));
-		}
-	} /* END function subsetSum */
+	return _stylisticSetArray;
+} /* END function __getStylisticSetsArray */
 
-	return stylisticSetsArray;
-} /* END function getStylisticSetsArray */
+
+/**
+ * Calculate subset of given sum 
+ * @param {Number} _num 
+ * @param {Array} _array 
+ * @returns 
+ */
+ function __getSubsetOfSum(_num, _array) {
+  
+  if(_num < 0) { return null; }
+  if(_num === 0) { return [0]; }
+
+  _array = _array.slice();
+  while(_array.length) {              // Try remaining values
+    var _firstItem = _array.shift();            // Take next value
+    var _subsetArray = __getSubsetOfSum(_num - _firstItem, _array); // Find solution recursively
+    if (_subsetArray) { 
+			return _subsetArray.concat(_firstItem);
+		}
+  }
+} /* END function __getSubsetOfSum */
+
+
 
 
 /**
