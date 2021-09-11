@@ -118,7 +118,7 @@ function __showOTFWindow() {
 	var _positionalFormsFinalCheckbox;
 	var _positionalFormsIsolatedCheckbox;
 
-	var _cancelButton;
+	var _closeButton;
 	var _refreshButton;
 	var _cStyleNameEdittext;
 	var _cStyleButton;
@@ -559,14 +559,15 @@ function __showOTFWindow() {
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
 			spacing = 10;
-			_cancelButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel"});
-			with(_cancelButton) {
+			_closeButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel"});
+			with(_closeButton) {
 				alignment = ["left","bottom"];
-				helpTip = localize(_global.closeWindowHelpTip);
-			} /* END _cancelButton */
+				helpTip = localize(_global.closeButtonHelpTip);
+			} /* END _closeButton */
 			var _refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
 			with(_refreshButton) {
 				alignment = ["left","bottom"];
+				helpTip = localize(_global.refreshButtonHelpTip);
 			} /* END _refreshButton */
 			_cStyleNameEdittext = add("edittext", undefined, "");
 			with(_cStyleNameEdittext) {
@@ -854,7 +855,7 @@ function __showOTFWindow() {
 		}
 	});
 
-	_cancelButton.onClick = function() {
+	_closeButton.onClick = function() {
 		_otfWindow.close(2);
 	};
 	
@@ -1611,11 +1612,16 @@ function __defineLocalizeStrings() {
 		de:"Zeichenformat mit ausgewählten OpenType-Eigenschaften erstellen."
 	};
 
-	_global.closeWindowHelpTip = {
+	_global.closeButtonHelpTip = {
 		en:"Close Window",
 		de:"Fenster schlie\u00dfen"
 	};
 	
+	_global.refreshButtonHelpTip = {
+		en:"Refresh display.",
+		de:"Anzeige aktualisieren."
+	};
+
 	_global.invalidSelectionAlert = {
 		en:"Please select some text!",
 		de:"Bitte eine Textstelle ausw\u00e4hlen!"
