@@ -932,7 +932,7 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfMark", "mark", _selection, _otfWindow, _otfMarkCheckbox);
 		}
 		if(!_flag || _flag === "otfProportionalMetrics") {
-			__checkOTFFeature("otfProportionalMetrics", "vpal", _selection, _otfWindow, _otfProportionalMetricsCheckbox); /* pres ??? */
+			__checkOTFFeature("otfProportionalMetrics", "palt", _selection, _otfWindow, _otfProportionalMetricsCheckbox);
 		}
 		if(!_flag || _flag === "otfJustificationAlternate") {
 			__checkOTFFeature("otfJustificationAlternate", OpenTypeFeature.JUSTIFICATION_ALTERNATE, _selection, _otfWindow, _otfJustificationAlternateCheckbox);
