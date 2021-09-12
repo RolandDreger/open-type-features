@@ -986,8 +986,8 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfStylisticSets", "ss20", _selection, _otfWindow, _otfStylisticSet20Checkbox);
 		}
 		if(!_flag || _flag === "positionalForm") {
-			__checkOTFFeature("positionalForm", "opfg", _selection, _otfWindow, _positionalFormsGeneralCheckbox); /* opfg ??? */
-			__checkOTFFeature("positionalForm", "apfm", _selection, _otfWindow, _positionalFormsAutomaticCheckbox); /* apfm ??? */
+			__checkOTFFeature("positionalForm", "opfg", _selection, _otfWindow, _positionalFormsGeneralCheckbox); /* fictional tag opfg ??? */
+			__checkOTFFeature("positionalForm", "apfm", _selection, _otfWindow, _positionalFormsAutomaticCheckbox); /* fictional tag apfm ??? */
 			__checkOTFFeature("positionalForm", "init", _selection, _otfWindow, _positionalFormsInitialCheckbox);
 			__checkOTFFeature("positionalForm", "medi", _selection, _otfWindow, _positionalFormsMedialCheckbox);
 			__checkOTFFeature("positionalForm", "fina", _selection, _otfWindow, _positionalFormsFinalCheckbox);
@@ -1193,7 +1193,21 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 		var _otfFeatureAvailability;
 		
 		try {
-			_otfFeatureAvailability= _appliedFont.checkOpenTypeFeature(_otfFeatureTag);
+			switch (_otfFeatureTag) {
+				/* Hack: Positional Form */
+				case "opfg":
+				case "apfm":
+					_otfFeatureAvailability = (
+						_appliedFont.checkOpenTypeFeature("init") || 
+						_appliedFont.checkOpenTypeFeature("medi") || 
+						_appliedFont.checkOpenTypeFeature("fina") || 
+						_appliedFont.checkOpenTypeFeature("isol")
+					);
+					break;
+				default:
+					_otfFeatureAvailability = _appliedFont.checkOpenTypeFeature(_otfFeatureTag);
+					break;
+			}
 		} catch(_error) {
 			_window.text = _error.message;
 			continue;
