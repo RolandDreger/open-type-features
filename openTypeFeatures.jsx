@@ -766,6 +766,7 @@ function __showOTFWindow() {
 	_otfStylisticSet20Checkbox.onClick = function() {
 		var _value = __getOtfSylisticSetValue(_otfStylisticSetsPanel);
 		__setValue("otfStylisticSets", _value, _otfWindow);
+		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
 		__checkInputs("otfStylisticSets");
 	};
 	/* Positionalform */
@@ -832,6 +833,7 @@ function __showOTFWindow() {
 	};
 
 	_refreshButton.onClick = function() {
+		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
 		__checkInputs();
 	};
 
@@ -961,6 +963,7 @@ function __showOTFWindow() {
 		}
 		if(!_flag || _flag === "otfStylisticSets") {
 			__checkOTFFeature("otfStylisticSets", "ss01", _selection, _otfWindow, _otfStylisticSet1Checkbox);
+			_otfWindow["prevSelection"] = _selection; /* Cache selection to avoid multiple calculation of stylistic sets. */
 			__checkOTFFeature("otfStylisticSets", "ss02", _selection, _otfWindow, _otfStylisticSet2Checkbox);
 			__checkOTFFeature("otfStylisticSets", "ss03", _selection, _otfWindow, _otfStylisticSet3Checkbox);
 			__checkOTFFeature("otfStylisticSets", "ss04", _selection, _otfWindow, _otfStylisticSet4Checkbox);
@@ -1132,7 +1135,17 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 				break;
 			/* Formsätze */
 			case "otfStylisticSets":
-				var _setCodeArray = __getStylisticSetsArray(_otfFeatureValue); /* ToDo: Bad performance!!! */
+				var _setCodeArray = [];
+				var _prevSelection = _window["prevSelection"];
+				if(!_prevSelection || _prevSelection !== _selection) {
+					_setCodeArray = __getStylisticSetsArray(_otfFeatureValue);
+					if(i === 0) {
+						_window["stylisticSets"] = [];
+					}
+					_window["stylisticSets"].push(_setCodeArray);
+				} else {
+					_setCodeArray = (_window["stylisticSets"] && _window["stylisticSets"][i]) || [];
+				}
 				if(__isInArray(_suiItem.code, _setCodeArray)) {
 					_suiItem.value = true;
 				}
