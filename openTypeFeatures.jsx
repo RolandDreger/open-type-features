@@ -1053,17 +1053,17 @@ function __showOTFWindow() {
 /**
  * Check OpenType Feature
  * @param {String} _propertyName
- * @param {String} _otfFeatureEnum 
+ * @param {String} _otfFeatureTag 
  * @param {Text} _selection 
  * @param {Window} _window 
  * @param {ScriptUiItem} _suiItem 
  * @returns {Boolean}
  */
-function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, _suiItem) {
+function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _suiItem) {
 
 	if(!_global) { return false; }
 	if(!_propertyName || _propertyName.constructor !== String) { return false; }
-	if(_otfFeatureEnum === null ||_otfFeatureEnum === undefined) { return false; }
+	if(_otfFeatureTag === null ||_otfFeatureTag === undefined) { return false; }
 	if(!_window || !(_window instanceof Window)) { return false; }
 	if(!_suiItem || !_suiItem.hasOwnProperty("value")) { return false; }
 
@@ -1120,21 +1120,21 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 			/* Checkboxes: Position */
 			case "position":
 				if(
-					(_otfFeatureEnum === OpenTypeFeature.SUPERSCRIPT_FEATURE && _otfFeatureValue === Position.OT_SUPERSCRIPT) || 
-					(_otfFeatureEnum === OpenTypeFeature.SUBSCRIPT_FEATURE && _otfFeatureValue === Position.OT_SUBSCRIPT) ||
-					(_otfFeatureEnum === OpenTypeFeature.NUMERATOR_FEATURE && _otfFeatureValue === Position.OT_NUMERATOR) ||
-					(_otfFeatureEnum === OpenTypeFeature.DENOMINATOR_FEATURE && _otfFeatureValue === Position.OT_DENOMINATOR)
+					(_otfFeatureTag === OpenTypeFeature.SUPERSCRIPT_FEATURE && _otfFeatureValue === Position.OT_SUPERSCRIPT) || 
+					(_otfFeatureTag === OpenTypeFeature.SUBSCRIPT_FEATURE && _otfFeatureValue === Position.OT_SUBSCRIPT) ||
+					(_otfFeatureTag === OpenTypeFeature.NUMERATOR_FEATURE && _otfFeatureValue === Position.OT_NUMERATOR) ||
+					(_otfFeatureTag === OpenTypeFeature.DENOMINATOR_FEATURE && _otfFeatureValue === Position.OT_DENOMINATOR)
 					) {
 					_suiItem.value = true;
 				}
 				break;
 			case "otfFigureStyle":
 				if(
-					(_otfFeatureEnum === OpenTypeFeature.TABULAR_LINING_FEATURE && _otfFeatureValue === OTFFigureStyle.TABULAR_LINING) || 
-					(_otfFeatureEnum === OpenTypeFeature.PROPORTIONAL_OLDSTYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
-					(_otfFeatureEnum === OpenTypeFeature.PROPORTIONAL_LINING_FEATURE && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_LINING) ||
-					(_otfFeatureEnum === OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.TABULAR_OLDSTYLE) ||
-					(_otfFeatureEnum === OpenTypeFeature.DEFAULT_FIGURE_STYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.DEFAULT_VALUE)
+					(_otfFeatureTag === OpenTypeFeature.TABULAR_LINING_FEATURE && _otfFeatureValue === OTFFigureStyle.TABULAR_LINING) || 
+					(_otfFeatureTag === OpenTypeFeature.PROPORTIONAL_OLDSTYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
+					(_otfFeatureTag === OpenTypeFeature.PROPORTIONAL_LINING_FEATURE && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_LINING) ||
+					(_otfFeatureTag === OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.TABULAR_OLDSTYLE) ||
+					(_otfFeatureTag === OpenTypeFeature.DEFAULT_FIGURE_STYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.DEFAULT_VALUE)
 					) {
 					_suiItem.value = true;
 				}
@@ -1159,12 +1159,12 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 			/* Positionalform */
 			case "positionalForm":
 				if( 
-					(_otfFeatureEnum === "opfg" && _otfFeatureValue === PositionalForms.NONE) ||
-					(_otfFeatureEnum === "apfm" && _otfFeatureValue === PositionalForms.CALCULATE) ||
-					(_otfFeatureEnum === "init"  && _otfFeatureValue === PositionalForms.INITIAL) ||
-					(_otfFeatureEnum === "medi"  && _otfFeatureValue === PositionalForms.MEDIAL) ||
-					(_otfFeatureEnum === "fina"  && _otfFeatureValue === PositionalForms.FINAL) ||
-					(_otfFeatureEnum === "isol"  && _otfFeatureValue === PositionalForms.ISOLATED)
+					(_otfFeatureTag === "opfg" && _otfFeatureValue === PositionalForms.NONE) ||
+					(_otfFeatureTag === "apfm" && _otfFeatureValue === PositionalForms.CALCULATE) ||
+					(_otfFeatureTag === "init"  && _otfFeatureValue === PositionalForms.INITIAL) ||
+					(_otfFeatureTag === "medi"  && _otfFeatureValue === PositionalForms.MEDIAL) ||
+					(_otfFeatureTag === "fina"  && _otfFeatureValue === PositionalForms.FINAL) ||
+					(_otfFeatureTag === "isol"  && _otfFeatureValue === PositionalForms.ISOLATED)
 				) {
 					_suiItem.value = true;
 				}
@@ -1193,7 +1193,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 		var _otfFeatureAvailability;
 		
 		try {
-			_otfFeatureAvailability= _appliedFont.checkOpenTypeFeature(_otfFeatureEnum);
+			_otfFeatureAvailability= _appliedFont.checkOpenTypeFeature(_otfFeatureTag);
 		} catch(_error) {
 			_window.text = _error.message;
 			continue;
