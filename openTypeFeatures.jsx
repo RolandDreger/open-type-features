@@ -4,9 +4,9 @@
 	
 		+	Adobe InDesign Version: CS2020+
 		+	Autor: Roland Dreger
-		+	Datum: 30. August 2021
+		+	Date: 30. August 2021
 		
-		+	Zuletzt aktualisiert: 12. September 2021
+		+	Last updated: 12. September 2021
 
 			
 		+	License (MIT)
@@ -911,7 +911,7 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfTitling", OpenTypeFeature.TITLING_FEATURE, _selection, _otfWindow, _otfTitlingCheckbox);
 		}
 		if(!_flag || _flag === "otfContextualAlternate") {
-			__checkOTFFeature("otfContextualAlternate", OpenTypeFeature.CONTEXTUAL_ALTERNATES_FEATURE, _selection, _otfWindow, _otfContextualAlternateCheckbox);
+			__checkOTFFeature("otfContextualAlternate", "calt", _selection, _otfWindow, _otfContextualAlternateCheckbox);
 		}
 		if(!_flag || _flag === "capitalization") {
 			__checkOTFFeature("capitalization", OpenTypeFeature.ALL_SMALL_CAPS_FEATURE, _selection, _otfWindow, _capitalizationCheckbox);
@@ -944,7 +944,7 @@ function __showOTFWindow() {
 			__checkOTFFeature("otfStretchedAlternate", OpenTypeFeature.STRETCHED_ALTERNATE, _selection, _otfWindow, _otfStretchedAlternateCheckbox);
 		}
 		if(!_flag || _flag === "otfStylisticAlternate") {
-			__checkOTFFeature("otfStylisticAlternate", OpenTypeFeature.STYLISTIC_ALTERNATE, _selection, _otfWindow, _otfStylisticAlternateCheckbox);
+			__checkOTFFeature("otfStylisticAlternate", "salt", _selection, _otfWindow, _otfStylisticAlternateCheckbox);
 		}
 		if(!_flag || _flag === "otfHVKana") {
 			__checkOTFFeature("otfHVKana", "hkna", _selection, _otfWindow, _otfHVKanaCheckbox);
