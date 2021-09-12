@@ -1072,12 +1072,17 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 		return false;
 	}
 	
-	const RED_COLOR = [1,0.35,0.35,1];
-	const DIMMED_BLACK_COLOR = [0,0,0,0.05];
 	const TRANSPARENT_WHITE_COLOR = [1,1,1,0];
-
 	const _squareBracketRegExp = new RegExp("[\\[\\]]","g");
 
+	var _multipleValuesColor = [1,0.25,0.25,0.9];
+	var _multipleFeatureColor = [0,0,0,0.05];
+	
+	var _appPrefs = app.generalPreferences;
+	if(_appPrefs.hasOwnProperty("uiBrightnessPreference") && _appPrefs.uiBrightnessPreference <= 0.5) {
+		_multipleValuesColor = [1,0,0.15,0.6];
+		_multipleFeatureColor = [1,1,1,0.06];
+	}
 
 	/* Reset values */
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
@@ -1173,7 +1178,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 		}
 
 		if(_prevOTFFeatureValue !== undefined && _otfFeatureValue !== _prevOTFFeatureValue) {
-			__applyBackgroundColor(_suiItem.parent, RED_COLOR);
+			__applyBackgroundColor(_suiItem.parent, _multipleValuesColor);
 			_suiItem.helpTip = _suiItem.parent.helpTip = localize(_global.multipleFeatureValuesAlert);
 			_suiItem.parent.isBackgroundSet = true;
 		}
@@ -1199,7 +1204,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 		} 
 
 		if(_suiItem.parent.isBackgroundSet !== true && _prevOTFFeatureAvailability !== undefined && _otfFeatureAvailability !== _prevOTFFeatureAvailability) {
-			__applyBackgroundColor(_suiItem.parent, DIMMED_BLACK_COLOR);
+			__applyBackgroundColor(_suiItem.parent, _multipleFeatureColor);
 			_suiItem.helpTip = _suiItem.parent.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
 		}
 
