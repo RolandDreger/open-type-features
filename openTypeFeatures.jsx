@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Datum: 30. August 2021
 		
-		+	Zuletzt aktualisiert: 11. September 2021
+		+	Zuletzt aktualisiert: 12. September 2021
 
 			
 		+	License (MIT)
@@ -161,6 +161,7 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_ligaturesCheckbox = add("checkbox", undefined, localize(_global.ligatureCheckboxLabel));
 						_ligaturesCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_ligaturesCheckbox["desc"] = localize(_global.ligaturesCheckboxDesc);
 					} /* END _ligaturesGroup */
 					var _otfDiscretionaryLigatureGroup = add("group");
 					with(_otfDiscretionaryLigatureGroup) {
@@ -1082,9 +1083,9 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
 	_suiItem.parent.isBackgroundSet = false;
 	_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
+	_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
 	_suiItem.value = false;
-
-
+	
 	/* Upadate values */
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
 
@@ -1173,8 +1174,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 
 		if(_prevOTFFeatureValue !== undefined && _otfFeatureValue !== _prevOTFFeatureValue) {
 			__applyBackgroundColor(_suiItem.parent, RED_COLOR);
-			_suiItem.helpTip = localize(_global.multipleFeatureValuesAlert);
-			_suiItem.parent.helpTip = localize(_global.multipleFeatureValuesAlert);
+			_suiItem.helpTip = _suiItem.parent.helpTip = localize(_global.multipleFeatureValuesAlert);
 			_suiItem.parent.isBackgroundSet = true;
 		}
 
@@ -1200,8 +1200,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureEnum, _selection, _window, 
 
 		if(_suiItem.parent.isBackgroundSet !== true && _prevOTFFeatureAvailability !== undefined && _otfFeatureAvailability !== _prevOTFFeatureAvailability) {
 			__applyBackgroundColor(_suiItem.parent, DIMMED_BLACK_COLOR);
-			_suiItem.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
-			_suiItem.parent.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
+			_suiItem.helpTip = _suiItem.parent.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
 		}
 
 		_prevOTFFeatureAvailability = _otfFeatureAvailability;
@@ -1880,4 +1879,8 @@ function __defineLocalizeStrings() {
 		de:"Isoloierte Form"
 	};
 
+	_global.ligaturesCheckboxDesc = {
+		en:"If selected, replaces specific character combinations (e.g., fl, fi) with ligature characters.",
+		de:"Wenn ausgewählt, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
+	};
 } /* END function __defineLocalizeStrings */
