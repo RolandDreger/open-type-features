@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Date: 30. August 2021
 		
-		+	Last updated: 12. September 2021
+		+	Last updated: 13. September 2021
 
 			
 		+	License (MIT)
@@ -1195,6 +1195,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 		try {
 			switch (_otfFeatureTag) {
 				/* Hack: Positional Form */
+				/* "opfg" (PositionalForms.NONE) and "apfm" (PositionalForms.CALCULATE) are specific to InDesign */
 				case "opfg":
 				case "apfm":
 					_otfFeatureAvailability = (
@@ -1202,6 +1203,22 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 						_appliedFont.checkOpenTypeFeature("medi") || 
 						_appliedFont.checkOpenTypeFeature("fina") || 
 						_appliedFont.checkOpenTypeFeature("isol")
+					);
+					break;
+				/* Hack: Figure Style */
+				/* InDesign does not distinguish between "onum" with "pnum" or "tnum", same for "lnum" */
+				case OpenTypeFeature.PROPORTIONAL_OLDSTYLE_FEATURE:
+				case OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE:
+					_otfFeatureAvailability = (
+						_appliedFont.checkOpenTypeFeature(_otfFeatureTag) ||
+						_appliedFont.checkOpenTypeFeature("onum")
+					);
+					break;
+				case OpenTypeFeature.TABULAR_LINING_FEATURE:
+				case OpenTypeFeature.PROPORTIONAL_LINING_FEATURE:	
+					_otfFeatureAvailability = (
+						_appliedFont.checkOpenTypeFeature(_otfFeatureTag) ||
+						_appliedFont.checkOpenTypeFeature("lnum")
 					);
 					break;
 				default:
