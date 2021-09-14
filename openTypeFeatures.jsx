@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Date: 30. August 2021
 		
-		+	Last updated: 13. September 2021
+		+	Last updated: 14. September 2021
 
 			
 		+	License (MIT)
@@ -161,55 +161,63 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_ligaturesCheckbox = add("checkbox", undefined, localize(_global.ligatureCheckboxLabel));
 						_ligaturesCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_ligaturesCheckbox["desc"] = localize(_global.ligaturesCheckboxDesc);
+						_ligaturesCheckbox["desc"] = localize(_global.ligaturesFeatureDesc);
 					} /* END _ligaturesGroup */
 					var _otfDiscretionaryLigatureGroup = add("group");
 					with(_otfDiscretionaryLigatureGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfDiscretionaryLigatureCheckbox = add("checkbox", undefined, localize(_global.otfDiscretionaryLigatureCheckboxLabel));
 						_otfDiscretionaryLigatureCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfDiscretionaryLigatureCheckbox["desc"] = localize(_global.otfDiscretionaryLigatureFeatureDesc);
 					} /* END _otfDiscretionaryLigatureGroup */
 					var _otfFractionGroup = add("group");
 					with(_otfFractionGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfFractionCheckbox = add("checkbox", undefined, localize(_global.otfFractionCheckboxLabel));
 						_otfFractionCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfFractionCheckbox["desc"] = localize(_global.otfFractionFeatureDesc);
 					} /* END _otfFractionGroup */
 					var _otfOrdinalGroup = add("group");
 					with(_otfOrdinalGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfOrdinalCheckbox = add("checkbox", undefined, localize(_global.otfOrdinalCheckboxLabel));
 						_otfOrdinalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfOrdinalCheckbox["desc"] = localize(_global.otfOrdinalFeatureDesc);
 					} /* END _otfOrdinalGroup */
 					var _otfSwashGroup = add("group");
 					with(_otfSwashGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfSwashCheckbox = add("checkbox", undefined, localize(_global.otfSwashCheckboxLabel));
 						_otfSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfSwashCheckbox["desc"] = localize(_global.otfSwashFeatureDesc);
 					} /* END _otfSwashGroup */
 					var _otfTitlingGroup = add("group");
 					with(_otfTitlingGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfTitlingCheckbox = add("checkbox", undefined, localize(_global.otfTitlingCheckboxLabel));
 						_otfTitlingCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfTitlingCheckbox["desc"] = localize(_global.otfTitlingFeatureDesc);
 					} /* END _otfTitlingGroup */
 					var _otfContextualAlternateGroup = add("group");
 					with(_otfContextualAlternateGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfContextualAlternateCheckbox = add("checkbox", undefined, localize(_global.otfContextualAlternateCheckboxLabel));
 						_otfContextualAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfContextualAlternateCheckbox["desc"] = localize(_global.otfContextualAlternateFeatureDesc);
 					} /* END _otfContextualAlternateGroup */
 					var _capitalizationGroup = add("group");
 					with(_capitalizationGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_capitalizationCheckbox = add("checkbox", undefined, localize(_global.capitalizationCheckboxLabel));
 						_capitalizationCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_capitalizationCheckbox["desc"] = localize(_global.capitalizationFeatureDesc);
 					} /* END _capitalizationGroup */
 					var _otfSlashedZeroGroup = add("group");
 					with(_otfSlashedZeroGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfSlashedZeroCheckbox = add("checkbox", undefined, localize(_global.otfSlashedZeroCheckboxLabel));
 						_otfSlashedZeroCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfSlashedZeroCheckbox["desc"] = localize(_global.otfSlashedZeroFeatureDesc);
 					} /* END _otfSlashedZeroGroup */
 				} /* END _otfGeneralFeaturePanel */
 				var _otfSpecialFeaturePanel = add("panel", undefined, localize(_global.oftSpecialFeaturePanelLabel));
@@ -222,60 +230,70 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfHistoricalCheckbox = add("checkbox", undefined, localize(_global.otfHistoricalCheckboxLabel));
 						_otfHistoricalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfHistoricalCheckbox["desc"] = localize(_global.otfHistoricalFeatureDesc);
 					} /* END _otfHistoricalGroup */
 					var _otfRomanItalicsGroup = add("group");
 					with(_otfRomanItalicsGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfRomanItalicsCheckbox = add("checkbox", undefined, localize(_global.otfRomanItalicsCheckboxLabel));
 						_otfRomanItalicsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfRomanItalicsCheckbox["desc"] = localize(_global.otfRomanItalicsFeatureDesc);
 					} /* END _otfRomanItalicsGroup */
 					var _otfLocaleGroup = add("group");
 					with(_otfLocaleGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfLocaleCheckbox = add("checkbox", undefined, localize(_global.otfLocaleCheckboxLabel));
 						_otfLocaleCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfLocaleCheckbox["desc"] = localize(_global.otfLocaleFeatureDesc);
 					} /* END _otfLocaleGroup */
 					var _otfOverlapSwashGroup = add("group");
 					with(_otfOverlapSwashGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfOverlapSwashCheckbox = add("checkbox", undefined, localize(_global.otfOverlapSwashCheckboxLabel));
 						_otfOverlapSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfOverlapSwashCheckbox["desc"] = localize(_global.otfOverlapSwashFeatureDesc);
 					} /* END _otfOverlapSwashGroup */
 					var _otfMarkGroup = add("group");
 					with(_otfMarkGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfMarkCheckbox = add("checkbox", undefined, localize(_global.otfMarkCheckboxLabelCheckboxLabel));
 						_otfMarkCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfMarkCheckbox["desc"] = localize(_global.otfMarkFeatureDesc);
 					} /* END _otfMarkGroup */
 					var _otfProportionalMetricsGroup = add("group");
 					with(_otfProportionalMetricsGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfProportionalMetricsCheckbox = add("checkbox", undefined, localize(_global.otfProportionalMetricsCheckboxLabel));
 						_otfProportionalMetricsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfProportionalMetricsCheckbox["desc"] = localize(_global.otfProportionalMetricsFeatureDesc);
 					} /* END _otfProportionalMetricsGroup */
 					var _otfJustificationAlternateGroup = add("group");
 					with(_otfJustificationAlternateGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfJustificationAlternateCheckbox = add("checkbox", undefined, localize(_global.otfJustificationAlternateCheckboxLabel));
 						_otfJustificationAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfJustificationAlternateCheckbox["desc"] = localize(_global.otfJustificationAlternateFeatureDesc);
 					} /* END _otfJustificationAlternateGroup */
 					var _otfStretchedAlternateGroup = add("group");
 					with(_otfStretchedAlternateGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfStretchedAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStretchedAlternateCheckboxLabel));
 						_otfStretchedAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfStretchedAlternateCheckbox["desc"] = localize(_global.otfStretchedAlternateFeatureDesc);
 					} /* END _otfStretchedAlternateGroup */
 					var _otfStylisticAlternateGroup = add("group");
 					with(_otfStylisticAlternateGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfStylisticAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStylisticAlternateCheckboxLabel));
 						_otfStylisticAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfStylisticAlternateCheckbox["desc"] = localize(_global.otfStylisticAlternateFeatureDesc);
 					} /* END _otfStylisticAlternateGroup */
 					var _otfHVKanaGroup = add("group");
 					with(_otfHVKanaGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_otfHVKanaCheckbox = add("checkbox", undefined, localize(_global.otfHVKanaCheckboxLabel));
 						_otfHVKanaCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+						_otfHVKanaCheckbox["desc"] = localize(_global.otfHVKanaFeatureDesc);
 					} /* END _otfHVKanaGroup */
 				} /* END _otfSpecialFeaturePanel */
 			} /* END _column1Group */
@@ -1915,8 +1933,100 @@ function __defineLocalizeStrings() {
 		de:"Isoloierte Form"
 	};
 
-	_global.ligaturesCheckboxDesc = {
+	_global.ligaturesFeatureDesc = {
 		en:"If selected, replaces specific character combinations (e.g., fl, fi) with ligature characters.",
 		de:"Wenn ausgewählt, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
 	};
+
+	_global.otfDiscretionaryLigatureFeatureDesc = {
+		en:"If true, uses discretionary ligatures in OpenType fonts.",
+		de:"If true, uses discretionary ligatures in OpenType fonts."
+	};
+
+	_global.otfFractionFeatureDesc = {
+		en:"If true, uses fractions in OpenType fonts.",
+		de:"If true, uses fractions in OpenType fonts."
+	};
+
+	_global.otfOrdinalFeatureDesc = {
+		en:"If true, uses ordinals in OpenType fonts.",
+		de:"If true, uses ordinals in OpenType fonts."
+	};
+
+	_global.otfSwashFeatureDesc = {
+		en:"If true, uses swash forms in OpenType fonts.",
+		de:"If true, uses swash forms in OpenType fonts."
+	};
+
+	_global.otfTitlingFeatureDesc = {
+		en:"If true, uses titling forms in OpenType fonts.",
+		de:"If true, uses titling forms in OpenType fonts."
+	};
+
+	_global.otfContextualAlternateFeatureDesc = {
+		en:"If true, uses contextual alternate forms in OpenType fonts.",
+		de:"If true, uses contextual alternate forms in OpenType fonts."
+	};
+
+	_global.capitalizationFeatureDesc = {
+		en:"If true, uses small capitals in OpenType fonts.",
+		de:"If true, uses small capitals in OpenType fonts."
+	};
+
+	_global.otfSlashedZeroFeatureDesc = {
+		en:"If true, use a slashed zeroes in OpenType fonts.",
+		de:"If true, use a slashed zeroes in OpenType fonts."
+	};
+
+	_global.otfHistoricalFeatureDesc = {
+		en:"If true, use historical forms in OpenType fonts.",
+		de:"If true, use historical forms in OpenType fonts."
+	};
+
+	_global.otfRomanItalicsFeatureDesc = {
+		en:"If true, applies italics to half-width alphanumerics.",
+		de:"If true, applies italics to half-width alphanumerics."
+	};
+
+	_global.otfLocaleFeatureDesc = {
+		en:"If true, uses localized forms in OpenType fonts.",
+		de:"If true, uses localized forms in OpenType fonts."
+	};
+
+	_global.otfOverlapSwashFeatureDesc = {
+		en:"If true, use overlapping swash forms in OpenType fonts.",
+		de:"If true, use overlapping swash forms in OpenType fonts."
+	};
+
+	_global.otfMarkFeatureDesc = {
+		en:"If true, uses mark positioning in OpenType fonts.",
+		de:"If true, uses mark positioning in OpenType fonts."
+	};
+
+	_global.otfProportionalMetricsFeatureDesc = {
+		en:"If true, kerns according to proportional CJK metrics in OpenType fonts.",
+		de:"If true, kerns according to proportional CJK metrics in OpenType fonts."
+	};
+
+	_global.otfJustificationAlternateFeatureDesc = {
+		en:"If true, use alternate justification forms in OpenType fonts.",
+		de:"If true, use alternate justification forms in OpenType fonts."
+	};
+
+	_global.otfStretchedAlternateFeatureDesc = {
+		en:"If true, use stretched alternate forms in OpenType fonts.",
+		de:"If true, use stretched alternate forms in OpenType fonts."
+	};
+
+	_global.otfStylisticAlternateFeatureDesc = {
+		en:"If true, use stylistic alternate forms in OpenType fonts.",
+		de:"If true, use stylistic alternate forms in OpenType fonts."
+	};
+
+	_global.otfHVKanaFeatureDesc = {
+		en:"If true, standard kana (hiragana and katakana) are replaced with forms specifically designed for horizontal or vertical writing.",
+		de:"Wenn gewählt, werden standardmäßige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell für das horizontale oder vertikale Schreiben entwickelt wurden."
+	};
+
+	
 } /* END function __defineLocalizeStrings */
