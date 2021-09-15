@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Date: 30. August 2021
 		
-		+	Last updated: 14. September 2021
+		+	Last updated: 15. September 2021
 
 			
 		+	License (MIT)
@@ -54,7 +54,7 @@ function __showOTFWindow() {
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
 	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 24 });
 	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 24 });
-	const THIRD_COLUMN_CHAR_NUM = localize({ en: 7, de: 8 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en: 16, de: 16 });
 	
 	var _appliedFontsStatictext;
 
@@ -890,6 +890,7 @@ function __showOTFWindow() {
 
 	/* Dialog initialisieren */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
+	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
 
 	
@@ -1102,12 +1103,20 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 		_multipleFeatureColor = [1,1,1,0.06];
 	}
 
-	/* Reset values */
+	var _prevSelection = _window["prevSelection"];
+
+	/* Reset UI */
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
 	_suiItem.parent.isBackgroundSet = false;
-	_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
-	_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
 	_suiItem.value = false;
+	var _suiItemLabel;
+	if(_propertyName === "otfStylisticSets") {
+		var _setNum = Number(_otfFeatureTag.replace(/\D+/g,""));
+		_suiItemLabel = __getOtfSylisticSetName(_setNum);
+	}
+	_suiItem.text = (_suiItemLabel || "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]");
+	_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
+	
 	
 	/* Upadate values */
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
@@ -1128,6 +1137,7 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 		}
 
 		var _otfFeatureValue = _curTextStyleRange[_propertyName];
+
 		switch (_propertyName) {
 			/* Checkbox: Alles in Kapitälchen */
 			case "capitalization":
@@ -1160,15 +1170,14 @@ function __checkOTFFeature(_propertyName, _otfFeatureTag, _selection, _window, _
 			/* Formsätze */
 			case "otfStylisticSets":
 				var _setCodeArray = [];
-				var _prevSelection = _window["prevSelection"];
 				if(!_prevSelection || _prevSelection !== _selection) {
 					_setCodeArray = __getStylisticSetsArray(_otfFeatureValue);
 					if(i === 0) {
-						_window["stylisticSets"] = [];
+						_window["stylisticSetCodes"] = [];
 					}
-					_window["stylisticSets"].push(_setCodeArray);
+					_window["stylisticSetCodes"].push(_setCodeArray);
 				} else {
-					_setCodeArray = (_window["stylisticSets"] && _window["stylisticSets"][i]) || [];
+					_setCodeArray = (_window["stylisticSetCodes"] && _window["stylisticSetCodes"][i]) || [];
 				}
 				if(__isInArray(_suiItem.code, _setCodeArray)) {
 					_suiItem.value = true;
@@ -1318,9 +1327,9 @@ function __getStylisticSetsArray(_stylisticSetCode) {
  * Calculate subset of given sum 
  * @param {Number} _num 
  * @param {Array} _array 
- * @returns 
+ * @returns {Array}
  */
- function __getSubsetOfSum(_num, _array) {
+function __getSubsetOfSum(_num, _array) {
   
   if(_num < 0) { return null; }
   if(_num === 0) { return [0]; }
@@ -1336,6 +1345,39 @@ function __getStylisticSetsArray(_stylisticSetCode) {
 } /* END function __getSubsetOfSum */
 
 
+/**
+ * Get name of stylistic set
+ * @param {Number} _setNum
+ * @returns {String}
+ */
+function __getOtfSylisticSetName(_setNum) {
+
+	if(_setNum === null || _setNum === undefined || isNaN(_setNum)) {
+		return "";
+	}
+
+	var _charPanelMenu = app.menus.itemByName("$ID/CharPanelPopup");
+	if(!_charPanelMenu.isValid) {
+		return "";
+	}
+	var _openTypeSubmenu = _charPanelMenu.submenus.itemByName("$ID/OpenType");
+	if(!_openTypeSubmenu.isValid) {
+		return "";
+	}
+	var _stylisticSetSubmenu = _openTypeSubmenu.submenus.itemByName("$ID/Stylistic");
+	if(!_stylisticSetSubmenu.isValid) {
+		return "";
+	}
+	var _stylisticSetItem = _stylisticSetSubmenu.menuItems.item(Number(_setNum) - 1);
+	if(!_stylisticSetItem.isValid) {
+		return "";
+	}
+
+	var _isChecked = _stylisticSetItem.checked; /* Trigger Indesign to retrieve the current name. */
+	var _setName = _stylisticSetItem.name;
+
+	return _setName;
+} /* END __getOtfSylisticSetName */
 
 
 /**
