@@ -20,11 +20,11 @@ Put the script into the script folder of InDesign and start it from the script p
 
 ### Different Values
 
-If the current selection contains different values for the same OpenType feature, the background of the checkbox is grayed out. In the help text of the checkbox, this fact is pointed out again.
+If the current selection contains different values for the same OpenType feature, the background of the checkbox is highlighted in red. In the help text of the checkbox, this fact is pointed out again.
 
 ### Different Availability
 
-If the fonts contained in the selection have different availabilities for the same OpenType feature, the background of the checkbox is highlighted in red.
+If the fonts contained in the selection have different availabilities for the same OpenType feature, the background of the checkbox is grayed out.
 
 ### ALT + Click
 
