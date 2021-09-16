@@ -45,9 +45,13 @@ The selected features can be transferred to a character style. To do this, enter
 
 Error messages are displayed in the title bar of the dialog.
 
+### What's missing?
+
+Yes, OpenType features are a wide field to get lost in. This is the first version of the script, maybe I will add more functions in the future. Let's see ...
+
 ## Credits
 
-Thanks for tips and discussion to [Dirk Becker](https://twitter.com/dirkbecker) and [Ken Lunde](https://twitter.com/ken_lunde).
+Thanks for tips and discussion to [Dirk Becker](https://twitter.com/dirkbecker)/[IxtaTypeUI](https://twitter.com/IxtaTypeUI) and [Ken Lunde](https://twitter.com/ken_lunde).
 
 ## License
 
