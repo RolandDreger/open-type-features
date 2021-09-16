@@ -10,6 +10,8 @@ To get full functionality for Japanese/CJK or Arabic OpenType features in InDesi
 
 Put the script into the script folder of InDesign and start it from the script panel via double click. By selecting a checkbox, the corresponding OpenType feature is enabled in the current selection of your document.
 
+Here is a [short Video](https://vimeo.com/606686469) on how to use it.
+
 ### Selection
 
 **Insertion Point**: If the insertion point is placed in a paragraph, the feature is enabled in the entire paragraph.
