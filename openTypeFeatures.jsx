@@ -971,7 +971,7 @@ function __showOTFWindow() {
 	_otfStylisticSet18Group.addEventListener('mousedown', __altKeyHandler);
 	_otfStylisticSet19Group.addEventListener('mousedown', __altKeyHandler);
 	_otfStylisticSet20Group.addEventListener('mousedown', __altKeyHandler);
-	
+
 	function __altKeyHandler(_event) {
 
 		if(!_event || !_event.hasOwnProperty("altKey")) {
@@ -982,7 +982,7 @@ function __showOTFWindow() {
 			return false;
 		}
 
-		var _eventTarget = _event.target;
+		var _eventTarget = _event.currentTarget;
 		if(!_eventTarget || !(_eventTarget instanceof Group)) {
 			return false;
 		}
