@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Date: 30. August 2021
 		
-		+	Last updated: 15. September 2021
+		+	Last updated: 16. September 2021
 
 			
 		+	License (MIT)
@@ -900,17 +900,25 @@ function __showOTFWindow() {
 
 	/* Eingaben überprüfen */
 	function __checkInputs(_flag) {
-		if(_flag instanceof Event) {
+		
+		if(!_global) {
+			return false;
+		}
+		
+		if(_flag !== null && _flag !== undefined && _flag instanceof Event) {
 			_flag.stopPropagation();
 			_flag = undefined;
 		}
+		
 		if(!_flag) {
 			_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 		}
+		
 		var _selection = __getSelection(_otfWindow);
 		if(!_selection) {
 			return false;
 		}
+		
 		if(!_flag || _flag === "ligatures") {
 			__checkOTFeature("ligatures", "liga", _selection, _otfWindow, _ligaturesCheckbox);
 		}
@@ -1014,53 +1022,161 @@ function __showOTFWindow() {
 		}
 	} /* END function __checkInputs */ 
 	
+
 	/* Eingaben auslesen */
 	function __getOTFeatureValues() {
 		return {
-			"ligatures":_ligaturesCheckbox.value,
-			"otfDiscretionaryLigature":_otfDiscretionaryLigatureCheckbox.value,
-			"otfFraction":_otfFractionCheckbox.value,
-			"otfOrdinal":_otfOrdinalCheckbox.value,
-			"otfSwash":_otfSwashCheckbox.value,
-			"otfTitling":_otfTitlingCheckbox.value,
-			"otfContextualAlternate":_otfContextualAlternateCheckbox.value,
-			"capitalization":(_capitalizationCheckbox.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL,
-			"otfSlashedZero":_otfSlashedZeroCheckbox.value,
-			"otfHistorical":_otfHistoricalCheckbox.value,
-			"otfRomanItalics":_otfRomanItalicsCheckbox.value,
-			"otfLocale":_otfLocaleCheckbox.value,
-			"otfOverlapSwash":_otfOverlapSwashCheckbox.value,
-			"otfMark":_otfMarkCheckbox.value,
-			"otfProportionalMetrics":_otfProportionalMetricsCheckbox.value,
-			"otfJustificationAlternate":_otfJustificationAlternateCheckbox.value,
-			"otfStretchedAlternate":_otfStretchedAlternateCheckbox.value,
-			"otfStylisticAlternate":_otfStylisticAlternateCheckbox.value,
-			"otfHVKana":_otfHVKanaCheckbox.value,
-			"position": (
-				(_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
-				(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
-				(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
-				(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
-				Position.NORMAL
-			),
-			"otfFigureStyle":(
-				(_digitTabularLiningCheckbox.value && OTFFigureStyle.TABULAR_LINING) ||
-				(_digitProportionalOldstyleCheckbox.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
-				(_digitProportionalLiningCheckbox.value && OTFFigureStyle.PROPORTIONAL_LINING) ||
-				(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
-				OTFFigureStyle.DEFAULT_VALUE
-			),
-			"otfStylisticSets":__getOtfSylisticSetValue(_otfStylisticSetsPanel),
-			"positionalForm":(
-				(_positionalFormsAutomaticCheckbox.value && PositionalForms.CALCULATE) ||
-				(_positionalFormsInitialCheckbox.value && PositionalForms.INITIAL) ||
-				(_positionalFormsMedialCheckbox.value && PositionalForms.MEDIAL) ||
-				(_positionalFormsFinalCheckbox.value && PositionalForms.FINAL) ||
-				(_positionalFormsIsolatedCheckbox.value && PositionalForms.ISOLATED) ||
-				PositionalForms.NONE
-			)
+			"ligatures":{
+				"value":_ligaturesCheckbox.value,
+				"enabled":_ligaturesCheckbox.enabled
+			},
+			"otfDiscretionaryLigature":{ 
+				"value":_otfDiscretionaryLigatureCheckbox.value, 
+				"enabled":_otfDiscretionaryLigatureCheckbox.enabled
+			},
+			"otfFraction":{ 
+				"value":_otfFractionCheckbox.value, 
+				"enabled":_otfFractionCheckbox.enabled
+			},
+			"otfOrdinal":{ 
+				"value":_otfOrdinalCheckbox.value, 
+				"enabled":_otfOrdinalCheckbox.enabled
+			},
+			"otfSwash":{ 
+				"value":_otfSwashCheckbox.value, 
+				"enabled":_otfSwashCheckbox.enabled
+			},
+			"otfTitling":{ 
+				"value":_otfTitlingCheckbox.value, 
+				"enabled":_otfTitlingCheckbox.enabled
+			},
+			"otfContextualAlternate":{ 
+				"value":_otfContextualAlternateCheckbox.value, 
+				"enabled":_otfContextualAlternateCheckbox.enabled
+			},
+			"capitalization":{ 
+				"value":(_capitalizationCheckbox.value) ? Capitalization.CAP_TO_SMALL_CAP : Capitalization.NORMAL, 
+				"enabled":_capitalizationCheckbox.enabled
+			},
+			"otfSlashedZero":{ 
+				"value":_otfSlashedZeroCheckbox.value, 
+				"enabled":_otfSlashedZeroCheckbox.enabled
+			},
+			"otfHistorical":{ 
+				"value":_otfHistoricalCheckbox.value, 
+				"enabled":_otfHistoricalCheckbox.enabled
+			},
+			"otfRomanItalics":{ 
+				"value":_otfRomanItalicsCheckbox.value, 
+				"enabled":_otfRomanItalicsCheckbox.enabled
+			},
+			"otfLocale":{ 
+				"value":_otfLocaleCheckbox.value, 
+				"enabled":_otfLocaleCheckbox.enabled
+			},
+			"otfOverlapSwash":{ 
+				"value":_otfOverlapSwashCheckbox.value, 
+				"enabled":_otfOverlapSwashCheckbox.enabled
+			},
+			"otfMark":{ 
+				"value":_otfMarkCheckbox.value, 
+				"enabled":_otfMarkCheckbox.enabled
+			},
+			"otfProportionalMetrics":{ 
+				"value":_otfProportionalMetricsCheckbox.value, 
+				"enabled":_otfProportionalMetricsCheckbox.enabled
+			},
+			"otfJustificationAlternate":{ 
+				"value":_otfJustificationAlternateCheckbox.value, 
+				"enabled":_otfJustificationAlternateCheckbox.enabled
+			},
+			"otfStretchedAlternate":{ 
+				"value":_otfStretchedAlternateCheckbox.value, 
+				"enabled":_otfStretchedAlternateCheckbox.enabled
+			},
+			"otfStylisticAlternate":{ 
+				"value":_otfStylisticAlternateCheckbox.value, 
+				"enabled":_otfStylisticAlternateCheckbox.enabled
+			},
+			"otfHVKana":{ 
+				"value":_otfHVKanaCheckbox.value,
+				"enabled":_otfHVKanaCheckbox.enabled
+			},
+			"position": { 
+				"value":(
+					(_positionSuperscriptCheckbox.value && Position.OT_SUPERSCRIPT) ||
+					(_positionSubscriptCheckbox.value && Position.OT_SUBSCRIPT) ||
+					(_positionNumeratorCheckbox.value && Position.OT_NUMERATOR) ||
+					(_positionDenominatorCheckbox.value && Position.OT_DENOMINATOR) || 
+					Position.NORMAL
+				), 
+				"enabled":(
+					_positionSuperscriptCheckbox.enabled || 
+					_positionSubscriptCheckbox.enabled || 
+					_positionNumeratorCheckbox.enabled || 
+					_positionDenominatorCheckbox.enabled
+				)
+			},
+			"otfFigureStyle":{ 
+				"value":(
+					(_digitTabularLiningCheckbox.value && OTFFigureStyle.TABULAR_LINING) ||
+					(_digitProportionalOldstyleCheckbox.value && OTFFigureStyle.PROPORTIONAL_OLDSTYLE) ||
+					(_digitProportionalLiningCheckbox.value && OTFFigureStyle.PROPORTIONAL_LINING) ||
+					(_digitTabularOldstyleCheckbox.value && OTFFigureStyle.TABULAR_OLDSTYLE) ||
+					OTFFigureStyle.DEFAULT_VALUE
+				), 
+				"enabled":(
+					_digitTabularLiningCheckbox.enabled ||
+					_digitProportionalOldstyleCheckbox.enabled ||
+					_digitProportionalLiningCheckbox.enabled ||
+					_digitTabularOldstyleCheckbox.enabled
+				)
+			},
+			"otfStylisticSets":{ 
+				"value":__getOtfSylisticSetValue(_otfStylisticSetsPanel), 
+				"enabled":(
+					_otfStylisticSet1Checkbox.enabled || 
+					_otfStylisticSet2Checkbox.enabled || 
+					_otfStylisticSet3Checkbox.enabled || 
+					_otfStylisticSet4Checkbox.enabled || 
+					_otfStylisticSet5Checkbox.enabled || 
+					_otfStylisticSet6Checkbox.enabled || 
+					_otfStylisticSet7Checkbox.enabled || 
+					_otfStylisticSet8Checkbox.enabled || 
+					_otfStylisticSet9Checkbox.enabled || 
+					_otfStylisticSet10Checkbox.enabled || 
+					_otfStylisticSet11Checkbox.enabled || 
+					_otfStylisticSet12Checkbox.enabled || 
+					_otfStylisticSet13Checkbox.enabled || 
+					_otfStylisticSet14Checkbox.enabled || 
+					_otfStylisticSet15Checkbox.enabled || 
+					_otfStylisticSet16Checkbox.enabled || 
+					_otfStylisticSet17Checkbox.enabled || 
+					_otfStylisticSet18Checkbox.enabled || 
+					_otfStylisticSet19Checkbox.enabled || 
+					_otfStylisticSet20Checkbox.enabled
+				)
+			},
+			"positionalForm":{ 
+				"value":(
+					(_positionalFormsAutomaticCheckbox.value && PositionalForms.CALCULATE) ||
+					(_positionalFormsInitialCheckbox.value && PositionalForms.INITIAL) ||
+					(_positionalFormsMedialCheckbox.value && PositionalForms.MEDIAL) ||
+					(_positionalFormsFinalCheckbox.value && PositionalForms.FINAL) ||
+					(_positionalFormsIsolatedCheckbox.value && PositionalForms.ISOLATED) ||
+					PositionalForms.NONE
+				), 
+				"enabled":(
+					_positionalFormsAutomaticCheckbox.enabled ||
+					_positionalFormsInitialCheckbox.enabled ||
+					_positionalFormsMedialCheckbox.enabled ||
+					_positionalFormsFinalCheckbox.enabled ||
+					_positionalFormsIsolatedCheckbox.enabled
+				)
+			}
 		};
 	} /* END function __getOTFeatureValues */
+
 
 	/* Show OTF Dialog */
 	_otfWindow.show();
@@ -1091,8 +1207,10 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 		return false;
 	}
 	
+	const MODE = "enable"; /* Values: enable or brackets */
+
 	const TRANSPARENT_WHITE_COLOR = [1,1,1,0];
-	const _squareBracketRegExp = new RegExp("[\\[\\]]","g");
+	const _squareBracketRegExp = new RegExp("[\\[\\]]+","g");
 
 	var _multipleValuesColor = [1,0.25,0.25,0.9];
 	var _multipleFeatureColor = [0,0,0,0.05];
@@ -1109,14 +1227,14 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
 	_suiItem.parent.isBackgroundSet = false;
 	_suiItem.value = false;
-	var _suiItemLabel;
 	if(_propertyName === "otfStylisticSets") {
 		var _setNum = Number(_otfFeatureTag.replace(/\D+/g,""));
-		_suiItemLabel = __getOtfSylisticSetName(_setNum);
+		var _suiItemLabel = __getOtfSylisticSetName(_setNum);
+		if(_suiItemLabel !== "") {
+			_suiItem.text = _suiItemLabel.replace(_squareBracketRegExp, "");
+		}
 	}
-	_suiItem.text = (_suiItemLabel || "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]");
 	_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
-	
 	
 	/* Upadate values */
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
@@ -1257,13 +1375,30 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 			continue;
 		}
 		
-		if(_otfFeatureAvailability === true) {
-			_suiItem.text = _suiItem.text.replace(_squareBracketRegExp, "");
-		} 
-
 		if(_suiItem.parent.isBackgroundSet !== true && _prevOTFFeatureAvailability !== undefined && _otfFeatureAvailability !== _prevOTFFeatureAvailability) {
 			__applyBackgroundColor(_suiItem.parent, _multipleFeatureColor);
 			_suiItem.helpTip = _suiItem.parent.helpTip = localize(_global.multipleFeatureAvailabilityAlert);
+			_otfFeatureAvailability = true;
+		}
+
+		switch (MODE) {
+			case "brackets":
+				if(_otfFeatureAvailability === true) {
+					_suiItem.text = _suiItem.text.replace(_squareBracketRegExp, "");
+				} else {
+					_suiItem.text = "[" + _suiItem.text.replace(_squareBracketRegExp, "") + "]";
+				}
+				break;
+			case "enable":
+				if(_otfFeatureAvailability === true) {
+					_suiItem.enabled = true;
+				} else {
+					_suiItem.enabled = false;
+				}
+				break;
+			default:
+				_suiItem.enabled = false;
+				break;
 		}
 
 		_prevOTFFeatureAvailability = _otfFeatureAvailability;
@@ -1654,8 +1789,11 @@ function __createCStyle(_styleName, _inputObj) {
 			continue;
 		}
 
-		var _value = _inputObj[_key];
+		var _value = _inputObj[_key]["value"];
+		var _isEnabled = _inputObj[_key]["enabled"];
+
 		if(
+			!_isEnabled ||
 			_value === false || 
 			_value === Capitalization.NORMAL ||
 			_value === Position.NORMAL ||
