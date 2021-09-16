@@ -701,7 +701,7 @@ function __showOTFWindow() {
 		__setValue("otfSlashedZero", this.value, _otfWindow);
 		__checkInputs("otfSlashedZero");
 	};
-	/* Spezielle Features (NICHT über Benuteroberfläche von InDesign zugänglich) */
+	/* Special Features (NOT accessible via InDesign user interface) */
 	_otfHistoricalCheckbox.onClick = function() {
 		__setValue("otfHistorical", this.value, _otfWindow);
 		__checkInputs("otfHistorical");
@@ -848,7 +848,7 @@ function __showOTFWindow() {
 		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
 		__checkInputs("otfStylisticSets");
 	};
-	/* Positionalform */
+	/* Positional Form */
 	_positionalFormsGeneralCheckbox.onClick = function() {
 		_positionalFormsAutomaticCheckbox.value = false;
 		_positionalFormsInitialCheckbox.value = false;
@@ -911,7 +911,7 @@ function __showOTFWindow() {
 		__checkInputs("positionalForm");
 	};
 
-	/* ALT Click on Group */
+	/* ALT + Click on Group (enable the checkboxes) */
 	_ligaturesGroup.addEventListener('mousedown', __altKeyHandler);
 	_otfDiscretionaryLigatureGroup.addEventListener('mousedown', __altKeyHandler);
 	_otfFractionGroup.addEventListener('mousedown', __altKeyHandler);
@@ -973,17 +973,18 @@ function __showOTFWindow() {
 	_otfStylisticSet20Group.addEventListener('mousedown', __altKeyHandler);
 
 	function __altKeyHandler(_event) {
-
-		if(!_event || !_event.hasOwnProperty("altKey")) {
-			return false;
-		}
-
-		if(!_event.altKey) {
-			return false;
-		}
-
+		
+		/* If a modal dialog is open? Bug? */
 		try {
-			
+
+			if(!_event || !_event.hasOwnProperty("altKey")) {
+				return false;
+			}
+
+			if(!_event.altKey) {
+				return false;
+			}
+
 			var _eventTarget = _event.currentTarget;
 			if(!_eventTarget || !(_eventTarget instanceof Group)) {
 				return false;
@@ -1041,17 +1042,17 @@ function __showOTFWindow() {
 	};
 
 
-	/* Dialog initialisieren */
+	/* Initialize Dialog */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
 
 	
-	/* Add EventListener */
+	/* EventListener AFTER_SELECTION_CHANGED */
 	var _selectionEventListener = app.addEventListener(Application.AFTER_SELECTION_CHANGED, __checkInputs);
 	
 
-	/* Eingaben überprüfen */
+	/* Check inputs */
 	function __checkInputs(_flag) {
 		
 		if(!_global) {
@@ -1176,7 +1177,7 @@ function __showOTFWindow() {
 	} /* END function __checkInputs */ 
 	
 
-	/* Eingaben auslesen */
+	/* Get inputs */
 	function __getOTFeatureValues() {
 		return {
 			"ligatures":{
@@ -1562,7 +1563,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 
 
 /**
- * Formsatznummer ermitteln
+ * Determine Sylistic Set Value
  * @param {SUIPanel} _panel 
  * @returns {Number}
  */
@@ -1590,7 +1591,7 @@ function __getOtfSylisticSetValue(_panel) {
 
 
 /**
- * Formatsatzcodes ermitteln
+ * Calculate Sylistic Set Codes
  * @param {Number} _stylisticSetCode 
  * @returns {Array}
  */
@@ -1690,7 +1691,7 @@ function __getOtfSylisticSetName(_setNum) {
 
 
 /**
- * Hintergrundfarbe für Skript-UI-Item im Dialog zuweisen
+ * Assign background color for script UI item
  * @param {SUIItem} _suiItem 
  * @param {Boolean} _flag 
  * @returns {Boolean}
@@ -1719,7 +1720,7 @@ function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
 
 
 /**
- * Wert der OTF-Eigenschaft setzen
+ * Set value of OTF property
  * @param {String} _otfFeatureName 
  * @param {Any} _otfFeatureValue 
  * @param {SUIWindow} _otfWindow 
@@ -1879,7 +1880,7 @@ function __isFontInstalled(_font) {
 
 
 /**
- * Array nach mehrfachen Einträgen filtern
+ * Filter array for multiple entries
  * @param {Array} _inputArray 
  * @returns {Array}
  */
@@ -1977,7 +1978,7 @@ function __createCStyle(_styleName, _inputObj) {
 
 
 /**
- * Deutsch-Englische Dialogtexte und Fehlermeldungen
+ * German-English dialog texts and error messages
  */
 function __defineLocalizeStrings() {
 	
