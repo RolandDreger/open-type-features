@@ -6,7 +6,7 @@
 		+	Autor: Roland Dreger
 		+	Date: 30. August 2021
 		
-		+	Last updated: 16. September 2021
+		+	Last updated: 17. September 2021
 
 			
 		+	License (MIT)
@@ -374,24 +374,28 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionSuperscriptCheckbox = add("checkbox", undefined, localize(_global.positionSuperscriptCheckboxLabel));
 						_positionSuperscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionSuperscriptCheckbox["desc"] = localize(_global.positionSuperscriptFeatureDesc);
 					} /* END _positionSuperscriptGroup */
 					_positionSubscriptGroup = add("group");
 					with(_positionSubscriptGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionSubscriptCheckbox = add("checkbox", undefined, localize(_global.positionSubscriptCheckboxLabel));
 						_positionSubscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionSubscriptCheckbox["desc"] = localize(_global.positionSubscriptFeatureDesc);
 					} /* END _positionSubscriptGroup */
 					_positionNumeratorGroup = add("group");
 					with(_positionNumeratorGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionNumeratorCheckbox = add("checkbox", undefined, localize(_global.positionNumeratorCheckboxLabel));
 						_positionNumeratorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionNumeratorCheckbox["desc"] = localize(_global.positionNumeratorFeatureDesc);
 					} /* END _positionNumeratorGroup */
 					_positionDenominatorGroup = add("group");
 					with(_positionDenominatorGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionDenominatorCheckbox = add("checkbox", undefined, localize(_global.positionDenominatorCheckboxLabel));
 						_positionDenominatorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionDenominatorCheckbox["desc"] = localize(_global.positionDenominatorFeatureDesc);
 					} /* END _positionDenominatorGroup */
 				} /* END _otfPositionPanel */
 				var _otfDigitPanel = add("panel", undefined,localize(_global.otfDigitPanelLabel));
@@ -404,30 +408,35 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_digitDefaultFigureStyleCheckbox = add("checkbox", undefined, localize(_global.digitDefaultFigureStyleCheckboxLabel));
 						_digitDefaultFigureStyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_digitDefaultFigureStyleCheckbox["desc"] = localize(_global.digitDefaultFigureStyleFeatureDesc);
 					} /* END _digitDefaultFigureStyleGroup */
 					_digitProportionalOldstyleGroup = add("group");
 					with(_digitProportionalOldstyleGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_digitProportionalOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitProportionalOldstyleCheckboxLabel));
 						_digitProportionalOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_digitProportionalOldstyleCheckbox["desc"] = localize(_global.digitProportionalOldstyleFeatureDesc);
 					} /* END _digitProportionalOldstyleGroup */
 					_digitProportionalLiningGroup = add("group");
 					with(_digitProportionalLiningGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_digitProportionalLiningCheckbox = add("checkbox", undefined, localize(_global.digitProportionalLiningCheckboxLabel));
 						_digitProportionalLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_digitProportionalLiningCheckbox["desc"] = localize(_global.digitProportionalLiningFeatureDesc);
 					} /* END _digitProportionalLiningGroup */
 					_digitTabularOldstyleGroup = add("group");
 					with(_digitTabularOldstyleGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_digitTabularOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitTabularOldstyleCheckboxLabel));
 						_digitTabularOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_digitTabularOldstyleCheckbox["desc"] = localize(_global.digitTabularOldstyleFeatureDesc);
 					} /* END _digitTabularOldstyleGroup */
 					_digitTabularLiningGroup = add("group");
 					with(_digitTabularLiningGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_digitTabularLiningCheckbox = add("checkbox", undefined, localize(_global.digitTabularLiningCheckboxLabel));
 						_digitTabularLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_digitTabularLiningCheckbox["desc"] = localize(_global.digitTabularLiningFeatureDesc);
 					} /* END _digitTabularLiningGroup */
 				} /* END _otfDigitPanel */
 				var _positionalFormsPanel = add("panel", undefined,localize(_global.positionalFormLabel));
@@ -440,36 +449,42 @@ function __showOTFWindow() {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsGeneralCheckbox = add("checkbox", undefined, localize(_global.positionalFormsGeneralCheckboxLabel));
 						_positionalFormsGeneralCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsGeneralCheckbox["desc"] = localize(_global.positionalFormsGeneralFeatureDesc);
 					} /* END _positionalFormsGeneralGroup */
 					_positionalFormsAutomaticGroup = add("group");
 					with(_positionalFormsAutomaticGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsAutomaticCheckbox = add("checkbox", undefined, localize(_global.positionalFormsAutomaticCheckboxLabel));
 						_positionalFormsAutomaticCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsAutomaticCheckbox["desc"] = localize(_global.positionalFormsAutomaticFeatureDesc);
 					} /* END _positionalFormsAutomaticGroup */
 					_positionalFormsInitialGroup = add("group");
 					with(_positionalFormsInitialGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsInitialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsInitialCheckboxLabel));
 						_positionalFormsInitialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsInitialCheckbox["desc"] = localize(_global.positionalFormsInitialFeatureDesc);
 					} /* END _positionalFormsInitialGroup */
 					_positionalFormsMedialGroup = add("group");
 					with(_positionalFormsMedialGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsMedialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsMedialCheckboxLabel));
 						_positionalFormsMedialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsMedialCheckbox["desc"] = localize(_global.positionalFormsMedialFeatureDesc);
 					} /* END _positionalFormsMedialGroup */
 					_positionalFormsFinalGroup = add("group");
 					with(_positionalFormsFinalGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsFinalCheckbox = add("checkbox", undefined, localize(_global.positionalFormsFinalCheckboxLabel));
 						_positionalFormsFinalCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsFinalCheckbox["desc"] = localize(_global.positionalFormsFinalFeatureDesc);
 					} /* END _positionalFormsFinalGroup */
 					_positionalFormsIsolatedGroup = add("group");
 					with(_positionalFormsIsolatedGroup) {
 						margins = FEATURE_GROUP_MARGINS;
 						_positionalFormsIsolatedCheckbox = add("checkbox", undefined, localize(_global.positionalFormsIsolatedCheckboxLabel));
 						_positionalFormsIsolatedCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+						_positionalFormsIsolatedCheckbox["desc"] = localize(_global.positionalFormsIsolatedFeatureDesc);
 					} /* END _positionalFormsIsolatedGroup */
 				} /* END _positionalFormsPanel */
 			} /* END _column2Group */
@@ -2050,12 +2065,12 @@ function __defineLocalizeStrings() {
 	_global.multipleFeatureValuesAlert = {
 		en:"The selection has different values for this OpenType feature.",
 		de:"Die Auswahl weist unterschiedliche Werte für diese OpenType-Funktion auf."
-	}
+	};
 
 	_global.multipleFeatureAvailabilityAlert = {
 		en:"The selection has different availability for this OpenType feature.",
 		de:"Die Auswahl weist unterschiedliche Verfügbarkeit für diese OpenType-Funktion auf."
-	}
+	};
 
 	_global.oftGeneralFeaturePanelLabel = {
 		en:"General",
@@ -2269,98 +2284,172 @@ function __defineLocalizeStrings() {
 
 	_global.ligaturesFeatureDesc = {
 		en:"If selected, replaces specific character combinations (e.g., fl, fi) with ligature characters.",
-		de:"Wenn ausgewählt, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
+		de:"Wenn diese Option ausgewählt ist, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
 	};
 
 	_global.otfDiscretionaryLigatureFeatureDesc = {
-		en:"If true, uses discretionary ligatures in OpenType fonts.",
-		de:"If true, uses discretionary ligatures in OpenType fonts."
+		en:"If selected, uses discretionary ligatures in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden in OpenType-Schriften bedingte Ligaturen verwendet."
 	};
 
 	_global.otfFractionFeatureDesc = {
-		en:"If true, uses fractions in OpenType fonts.",
-		de:"If true, uses fractions in OpenType fonts."
+		en:"If selected, uses fractions in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden Brüche in OpenType-Schriften verwendet."
 	};
 
 	_global.otfOrdinalFeatureDesc = {
-		en:"If true, uses ordinals in OpenType fonts.",
-		de:"If true, uses ordinals in OpenType fonts."
+		en:"If selected, uses ordinals in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden Ordnungszahlen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfSwashFeatureDesc = {
-		en:"If true, uses swash forms in OpenType fonts.",
-		de:"If true, uses swash forms in OpenType fonts."
+		en:"If selected, uses swash forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden Schwungbuchstaben in OpenType-Schriften verwendet."
 	};
 
 	_global.otfTitlingFeatureDesc = {
-		en:"If true, uses titling forms in OpenType fonts.",
-		de:"If true, uses titling forms in OpenType fonts."
+		en:"If selected, uses titling forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden Titelschriftvarianten in OpenType-Schriften verwendet."
 	};
 
 	_global.otfContextualAlternateFeatureDesc = {
-		en:"If true, uses contextual alternate forms in OpenType fonts.",
-		de:"If true, uses contextual alternate forms in OpenType fonts."
+		en:"If selected, uses contextual alternate forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden kontextbedingte Alternativen in OpenType-Schriften verwendet."
 	};
 
 	_global.capitalizationFeatureDesc = {
-		en:"If true, uses small capitals in OpenType fonts.",
-		de:"If true, uses small capitals in OpenType fonts."
+		en:"If selected, uses small capitals in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden Kapitälchen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfSlashedZeroFeatureDesc = {
-		en:"If true, use a slashed zeroes in OpenType fonts.",
-		de:"If true, use a slashed zeroes in OpenType fonts."
+		en:"If selected, use a slashed zeroes in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, wird eine Null mit Schrägstrich in OpenType-Schriften verwendet."
 	};
 
 	_global.otfHistoricalFeatureDesc = {
-		en:"If true, use historical forms in OpenType fonts.",
-		de:"If true, use historical forms in OpenType fonts."
+		en:"If selected, use historical forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden historische Alternativen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfRomanItalicsFeatureDesc = {
-		en:"If true, applies italics to half-width alphanumerics.",
-		de:"If true, applies italics to half-width alphanumerics."
+		en:"If selected, applies italics to half-width alphanumerics.",
+		de:"Wenn diese Option ausgewählt ist, werden Roman-Glyphen durch entsprechende Italic-Glyphen in OpenType-Schriften ersetzt."
 	};
 
 	_global.otfLocaleFeatureDesc = {
-		en:"If true, uses localized forms in OpenType fonts.",
-		de:"If true, uses localized forms in OpenType fonts."
+		en:"If selected, uses localized forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden lokalisierte Formen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfOverlapSwashFeatureDesc = {
-		en:"If true, use overlapping swash forms in OpenType fonts.",
-		de:"If true, use overlapping swash forms in OpenType fonts."
+		en:"If selected, use overlapping swash forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden überlappende Schwungbuchstaben in OpenType-Schriften verwendet."
 	};
 
 	_global.otfMarkFeatureDesc = {
-		en:"If true, uses mark positioning in OpenType fonts.",
-		de:"If true, uses mark positioning in OpenType fonts."
+		en:"If selected, uses mark positioning in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden in OpenType-Schriften markierte Glyphen in Bezug auf Basisglyphen positioniert."
 	};
 
 	_global.otfProportionalMetricsFeatureDesc = {
-		en:"If true, kerns according to proportional CJK metrics in OpenType fonts.",
-		de:"If true, kerns according to proportional CJK metrics in OpenType fonts."
+		en:"If selected, kerns according to proportional CJK metrics in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, erfolgt das Kerning in OpenType-Schriften entsprechend den proportionalen CJK-Metriken."
 	};
 
 	_global.otfJustificationAlternateFeatureDesc = {
-		en:"If true, use alternate justification forms in OpenType fonts.",
-		de:"If true, use alternate justification forms in OpenType fonts."
+		en:"If selected, use alternate justification forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden alternative Ausrichtungsformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfStretchedAlternateFeatureDesc = {
-		en:"If true, use stretched alternate forms in OpenType fonts.",
-		de:"If true, use stretched alternate forms in OpenType fonts."
+		en:"If selected, use stretched alternate forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden skalierte Alternativformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfStylisticAlternateFeatureDesc = {
-		en:"If true, use stylistic alternate forms in OpenType fonts.",
-		de:"If true, use stylistic alternate forms in OpenType fonts."
+		en:"If selected, use stylistic alternate forms in OpenType fonts.",
+		de:"Wenn diese Option ausgewählt ist, werden stilistische Alternativformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfHVKanaFeatureDesc = {
-		en:"If true, standard kana (hiragana and katakana) are replaced with forms specifically designed for horizontal or vertical writing.",
-		de:"Wenn gewählt, werden standardmäßige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell für das horizontale oder vertikale Schreiben entwickelt wurden."
+		en:"If selected, standard kana (hiragana and katakana) are replaced with forms specifically designed for horizontal or vertical writing.",
+		de:"Wenn diese Option ausgewählt ist, werden standardmäßige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell für das horizontale oder vertikale Schreiben entwickelt wurden."
 	};
 
+	_global.positionSuperscriptFeatureDesc = {
+		en:"If selected, raised glyphs are used that are sized correctly relative to the surrounding characters.",
+		de:"Wenn diese Option ausgewählt ist, werden hochgestellte Glyphen verwendet, die im Verhältnis zu den umgebenden Zeichen korrekt dimensioniert sind."
+	};
+
+	_global.positionSubscriptFeatureDesc = {
+		en:"If selected, lowered glyphs are used that are sized correctly relative to the surrounding characters.",
+		de:"Wenn diese Option ausgewählt ist, werden abgesenkte Glyphen verwendet, die im Verhältnis zu den umgebenden Zeichen korrekt dimensioniert sind."
+	};
+
+	_global.positionNumeratorFeatureDesc = {
+		en:"If selected, the text is shrunk but the top of the characters keeps aligned with the top of the main text. Valid only for numeric characters.",
+		de:"Wenn diese Option ausgewählt ist, wird der Text verkleinert, wobei der obere Rand der Zeichen am oberen Rand des Haupttextes ausgerichtet wird. Gilt nur für numerische Zeichen."
+	};
+	
+	_global.positionDenominatorFeatureDesc = {
+		en:"If selected, the text is shrunk but keeps on the main text baseline.",
+		de:"Wenn diese Option ausgewählt ist, wird der Text verkleinert, bleibt aber auf der Grundlinie des Haupttextes. Gilt nur für numerische Zeichen."
+	};
+
+	_global.digitDefaultFigureStyleFeatureDesc = {
+		en:"If selected, the default figure style of the OpenType font will be used.",
+		de:"Wenn diese Option ausgewählt ist, werden Standardzahlen verwendet."
+	};
+
+	_global.digitProportionalOldstyleFeatureDesc = {
+		en:"If selected, proportional width oldstyle figures of the OpenType font will be used.",
+		de:"Wenn diese Option ausgewählt ist, werden proportionale Mediävalzahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
+	};
+
+	_global.digitProportionalLiningFeatureDesc = {
+		en:"If selected, proportional width lining figures of the OpenType font will be used.",
+		de:"Wenn diese Option ausgewählt ist, werden proportionale Zahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
+	};
+
+	_global.digitTabularOldstyleFeatureDesc = {
+		en:"If selected, monospaced oldstyle figures of the OpenType font will be used.",
+		de:"Wenn diese Option ausgewählt ist, werden Mediävalzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
+	};
+
+	_global.digitTabularLiningFeatureDesc = {
+		en:"If selected, monspaced lining figures of the OpenType font will be used.",
+		de:"Wenn diese Option ausgewählt ist, werden Tabellenzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
+	};
+
+	_global.positionalFormsGeneralFeatureDesc = {
+		en:"If selected, the default characters are used regardless of their position.",
+		de:"Wenn diese Option ausgewählt ist, werden die Standardzeichen unabhängig von ihrer Position verwendet."
+	};
+
+	_global.positionalFormsAutomaticFeatureDesc = {
+		en:"If selected, characters are automatically replaced by special glyphs at certain positions, e.g. at the beginning or end of a word.",
+		de:"Wenn diese Option ausgewählt ist, werden Zeichen automatisch an bestimmten Position durch alternative Formen ersetzt, z.B. am Anfang oder Ende eines Wortes."
+	};
+
+	_global.positionalFormsInitialFeatureDesc = {
+		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in an initial context.",
+		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer einleitenden Position (am Anfang eines Wortes) durch alternative Formen ersetzt."
+	};
+
+	_global.positionalFormsMedialFeatureDesc = {
+		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a medial context.",
+		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer mittleren Position (in der Mitte eines Wortes) durch alternative Formen ersetzt."
+	};
+
+	_global.positionalFormsFinalFeatureDesc = {
+		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a final context.",
+		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer abschließenden Position (am Ende eines Wortes) durch alternative Formen ersetzt."
+	};
+
+	_global.positionalFormsIsolatedFeatureDesc = {
+		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a isolate (non-joining) context.",
+		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer isolierten Position (außerhalb eines Wortes) durch alternative Formen ersetzt."
+	};
 	
 } /* END function __defineLocalizeStrings */
