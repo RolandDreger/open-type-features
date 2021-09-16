@@ -982,18 +982,24 @@ function __showOTFWindow() {
 			return false;
 		}
 
-		var _eventTarget = _event.currentTarget;
-		if(!_eventTarget || !(_eventTarget instanceof Group)) {
+		try {
+			
+			var _eventTarget = _event.currentTarget;
+			if(!_eventTarget || !(_eventTarget instanceof Group)) {
+				return false;
+			}
+
+			var _firstTargetChild = _eventTarget.children[0];
+			if(!_firstTargetChild || !_firstTargetChild.hasOwnProperty("enabled")) {
+				return false;
+			}
+
+			_firstTargetChild.enabled = !_firstTargetChild.enabled;
+
+		} catch(_error) {
 			return false;
 		}
-
-		var _firstTargetChild = _eventTarget.children[0];
-		if(!_firstTargetChild || !_firstTargetChild.hasOwnProperty("enabled")) {
-			return false;
-		}
-
-		_firstTargetChild.enabled = !_firstTargetChild.enabled;
-
+		
 		return true;
 	} /* END function __altKeyHandler */
 
