@@ -2,6 +2,8 @@
 
 The idea behind this script is to test the OpenType features of an installed font in InDesign - without flyouts, dropdowns, and the like.
 
+<img width="1444" alt="otf_script_screenshot" src="https://user-images.githubusercontent.com/19747449/133749014-584aa060-c4bc-4d36-9ad8-d7726c6fa74a.png">
+
 Some of the OpenType features are also not accessible from the English or German user interface of InDesign. (Section »Special« in the Script dialog)
 
 To get full functionality for Japanese/CJK or Arabic OpenType features in InDesign, read [this article](https://ken-lunde.medium.com/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6).
