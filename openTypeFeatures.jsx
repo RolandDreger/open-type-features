@@ -2,38 +2,38 @@
 
 /*
 	
-		+	Adobe InDesign Version: CS2020+
-		+	Autor: Roland Dreger
-		+	Date: 30. August 2021
+	+	Adobe InDesign Version: CS2020+
+	+	Autor: Roland Dreger
+	+	Date: 30. August 2021
+	
+	+	Last updated: 18. September 2021
+
 		
-		+	Last updated: 17. September 2021
+	+	License (MIT)
 
-			
-		+	License (MIT)
+		Copyright 2021 Roland Dreger
 
-			Copyright 2021 Roland Dreger
+		Permission is hereby granted, free of charge, to any person obtaining 
+		a copy of this software and associated documentation files (the "Software"), 
+		to deal in the Software without restriction, including without limitation 
+		the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+		and/or sell copies of the Software, and to permit persons to whom the 
+		Software is furnished to do so, subject to the following conditions:
 
-			Permission is hereby granted, free of charge, to any person obtaining 
-			a copy of this software and associated documentation files (the "Software"), 
-			to deal in the Software without restriction, including without limitation 
-			the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-			and/or sell copies of the Software, and to permit persons to whom the 
-			Software is furnished to do so, subject to the following conditions:
+		The above copyright notice and this permission notice shall be included 
+		in all copies or substantial portions of the Software.
 
-			The above copyright notice and this permission notice shall be included 
-			in all copies or substantial portions of the Software.
-
-			THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
-			OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-			FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-			THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-			LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-			FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-			DEALINGS IN THE SOFTWARE.
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+		OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+		THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+		DEALINGS IN THE SOFTWARE.
 		
 */
 
-//@targetengine "openTypeFeatures"
+//@targetengine "OpenTypeFeatures"
 
 var _global = {};
 
@@ -364,7 +364,7 @@ function __showOTFWindow() {
 			with(_column2Group) {
 				orientation = "column";
 				alignChildren = ["fill","fill"];
-				var _otfPositionPanel = add("panel", undefined,localize(_global.otfPositionPanelLabel)); 
+				var _otfPositionPanel = add("panel", undefined,localize(_global.otfPositionPanelLabel));
 				with(_otfPositionPanel) {
 					alignChildren = ["fill","top"];
 					margins = PANEL_MARGINS;
@@ -653,12 +653,12 @@ function __showOTFWindow() {
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
 			spacing = 10;
-			_closeButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel"});
+			_closeButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel" });
 			with(_closeButton) {
 				alignment = ["left","bottom"];
 				helpTip = localize(_global.closeButtonHelpTip);
 			} /* END _closeButton */
-			var _refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
+			_refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
 			with(_refreshButton) {
 				alignment = ["left","bottom"];
 				helpTip = localize(_global.refreshButtonHelpTip);
@@ -668,7 +668,7 @@ function __showOTFWindow() {
 				alignment = ["right","middle"];
 				characters = 24;
 			} /* END _cStyleNameEdittext */
-			_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok"});
+			_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok" });
 			with(_cStyleButton) {
 				alignment = ["right","bottom"];
 				helpTip = localize(_global.cStyleButtonHelpTip);
@@ -833,7 +833,7 @@ function __showOTFWindow() {
 		_digitProportionalLiningCheckbox.value = false;
 		_digitTabularOldstyleCheckbox.value = false;
 		_digitDefaultFigureStyleCheckbox.value = !this.value;
-		var _value = (this.value &&	OTFFigureStyle.TABULAR_LINING) || OTFFigureStyle.DEFAULT_VALUE;
+		var _value = (this.value && OTFFigureStyle.TABULAR_LINING) || OTFFigureStyle.DEFAULT_VALUE;
 		__setValue("otfFigureStyle", _value, _otfWindow);
 		__checkInputs("otfFigureStyle");
 	};
@@ -1034,7 +1034,7 @@ function __showOTFWindow() {
 		var _inputObj = __getOTFeatureValues();
 		var _cStyle = __createCStyle(_cStyleName, _inputObj);
 		if(_cStyle) { 
-			_cStyleNameEdittext.text = ""; 
+			_cStyleNameEdittext.text = "";
 		}
 	};
 
@@ -1050,7 +1050,7 @@ function __showOTFWindow() {
 	};
 	
 	_otfWindow.onClose = function() {
-		if(_selectionEventListener && _selectionEventListener instanceof EventListener && _selectionEventListener.isValid) {
+		if(_selectionEventListener && (_selectionEventListener instanceof EventListener) && _selectionEventListener.isValid) {
 			_selectionEventListener.remove();
 		}
 		_global = null;
@@ -1371,7 +1371,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 	if(!_window || !(_window instanceof Window)) { return false; }
 	if(!_suiItem || !_suiItem.hasOwnProperty("value")) { return false; }
 
-	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { 
+	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { 
 		_window.text = localize(_global.selectionNotValidAlert);
 		return false;
 	}
@@ -1439,7 +1439,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 					(_otfFeatureTag === OpenTypeFeature.SUBSCRIPT_FEATURE && _otfFeatureValue === Position.OT_SUBSCRIPT) ||
 					(_otfFeatureTag === OpenTypeFeature.NUMERATOR_FEATURE && _otfFeatureValue === Position.OT_NUMERATOR) ||
 					(_otfFeatureTag === OpenTypeFeature.DENOMINATOR_FEATURE && _otfFeatureValue === Position.OT_DENOMINATOR)
-					) {
+				) {
 					_suiItem.value = true;
 				}
 				break;
@@ -1450,7 +1450,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 					(_otfFeatureTag === OpenTypeFeature.PROPORTIONAL_LINING_FEATURE && _otfFeatureValue === OTFFigureStyle.PROPORTIONAL_LINING) ||
 					(_otfFeatureTag === OpenTypeFeature.TABULAR_OLDSTYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.TABULAR_OLDSTYLE) ||
 					(_otfFeatureTag === OpenTypeFeature.DEFAULT_FIGURE_STYLE_FEATURE && _otfFeatureValue === OTFFigureStyle.DEFAULT_VALUE)
-					) {
+				) {
 					_suiItem.value = true;
 				}
 				break;
@@ -1475,10 +1475,10 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 				if( 
 					(_otfFeatureTag === "opfg" && _otfFeatureValue === PositionalForms.NONE) ||
 					(_otfFeatureTag === "apfm" && _otfFeatureValue === PositionalForms.CALCULATE) ||
-					(_otfFeatureTag === "init"  && _otfFeatureValue === PositionalForms.INITIAL) ||
-					(_otfFeatureTag === "medi"  && _otfFeatureValue === PositionalForms.MEDIAL) ||
-					(_otfFeatureTag === "fina"  && _otfFeatureValue === PositionalForms.FINAL) ||
-					(_otfFeatureTag === "isol"  && _otfFeatureValue === PositionalForms.ISOLATED)
+					(_otfFeatureTag === "init" && _otfFeatureValue === PositionalForms.INITIAL) ||
+					(_otfFeatureTag === "medi" && _otfFeatureValue === PositionalForms.MEDIAL) ||
+					(_otfFeatureTag === "fina" && _otfFeatureValue === PositionalForms.FINAL) ||
+					(_otfFeatureTag === "isol" && _otfFeatureValue === PositionalForms.ISOLATED)
 				) {
 					_suiItem.value = true;
 				}
@@ -1529,7 +1529,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 					);
 					break;
 				case OpenTypeFeature.TABULAR_LINING_FEATURE:
-				case OpenTypeFeature.PROPORTIONAL_LINING_FEATURE:	
+				case OpenTypeFeature.PROPORTIONAL_LINING_FEATURE:
 					_otfFeatureAvailability = (
 						_appliedFont.checkOpenTypeFeature(_otfFeatureTag) ||
 						_appliedFont.checkOpenTypeFeature("lnum")
@@ -1639,12 +1639,12 @@ function __getSubsetOfSum(_num, _array) {
   if(_num === 0) { return [0]; }
 
   _array = _array.slice();
-  while(_array.length) {              // Try remaining values
-    var _firstItem = _array.shift();            // Take next value
-    var _subsetArray = __getSubsetOfSum(_num - _firstItem, _array); // Find solution recursively
+  while(_array.length) {
+    var _firstItem = _array.shift();
+    var _subsetArray = __getSubsetOfSum(_num - _firstItem, _array);
     if (_subsetArray) { 
-			return _subsetArray.concat(_firstItem);
-		}
+		return _subsetArray.concat(_firstItem);
+	}
   }
 } /* END function __getSubsetOfSum */
 
@@ -1714,7 +1714,7 @@ function __getOtfSylisticSetName(_setNum) {
 function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
 
 	if (!_suiItem || !_suiItem.hasOwnProperty("graphics")) { return false; }
-	if (!_bgColorArray || !(_bgColorArray instanceof Array) || _bgColorArray.length !== 4) { return false; }
+	if (!_bgColorArray || !(_bgColorArray instanceof Array) || _bgColorArray.length !== 4) { return false; }
 
 	const _transparentBGColorArray = [1, 1, 1, 0];
 
@@ -1781,7 +1781,7 @@ function __getSelection(_window) {
 
 	_window.text = localize(_global.uiHeadLabel);
 
-	var _selection = app.properties.selection && app.selection.length === 1 && app.selection[0];
+	var _selection = app.properties.selection && (app.selection.length === 1) && app.selection[0];
 	if(!_selection) {
 		_window.text = localize(_global.invalidSelectionAlert);
 		return null;
@@ -1818,7 +1818,7 @@ function __getAppliedFonts(_window) {
 	}
 
 	var _selection = __getSelection(_window);
-	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) {
+	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) {
 		return localize(_global.fontNotEvaluableAlert);
 	}
 
@@ -1835,7 +1835,7 @@ function __getAppliedFonts(_window) {
 		}
 		
 		var _appliedFont = _curTextStyleRange.appliedFont;
-		if(!!_appliedFont && _appliedFont.isValid) {
+		if(!!_appliedFont && (_appliedFont instanceof Font) && _appliedFont.isValid) {
 
 			var _fontName = _appliedFont.name.replace(/\t/g," ");
 
@@ -1998,8 +1998,8 @@ function __createCStyle(_styleName, _inputObj) {
 function __defineLocalizeStrings() {
 	
 	_global.uiHeadLabel = {
-		en:"OpenType Features (V 1.0)",
-		de:"OpenType-Funktionen (V 1.0)"
+		en:"OpenType Features (V 1.1)",
+		de:"OpenType-Funktionen (V 1.1)"
 	};
 	
 	_global.testGoBackLabel = { 
@@ -2024,7 +2024,7 @@ function __defineLocalizeStrings() {
 
 	_global.cStyleButtonHelpTip = {
 		en:"Create character style with selected OpenType features",
-		de:"Zeichenformat mit ausgewählten OpenType-Eigenschaften erstellen."
+		de:"Zeichenformat mit ausgew\u00e4hlten OpenType-Eigenschaften erstellen."
 	};
 
 	_global.closeButtonHelpTip = {
@@ -2044,7 +2044,7 @@ function __defineLocalizeStrings() {
 	
 	_global.windowNotAvailableAlert = {
 		en:"Dialog window not available",
-		de:"Dialogfenster nicht verügbar!"
+		de:"Dialogfenster nicht ver\u00fcgbar!"
 	};
 
 	_global.fontNotEvaluableAlert = {
@@ -2054,22 +2054,22 @@ function __defineLocalizeStrings() {
 	
 	_global.fontNotAvaliableAlert = {
 		en:"Not avaliable",
-		de:"Nicht verfügbar"
+		de:"Nicht verf\u00fcgbar"
 	};
 
 	_global.selectionNotValidAlert = {
 		en:"Selection not valid!",
-		de:"Auswahl nicht verfügbar!"
+		de:"Auswahl nicht verf\u00fcgbar!"
 	};
 
 	_global.multipleFeatureValuesAlert = {
 		en:"The selection has different values for this OpenType feature.",
-		de:"Die Auswahl weist unterschiedliche Werte für diese OpenType-Funktion auf."
+		de:"Die Auswahl weist unterschiedliche Werte f\u00fcr diese OpenType-Funktion auf."
 	};
 
 	_global.multipleFeatureAvailabilityAlert = {
 		en:"The selection has different availability for this OpenType feature.",
-		de:"Die Auswahl weist unterschiedliche Verfügbarkeit für diese OpenType-Funktion auf."
+		de:"Die Auswahl weist unterschiedliche Verf\u00fcgbarkeit f\u00fcr diese OpenType-Funktion auf."
 	};
 
 	_global.oftGeneralFeaturePanelLabel = {
@@ -2094,7 +2094,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfFractionCheckboxLabel = {
 		en:"Fractions",
-		de:"Brüche"
+		de:"Br\u00fcche"
 	};
 
 	_global.otfOrdinalCheckboxLabel = {
@@ -2119,12 +2119,12 @@ function __defineLocalizeStrings() {
 
 	_global.capitalizationCheckboxLabel = {
 		en:"All Small Caps",
-		de:"Alles in Kapitälchen"
+		de:"Alles in Kapit\u00e4lchen"
 	};
 
 	_global.otfSlashedZeroCheckboxLabel = {
 		en:"Slashed Zero",
-		de:"Null mit Schrägstrich"
+		de:"Null mit Schr\u00e4gstrich"
 	};
 
 	_global.otfHistoricalCheckboxLabel = {
@@ -2144,7 +2144,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfOverlapSwashCheckboxLabel = {
 		en:"Overlapping Swash",
-		de:"Überlappende Schwungschrift"
+		de:"\u00dcberlappende Schwungschrift"
 	};
 
 	_global.otfMarkCheckboxLabelCheckboxLabel = {
@@ -2194,7 +2194,7 @@ function __defineLocalizeStrings() {
 	
 	_global.positionNumeratorCheckboxLabel = {
 		en:"Numerator",
-		de:"Zähler"
+		de:"Z\u00e4hler"
 	};
 	
 	_global.positionDenominatorCheckboxLabel = {
@@ -2209,12 +2209,12 @@ function __defineLocalizeStrings() {
 
 	_global.digitTabularLiningCheckboxLabel = {
 		en:"Tabular Lining",
-		de:"Versalziffern für Tabellen"
+		de:"Versalziffern f\u00fcr Tabellen"
 	};
 
 	_global.digitProportionalOldstyleCheckboxLabel = {
 		en:"Proportional Oldstyle",
-		de:"Proportionale Mediävalziffern"
+		de:"Proportionale Medi\u00e4valziffern"
 	};
 
 	_global.digitProportionalLiningCheckboxLabel = {
@@ -2224,7 +2224,7 @@ function __defineLocalizeStrings() {
 
 	_global.digitTabularOldstyleCheckboxLabel = {
 		en:"Tabular Oldstyle",
-		de:"Mediävalziffern für Tabellen"
+		de:"Medi\u00e4valziffern f\u00fcr Tabellen"
 	};
 
 	_global.digitDefaultFigureStyleCheckboxLabel = {
@@ -2239,7 +2239,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfStylisticSetPanelLabel = {
 		en:"Stylistic Sets",
-		de:"Formsätze"
+		de:"Forms\u00e4tze"
 	};
 
 	_global.otfStylisticSetCheckboxLabel = {
@@ -2284,172 +2284,172 @@ function __defineLocalizeStrings() {
 
 	_global.ligaturesFeatureDesc = {
 		en:"If selected, replaces specific character combinations (e.g., fl, fi) with ligature characters.",
-		de:"Wenn diese Option ausgewählt ist, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt."
 	};
 
 	_global.otfDiscretionaryLigatureFeatureDesc = {
 		en:"If selected, uses discretionary ligatures in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden in OpenType-Schriften bedingte Ligaturen verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden in OpenType-Schriften bedingte Ligaturen verwendet."
 	};
 
 	_global.otfFractionFeatureDesc = {
 		en:"If selected, uses fractions in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden Brüche in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Br\u00fcche in OpenType-Schriften verwendet."
 	};
 
 	_global.otfOrdinalFeatureDesc = {
 		en:"If selected, uses ordinals in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden Ordnungszahlen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Ordnungszahlen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfSwashFeatureDesc = {
 		en:"If selected, uses swash forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden Schwungbuchstaben in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Schwungbuchstaben in OpenType-Schriften verwendet."
 	};
 
 	_global.otfTitlingFeatureDesc = {
 		en:"If selected, uses titling forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden Titelschriftvarianten in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Titelschriftvarianten in OpenType-Schriften verwendet."
 	};
 
 	_global.otfContextualAlternateFeatureDesc = {
 		en:"If selected, uses contextual alternate forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden kontextbedingte Alternativen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden kontextbedingte Alternativen in OpenType-Schriften verwendet."
 	};
 
 	_global.capitalizationFeatureDesc = {
 		en:"If selected, uses small capitals in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden Kapitälchen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Kapit\u00e4lchen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfSlashedZeroFeatureDesc = {
 		en:"If selected, use a slashed zeroes in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, wird eine Null mit Schrägstrich in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, wird eine Null mit Schr\u00e4gstrich in OpenType-Schriften verwendet."
 	};
 
 	_global.otfHistoricalFeatureDesc = {
 		en:"If selected, use historical forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden historische Alternativen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden historische Alternativen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfRomanItalicsFeatureDesc = {
 		en:"If selected, applies italics to half-width alphanumerics.",
-		de:"Wenn diese Option ausgewählt ist, werden Roman-Glyphen durch entsprechende Italic-Glyphen in OpenType-Schriften ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Roman-Glyphen durch entsprechende Italic-Glyphen in OpenType-Schriften ersetzt."
 	};
 
 	_global.otfLocaleFeatureDesc = {
 		en:"If selected, uses localized forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden lokalisierte Formen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden lokalisierte Formen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfOverlapSwashFeatureDesc = {
 		en:"If selected, use overlapping swash forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden überlappende Schwungbuchstaben in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden \u00fcberlappende Schwungbuchstaben in OpenType-Schriften verwendet."
 	};
 
 	_global.otfMarkFeatureDesc = {
 		en:"If selected, uses mark positioning in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden in OpenType-Schriften markierte Glyphen in Bezug auf Basisglyphen positioniert."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden in OpenType-Schriften markierte Glyphen in Bezug auf Basisglyphen positioniert."
 	};
 
 	_global.otfProportionalMetricsFeatureDesc = {
 		en:"If selected, kerns according to proportional CJK metrics in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, erfolgt das Kerning in OpenType-Schriften entsprechend den proportionalen CJK-Metriken."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, erfolgt das Kerning in OpenType-Schriften entsprechend den proportionalen CJK-Metriken."
 	};
 
 	_global.otfJustificationAlternateFeatureDesc = {
 		en:"If selected, use alternate justification forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden alternative Ausrichtungsformen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden alternative Ausrichtungsformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfStretchedAlternateFeatureDesc = {
 		en:"If selected, use stretched alternate forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden skalierte Alternativformen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden skalierte Alternativformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfStylisticAlternateFeatureDesc = {
 		en:"If selected, use stylistic alternate forms in OpenType fonts.",
-		de:"Wenn diese Option ausgewählt ist, werden stilistische Alternativformen in OpenType-Schriften verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden stilistische Alternativformen in OpenType-Schriften verwendet."
 	};
 
 	_global.otfHVKanaFeatureDesc = {
 		en:"If selected, standard kana (hiragana and katakana) are replaced with forms specifically designed for horizontal or vertical writing.",
-		de:"Wenn diese Option ausgewählt ist, werden standardmäßige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell für das horizontale oder vertikale Schreiben entwickelt wurden."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden standardm\u00e4\u00dfige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell f\u00fcr das horizontale oder vertikale Schreiben entwickelt wurden."
 	};
 
 	_global.positionSuperscriptFeatureDesc = {
 		en:"If selected, raised glyphs are used that are sized correctly relative to the surrounding characters.",
-		de:"Wenn diese Option ausgewählt ist, werden hochgestellte Glyphen verwendet, die im Verhältnis zu den umgebenden Zeichen korrekt dimensioniert sind."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden hochgestellte Glyphen verwendet, die im Verh\u00e4ltnis zu den umgebenden Zeichen korrekt dimensioniert sind."
 	};
 
 	_global.positionSubscriptFeatureDesc = {
 		en:"If selected, lowered glyphs are used that are sized correctly relative to the surrounding characters.",
-		de:"Wenn diese Option ausgewählt ist, werden abgesenkte Glyphen verwendet, die im Verhältnis zu den umgebenden Zeichen korrekt dimensioniert sind."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden abgesenkte Glyphen verwendet, die im Verh\u00e4ltnis zu den umgebenden Zeichen korrekt dimensioniert sind."
 	};
 
 	_global.positionNumeratorFeatureDesc = {
 		en:"If selected, the text is shrunk but the top of the characters keeps aligned with the top of the main text. Valid only for numeric characters.",
-		de:"Wenn diese Option ausgewählt ist, wird der Text verkleinert, wobei der obere Rand der Zeichen am oberen Rand des Haupttextes ausgerichtet wird. Gilt nur für numerische Zeichen."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, wird der Text verkleinert, wobei der obere Rand der Zeichen am oberen Rand des Haupttextes ausgerichtet wird. Gilt nur f\u00fcr numerische Zeichen."
 	};
 	
 	_global.positionDenominatorFeatureDesc = {
 		en:"If selected, the text is shrunk but keeps on the main text baseline.",
-		de:"Wenn diese Option ausgewählt ist, wird der Text verkleinert, bleibt aber auf der Grundlinie des Haupttextes. Gilt nur für numerische Zeichen."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, wird der Text verkleinert, bleibt aber auf der Grundlinie des Haupttextes. Gilt nur f\u00fcr numerische Zeichen."
 	};
 
 	_global.digitDefaultFigureStyleFeatureDesc = {
 		en:"If selected, the default figure style of the OpenType font will be used.",
-		de:"Wenn diese Option ausgewählt ist, werden Standardzahlen verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Standardzahlen verwendet."
 	};
 
 	_global.digitProportionalOldstyleFeatureDesc = {
 		en:"If selected, proportional width oldstyle figures of the OpenType font will be used.",
-		de:"Wenn diese Option ausgewählt ist, werden proportionale Mediävalzahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Medi\u00e4valzahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
 	};
 
 	_global.digitProportionalLiningFeatureDesc = {
 		en:"If selected, proportional width lining figures of the OpenType font will be used.",
-		de:"Wenn diese Option ausgewählt ist, werden proportionale Zahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Zahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet."
 	};
 
 	_global.digitTabularOldstyleFeatureDesc = {
 		en:"If selected, monospaced oldstyle figures of the OpenType font will be used.",
-		de:"Wenn diese Option ausgewählt ist, werden Mediävalzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Medi\u00e4valzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
 	};
 
 	_global.digitTabularLiningFeatureDesc = {
 		en:"If selected, monspaced lining figures of the OpenType font will be used.",
-		de:"Wenn diese Option ausgewählt ist, werden Tabellenzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Tabellenzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet."
 	};
 
 	_global.positionalFormsGeneralFeatureDesc = {
 		en:"If selected, the default characters are used regardless of their position.",
-		de:"Wenn diese Option ausgewählt ist, werden die Standardzeichen unabhängig von ihrer Position verwendet."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden die Standardzeichen unabh\u00e4ngig von ihrer Position verwendet."
 	};
 
 	_global.positionalFormsAutomaticFeatureDesc = {
 		en:"If selected, characters are automatically replaced by special glyphs at certain positions, e.g. at the beginning or end of a word.",
-		de:"Wenn diese Option ausgewählt ist, werden Zeichen automatisch an bestimmten Position durch alternative Formen ersetzt, z.B. am Anfang oder Ende eines Wortes."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen automatisch an bestimmten Position durch alternative Formen ersetzt, z.B. am Anfang oder Ende eines Wortes."
 	};
 
 	_global.positionalFormsInitialFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in an initial context.",
-		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer einleitenden Position (am Anfang eines Wortes) durch alternative Formen ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer einleitenden Position (am Anfang eines Wortes) durch alternative Formen ersetzt."
 	};
 
 	_global.positionalFormsMedialFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a medial context.",
-		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer mittleren Position (in der Mitte eines Wortes) durch alternative Formen ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer mittleren Position (in der Mitte eines Wortes) durch alternative Formen ersetzt."
 	};
 
 	_global.positionalFormsFinalFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a final context.",
-		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer abschließenden Position (am Ende eines Wortes) durch alternative Formen ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer abschlie\u00dfenden Position (am Ende eines Wortes) durch alternative Formen ersetzt."
 	};
 
 	_global.positionalFormsIsolatedFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a isolate (non-joining) context.",
-		de:"Wenn diese Option ausgewählt ist, werden Zeichen an einer isolierten Position (außerhalb eines Wortes) durch alternative Formen ersetzt."
+		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer isolierten Position (au\u00dferhalb eines Wortes) durch alternative Formen ersetzt."
 	};
 	
 } /* END function __defineLocalizeStrings */
