@@ -52,7 +52,7 @@ function __showOTFWindow() {
 
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 24, fr:27 });
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 24, fr:31 });
 	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 24, fr:26 });
 	const THIRD_COLUMN_CHAR_NUM = localize({ en: 16, de: 16, fr: 16 });
 	
