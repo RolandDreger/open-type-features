@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 26. September 2021
+	+	Last updated: 27. September 2021
 
 		
 	+	License (MIT)
@@ -2028,9 +2028,9 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.cStyleButtonHelpTip = {
-		en:"Create character style with selected OpenType features",
+		en:"Create character style with selected OpenType features.",
 		de:"Zeichenformat mit ausgew\u00e4hlten OpenType-Eigenschaften erstellen.",
-		fr:"Créez un style de caractère avec des caractéristiques OpenType sélectionnées"
+		fr:"Créer un style de caractère avec les caractéristiques OpenType sélectionnées."
 	};
 
 	_global.closeButtonHelpTip = {
@@ -2084,7 +2084,7 @@ function __defineLocalizeStrings() {
 	_global.multipleFeatureAvailabilityAlert = {
 		en:"The selection has a different availability for this OpenType feature.",
 		de:"Die Auswahl weist unterschiedliche Verf\u00fcgbarkeiten f\u00fcr diese OpenType-Funktion auf.",
-		fr:"La sélection montre différentes disponibilités pour cette fonctionnalité OpenType."
+		fr:"Cette fonction OpenType n'est pas uniformément disponible dans la sélection."
 	};
 
 	_global.oftGeneralFeaturePanelLabel = {
@@ -2174,13 +2174,13 @@ function __defineLocalizeStrings() {
 	_global.otfOverlapSwashCheckboxLabel = {
 		en:"Overlapping Swash",
 		de:"\u00dcberlappende Schwungschrift",
-		fr:"Lettre italique ornée se chevauchant"
+		fr:"Lettre italique ornée avec chevauchement"
 	};
 
 	_global.otfMarkCheckboxLabelCheckboxLabel = {
 		en:"Mark Positioning",
 		de:"Markierte Positionierung",
-		fr:"Positionnement marqué"
+		fr:"Positionnement de marque"
 	};
 
 	_global.otfProportionalMetricsCheckboxLabel = {
@@ -2348,7 +2348,7 @@ function __defineLocalizeStrings() {
 	_global.otfDiscretionaryLigatureFeatureDesc = {
 		en:"If selected, uses discretionary ligatures in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden in OpenType-Schriften bedingte Ligaturen verwendet.",
-		fr:"Si cette option est sélectionnée, utilise des ligatures discrétionnaires dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les ligatures conditionnelles (des polices OpenType)."
 	};
 
 	_global.otfFractionFeatureDesc = {
@@ -2390,7 +2390,7 @@ function __defineLocalizeStrings() {
 	_global.otfSlashedZeroFeatureDesc = {
 		en:"If selected, use a slashed zeroes in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, wird eine Null mit Schr\u00e4gstrich in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, les petites capitales sont utilisées dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise le zéro barré (des polices OpenType)."
 	};
 
 	_global.otfHistoricalFeatureDesc = {
@@ -2414,7 +2414,7 @@ function __defineLocalizeStrings() {
 	_global.otfOverlapSwashFeatureDesc = {
 		en:"If selected, use overlapping swash forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden \u00fcberlappende Schwungbuchstaben in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilisez des lettres italique ornée se chevauchant les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise des lettres italiques ornées avec chevauchement."
 	};
 
 	_global.otfMarkFeatureDesc = {
@@ -2480,31 +2480,31 @@ function __defineLocalizeStrings() {
 	_global.digitDefaultFigureStyleFeatureDesc = {
 		en:"If selected, the default figure style of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Standardzahlen verwendet.",
-		fr:"Si cette option est sélectionnée, le style de figure par défaut de la écritures OpenType sera utilisé."
+		fr:"Si cette option est sélectionnée, le style de chiffre par défaut sera utilisé."
 	};
 
 	_global.digitProportionalOldstyleFeatureDesc = {
 		en:"If selected, proportional width oldstyle figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Medi\u00e4valzahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres oldstyle de largeur proportionnelle de la écritures OpenType seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres elzéviriens proportionnels seront utilisés."
 	};
 
 	_global.digitProportionalLiningFeatureDesc = {
 		en:"If selected, proportional width lining figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Zahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres de doublage à largeur proportionnelle de la écritures OpenType seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres alignés proportionnels seront utilisés."
 	};
 
 	_global.digitTabularOldstyleFeatureDesc = {
 		en:"If selected, monospaced oldstyle figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Medi\u00e4valzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres monochromes de style ancien de la écritures OpenType seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres elzéviriens tabulaires seront utilisés."
 	};
 
 	_global.digitTabularLiningFeatureDesc = {
 		en:"If selected, monspaced lining figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Tabellenzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres de la écritures OpenType seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres alignés tabulaires seront utilisés."
 	};
 
 	_global.positionalFormsGeneralFeatureDesc = {
@@ -2540,7 +2540,7 @@ function __defineLocalizeStrings() {
 	_global.positionalFormsIsolatedFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a isolate (non-joining) context.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer isolierten Position (au\u00dferhalb eines Wortes) durch alternative Formen ersetzt.",
-		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte d'isolement (sans jonction)."
+		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent isolément."
 	};
 	
 } /* END function __defineLocalizeStrings */
