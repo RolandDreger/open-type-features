@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 27. September 2021
+	+	Last updated: 28. September 2021
 
 		
 	+	License (MIT)
@@ -1606,19 +1606,19 @@ function __getOtfSylisticSetValue(_panel) {
 
 
 /**
- * Calculate Sylistic Set Codes
+ * Calculate Stylistic Set Codes
  * @param {Number} _stylisticSetCode 
  * @returns {Array}
  */
-function __getStylisticSetsArray(_stylisticSetCode) {
+ function __getStylisticSetsArray(_stylisticSetCode) {
 
 	var _baseArray = [];
 
-	for (var n = 1; n < 21; n++) {
+	for (var n = 20; n > 0; n-=1) {
 		_baseArray.push(2 * Math.pow(2, n - 1));
 	}
 
-	var _stylisticSetArray = __getSubsetOfSum(_stylisticSetCode, _baseArray);
+	var _stylisticSetArray = __getSubsetOfSum(_stylisticSetCode, _baseArray.slice());
 	if(!_stylisticSetArray || _stylisticSetArray.length === 0) {
 		_stylisticSetArray = [0];
 	}
@@ -1633,20 +1633,19 @@ function __getStylisticSetsArray(_stylisticSetCode) {
  * @param {Array} _array 
  * @returns {Array}
  */
-function __getSubsetOfSum(_num, _array) {
+ function __getSubsetOfSum(_num, _array) {
   
-  if(_num < 0) { return null; }
-  if(_num === 0) { return [0]; }
-
-  _array = _array.slice();
-  while(_array.length) {
-    var _firstItem = _array.shift();
-    var _subsetArray = __getSubsetOfSum(_num - _firstItem, _array);
-    if (_subsetArray) { 
-		return _subsetArray.concat(_firstItem);
+	if(_num < 0) { return null; }
+	if(_num === 0) { return [_num]; }
+ 
+	while(_array.length) {
+	  var _firstItem = _array.shift();
+	  var _subsetArray = __getSubsetOfSum(_num - _firstItem, _array);
+	  if (_subsetArray) { 
+			 return _subsetArray.concat(_firstItem);
+		 }
 	}
-  }
-} /* END function __getSubsetOfSum */
+ } /* END function __getSubsetOfSum */
 
 
 /**
