@@ -60,9 +60,9 @@ function __showOTFWindow() {
 
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 24, fr:31 });
-	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 24, fr:26 });
-	const THIRD_COLUMN_CHAR_NUM = localize({ en: 16, de: 16, fr: 16 });
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:31 });
+	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 23, fr:26 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en: 14, de: 14, fr: 14 });
 	
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
@@ -677,7 +677,7 @@ function __showOTFWindow() {
 				with(_tab1ActionsGroup) {
 					_cStyleNameEdittext = add("edittext", undefined, "");
 					with(_cStyleNameEdittext) {
-						characters = 26;
+						characters = 24;
 						alignment = ["left","middle"];
 					} /* END _cStyleNameEdittext */
 					_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok" });
@@ -877,7 +877,7 @@ function __showOTFWindow() {
 		__setValue("otfFigureStyle", _value, _otfWindow);
 		__checkInputs("otfFigureStyle");
 	};
-	/* Formsätze */
+	/* Formatsätze */
 	_otfStylisticSet1Checkbox.onClick = 
 	_otfStylisticSet2Checkbox.onClick = 
 	_otfStylisticSet3Checkbox.onClick = 
@@ -1445,24 +1445,28 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 
 	var _prevSelection = _window["prevSelection"];
 
+
 	/* Reset UI */
 	__applyBackgroundColor(_suiItem.parent, TRANSPARENT_WHITE_COLOR);
 	_suiItem.parent.isBackgroundSet = false;
 	_suiItem.value = false;
-	if(_propertyName === "otfStylisticSets") {
-		var _setNum = Number(_otfFeatureTag.replace(/\D+/g,""));
-		var _suiItemLabel = __getOtfSylisticSetName(_setNum);
-		if(_suiItemLabel !== "") {
-			_suiItem.text = _suiItemLabel.replace(_squareBracketRegExp, "");
-		}
-	}
-
+	/* OTF Help Tips */
 	if(_window["isHelpTipDisplayed"] === true) {
 		_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
 	} else {
 		_suiItem.helpTip = _suiItem.parent.helpTip = "";
 	}
-	
+	/* Stylistic Set Names */
+	if(_propertyName === "otfStylisticSets") {
+		var _setNum = Number(_otfFeatureTag.replace(/\D+/g,""));
+		var _suiItemLabel = __getOtfSylisticSetName(_setNum);
+		_suiItem.text = (_suiItemLabel && _suiItemLabel.replace(_squareBracketRegExp, ""));
+		if(_suiItem.text.length > 7) {
+			_suiItem.helpTip = _suiItem.parent.helpTip = _suiItem.text;
+		}
+	}
+
+
 	/* Upadate values */
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
 
@@ -1512,7 +1516,7 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 					_suiItem.value = true;
 				}
 				break;
-			/* Formsätze */
+			/* Formatsätze */
 			case "otfStylisticSets":
 				var _setCodeArray = [];
 				if(!_prevSelection || _prevSelection !== _selection) {
@@ -2384,7 +2388,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfStylisticSetPanelLabel = {
 		en:"Stylistic Sets",
-		de:"Forms\u00e4tze",
+		de:"Formats\u00e4tze",
 		fr:"Jeux stylistiques"
 	};
 
