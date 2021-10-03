@@ -41,8 +41,8 @@ var _global = {
 };
 
 _global["setups"] = {
-	"isHelpTipDisplayed":false,
-	"isStyleAppliedToSelection":true
+	"isHelpTipDisplayed":false, /* Display OFT help tips. Values: true or false */
+	"isStyleAppliedToSelection":true /* Apply style to selection. Values: true or false */
 };
 
 
@@ -1071,10 +1071,16 @@ function __showOTFWindow() {
 			return false; 
 		}
 		var _cStyleName = _cStyleNameEdittext.text;
+		if(!_cStyleName) {
+			return false;
+		}
 		var _inputObj = __getOTFeatureValues();
 		var _cStyle = __createCStyle(_cStyleName, _inputObj);
 		if(_cStyle) { 
 			_cStyleNameEdittext.text = "";
+			if(_applyStyleToSelectionCheckbox.value === true) {
+				__applyCStyle(_cStyle, _selection);
+			}
 		}
 	};
 
@@ -1104,6 +1110,7 @@ function __showOTFWindow() {
 
 	/* Initialize Dialog */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
+	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
@@ -1985,7 +1992,6 @@ function __uniqueArray(_inputArray) {
  */
 function __createCStyle(_styleName, _inputObj) {
 
-	if(!_global) { return false; }
 	if(_styleName === null || _styleName === undefined || _styleName.constructor !== String) { return false; }
 	if(!_inputObj || !(_inputObj instanceof Object)) { return false; }
 
@@ -2036,6 +2042,29 @@ function __createCStyle(_styleName, _inputObj) {
 
 	return _style;
 } /* END function __createCStyle */
+
+
+/**
+ * Apply Character Style to Selection
+ * @param {CharacterStyle} _cStyle 
+ * @param {Text} _selection  
+ * @returns {Boolean}
+ */
+function __applyCStyle(_cStyle, _selection) {
+
+	if(!_cStyle || !(_cStyle instanceof CharacterStyle) || !_cStyle.isValid) { return false; }
+	if(!_selection || !_selection.hasOwnProperty("applyCharacterStyle") || !_selection.isValid) { return false; }
+
+	try {
+		_selection.applyCharacterStyle(_cStyle);
+	} catch(_error) {
+		alert(_error.message);
+		return false;
+	}
+
+	return true;
+} /* END function __applyCStyle */
+
 
 
 
