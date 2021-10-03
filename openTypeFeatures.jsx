@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 28. September 2021
+	+	Last updated: 3. Oktober 2021
 
 		
 	+	License (MIT)
@@ -35,7 +35,15 @@
 
 //@targetengine "OpenTypeFeatures"
 
-var _global = {};
+var _global = {
+	"projectName":"OpenType Features",
+	"version":"1.3"
+};
+
+_global["setups"] = {
+	"isHelpTipDisplayed":false,
+	"isStyleAppliedToSelection":true
+};
 
 
 __defineLocalizeStrings();
@@ -56,6 +64,11 @@ function __showOTFWindow() {
 	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 24, fr:26 });
 	const THIRD_COLUMN_CHAR_NUM = localize({ en: 16, de: 16, fr: 16 });
 	
+	var _setupObj = _global["setups"];
+	if(!_setupObj || !(_setupObj instanceof Object)) { 
+		return false; 
+	}
+
 	var _appliedFontsStatictext;
 
 	var _ligaturesGroup;
@@ -178,6 +191,9 @@ function __showOTFWindow() {
 	var _positionalFormsFinalCheckbox;
 	var _positionalFormsIsolatedCheckbox;
 
+	var _applyStyleToSelectionCheckbox;
+	var _displayHelpTipCheckbox;
+
 	var _closeButton;
 	var _refreshButton;
 	var _cStyleNameEdittext;
@@ -186,8 +202,8 @@ function __showOTFWindow() {
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
 	with (_otfWindow) { 
 		alignChildren = ["fill","fill"];
-		margins = [15,20,20,15]; 
-		spacing = 20;
+		margins = [10,15,10,10]; 
+		spacing = 10;
 		var _headerGroup = add("group");
 		with(_headerGroup) {
 			alignChildren = ["fill","fill"];
@@ -204,475 +220,499 @@ function __showOTFWindow() {
 		var _selectionGroup = add("group");
 		with(_selectionGroup) {
 			alignChildren = ["fill","fill"];
-			/* ++++++++++++ */
-			/* + Column 1 + */
-			/* ++++++++++++ */
-			var _column1Group = add("group");
-			with(_column1Group) {
-				orientation = "column";
+			orientation = "column";
+			var _row1Group = add("group");
+			with(_row1Group) {
 				alignChildren = ["fill","fill"];
-				var _otfGeneralFeaturePanel = add("panel", undefined, localize(_global.oftGeneralFeaturePanelLabel));
-				with(_otfGeneralFeaturePanel) {
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					_ligaturesGroup = add("group");
-					with(_ligaturesGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_ligaturesCheckbox = add("checkbox", undefined, localize(_global.ligatureCheckboxLabel));
-						_ligaturesCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_ligaturesCheckbox["desc"] = localize(_global.ligaturesFeatureDesc);
-					} /* END _ligaturesGroup */
-					_otfDiscretionaryLigatureGroup = add("group");
-					with(_otfDiscretionaryLigatureGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfDiscretionaryLigatureCheckbox = add("checkbox", undefined, localize(_global.otfDiscretionaryLigatureCheckboxLabel));
-						_otfDiscretionaryLigatureCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfDiscretionaryLigatureCheckbox["desc"] = localize(_global.otfDiscretionaryLigatureFeatureDesc);
-					} /* END _otfDiscretionaryLigatureGroup */
-					_otfFractionGroup = add("group");
-					with(_otfFractionGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfFractionCheckbox = add("checkbox", undefined, localize(_global.otfFractionCheckboxLabel));
-						_otfFractionCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfFractionCheckbox["desc"] = localize(_global.otfFractionFeatureDesc);
-					} /* END _otfFractionGroup */
-					_otfOrdinalGroup = add("group");
-					with(_otfOrdinalGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfOrdinalCheckbox = add("checkbox", undefined, localize(_global.otfOrdinalCheckboxLabel));
-						_otfOrdinalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfOrdinalCheckbox["desc"] = localize(_global.otfOrdinalFeatureDesc);
-					} /* END _otfOrdinalGroup */
-					_otfSwashGroup = add("group");
-					with(_otfSwashGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfSwashCheckbox = add("checkbox", undefined, localize(_global.otfSwashCheckboxLabel));
-						_otfSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfSwashCheckbox["desc"] = localize(_global.otfSwashFeatureDesc);
-					} /* END _otfSwashGroup */
-					_otfTitlingGroup = add("group");
-					with(_otfTitlingGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfTitlingCheckbox = add("checkbox", undefined, localize(_global.otfTitlingCheckboxLabel));
-						_otfTitlingCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfTitlingCheckbox["desc"] = localize(_global.otfTitlingFeatureDesc);
-					} /* END _otfTitlingGroup */
-					_otfContextualAlternateGroup = add("group");
-					with(_otfContextualAlternateGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfContextualAlternateCheckbox = add("checkbox", undefined, localize(_global.otfContextualAlternateCheckboxLabel));
-						_otfContextualAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfContextualAlternateCheckbox["desc"] = localize(_global.otfContextualAlternateFeatureDesc);
-					} /* END _otfContextualAlternateGroup */
-					_capitalizationGroup = add("group");
-					with(_capitalizationGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_capitalizationCheckbox = add("checkbox", undefined, localize(_global.capitalizationCheckboxLabel));
-						_capitalizationCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_capitalizationCheckbox["desc"] = localize(_global.capitalizationFeatureDesc);
-					} /* END _capitalizationGroup */
-					_otfSlashedZeroGroup = add("group");
-					with(_otfSlashedZeroGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfSlashedZeroCheckbox = add("checkbox", undefined, localize(_global.otfSlashedZeroCheckboxLabel));
-						_otfSlashedZeroCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfSlashedZeroCheckbox["desc"] = localize(_global.otfSlashedZeroFeatureDesc);
-					} /* END _otfSlashedZeroGroup */
-				} /* END _otfGeneralFeaturePanel */
-				var _otfSpecialFeaturePanel = add("panel", undefined, localize(_global.oftSpecialFeaturePanelLabel));
-				with(_otfSpecialFeaturePanel) {
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					_otfHistoricalGroup = add("group");
-					with(_otfHistoricalGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfHistoricalCheckbox = add("checkbox", undefined, localize(_global.otfHistoricalCheckboxLabel));
-						_otfHistoricalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfHistoricalCheckbox["desc"] = localize(_global.otfHistoricalFeatureDesc);
-					} /* END _otfHistoricalGroup */
-					_otfRomanItalicsGroup = add("group");
-					with(_otfRomanItalicsGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfRomanItalicsCheckbox = add("checkbox", undefined, localize(_global.otfRomanItalicsCheckboxLabel));
-						_otfRomanItalicsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfRomanItalicsCheckbox["desc"] = localize(_global.otfRomanItalicsFeatureDesc);
-					} /* END _otfRomanItalicsGroup */
-					_otfLocaleGroup = add("group");
-					with(_otfLocaleGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfLocaleCheckbox = add("checkbox", undefined, localize(_global.otfLocaleCheckboxLabel));
-						_otfLocaleCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfLocaleCheckbox["desc"] = localize(_global.otfLocaleFeatureDesc);
-					} /* END _otfLocaleGroup */
-					_otfOverlapSwashGroup = add("group");
-					with(_otfOverlapSwashGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfOverlapSwashCheckbox = add("checkbox", undefined, localize(_global.otfOverlapSwashCheckboxLabel));
-						_otfOverlapSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfOverlapSwashCheckbox["desc"] = localize(_global.otfOverlapSwashFeatureDesc);
-					} /* END _otfOverlapSwashGroup */
-					_otfMarkGroup = add("group");
-					with(_otfMarkGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfMarkCheckbox = add("checkbox", undefined, localize(_global.otfMarkCheckboxLabelCheckboxLabel));
-						_otfMarkCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfMarkCheckbox["desc"] = localize(_global.otfMarkFeatureDesc);
-					} /* END _otfMarkGroup */
-					_otfProportionalMetricsGroup = add("group");
-					with(_otfProportionalMetricsGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfProportionalMetricsCheckbox = add("checkbox", undefined, localize(_global.otfProportionalMetricsCheckboxLabel));
-						_otfProportionalMetricsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfProportionalMetricsCheckbox["desc"] = localize(_global.otfProportionalMetricsFeatureDesc);
-					} /* END _otfProportionalMetricsGroup */
-					_otfJustificationAlternateGroup = add("group");
-					with(_otfJustificationAlternateGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfJustificationAlternateCheckbox = add("checkbox", undefined, localize(_global.otfJustificationAlternateCheckboxLabel));
-						_otfJustificationAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfJustificationAlternateCheckbox["desc"] = localize(_global.otfJustificationAlternateFeatureDesc);
-					} /* END _otfJustificationAlternateGroup */
-					_otfStretchedAlternateGroup = add("group");
-					with(_otfStretchedAlternateGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfStretchedAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStretchedAlternateCheckboxLabel));
-						_otfStretchedAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfStretchedAlternateCheckbox["desc"] = localize(_global.otfStretchedAlternateFeatureDesc);
-					} /* END _otfStretchedAlternateGroup */
-					_otfStylisticAlternateGroup = add("group");
-					with(_otfStylisticAlternateGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfStylisticAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStylisticAlternateCheckboxLabel));
-						_otfStylisticAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfStylisticAlternateCheckbox["desc"] = localize(_global.otfStylisticAlternateFeatureDesc);
-					} /* END _otfStylisticAlternateGroup */
-					_otfHVKanaGroup = add("group");
-					with(_otfHVKanaGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_otfHVKanaCheckbox = add("checkbox", undefined, localize(_global.otfHVKanaCheckboxLabel));
-						_otfHVKanaCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
-						_otfHVKanaCheckbox["desc"] = localize(_global.otfHVKanaFeatureDesc);
-					} /* END _otfHVKanaGroup */
-				} /* END _otfSpecialFeaturePanel */
-			} /* END _column1Group */
-			/* ++++++++++++ */
-			/* + Column 2 + */
-			/* ++++++++++++ */
-			var _column2Group = add("group");
-			with(_column2Group) {
-				orientation = "column";
-				alignChildren = ["fill","fill"];
-				var _otfPositionPanel = add("panel", undefined,localize(_global.otfPositionPanelLabel));
-				with(_otfPositionPanel) {
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					_positionSuperscriptGroup = add("group");
-					with(_positionSuperscriptGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionSuperscriptCheckbox = add("checkbox", undefined, localize(_global.positionSuperscriptCheckboxLabel));
-						_positionSuperscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionSuperscriptCheckbox["desc"] = localize(_global.positionSuperscriptFeatureDesc);
-					} /* END _positionSuperscriptGroup */
-					_positionSubscriptGroup = add("group");
-					with(_positionSubscriptGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionSubscriptCheckbox = add("checkbox", undefined, localize(_global.positionSubscriptCheckboxLabel));
-						_positionSubscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionSubscriptCheckbox["desc"] = localize(_global.positionSubscriptFeatureDesc);
-					} /* END _positionSubscriptGroup */
-					_positionNumeratorGroup = add("group");
-					with(_positionNumeratorGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionNumeratorCheckbox = add("checkbox", undefined, localize(_global.positionNumeratorCheckboxLabel));
-						_positionNumeratorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionNumeratorCheckbox["desc"] = localize(_global.positionNumeratorFeatureDesc);
-					} /* END _positionNumeratorGroup */
-					_positionDenominatorGroup = add("group");
-					with(_positionDenominatorGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionDenominatorCheckbox = add("checkbox", undefined, localize(_global.positionDenominatorCheckboxLabel));
-						_positionDenominatorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionDenominatorCheckbox["desc"] = localize(_global.positionDenominatorFeatureDesc);
-					} /* END _positionDenominatorGroup */
-				} /* END _otfPositionPanel */
-				var _otfDigitPanel = add("panel", undefined,localize(_global.otfDigitPanelLabel));
-				with(_otfDigitPanel) {
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					_digitDefaultFigureStyleGroup = add("group");
-					with(_digitDefaultFigureStyleGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_digitDefaultFigureStyleCheckbox = add("checkbox", undefined, localize(_global.digitDefaultFigureStyleCheckboxLabel));
-						_digitDefaultFigureStyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_digitDefaultFigureStyleCheckbox["desc"] = localize(_global.digitDefaultFigureStyleFeatureDesc);
-					} /* END _digitDefaultFigureStyleGroup */
-					_digitProportionalOldstyleGroup = add("group");
-					with(_digitProportionalOldstyleGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_digitProportionalOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitProportionalOldstyleCheckboxLabel));
-						_digitProportionalOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_digitProportionalOldstyleCheckbox["desc"] = localize(_global.digitProportionalOldstyleFeatureDesc);
-					} /* END _digitProportionalOldstyleGroup */
-					_digitProportionalLiningGroup = add("group");
-					with(_digitProportionalLiningGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_digitProportionalLiningCheckbox = add("checkbox", undefined, localize(_global.digitProportionalLiningCheckboxLabel));
-						_digitProportionalLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_digitProportionalLiningCheckbox["desc"] = localize(_global.digitProportionalLiningFeatureDesc);
-					} /* END _digitProportionalLiningGroup */
-					_digitTabularOldstyleGroup = add("group");
-					with(_digitTabularOldstyleGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_digitTabularOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitTabularOldstyleCheckboxLabel));
-						_digitTabularOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_digitTabularOldstyleCheckbox["desc"] = localize(_global.digitTabularOldstyleFeatureDesc);
-					} /* END _digitTabularOldstyleGroup */
-					_digitTabularLiningGroup = add("group");
-					with(_digitTabularLiningGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_digitTabularLiningCheckbox = add("checkbox", undefined, localize(_global.digitTabularLiningCheckboxLabel));
-						_digitTabularLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_digitTabularLiningCheckbox["desc"] = localize(_global.digitTabularLiningFeatureDesc);
-					} /* END _digitTabularLiningGroup */
-				} /* END _otfDigitPanel */
-				var _positionalFormsPanel = add("panel", undefined,localize(_global.positionalFormLabel));
-				with(_positionalFormsPanel) {
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					_positionalFormsGeneralGroup = add("group");
-					with(_positionalFormsGeneralGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsGeneralCheckbox = add("checkbox", undefined, localize(_global.positionalFormsGeneralCheckboxLabel));
-						_positionalFormsGeneralCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsGeneralCheckbox["desc"] = localize(_global.positionalFormsGeneralFeatureDesc);
-					} /* END _positionalFormsGeneralGroup */
-					_positionalFormsAutomaticGroup = add("group");
-					with(_positionalFormsAutomaticGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsAutomaticCheckbox = add("checkbox", undefined, localize(_global.positionalFormsAutomaticCheckboxLabel));
-						_positionalFormsAutomaticCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsAutomaticCheckbox["desc"] = localize(_global.positionalFormsAutomaticFeatureDesc);
-					} /* END _positionalFormsAutomaticGroup */
-					_positionalFormsInitialGroup = add("group");
-					with(_positionalFormsInitialGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsInitialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsInitialCheckboxLabel));
-						_positionalFormsInitialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsInitialCheckbox["desc"] = localize(_global.positionalFormsInitialFeatureDesc);
-					} /* END _positionalFormsInitialGroup */
-					_positionalFormsMedialGroup = add("group");
-					with(_positionalFormsMedialGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsMedialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsMedialCheckboxLabel));
-						_positionalFormsMedialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsMedialCheckbox["desc"] = localize(_global.positionalFormsMedialFeatureDesc);
-					} /* END _positionalFormsMedialGroup */
-					_positionalFormsFinalGroup = add("group");
-					with(_positionalFormsFinalGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsFinalCheckbox = add("checkbox", undefined, localize(_global.positionalFormsFinalCheckboxLabel));
-						_positionalFormsFinalCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsFinalCheckbox["desc"] = localize(_global.positionalFormsFinalFeatureDesc);
-					} /* END _positionalFormsFinalGroup */
-					_positionalFormsIsolatedGroup = add("group");
-					with(_positionalFormsIsolatedGroup) {
-						margins = FEATURE_GROUP_MARGINS;
-						_positionalFormsIsolatedCheckbox = add("checkbox", undefined, localize(_global.positionalFormsIsolatedCheckboxLabel));
-						_positionalFormsIsolatedCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
-						_positionalFormsIsolatedCheckbox["desc"] = localize(_global.positionalFormsIsolatedFeatureDesc);
-					} /* END _positionalFormsIsolatedGroup */
-				} /* END _positionalFormsPanel */
-			} /* END _column2Group */
-			/* ++++++++++++ */
-			/* + Column 3 + */
-			/* ++++++++++++ */
-			var _column3Group = add("group");
-			with(_column3Group) {
-				orientation = "column";
-				alignChildren = ["fill","fill"];
-				var _otfStylisticSetsPanel = add("panel", undefined,localize(_global.otfStylisticSetPanelLabel));
-				with(_otfStylisticSetsPanel) {
+				/* ++++++++++++ */
+				/* + Column 1 + */
+				/* ++++++++++++ */
+				var _column1Group = add("group");
+				with(_column1Group) {
 					orientation = "column";
-					alignChildren = ["fill","top"];
-					margins = PANEL_MARGINS;
-					spacing = 0;
-					var _otfStylisticSetColumn1Group = add("group");
-					with(_otfStylisticSetColumn1Group) {
+					alignChildren = ["fill","fill"];
+					var _otfGeneralFeaturePanel = add("panel", undefined, localize(_global.oftGeneralFeaturePanelLabel));
+					with(_otfGeneralFeaturePanel) {
+						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
+						spacing = 0;
+						_ligaturesGroup = add("group");
+						with(_ligaturesGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_ligaturesCheckbox = add("checkbox", undefined, localize(_global.ligatureCheckboxLabel));
+							_ligaturesCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_ligaturesCheckbox["desc"] = localize(_global.ligaturesFeatureDesc);
+						} /* END _ligaturesGroup */
+						_otfDiscretionaryLigatureGroup = add("group");
+						with(_otfDiscretionaryLigatureGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfDiscretionaryLigatureCheckbox = add("checkbox", undefined, localize(_global.otfDiscretionaryLigatureCheckboxLabel));
+							_otfDiscretionaryLigatureCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfDiscretionaryLigatureCheckbox["desc"] = localize(_global.otfDiscretionaryLigatureFeatureDesc);
+						} /* END _otfDiscretionaryLigatureGroup */
+						_otfFractionGroup = add("group");
+						with(_otfFractionGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfFractionCheckbox = add("checkbox", undefined, localize(_global.otfFractionCheckboxLabel));
+							_otfFractionCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfFractionCheckbox["desc"] = localize(_global.otfFractionFeatureDesc);
+						} /* END _otfFractionGroup */
+						_otfOrdinalGroup = add("group");
+						with(_otfOrdinalGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfOrdinalCheckbox = add("checkbox", undefined, localize(_global.otfOrdinalCheckboxLabel));
+							_otfOrdinalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfOrdinalCheckbox["desc"] = localize(_global.otfOrdinalFeatureDesc);
+						} /* END _otfOrdinalGroup */
+						_otfSwashGroup = add("group");
+						with(_otfSwashGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfSwashCheckbox = add("checkbox", undefined, localize(_global.otfSwashCheckboxLabel));
+							_otfSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfSwashCheckbox["desc"] = localize(_global.otfSwashFeatureDesc);
+						} /* END _otfSwashGroup */
+						_otfTitlingGroup = add("group");
+						with(_otfTitlingGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfTitlingCheckbox = add("checkbox", undefined, localize(_global.otfTitlingCheckboxLabel));
+							_otfTitlingCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfTitlingCheckbox["desc"] = localize(_global.otfTitlingFeatureDesc);
+						} /* END _otfTitlingGroup */
+						_otfContextualAlternateGroup = add("group");
+						with(_otfContextualAlternateGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfContextualAlternateCheckbox = add("checkbox", undefined, localize(_global.otfContextualAlternateCheckboxLabel));
+							_otfContextualAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfContextualAlternateCheckbox["desc"] = localize(_global.otfContextualAlternateFeatureDesc);
+						} /* END _otfContextualAlternateGroup */
+						_capitalizationGroup = add("group");
+						with(_capitalizationGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_capitalizationCheckbox = add("checkbox", undefined, localize(_global.capitalizationCheckboxLabel));
+							_capitalizationCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_capitalizationCheckbox["desc"] = localize(_global.capitalizationFeatureDesc);
+						} /* END _capitalizationGroup */
+						_otfSlashedZeroGroup = add("group");
+						with(_otfSlashedZeroGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfSlashedZeroCheckbox = add("checkbox", undefined, localize(_global.otfSlashedZeroCheckboxLabel));
+							_otfSlashedZeroCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfSlashedZeroCheckbox["desc"] = localize(_global.otfSlashedZeroFeatureDesc);
+						} /* END _otfSlashedZeroGroup */
+					} /* END _otfGeneralFeaturePanel */
+					var _otfSpecialFeaturePanel = add("panel", undefined, localize(_global.oftSpecialFeaturePanelLabel));
+					with(_otfSpecialFeaturePanel) {
+						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
+						spacing = 0;
+						_otfHistoricalGroup = add("group");
+						with(_otfHistoricalGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfHistoricalCheckbox = add("checkbox", undefined, localize(_global.otfHistoricalCheckboxLabel));
+							_otfHistoricalCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfHistoricalCheckbox["desc"] = localize(_global.otfHistoricalFeatureDesc);
+						} /* END _otfHistoricalGroup */
+						_otfRomanItalicsGroup = add("group");
+						with(_otfRomanItalicsGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfRomanItalicsCheckbox = add("checkbox", undefined, localize(_global.otfRomanItalicsCheckboxLabel));
+							_otfRomanItalicsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfRomanItalicsCheckbox["desc"] = localize(_global.otfRomanItalicsFeatureDesc);
+						} /* END _otfRomanItalicsGroup */
+						_otfLocaleGroup = add("group");
+						with(_otfLocaleGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfLocaleCheckbox = add("checkbox", undefined, localize(_global.otfLocaleCheckboxLabel));
+							_otfLocaleCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfLocaleCheckbox["desc"] = localize(_global.otfLocaleFeatureDesc);
+						} /* END _otfLocaleGroup */
+						_otfOverlapSwashGroup = add("group");
+						with(_otfOverlapSwashGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfOverlapSwashCheckbox = add("checkbox", undefined, localize(_global.otfOverlapSwashCheckboxLabel));
+							_otfOverlapSwashCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfOverlapSwashCheckbox["desc"] = localize(_global.otfOverlapSwashFeatureDesc);
+						} /* END _otfOverlapSwashGroup */
+						_otfMarkGroup = add("group");
+						with(_otfMarkGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfMarkCheckbox = add("checkbox", undefined, localize(_global.otfMarkCheckboxLabelCheckboxLabel));
+							_otfMarkCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfMarkCheckbox["desc"] = localize(_global.otfMarkFeatureDesc);
+						} /* END _otfMarkGroup */
+						_otfProportionalMetricsGroup = add("group");
+						with(_otfProportionalMetricsGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfProportionalMetricsCheckbox = add("checkbox", undefined, localize(_global.otfProportionalMetricsCheckboxLabel));
+							_otfProportionalMetricsCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfProportionalMetricsCheckbox["desc"] = localize(_global.otfProportionalMetricsFeatureDesc);
+						} /* END _otfProportionalMetricsGroup */
+						_otfJustificationAlternateGroup = add("group");
+						with(_otfJustificationAlternateGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfJustificationAlternateCheckbox = add("checkbox", undefined, localize(_global.otfJustificationAlternateCheckboxLabel));
+							_otfJustificationAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfJustificationAlternateCheckbox["desc"] = localize(_global.otfJustificationAlternateFeatureDesc);
+						} /* END _otfJustificationAlternateGroup */
+						_otfStretchedAlternateGroup = add("group");
+						with(_otfStretchedAlternateGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStretchedAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStretchedAlternateCheckboxLabel));
+							_otfStretchedAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfStretchedAlternateCheckbox["desc"] = localize(_global.otfStretchedAlternateFeatureDesc);
+						} /* END _otfStretchedAlternateGroup */
+						_otfStylisticAlternateGroup = add("group");
+						with(_otfStylisticAlternateGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfStylisticAlternateCheckbox = add("checkbox", undefined, localize(_global.otfStylisticAlternateCheckboxLabel));
+							_otfStylisticAlternateCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfStylisticAlternateCheckbox["desc"] = localize(_global.otfStylisticAlternateFeatureDesc);
+						} /* END _otfStylisticAlternateGroup */
+						_otfHVKanaGroup = add("group");
+						with(_otfHVKanaGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_otfHVKanaCheckbox = add("checkbox", undefined, localize(_global.otfHVKanaCheckboxLabel));
+							_otfHVKanaCheckbox.characters = FIRST_COLUMN_CHAR_NUM;
+							_otfHVKanaCheckbox["desc"] = localize(_global.otfHVKanaFeatureDesc);
+						} /* END _otfHVKanaGroup */
+					} /* END _otfSpecialFeaturePanel */
+				} /* END _column1Group */
+				/* ++++++++++++ */
+				/* + Column 2 + */
+				/* ++++++++++++ */
+				var _column2Group = add("group");
+				with(_column2Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _otfPositionPanel = add("panel", undefined,localize(_global.otfPositionPanelLabel));
+					with(_otfPositionPanel) {
+						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
+						spacing = 0;
+						_positionSuperscriptGroup = add("group");
+						with(_positionSuperscriptGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionSuperscriptCheckbox = add("checkbox", undefined, localize(_global.positionSuperscriptCheckboxLabel));
+							_positionSuperscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionSuperscriptCheckbox["desc"] = localize(_global.positionSuperscriptFeatureDesc);
+						} /* END _positionSuperscriptGroup */
+						_positionSubscriptGroup = add("group");
+						with(_positionSubscriptGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionSubscriptCheckbox = add("checkbox", undefined, localize(_global.positionSubscriptCheckboxLabel));
+							_positionSubscriptCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionSubscriptCheckbox["desc"] = localize(_global.positionSubscriptFeatureDesc);
+						} /* END _positionSubscriptGroup */
+						_positionNumeratorGroup = add("group");
+						with(_positionNumeratorGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionNumeratorCheckbox = add("checkbox", undefined, localize(_global.positionNumeratorCheckboxLabel));
+							_positionNumeratorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionNumeratorCheckbox["desc"] = localize(_global.positionNumeratorFeatureDesc);
+						} /* END _positionNumeratorGroup */
+						_positionDenominatorGroup = add("group");
+						with(_positionDenominatorGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionDenominatorCheckbox = add("checkbox", undefined, localize(_global.positionDenominatorCheckboxLabel));
+							_positionDenominatorCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionDenominatorCheckbox["desc"] = localize(_global.positionDenominatorFeatureDesc);
+						} /* END _positionDenominatorGroup */
+					} /* END _otfPositionPanel */
+					var _otfDigitPanel = add("panel", undefined,localize(_global.otfDigitPanelLabel));
+					with(_otfDigitPanel) {
+						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
+						spacing = 0;
+						_digitDefaultFigureStyleGroup = add("group");
+						with(_digitDefaultFigureStyleGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_digitDefaultFigureStyleCheckbox = add("checkbox", undefined, localize(_global.digitDefaultFigureStyleCheckboxLabel));
+							_digitDefaultFigureStyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_digitDefaultFigureStyleCheckbox["desc"] = localize(_global.digitDefaultFigureStyleFeatureDesc);
+						} /* END _digitDefaultFigureStyleGroup */
+						_digitProportionalOldstyleGroup = add("group");
+						with(_digitProportionalOldstyleGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_digitProportionalOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitProportionalOldstyleCheckboxLabel));
+							_digitProportionalOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_digitProportionalOldstyleCheckbox["desc"] = localize(_global.digitProportionalOldstyleFeatureDesc);
+						} /* END _digitProportionalOldstyleGroup */
+						_digitProportionalLiningGroup = add("group");
+						with(_digitProportionalLiningGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_digitProportionalLiningCheckbox = add("checkbox", undefined, localize(_global.digitProportionalLiningCheckboxLabel));
+							_digitProportionalLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_digitProportionalLiningCheckbox["desc"] = localize(_global.digitProportionalLiningFeatureDesc);
+						} /* END _digitProportionalLiningGroup */
+						_digitTabularOldstyleGroup = add("group");
+						with(_digitTabularOldstyleGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_digitTabularOldstyleCheckbox = add("checkbox", undefined, localize(_global.digitTabularOldstyleCheckboxLabel));
+							_digitTabularOldstyleCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_digitTabularOldstyleCheckbox["desc"] = localize(_global.digitTabularOldstyleFeatureDesc);
+						} /* END _digitTabularOldstyleGroup */
+						_digitTabularLiningGroup = add("group");
+						with(_digitTabularLiningGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_digitTabularLiningCheckbox = add("checkbox", undefined, localize(_global.digitTabularLiningCheckboxLabel));
+							_digitTabularLiningCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_digitTabularLiningCheckbox["desc"] = localize(_global.digitTabularLiningFeatureDesc);
+						} /* END _digitTabularLiningGroup */
+					} /* END _otfDigitPanel */
+					var _positionalFormsPanel = add("panel", undefined,localize(_global.positionalFormLabel));
+					with(_positionalFormsPanel) {
+						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
+						spacing = 0;
+						_positionalFormsGeneralGroup = add("group");
+						with(_positionalFormsGeneralGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsGeneralCheckbox = add("checkbox", undefined, localize(_global.positionalFormsGeneralCheckboxLabel));
+							_positionalFormsGeneralCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsGeneralCheckbox["desc"] = localize(_global.positionalFormsGeneralFeatureDesc);
+						} /* END _positionalFormsGeneralGroup */
+						_positionalFormsAutomaticGroup = add("group");
+						with(_positionalFormsAutomaticGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsAutomaticCheckbox = add("checkbox", undefined, localize(_global.positionalFormsAutomaticCheckboxLabel));
+							_positionalFormsAutomaticCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsAutomaticCheckbox["desc"] = localize(_global.positionalFormsAutomaticFeatureDesc);
+						} /* END _positionalFormsAutomaticGroup */
+						_positionalFormsInitialGroup = add("group");
+						with(_positionalFormsInitialGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsInitialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsInitialCheckboxLabel));
+							_positionalFormsInitialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsInitialCheckbox["desc"] = localize(_global.positionalFormsInitialFeatureDesc);
+						} /* END _positionalFormsInitialGroup */
+						_positionalFormsMedialGroup = add("group");
+						with(_positionalFormsMedialGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsMedialCheckbox = add("checkbox", undefined, localize(_global.positionalFormsMedialCheckboxLabel));
+							_positionalFormsMedialCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsMedialCheckbox["desc"] = localize(_global.positionalFormsMedialFeatureDesc);
+						} /* END _positionalFormsMedialGroup */
+						_positionalFormsFinalGroup = add("group");
+						with(_positionalFormsFinalGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsFinalCheckbox = add("checkbox", undefined, localize(_global.positionalFormsFinalCheckboxLabel));
+							_positionalFormsFinalCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsFinalCheckbox["desc"] = localize(_global.positionalFormsFinalFeatureDesc);
+						} /* END _positionalFormsFinalGroup */
+						_positionalFormsIsolatedGroup = add("group");
+						with(_positionalFormsIsolatedGroup) {
+							margins = FEATURE_GROUP_MARGINS;
+							_positionalFormsIsolatedCheckbox = add("checkbox", undefined, localize(_global.positionalFormsIsolatedCheckboxLabel));
+							_positionalFormsIsolatedCheckbox.characters = SECOND_COLUMN_CHAR_NUM;
+							_positionalFormsIsolatedCheckbox["desc"] = localize(_global.positionalFormsIsolatedFeatureDesc);
+						} /* END _positionalFormsIsolatedGroup */
+					} /* END _positionalFormsPanel */
+				} /* END _column2Group */
+				/* ++++++++++++ */
+				/* + Column 3 + */
+				/* ++++++++++++ */
+				var _column3Group = add("group");
+				with(_column3Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _otfStylisticSetsPanel = add("panel", undefined,localize(_global.otfStylisticSetPanelLabel));
+					with(_otfStylisticSetsPanel) {
 						orientation = "column";
 						alignChildren = ["fill","top"];
+						margins = PANEL_MARGINS;
 						spacing = 0;
-						_otfStylisticSet1Group = add("group");
-						with(_otfStylisticSet1Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet1Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "1"));
-							_otfStylisticSet1Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet1Checkbox.code = 2;
-						} /* END _otfStylisticSet1Group */
-						_otfStylisticSet2Group = add("group");
-						with(_otfStylisticSet2Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet2Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "2"));
-							_otfStylisticSet2Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet2Checkbox.code = 4;
-						} /* END _otfStylisticSet2Group */
-						_otfStylisticSet3Group = add("group");
-						with(_otfStylisticSet3Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet3Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "3"));
-							_otfStylisticSet3Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet3Checkbox.code = 8;
-						} /* END _otfStylisticSet3Group */
-						_otfStylisticSet4Group = add("group");
-						with(_otfStylisticSet4Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet4Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "4"));
-							_otfStylisticSet4Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet4Checkbox.code = 16;
-						} /* END _otfStylisticSet4Group */
-						_otfStylisticSet5Group = add("group");
-						with(_otfStylisticSet5Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet5Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "5"));
-							_otfStylisticSet5Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet5Checkbox.code = 32;
-						} /* END _otfStylisticSet5Group */
-						_otfStylisticSet6Group = add("group");
-						with(_otfStylisticSet6Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet6Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "6"));
-							_otfStylisticSet6Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet6Checkbox.code = 64;
-						} /* END _otfStylisticSet6Group */
-						_otfStylisticSet7Group = add("group");
-						with(_otfStylisticSet7Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet7Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "7"));
-							_otfStylisticSet7Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet7Checkbox.code = 128;
-						} /* END _otfStylisticSet7Group */
-						_otfStylisticSet8Group = add("group");
-						with(_otfStylisticSet8Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet8Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "8"));
-							_otfStylisticSet8Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet8Checkbox.code = 256;
-						} /* END _otfStylisticSet8Group */
-						_otfStylisticSet9Group = add("group");
-						with(_otfStylisticSet9Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet9Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "9"));
-							_otfStylisticSet9Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet9Checkbox.code = 512;
-						} /* END _otfStylisticSet9Group */
-						_otfStylisticSet10Group = add("group");
-						with(_otfStylisticSet10Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet10Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "10"));
-							_otfStylisticSet10Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet10Checkbox.code = 1024;
-						} /* END _otfStylisticSet10Group */
-						_otfStylisticSet11Group = add("group");
-						with(_otfStylisticSet11Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet11Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "11"));
-							_otfStylisticSet11Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet11Checkbox.code = 2048;
-						} /* END _otfStylisticSet11Group */
-						_otfStylisticSet12Group = add("group");
-						with(_otfStylisticSet12Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet12Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "12"));
-							_otfStylisticSet12Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet12Checkbox.code = 4096;
-						} /* END _otfStylisticSet12Group */
-						_otfStylisticSet13Group = add("group");
-						with(_otfStylisticSet13Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet13Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "13"));
-							_otfStylisticSet13Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet13Checkbox.code = 8192;
-						} /* END _otfStylisticSet13Group */
-						_otfStylisticSet14Group = add("group");
-						with(_otfStylisticSet14Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet14Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "14"));
-							_otfStylisticSet14Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet14Checkbox.code = 16384;
-						} /* END _otfStylisticSet14Group */
-						_otfStylisticSet15Group = add("group");
-						with(_otfStylisticSet15Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet15Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "15"));
-							_otfStylisticSet15Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet15Checkbox.code = 32768;
-						} /* END _otfStylisticSet15Group */
-						_otfStylisticSet16Group = add("group");
-						with(_otfStylisticSet16Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet16Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "16"));
-							_otfStylisticSet16Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet16Checkbox.code = 65536;
-						} /* END _otfStylisticSet16Group */
-						_otfStylisticSet17Group = add("group");
-						with(_otfStylisticSet17Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet17Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "17"));
-							_otfStylisticSet17Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet17Checkbox.code = 131072;
-						} /* END _otfStylisticSet17Group */
-						_otfStylisticSet18Group = add("group");
-						with(_otfStylisticSet18Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet18Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "18"));
-							_otfStylisticSet18Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet18Checkbox.code = 262144;
-						} /* END _otfStylisticSet18Group */
-						_otfStylisticSet19Group = add("group");
-						with(_otfStylisticSet19Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet19Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "19"));
-							_otfStylisticSet19Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet19Checkbox.code = 524288;
-						} /* END _otfStylisticSet19Group */
-						_otfStylisticSet20Group = add("group");
-						with(_otfStylisticSet20Group) {
-							margins = FEATURE_GROUP_MARGINS;
-							_otfStylisticSet20Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "20"));
-							_otfStylisticSet20Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
-							_otfStylisticSet20Checkbox.code = 1048576;
-						} /* END _otfStylisticSet20Group */
-					} /* END _otfStylisticSetColumn2Group */
-				} /* END _otfStylisticSetsPanel */
-			} /* END _column3Group */
+						var _otfStylisticSetColumn1Group = add("group");
+						with(_otfStylisticSetColumn1Group) {
+							orientation = "column";
+							alignChildren = ["fill","top"];
+							spacing = 0;
+							_otfStylisticSet1Group = add("group");
+							with(_otfStylisticSet1Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet1Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "1"));
+								_otfStylisticSet1Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet1Checkbox.code = 2;
+							} /* END _otfStylisticSet1Group */
+							_otfStylisticSet2Group = add("group");
+							with(_otfStylisticSet2Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet2Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "2"));
+								_otfStylisticSet2Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet2Checkbox.code = 4;
+							} /* END _otfStylisticSet2Group */
+							_otfStylisticSet3Group = add("group");
+							with(_otfStylisticSet3Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet3Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "3"));
+								_otfStylisticSet3Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet3Checkbox.code = 8;
+							} /* END _otfStylisticSet3Group */
+							_otfStylisticSet4Group = add("group");
+							with(_otfStylisticSet4Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet4Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "4"));
+								_otfStylisticSet4Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet4Checkbox.code = 16;
+							} /* END _otfStylisticSet4Group */
+							_otfStylisticSet5Group = add("group");
+							with(_otfStylisticSet5Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet5Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "5"));
+								_otfStylisticSet5Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet5Checkbox.code = 32;
+							} /* END _otfStylisticSet5Group */
+							_otfStylisticSet6Group = add("group");
+							with(_otfStylisticSet6Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet6Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "6"));
+								_otfStylisticSet6Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet6Checkbox.code = 64;
+							} /* END _otfStylisticSet6Group */
+							_otfStylisticSet7Group = add("group");
+							with(_otfStylisticSet7Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet7Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "7"));
+								_otfStylisticSet7Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet7Checkbox.code = 128;
+							} /* END _otfStylisticSet7Group */
+							_otfStylisticSet8Group = add("group");
+							with(_otfStylisticSet8Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet8Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "8"));
+								_otfStylisticSet8Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet8Checkbox.code = 256;
+							} /* END _otfStylisticSet8Group */
+							_otfStylisticSet9Group = add("group");
+							with(_otfStylisticSet9Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet9Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "9"));
+								_otfStylisticSet9Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet9Checkbox.code = 512;
+							} /* END _otfStylisticSet9Group */
+							_otfStylisticSet10Group = add("group");
+							with(_otfStylisticSet10Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet10Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "10"));
+								_otfStylisticSet10Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet10Checkbox.code = 1024;
+							} /* END _otfStylisticSet10Group */
+							_otfStylisticSet11Group = add("group");
+							with(_otfStylisticSet11Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet11Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "11"));
+								_otfStylisticSet11Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet11Checkbox.code = 2048;
+							} /* END _otfStylisticSet11Group */
+							_otfStylisticSet12Group = add("group");
+							with(_otfStylisticSet12Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet12Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "12"));
+								_otfStylisticSet12Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet12Checkbox.code = 4096;
+							} /* END _otfStylisticSet12Group */
+							_otfStylisticSet13Group = add("group");
+							with(_otfStylisticSet13Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet13Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "13"));
+								_otfStylisticSet13Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet13Checkbox.code = 8192;
+							} /* END _otfStylisticSet13Group */
+							_otfStylisticSet14Group = add("group");
+							with(_otfStylisticSet14Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet14Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "14"));
+								_otfStylisticSet14Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet14Checkbox.code = 16384;
+							} /* END _otfStylisticSet14Group */
+							_otfStylisticSet15Group = add("group");
+							with(_otfStylisticSet15Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet15Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "15"));
+								_otfStylisticSet15Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet15Checkbox.code = 32768;
+							} /* END _otfStylisticSet15Group */
+							_otfStylisticSet16Group = add("group");
+							with(_otfStylisticSet16Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet16Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "16"));
+								_otfStylisticSet16Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet16Checkbox.code = 65536;
+							} /* END _otfStylisticSet16Group */
+							_otfStylisticSet17Group = add("group");
+							with(_otfStylisticSet17Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet17Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "17"));
+								_otfStylisticSet17Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet17Checkbox.code = 131072;
+							} /* END _otfStylisticSet17Group */
+							_otfStylisticSet18Group = add("group");
+							with(_otfStylisticSet18Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet18Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "18"));
+								_otfStylisticSet18Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet18Checkbox.code = 262144;
+							} /* END _otfStylisticSet18Group */
+							_otfStylisticSet19Group = add("group");
+							with(_otfStylisticSet19Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet19Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "19"));
+								_otfStylisticSet19Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet19Checkbox.code = 524288;
+							} /* END _otfStylisticSet19Group */
+							_otfStylisticSet20Group = add("group");
+							with(_otfStylisticSet20Group) {
+								margins = FEATURE_GROUP_MARGINS;
+								_otfStylisticSet20Checkbox = add("checkbox", undefined, localize(_global.otfStylisticSetCheckboxLabel, "20"));
+								_otfStylisticSet20Checkbox.characters = THIRD_COLUMN_CHAR_NUM;
+								_otfStylisticSet20Checkbox.code = 1048576;
+							} /* END _otfStylisticSet20Group */
+						} /* END _otfStylisticSetColumn2Group */
+					} /* END _otfStylisticSetsPanel */
+				} /* END _column3Group */
+			} /* END _row1Group */
+			var _row2Group = add("group");
+			with(_row2Group) {
+				alignChildren = ["fill","fill"];
+				var _tab1ActionsGroup = add('group');
+				with(_tab1ActionsGroup) {
+					_cStyleNameEdittext = add("edittext", undefined, "");
+					with(_cStyleNameEdittext) {
+						characters = 26;
+						alignment = ["left","middle"];
+					} /* END _cStyleNameEdittext */
+					_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok" });
+					with(_cStyleButton) {
+						alignment = ["left","middle"];
+						helpTip = localize(_global.cStyleButtonHelpTip);
+					} /* END _cStyleButton */
+					_applyStyleToSelectionCheckbox = add("checkbox", undefined, localize(_global.applyStyleToSelectionCheckboxLabel));
+					with(_applyStyleToSelectionCheckbox) {
+						alignment = ["left","bottom"];
+						helpTip = localize(_global.applyStyleToSelectionCheckboxHelpTip);
+					} /* END _applyStyleToSelectionCheckbox */
+					_refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
+					with(_refreshButton) {
+						alignment = ["right","middle"];
+						preferredSize.width = 120;
+						helpTip = localize(_global.refreshButtonHelpTip);
+					} /* END _refreshButton */
+				} /* END _tab1ActionsGroup */
+			} /* END _row2Group */
 		} /* END _selectionGroup */
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
+			margins = 0;
 			spacing = 10;
+			_displayHelpTipCheckbox = add("checkbox", undefined, localize(_global.displayHelpTipCheckboxLabel));
+			with(_displayHelpTipCheckbox) {
+				alignment = ["left","bottom"];
+			} /* END _displayHelpTipCheckbox */
 			_closeButton = add("button", undefined, localize(_global.cancelButtonLabel), { name:"cancel" });
 			with(_closeButton) {
-				alignment = ["left","bottom"];
+				alignment = ["right","bottom"];
+				preferredSize.width = 120;
 				helpTip = localize(_global.closeButtonHelpTip);
 			} /* END _closeButton */
-			_refreshButton = add("button", undefined, localize(_global.refreshButtonLabel));
-			with(_refreshButton) {
-				alignment = ["left","bottom"];
-				helpTip = localize(_global.refreshButtonHelpTip);
-			} /* END _refreshButton */
-			_cStyleNameEdittext = add("edittext", undefined, "");
-			with(_cStyleNameEdittext) {
-				alignment = ["right","middle"];
-				characters = 24;
-			} /* END _cStyleNameEdittext */
-			_cStyleButton = add('button', undefined, ("+ " + localize(_global.cStyleButtonLabel)), { name:"ok" });
-			with(_cStyleButton) {
-				alignment = ["right","bottom"];
-				helpTip = localize(_global.cStyleButtonHelpTip);
-			} /* END _cStyleButton */
 		} /* END _buttonGroup */
 	} /* END palette _otfWindow */
  
@@ -1045,6 +1085,11 @@ function __showOTFWindow() {
 		}
 	});
 
+	_displayHelpTipCheckbox.onClick = function() {
+		_otfWindow["isHelpTipDisplayed"] = this.value;
+		_refreshButton.notify();
+	};
+
 	_closeButton.onClick = function() {
 		_otfWindow.close(2);
 	};
@@ -1059,6 +1104,7 @@ function __showOTFWindow() {
 
 	/* Initialize Dialog */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
+	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
 
@@ -1403,7 +1449,12 @@ function __checkOTFeature(_propertyName, _otfFeatureTag, _selection, _window, _s
 			_suiItem.text = _suiItemLabel.replace(_squareBracketRegExp, "");
 		}
 	}
-	_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
+
+	if(_window["isHelpTipDisplayed"] === true) {
+		_suiItem.helpTip = _suiItem.parent.helpTip = (_suiItem["desc"] || "");
+	} else {
+		_suiItem.helpTip = _suiItem.parent.helpTip = "";
+	}
 	
 	/* Upadate values */
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
@@ -1997,9 +2048,9 @@ function __createCStyle(_styleName, _inputObj) {
 function __defineLocalizeStrings() {
 	
 	_global.uiHeadLabel = {
-		en:"OpenType Features (V 1.2)",
-		de:"OpenType-Funktionen (V 1.2)",
-		fr:"Fonctionnalités OpenType (V 1.2)"
+		en:"OpenType Features (V " + _global["version"] + ")",
+		de:"OpenType-Funktionen (V " + _global["version"] + ")",
+		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")"
 	};
 	
 	_global.testGoBackLabel = { 
@@ -2008,6 +2059,12 @@ function __defineLocalizeStrings() {
 		fr:"Test des fonctionnalités OpenType"
 	};
 	
+	_global.displayHelpTipCheckboxLabel = {
+		en:"Show OTF help texts",
+		de:"OTF-Hilfstexte anzeigen",
+		fr:"Afficher les conseils d'aide OTF"
+	};
+
 	_global.cancelButtonLabel = {
 		en:"Close",
 		de:"Schlie\u00dfen",
@@ -2024,6 +2081,18 @@ function __defineLocalizeStrings() {
 		en:"Character Style",
 		de:"Zeichenformat",
 		fr:"Style de caractère"
+	};
+
+	_global.applyStyleToSelectionCheckboxLabel = {
+		en:"Selection",
+		de:"Auswahl",
+		fr:"Sélection"
+	};
+
+	_global.applyStyleToSelectionCheckboxHelpTip = {
+		en:"Apply Style to Selection",
+		de:"Format auf Auswahl anwenden",
+		fr:"Afficher le texte d'aide"
 	};
 
 	_global.cStyleButtonHelpTip = {
