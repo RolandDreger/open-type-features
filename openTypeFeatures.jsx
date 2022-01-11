@@ -2083,589 +2083,687 @@ function __defineLocalizeStrings() {
 	_global.uiHeadLabel = {
 		en:"OpenType Features (V " + _global["version"] + ")",
 		de:"OpenType-Funktionen (V " + _global["version"] + ")",
-		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")"
+		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")",
+		es:"Funciones OpenType"
 	};
 	
 	_global.testGoBackLabel = { 
 		en:"Test OpenType features",
 		de:"OpenType-Funktionen testen",
-		fr:"Test des fonctionnalités OpenType"
+		fr:"Test des fonctionnalités OpenType",
+		es:"Probar las funciones de OpenType"
 	};
 	
 	_global.displayHelpTipCheckboxLabel = {
 		en:"Show OTF help texts",
 		de:"OTF-Hilfstexte anzeigen",
-		fr:"Afficher les conseils d'aide OTF"
+		fr:"Afficher les conseils d'aide OTF",
+		es:"Mostrar textos de ayuda OTF"
 	};
 
 	_global.cancelButtonLabel = {
 		en:"Close",
 		de:"Schlie\u00dfen",
-		fr:"Fermer"
+		fr:"Fermer",
+		es:"Cerrar"
 	};
 	
 	_global.refreshButtonLabel = {
 		en:"Refresh",
 		de:"Aktualisieren",
-		fr:"Actualiser"
+		fr:"Actualiser",
+		es:"Actualizar"
 	};
 	
 	_global.cStyleButtonLabel = {
 		en:"Character Style",
 		de:"Zeichenformat",
-		fr:"Style de caractère"
+		fr:"Style de caractère",
+		es:"Estilo de carácter"
 	};
 
 	_global.applyStyleToSelectionCheckboxLabel = {
 		en:"Selection",
 		de:"Auswahl",
-		fr:"Sélection"
+		fr:"Sélection",
+		es:"Selection"
 	};
 
 	_global.applyStyleToSelectionCheckboxHelpTip = {
 		en:"Apply Style to Selection",
 		de:"Format auf Auswahl anwenden",
-		fr:"Afficher le texte d'aide"
+		fr:"Afficher le texte d'aide",
+		es:"Aplicar estilo a la selección"
 	};
 
 	_global.cStyleButtonHelpTip = {
 		en:"Create character style with selected OpenType features.",
 		de:"Zeichenformat mit ausgew\u00e4hlten OpenType-Eigenschaften erstellen.",
-		fr:"Créer un style de caractère avec les caractéristiques OpenType sélectionnées."
+		fr:"Créer un style de caractère avec les caractéristiques OpenType sélectionnées.",
+		es:"Cree un estilo de carácter con las características OpenType seleccionadas."
 	};
 
 	_global.closeButtonHelpTip = {
 		en:"Close Window",
 		de:"Fenster schlie\u00dfen",
-		fr:"Fermer la fenêtre"
+		fr:"Fermer la fenêtre",
+		es:"Cerrar ventana"
 	};
 	
 	_global.refreshButtonHelpTip = {
 		en:"Refresh display",
 		de:"Anzeige aktualisieren",
-		fr:"Rafraîchir l'affichage"
+		fr:"Rafraîchir l'affichage",
+		es:"Actualizar la pantalla"
 	};
 
 	_global.invalidSelectionAlert = {
 		en:"Please select some text!",
 		de:"Bitte eine Textstelle ausw\u00e4hlen!",
-		fr:"Veuillez sélectionner un texte !"
+		fr:"Veuillez sélectionner un texte !",
+		es:"Por favor, seleccione un texto."
 	};
 	
 	_global.windowNotAvailableAlert = {
 		en:"Dialog window not available",
 		de:"Dialogfenster nicht ver\u00fcgbar!",
-		fr:"La fenêtre de dialogue n'est pas disponible"
+		fr:"La fenêtre de dialogue n'est pas disponible",
+		es:"Ventana de diálogo no disponible"
 	};
 
 	_global.fontNotEvaluableAlert = {
 		en:"Font not evaluable!",
 		de:"Schrift nicht auswertbar!",
-		fr:"Écriture non évaluable !"
+		fr:"Écriture non évaluable !",
+		es:"Fuente no evaluable!"
 	};
 	
 	_global.fontNotAvaliableAlert = {
 		en:"Not avaliable",
 		de:"Nicht verf\u00fcgbar",
-		fr:"Non disponible"
+		fr:"Non disponible",
+		es:"No disponible"
 	};
 
 	_global.selectionNotValidAlert = {
 		en:"Selection not valid!",
 		de:"Auswahl nicht verf\u00fcgbar!",
-		fr:"Sélection non valide !"
+		fr:"Sélection non valide !",
+		es:"La selección no es válida."
 	};
 
 	_global.multipleFeatureValuesAlert = {
 		en:"The selection has different values for this OpenType feature.",
 		de:"Die Auswahl weist unterschiedliche Werte f\u00fcr diese OpenType-Funktion auf.",
-		fr:"La sélection a différentes valeurs pour cette fonction OpenType."
+		fr:"La sélection a différentes valeurs pour cette fonction OpenType.",
+		es:"La selección tiene diferentes valores para esta característica OpenType."
 	};
 
 	_global.multipleFeatureAvailabilityAlert = {
 		en:"The selection has a different availability for this OpenType feature.",
 		de:"Die Auswahl weist unterschiedliche Verf\u00fcgbarkeiten f\u00fcr diese OpenType-Funktion auf.",
-		fr:"Cette fonction OpenType n'est pas uniformément disponible dans la sélection."
+		fr:"Cette fonction OpenType n'est pas uniformément disponible dans la sélection.",
+		es:"La selección tiene una disponibilidad diferente para esta característica OpenType."
 	};
 
 	_global.oftGeneralFeaturePanelLabel = {
 		en:"General",
 		de:"Allgemein",
-		fr:"Général"
+		fr:"Général",
+		es:"General"
 	};
 
 	_global.oftSpecialFeaturePanelLabel = {
 		en:"Special",
 		de:"Speziell",
-		fr:"Spécial"
+		fr:"Spécial",
+		es:"Especial"
 	};
 	
 	_global.ligatureLabel = {
 		en:"Ligatures",
 		de:"Ligaturen",
-		fr:"Ligatures"
+		fr:"Ligatures",
+		es:"Ligaduras"
 	};
 
 	_global.otfDiscretionaryLigatureLabel = {
 		en:"Discretionary Ligatures",
 		de:"Bedingte Ligaturen",
-		fr:"Ligatures conditionnelles"
+		fr:"Ligatures conditionnelles",
+		es:"Ligaduras discrecionales"
 	};
 
 	_global.otfFractionLabel = {
 		en:"Fractions",
 		de:"Br\u00fcche",
-		fr:"Fractions"
+		fr:"Fractions",
+		es:"Fracciones"
 	};
 
 	_global.otfOrdinalLabel = {
 		en:"Ordinal",
 		de:"Ordinalzeichen",
-		fr:"Ordinal"
+		fr:"Ordinal",
+		es:"Ordinal"
 	};
 
 	_global.otfSwashLabel = {
 		en:"Swash",
 		de:"Schwungschrift",
-		fr:"Lettre italique ornée"
+		fr:"Lettre italique ornée",
+		es:"Letra cursiva ornamentada"
 	};
 
 	_global.otfTitlingLabel = {
 		en:"Titling Alternates",
 		de:"Titelschriftvarianten",
-		fr:"Variantes de titrage"
+		fr:"Variantes de titrage",
+		es:"Variantes de titulación"
 	};
 
 	_global.otfContextualAlternateLabel = {
 		en:"Contextual Alternates",
 		de:"Kontextbedingte Varianten",
-		fr:"Variantes contextuelles"
+		fr:"Variantes contextuelles",
+		es:"Variantes contextuales"
 	};
 
 	_global.capitalizationLabel = {
 		en:"All Small Caps",
 		de:"Alles in Kapit\u00e4lchen",
-		fr:"Tout en petites capitales"
+		fr:"Tout en petites capitales",
+		es:"Todo en minúsculas"
 	};
 
 	_global.otfSlashedZeroLabel = {
 		en:"Slashed Zero",
 		de:"Null mit Schr\u00e4gstrich",
-		fr:"Zéro barré"
+		fr:"Zéro barré",
+		es:"Cero tachado"
 	};
 
 	_global.otfHistoricalLabel = {
 		en:"Historical Forms",
 		de:"Historische Varianten",
-		fr:"Variantes historiques"
+		fr:"Variantes historiques",
+		es:"Variantes historiques"
 	};
 
 	_global.otfRomanItalicsLabel = {
 		en:"Roman Italics",
 		de:"Roman Italics",
-		fr:"Roman Italics"
+		fr:"Roman Italics",
+		es:"Cursiva romana"
 	};
 
 	_global.otfLocaleLabel = {
 		en:"Localized forms",
 		de:"Lokalisierte Formen",
-		fr:"Formes localisées"
+		fr:"Formes localisées",
+		es:"Formas localizadas"
 	};
 
 	_global.otfOverlapSwashLabel = {
 		en:"Overlapping Swash",
 		de:"\u00dcberlappende Schwungschrift",
-		fr:"Lettre italique ornée avec chevauchement"
+		fr:"Lettre italique ornée avec chevauchement",
+		es:"Letra cursiva ornamentada con superposición"
 	};
 
 	_global.otfMarkLabel = {
 		en:"Mark Positioning",
 		de:"Markierte Positionierung",
-		fr:"Positionnement de marque"
+		fr:"Positionnement de marque",
+		es:"Posicionamiento de la marca"
 	};
 
 	_global.otfProportionalMetricsLabel = {
 		en:"Proportional Metrics",
 		de:"Proportionale Metriken",
-		fr:"Métriques proportionnelles"
+		fr:"Métriques proportionnelles",
+		es:"Métricas proporcionales"
 	};
 
 	_global.otfJustificationAlternateLabel = {
 		en:"Justification Alternates",
 		de:"Ausrichtungsvarianten",
-		fr:"Variantes d'alignement"
+		fr:"Variantes d'alignement",
+		es:"Variantes de alineación"
 	};
 
 	_global.otfStretchedAlternateLabel = {
 		en:"Stretched Alternate",
 		de:"Skalierte Varianten",
-		fr:"Variantes étirées"
+		fr:"Variantes étirées",
+		es:"Variantes estiradas"
 	};
 
 	_global.otfStylisticAlternateLabel = {
 		en:"Stylistic Alternates",
 		de:"Stilistische Varianten",
-		fr:"Variantes stylistiques"
+		fr:"Variantes stylistiques",
+		es:"Variaciones estilísticas"
 	};
 
 	_global.otfHVKanaLabel = {
 		en:"H/V Kana Alternates",
 		de:"H/V Kana-Varianten",
-		fr:"Variantes de Kana (h/v)"
+		fr:"Variantes de Kana (h/v)",
+		es:"Variantes de kana (h/v)"
 	};
 
 	_global.otfPositionPanelLabel = {
 		en:"Position",
 		de:"Position",
-		fr:"Position"
+		fr:"Position",
+		es:"Posición"
 	};
 
 	_global.positionSuperscriptLabel = {
 		en:"Superscript/Superior",
 		de:"Hochgestellt",
-		fr:"Exposant/Supérieur"
+		fr:"Exposant/Supérieur",
+		es:"Expositor/Superior"
 	};
 
 	_global.positionSubscriptLabel = {
 		en:"Subscript/Inferior",
 		de:"Tiefgestellt",
-		fr:"Indice/Inférieur"
+		fr:"Indice/Inférieur",
+		es:"Índice/Bajo"
 	};
 	
 	_global.positionNumeratorLabel = {
 		en:"Numerator",
 		de:"Z\u00e4hler",
-		fr:"Numérateur"
+		fr:"Numérateur",
+		es:"Numerador"
 	};
 	
 	_global.positionDenominatorLabel = {
 		en:"Denominator",
 		de:"Nenner",
-		fr:"Dénominateur"
+		fr:"Dénominateur",
+		es:"Denominador"
 	};
 	
 	_global.otfDigitPanelLabel = {
 		en:"Digit",
 		de:"Ziffern",
-		fr:"Chiffres"
+		fr:"Chiffres",
+		es:"Cifras"
 	};
 
 	_global.liningFiguresLabel = {
 		en:"Lining Figures",
 		de:"Ausgerichtete Zahlen",
-		fr:"Chiffres alignés"
+		fr:"Chiffres alignés",
+		es:"Números alineados"
 	};
 
 	_global.tabularFiguresLabel = {
 		en:"Tabular Figures",
 		de:"Tabellenziffern",
-		fr:"Chiffres tabulaires"
+		fr:"Chiffres tabulaires",
+		es:"Cifras en forma de tabla"
 	};
 
 	_global.digitTabularLiningLabel = {
 		en:"Tabular Lining",
 		de:"Versalziffern f\u00fcr Tabellen",
-		fr:"Chiffres alignés tabulaires"
+		fr:"Chiffres alignés tabulaires",
+		es:"Cifras alineadas en forma de tabla"
 	};
 
 	_global.oldstyleFiguresLabel = {
 		en:"Oldstyle Figures",
 		de:"Medi\u00e4valziffern",
-		fr:"Chiffres elzéviriens"
+		fr:"Chiffres elzéviriens",
+		es:"Cifras de Elzevirian"
 	};
 
 	_global.proportionalFiguresLabel = {
 		en:"Proportional Figures",
 		de:"Proportionale Ziffern",
-		fr:"Chiffres proportionnels"
+		fr:"Chiffres proportionnels",
+		es:"Cifras proporcionales"
 	};
 
 	_global.digitProportionalOldstyleLabel = {
 		en:"Proportional Oldstyle",
 		de:"Proportionale Medi\u00e4valziffern",
-		fr:"Chiffres elzéviriens proportionnels"
+		fr:"Chiffres elzéviriens proportionnels",
+		es:"Cifras proporcionales de Elzevirian"
 	};
 
 	_global.digitProportionalLiningLabel = {
 		en:"Proportional Lining",
 		de:"Proportionale Versalziffern",
-		fr:"Chiffres alignés proportionnels"
+		fr:"Chiffres alignés proportionnels",
+		es:"Cifras proporcionales alineadas"
 	};
 
 	_global.digitTabularOldstyleLabel = {
 		en:"Tabular Oldstyle",
 		de:"Medi\u00e4valziffern f\u00fcr Tabellen",
-		fr:"Chiffres elzéviriens tabulaires"
+		fr:"Chiffres elzéviriens tabulaires",
+		es:"Cifras tabulares de Elzevir"
 	};
 
 	_global.digitDefaultFigureStyleLabel = {
 		en:"Default Figure Style",
 		de:"Standardzahlenformat",
-		fr:"Style de chiffre par défault"
+		fr:"Style de chiffre par défault",
+		es:"Estilo de figura por defecto"
 	};
 
 	_global.setValueAlert = {
 		en:"Value could not be set",
 		de:"Wert konnte nicht gesetzt werden",
-		fr:"La valeur n'a pas pu être définie"
+		fr:"La valeur n'a pas pu être définie",
+		es:"No se ha podido definir el valor"
 	};
 
 	_global.otfStylisticSetPanelLabel = {
 		en:"Stylistic Sets",
 		de:"Formats\u00e4tze",
-		fr:"Jeux stylistiques"
+		fr:"Jeux stylistiques",
+		es:"Juegos estilísticos"
 	};
 
 	_global.otfStylisticSetLabel = {
 		en:"Set %1",
 		de:"Satz %1",
-		fr:"Jeu %1"
+		fr:"Jeu %1",
+		es:"Juego %1"
 	};
 
 	_global.positionalFormsPanelLabel = {
 		en:"Positional Forms",
 		de:"Positionalform",
-		fr:"Formes positionnelles"
+		fr:"Formes positionnelles",
+		es:"Formas posicionales"
 	};
 
 	_global.positionalFormsGeneralLabel = {
 		en:"General Form",
 		de:"Allgemeine Form",
-		fr:"Forme générale"
+		fr:"Forme générale",
+		es:"Formulario general"
 	};
 
 	_global.positionalFormsAutomaticLabel = {
 		en:"Automatic Form",
 		de:"Automatische Form",
-		fr:"Forme automatique"
+		fr:"Forme automatique",
+		es:"Formulario automático"
 	};
 
 	_global.positionalFormsInitialLabel = {
 		en:"Inital Form",
 		de:"Initialform",
-		fr:"Forme initiale"
+		fr:"Forme initiale",
+		es:"Formulario inicial"
 	};
 
 	_global.positionalFormsMedialLabel = {
 		en:"Medial Form",
 		de:"Medialform",
-		fr:"Forme médiane"
+		fr:"Forme médiane",
+		es:"Forma de la mediana"
 	};
 
 	_global.positionalFormsFinalLabel = {
 		en:"Final Form",
 		de:"Finalform",
-		fr:"Forme finale"
+		fr:"Forme finale",
+		es:"Forma final"
 	};
 
 	_global.positionalFormsIsolatedLabel = {
 		en:"Isolated Form",
 		de:"Isoloierte Form",
-		fr:"Forme isolée"
+		fr:"Forme isolée",
+		es:"Forma aislada"
 	};
 
 	_global.ligaturesFeatureDesc = {
 		en:"If selected, replaces specific character combinations (e.g., fl, fi) with ligature characters.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden spezielle Zeichenkombinationen (z.B. fl, fi) durch Ligaturzeichen ersetzt.",
-		fr:"Si cette option est sélectionnée, remplace des combinaisons de caractères spécifiques (par exemple, fl, fi) par des caractères de ligature."
+		fr:"Si cette option est sélectionnée, remplace des combinaisons de caractères spécifiques (par exemple, fl, fi) par des caractères de ligature.",
+		es:"Si se selecciona, sustituye determinadas combinaciones de caracteres (por ejemplo, fl, fi) por caracteres de ligadura."
 	};
 
 	_global.otfDiscretionaryLigatureFeatureDesc = {
 		en:"If selected, uses discretionary ligatures in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden in OpenType-Schriften bedingte Ligaturen verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les ligatures conditionnelles (des polices OpenType)."
+		fr:"Si cette option est sélectionnée, utilise les ligatures conditionnelles (des polices OpenType).",
+		es:"Si se selecciona esta opción, se utilizan ligaduras condicionales (de fuentes OpenType)."
 	};
 
 	_global.otfFractionFeatureDesc = {
 		en:"If selected, uses fractions in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Br\u00fcche in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les fractions dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les fractions dans les écritures OpenType.",
+		es:"Si esta opción está seleccionada, utiliza fracciones en las escrituras OpenType."
 	};
 
 	_global.otfOrdinalFeatureDesc = {
 		en:"If selected, uses ordinals in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Ordnungszahlen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les ordinaux dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les ordinaux dans les écritures OpenType.",
+		es:"Si esta opción está seleccionada, utiliza ordinales en las escrituras OpenType."
 	};
 
 	_global.otfSwashFeatureDesc = {
 		en:"If selected, uses swash forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Schwungbuchstaben in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les lettres italiques ornées les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les lettres italiques ornées les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizarán letras cursivas adornadas en las escrituras OpenType."
 	};
 
 	_global.otfTitlingFeatureDesc = {
 		en:"If selected, uses titling forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Titelschriftvarianten in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise des formes de titrage dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise des formes de titrage dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, utiliza formas de titulación en scripts OpenType."
 	};
 
 	_global.otfContextualAlternateFeatureDesc = {
 		en:"If selected, uses contextual alternate forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden kontextbedingte Alternativen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les formes alternatives contextuelles dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les formes alternatives contextuelles dans les écritures OpenType.",
+		es:"Si esta opción está seleccionada, utiliza formas alternativas contextuales en los scripts OpenType."
 	};
 
 	_global.capitalizationFeatureDesc = {
 		en:"If selected, uses small capitals in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Kapit\u00e4lchen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, les petites capitales sont utilisées dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, les petites capitales sont utilisées dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizan las versalitas en las escrituras OpenType."
 	};
 
 	_global.otfSlashedZeroFeatureDesc = {
 		en:"If selected, use a slashed zeroes in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, wird eine Null mit Schr\u00e4gstrich in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise le zéro barré (des polices OpenType)."
+		fr:"Si cette option est sélectionnée, utilise le zéro barré (des polices OpenType).",
+		es:"Si se selecciona esta opción, se utilizará el cero inclinado (de las fuentes OpenType)."
 	};
 
 	_global.otfHistoricalFeatureDesc = {
 		en:"If selected, use historical forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden historische Alternativen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilisez les formes historiques dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilisez les formes historiques dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizan formas históricas en los scripts OpenType."
 	};
 
 	_global.otfRomanItalicsFeatureDesc = {
 		en:"If selected, applies italics to half-width alphanumerics.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Roman-Glyphen durch entsprechende Italic-Glyphen in OpenType-Schriften ersetzt.",
-		fr:"Si cette option est sélectionnée, elle applique l'italique aux caractères alphanumériques de demi-largeur."
+		fr:"Si cette option est sélectionnée, elle applique l'italique aux caractères alphanumériques de demi-largeur.",
+		es:"Si se selecciona esta opción, se aplica la cursiva a los caracteres alfanuméricos de media anchura."
 	};
 
 	_global.otfLocaleFeatureDesc = {
 		en:"If selected, uses localized forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden lokalisierte Formen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise les formes localisées dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise les formes localisées dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, utiliza las formas localizadas en los scripts OpenType."
 	};
 
 	_global.otfOverlapSwashFeatureDesc = {
 		en:"If selected, use overlapping swash forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden \u00fcberlappende Schwungbuchstaben in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilise des lettres italiques ornées avec chevauchement."
+		fr:"Si cette option est sélectionnée, utilise des lettres italiques ornées avec chevauchement.",
+		es:"Si se selecciona esta opción, se utilizarán letras cursivas ornamentadas y superpuestas."
 	};
 
 	_global.otfMarkFeatureDesc = {
 		en:"If selected, uses mark positioning in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden in OpenType-Schriften markierte Glyphen in Bezug auf Basisglyphen positioniert.",
-		fr:"Si cette option est sélectionnée, utilise le positionnement des marques dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilise le positionnement des marques dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, utiliza el posicionamiento de las marcas en las escrituras OpenType."
 	};
 
 	_global.otfProportionalMetricsFeatureDesc = {
 		en:"If selected, kerns according to proportional CJK metrics in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, erfolgt das Kerning in OpenType-Schriften entsprechend den proportionalen CJK-Metriken.",
-		fr:"Si cette option est sélectionnée, les grains sont conformes à la métrique CJK proportionnelle dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, les grains sont conformes à la métrique CJK proportionnelle dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, los granos se ajustan a la métrica CJK proporcional en los guiones OpenType."
 	};
 
 	_global.otfJustificationAlternateFeatureDesc = {
 		en:"If selected, use alternate justification forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden alternative Ausrichtungsformen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilisez des formes de justification alternatives dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilisez des formes de justification alternatives dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizan formas de justificación alternativas en los scripts OpenType."
 	};
 
 	_global.otfStretchedAlternateFeatureDesc = {
 		en:"If selected, use stretched alternate forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden skalierte Alternativformen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilisez les formes alternatives étirées dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilisez les formes alternatives étirées dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizan las formas estiradas alternativas en los scripts OpenType."
 	};
 
 	_global.otfStylisticAlternateFeatureDesc = {
 		en:"If selected, use stylistic alternate forms in OpenType fonts.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden stilistische Alternativformen in OpenType-Schriften verwendet.",
-		fr:"Si cette option est sélectionnée, utilisez des formes stylistiques alternatives dans les écritures OpenType."
+		fr:"Si cette option est sélectionnée, utilisez des formes stylistiques alternatives dans les écritures OpenType.",
+		es:"Si se selecciona esta opción, se utilizan formas estilísticas alternativas en los scripts OpenType."
 	};
 
 	_global.otfHVKanaFeatureDesc = {
 		en:"If selected, standard kana (hiragana and katakana) are replaced with forms specifically designed for horizontal or vertical writing.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden standardm\u00e4\u00dfige Kana (Hiragana und Katakana) durch Formen ersetzt, die speziell f\u00fcr das horizontale oder vertikale Schreiben entwickelt wurden.",
-		fr:"Si cette option est sélectionnée, les kana standard (hiragana et katakana) sont remplacés par des formes spécifiquement conçues pour l'écriture horizontale ou verticale."
+		fr:"Si cette option est sélectionnée, les kana standard (hiragana et katakana) sont remplacés par des formes spécifiquement conçues pour l'écriture horizontale ou verticale.",
+		es:"Si se selecciona esta opción, los kana estándar (hiragana y katakana) se sustituyen por formas específicamente diseñadas para la escritura horizontal o vertical."
 	};
 
 	_global.positionSuperscriptFeatureDesc = {
 		en:"If selected, raised glyphs are used that are sized correctly relative to the surrounding characters.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden hochgestellte Glyphen verwendet, die im Verh\u00e4ltnis zu den umgebenden Zeichen korrekt dimensioniert sind.",
-		fr:"Si cette option est sélectionnée, des glyphes en relief sont utilisés et sont correctement dimensionnés par rapport aux caractères environnants."
+		fr:"Si cette option est sélectionnée, des glyphes en relief sont utilisés et sont correctement dimensionnés par rapport aux caractères environnants.",
+		es:"Si se selecciona esta opción, se utilizan glifos en relieve y se dimensionan correctamente en relación con los caracteres circundantes."
 	};
 
 	_global.positionSubscriptFeatureDesc = {
 		en:"If selected, lowered glyphs are used that are sized correctly relative to the surrounding characters.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden abgesenkte Glyphen verwendet, die im Verh\u00e4ltnis zu den umgebenden Zeichen korrekt dimensioniert sind.",
-		fr:"Si cette option est sélectionnée, les glyphes abaissés sont utilisés et sont correctement dimensionnés par rapport aux caractères environnants."
+		fr:"Si cette option est sélectionnée, les glyphes abaissés sont utilisés et sont correctement dimensionnés par rapport aux caractères environnants.",
+		es:"Si se selecciona esta opción, se utilizan los glifos rebajados y se dimensionan correctamente en relación con los caracteres circundantes."
 	};
 
 	_global.positionNumeratorFeatureDesc = {
 		en:"If selected, the text is shrunk but the top of the characters keeps aligned with the top of the main text. Valid only for numeric characters.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, wird der Text verkleinert, wobei der obere Rand der Zeichen am oberen Rand des Haupttextes ausgerichtet wird. Gilt nur f\u00fcr numerische Zeichen.",
-		fr:"Si cette option est sélectionnée, le texte est rétréci mais le haut des caractères reste aligné avec le haut du texte principal. Valable uniquement pour les caractères numériques."
+		fr:"Si cette option est sélectionnée, le texte est rétréci mais le haut des caractères reste aligné avec le haut du texte principal. Valable uniquement pour les caractères numériques.",
+		es:"Si se selecciona esta opción, el texto se encoge pero la parte superior de los caracteres permanece alineada con la parte superior del texto principal. Sólo es válido para caracteres numéricos."
 	};
 	
 	_global.positionDenominatorFeatureDesc = {
 		en:"If selected, the text is shrunk but keeps on the main text baseline.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, wird der Text verkleinert, bleibt aber auf der Grundlinie des Haupttextes. Gilt nur f\u00fcr numerische Zeichen.",
-		fr:"Si cette option est sélectionnée, le texte est rétréci mais reste sur la ligne de base du texte principal."
+		fr:"Si cette option est sélectionnée, le texte est rétréci mais reste sur la ligne de base du texte principal.",
+		es:"Si se selecciona esta opción, el texto se encoge pero permanece en la línea base del texto principal."
 	};
 
 	_global.digitDefaultFigureStyleFeatureDesc = {
 		en:"If selected, the default figure style of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Standardzahlen verwendet.",
-		fr:"Si cette option est sélectionnée, le style de chiffre par défaut sera utilisé."
+		fr:"Si cette option est sélectionnée, le style de chiffre par défaut sera utilisé.",
+		es:"Si se selecciona esta opción, se utilizará el estilo de figura por defecto."
 	};
 
 	_global.digitProportionalOldstyleFeatureDesc = {
 		en:"If selected, proportional width oldstyle figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Medi\u00e4valzahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres elzéviriens proportionnels seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres elzéviriens proportionnels seront utilisés.",
+		es:"Si se selecciona esta opción, se utilizarán los números elzevirianos proporcionales."
 	};
 
 	_global.digitProportionalLiningFeatureDesc = {
 		en:"If selected, proportional width lining figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden proportionale Zahlen der OpenType-Schrift mit Glyphen-spezifischer (proportionaler) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres alignés proportionnels seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres alignés proportionnels seront utilisés.",
+		es:"Si se selecciona esta opción, se utilizarán dígitos alineados proporcionalmente."
 	};
 
 	_global.digitTabularOldstyleFeatureDesc = {
 		en:"If selected, monospaced oldstyle figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Medi\u00e4valzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres elzéviriens tabulaires seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres elzéviriens tabulaires seront utilisés.",
+		es:"Si se selecciona esta opción, se utilizarán los números tabulares de Elzevir."
 	};
 
 	_global.digitTabularLiningFeatureDesc = {
 		en:"If selected, monspaced lining figures of the OpenType font will be used.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Tabellenzahlen der OpenType-Schrift mit einheitlicher (tabellarischer) Breite verwendet.",
-		fr:"Si cette option est sélectionnée, les chiffres alignés tabulaires seront utilisés."
+		fr:"Si cette option est sélectionnée, les chiffres alignés tabulaires seront utilisés.",
+		es:"Si se selecciona esta opción, se utilizarán números alineados en forma de tabla."
 	};
 
 	_global.positionalFormsGeneralFeatureDesc = {
 		en:"If selected, the default characters are used regardless of their position.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden die Standardzeichen unabh\u00e4ngig von ihrer Position verwendet.",
-		fr:"Si cette option est sélectionnée, les caractères par défaut sont utilisés quelle que soit leur position."
+		fr:"Si cette option est sélectionnée, les caractères par défaut sont utilisés quelle que soit leur position.",
+		es:"Si se selecciona esta opción, se utilizan los caracteres por defecto independientemente de su posición."
 	};
 
 	_global.positionalFormsAutomaticFeatureDesc = {
 		en:"If selected, characters are automatically replaced by special glyphs at certain positions, e.g. at the beginning or end of a word.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen automatisch an bestimmten Position durch alternative Formen ersetzt, z.B. am Anfang oder Ende eines Wortes.",
-		fr:"Si cette option est sélectionnée, les caractères sont automatiquement remplacés par des glyphes spéciaux à certains endroits, par exemple au début ou à la fin d'un mot."
+		fr:"Si cette option est sélectionnée, les caractères sont automatiquement remplacés par des glyphes spéciaux à certains endroits, par exemple au début ou à la fin d'un mot.",
+		es:"Si se selecciona esta opción, los caracteres se sustituyen automáticamente por glifos especiales en determinados lugares, por ejemplo, al principio o al final de una palabra."
 	};
 
 	_global.positionalFormsInitialFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in an initial context.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer einleitenden Position (am Anfang eines Wortes) durch alternative Formen ersetzt.",
-		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte initial."
+		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte initial.",
+		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan en un contexto inicial."
 	};
 
 	_global.positionalFormsMedialFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a medial context.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer mittleren Position (in der Mitte eines Wortes) durch alternative Formen ersetzt.",
-		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte médian."
+		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte médian.",
+		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan en un contexto mediano."
 	};
 
 	_global.positionalFormsFinalFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a final context.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer abschlie\u00dfenden Position (am Ende eines Wortes) durch alternative Formen ersetzt.",
-		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte final."
+		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent dans un contexte final.",
+		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan en un contexto final."
 	};
 
 	_global.positionalFormsIsolatedFeatureDesc = {
 		en:"If selected, glyphs for characters that have applicable joining properties will be replaced with an alternate form when occurring in a isolate (non-joining) context.",
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer isolierten Position (au\u00dferhalb eines Wortes) durch alternative Formen ersetzt.",
-		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent isolément."
+		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent isolément.",
+		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan aislados."
 	};
 	
 } /* END function __defineLocalizeStrings */
