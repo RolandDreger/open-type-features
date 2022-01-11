@@ -2350,10 +2350,34 @@ function __defineLocalizeStrings() {
 		fr:"Chiffres"
 	};
 
+	_global.liningFiguresLabel = {
+		en:"Lining Figures",
+		de:"Ausgerichtete Zahlen",
+		fr:"Chiffres alignés"
+	};
+
+	_global.tabularFiguresLabel = {
+		en:"Tabular Figures",
+		de:"Tabellenziffern",
+		fr:"Chiffres tabulaires"
+	};
+
 	_global.digitTabularLiningLabel = {
 		en:"Tabular Lining",
 		de:"Versalziffern f\u00fcr Tabellen",
 		fr:"Chiffres alignés tabulaires"
+	};
+
+	_global.oldstyleFiguresLabel = {
+		en:"Oldstyle Figures",
+		de:"Medi\u00e4valziffern",
+		fr:"Chiffres elzéviriens"
+	};
+
+	_global.proportionalFiguresLabel = {
+		en:"Proportional Figures",
+		de:"Proportionale Ziffern",
+		fr:"Chiffres proportionnels"
 	};
 
 	_global.digitProportionalOldstyleLabel = {
