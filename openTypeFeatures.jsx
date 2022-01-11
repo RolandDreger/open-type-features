@@ -60,9 +60,9 @@ function __showOTFWindow() {
 
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:31 });
-	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 23, fr:26 });
-	const THIRD_COLUMN_CHAR_NUM = localize({ en: 14, de: 14, fr: 14 });
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:28, es:28 });
+	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 23, fr:26, es:26 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en: 14, de: 14, fr: 14, es:14 });
 	
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
@@ -2307,8 +2307,8 @@ function __defineLocalizeStrings() {
 	_global.otfOverlapSwashLabel = {
 		en:"Overlapping Swash",
 		de:"\u00dcberlappende Schwungschrift",
-		fr:"Lettre italique ornée avec chevauchement",
-		es:"Letra cursiva ornamentada con superposición"
+		fr:"Lettre ornée avec chevauchement",
+		es:"Letra ornamentada con superposición"
 	};
 
 	_global.otfMarkLabel = {
