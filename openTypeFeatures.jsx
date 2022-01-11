@@ -69,6 +69,11 @@ function __showOTFWindow() {
 		return false; 
 	}
 
+	var _otfTagObj = __getOTFTagObject();
+	if(!_otfTagObj) { 
+		return false; 
+	}
+
 	var _appliedFontsStatictext;
 
 	var _ligaturesGroup;
@@ -2052,7 +2057,7 @@ function __createCStyle(_styleName, _inputObj) {
  * Apply Character Style to Selection
  * @param {CharacterStyle} _cStyle 
  * @param {Text} _selection  
- * @returns {Boolean}
+ * @returns Boolean
  */
 function __applyCStyle(_cStyle, _selection) {
 
@@ -2071,6 +2076,1733 @@ function __applyCStyle(_cStyle, _selection) {
 
 
 
+/**
+ * OpenType Feature Object
+ * 
+ * Legend for type
+ * ---
+ * Registry: 					Registered feature* that cannot be assigned via the InDesign user interface.
+ * InDesign: 					Feature that occurs only in InDesign
+ * InDesign/Registry: 	Registered feature used in the same way in InDesign 
+ * InDesign+/Registry:	Registered feature, but used differently in InDesign, e.g. as a combination of two features.
+ * ---
+ * * »OpenType Layout Tag Registry«, Microsoft, https://docs.microsoft.com/de-de/typography/opentype/spec/featurelist
+ * 
+ * 
+ * @returns Object
+ */
+function __getOTFTagObject() {
+
+	if(!_global) {
+		return null;
+	}
+
+	const _otfTagObj = { 
+		"aalt": {
+			"tag":"aalt",
+			"label":"Access All Alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["aalt"]
+		},
+		"abvf": {
+			"tag":"abvf",
+			"label":"Above-base Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["abvf"]
+		},
+		"abvm": {
+			"tag":"abvm",
+			"label":"Above-base Mark Positioning",
+			"desc":"",
+			"type":"Registry",
+			"search":["abvm"]
+		},
+		"abvs": {
+			"tag":"abvs",
+			"label":"Above-base Substitutions",
+			"desc":"",
+			"type":"Registry",
+			"search":["abvs"]
+		},
+		"afrc": {
+			"tag":"afrc",
+			"label":"Alternative Fractions",
+			"desc":"",
+			"type":"Registry",
+			"search":["afrc"]
+		},
+		"akhn": {
+			"tag":"akhn",
+			"label":"Akhands",
+			"desc":"",
+			"type":"Registry",
+			"search":["akhn"]
+		},
+		"blwf": {
+			"tag":"blwf",
+			"label":"Below-base Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["blwf"]
+		},
+		"blwm": {
+			"tag":"blwm",
+			"label":"Below-base Mark Positioning",
+			"desc":"",
+			"type":"Registry",
+			"search":["blwm"]
+		},
+		"blws": {
+			"tag":"blws",
+			"label":"Below-base Substitutions",
+			"desc":"",
+			"type":"Registry",
+			"search":["blws"]
+		},
+		"calt": {
+			"tag":"calt",
+			"label":localize(_global.otfContextualAlternateLabel),
+			"desc":localize(_global.otfContextualAlternateFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["calt"]
+		},
+		"case": {
+			"tag":"case",
+			"label":"Case-Sensitive Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["case"]
+		},
+		"ccmp": {
+			"tag":"ccmp",
+			"label":"Glyph Composition / Decomposition",
+			"desc":"",
+			"type":"Registry",
+			"search":["ccmp"]
+		},
+		"cfar": {
+			"tag":"cfar",
+			"label":"Conjunct Form After Ro",
+			"desc":"",
+			"type":"Registry",
+			"search":["cfar"]
+		},
+		"chws": {
+			"tag":"chws",
+			"label":"Contextual Half-width Spacing",
+			"desc":"",
+			"type":"Registry",
+			"search":["chws"]
+		},
+		"cjct": {
+			"tag":"cjct",
+			"label":"Conjunct Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["cjct"]
+		},
+		"clig": {
+			"tag":"clig",
+			"label":"Contextual Ligatures",
+			"desc":"",
+			"type":"Registry",
+			"search":["clig"]
+		},
+		"cpct": {
+			"tag":"cpct",
+			"label":"Centered CJK Punctuation",
+			"desc":"",
+			"type":"Registry",
+			"search":["cpct"]
+		},
+		"cpsp": {
+			"tag":"cpsp",
+			"label":"Capital Spacing",
+			"desc":"",
+			"type":"Registry",
+			"search":["cpsp"]
+		},
+		"cswh": {
+			"tag":"cswh",
+			"label":"Contextual Swash",
+			"desc":"",
+			"type":"Registry",
+			"search":["cswh"]
+		},
+		"curs": {
+			"tag":"curs",
+			"label":"Cursive Positioning",
+			"desc":"",
+			"type":"Registry",
+			"search":["curs"]
+		},
+		"cv01": {
+			"tag":"cv01",
+			"label":"Character Variant 01",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv01"]
+		},
+		"cv02": {
+			"tag":"cv02",
+			"label":"Character Variant 02",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv02"]
+		},
+		"cv03": {
+			"tag":"cv03",
+			"label":"Character Variant 03",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv03"]
+		},
+		"cv04": {
+			"tag":"cv04",
+			"label":"Character Variant 04",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv04"]
+		},
+		"cv05": {
+			"tag":"cv05",
+			"label":"Character Variant 05",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv05"]
+		},
+		"cv06": {
+			"tag":"cv06",
+			"label":"Character Variant 06",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv06"]
+		},
+		"cv07": {
+			"tag":"cv07",
+			"label":"Character Variant 07",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv07"]
+		},
+		"cv08": {
+			"tag":"cv08",
+			"label":"Character Variant 08",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv08"]
+		},
+		"cv09": {
+			"tag":"cv09",
+			"label":"Character Variant 09",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv09"]
+		},
+		"cv10": {
+			"tag":"cv10",
+			"label":"Character Variant 10",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv10"]
+		},
+		"cv11": {
+			"tag":"cv11",
+			"label":"Character Variant 11",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv11"]
+		},
+		"cv12": {
+			"tag":"cv12",
+			"label":"Character Variant 12",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv12"]
+		},
+		"cv13": {
+			"tag":"cv13",
+			"label":"Character Variant 13",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv13"]
+		},
+		"cv14": {
+			"tag":"cv14",
+			"label":"Character Variant 14",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv14"]
+		},
+		"cv15": {
+			"tag":"cv15",
+			"label":"Character Variant 15",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv15"]
+		},
+		"cv16": {
+			"tag":"cv16",
+			"label":"Character Variant 16",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv16"]
+		},
+		"cv17": {
+			"tag":"cv17",
+			"label":"Character Variant 17",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv17"]
+		},
+		"cv18": {
+			"tag":"cv18",
+			"label":"Character Variant 18",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv18"]
+		},
+		"cv19": {
+			"tag":"cv19",
+			"label":"Character Variant 19",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv19"]
+		},
+		"cv20": {
+			"tag":"cv20",
+			"label":"Character Variant 20",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv20"]
+		},
+		"cv21": {
+			"tag":"cv21",
+			"label":"Character Variant 21",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv21"]
+		},
+		"cv22": {
+			"tag":"cv22",
+			"label":"Character Variant 22",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv22"]
+		},
+		"cv23": {
+			"tag":"cv23",
+			"label":"Character Variant 23",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv23"]
+		},
+		"cv24": {
+			"tag":"cv24",
+			"label":"Character Variant 24",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv24"]
+		},
+		"cv25": {
+			"tag":"cv25",
+			"label":"Character Variant 25",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv25"]
+		},
+		"cv26": {
+			"tag":"cv26",
+			"label":"Character Variant 26",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv26"]
+		},
+		"cv27": {
+			"tag":"cv27",
+			"label":"Character Variant 27",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv27"]
+		},
+		"cv28": {
+			"tag":"cv28",
+			"label":"Character Variant 28",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv28"]
+		},
+		"cv29": {
+			"tag":"cv29",
+			"label":"Character Variant 29",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv29"]
+		},
+		"cv30": {
+			"tag":"cv30",
+			"label":"Character Variant 30",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv30"]
+		},
+		"cv31": {
+			"tag":"cv31",
+			"label":"Character Variant 31",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv31"]
+		},
+		"cv32": {
+			"tag":"cv32",
+			"label":"Character Variant 32",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv32"]
+		},
+		"cv33": {
+			"tag":"cv33",
+			"label":"Character Variant 33",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv33"]
+		},
+		"cv34": {
+			"tag":"cv34",
+			"label":"Character Variant 34",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv34"]
+		},
+		"cv35": {
+			"tag":"cv35",
+			"label":"Character Variant 35",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv35"]
+		},
+		"cv36": {
+			"tag":"cv36",
+			"label":"Character Variant 36",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv36"]
+		},
+		"cv37": {
+			"tag":"cv37",
+			"label":"Character Variant 37",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv37"]
+		},
+		"cv38": {
+			"tag":"cv38",
+			"label":"Character Variant 38",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv38"]
+		},
+		"cv39": {
+			"tag":"cv39",
+			"label":"Character Variant 39",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv39"]
+		},
+		"cv40": {
+			"tag":"cv40",
+			"label":"Character Variant 40",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv40"]
+		},
+		"cv41": {
+			"tag":"cv41",
+			"label":"Character Variant 41",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv41"]
+		},
+		"cv42": {
+			"tag":"cv42",
+			"label":"Character Variant 42",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv42"]
+		},
+		"cv43": {
+			"tag":"cv43",
+			"label":"Character Variant 43",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv43"]
+		},
+		"cv44": {
+			"tag":"cv44",
+			"label":"Character Variant 44",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv44"]
+		},
+		"cv45": {
+			"tag":"cv45",
+			"label":"Character Variant 45",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv45"]
+		},
+		"cv46": {
+			"tag":"cv46",
+			"label":"Character Variant 46",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv46"]
+		},
+		"cv47": {
+			"tag":"cv47",
+			"label":"Character Variant 47",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv47"]
+		},
+		"cv48": {
+			"tag":"cv48",
+			"label":"Character Variant 48",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv48"]
+		},
+		"cv49": {
+			"tag":"cv49",
+			"label":"Character Variant 49",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv49"]
+		},
+		"cv50": {
+			"tag":"cv50",
+			"label":"Character Variant 50",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv50"]
+		},
+		"cv51": {
+			"tag":"cv51",
+			"label":"Character Variant 51",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv51"]
+		},
+		"cv52": {
+			"tag":"cv52",
+			"label":"Character Variant 52",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv52"]
+		},
+		"cv53": {
+			"tag":"cv53",
+			"label":"Character Variant 53",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv53"]
+		},
+		"cv54": {
+			"tag":"cv54",
+			"label":"Character Variant 54",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv54"]
+		},
+		"cv55": {
+			"tag":"cv55",
+			"label":"Character Variant 55",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv55"]
+		},
+		"cv56": {
+			"tag":"cv56",
+			"label":"Character Variant 56",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv56"]
+		},
+		"cv57": {
+			"tag":"cv57",
+			"label":"Character Variant 57",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv57"]
+		},
+		"cv58": {
+			"tag":"cv58",
+			"label":"Character Variant 58",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv58"]
+		},
+		"cv59": {
+			"tag":"cv59",
+			"label":"Character Variant 59",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv59"]
+		},
+		"cv60": {
+			"tag":"cv60",
+			"label":"Character Variant 60",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv60"]
+		},
+		"cv61": {
+			"tag":"cv61",
+			"label":"Character Variant 61",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv61"]
+		},
+		"cv62": {
+			"tag":"cv62",
+			"label":"Character Variant 62",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv62"]
+		},
+		"cv63": {
+			"tag":"cv63",
+			"label":"Character Variant 63",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv63"]
+		},
+		"cv64": {
+			"tag":"cv64",
+			"label":"Character Variant 64",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv64"]
+		},
+		"cv65": {
+			"tag":"cv65",
+			"label":"Character Variant 65",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv65"]
+		},
+		"cv66": {
+			"tag":"cv66",
+			"label":"Character Variant 66",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv66"]
+		},
+		"cv67": {
+			"tag":"cv67",
+			"label":"Character Variant 67",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv67"]
+		},
+		"cv68": {
+			"tag":"cv68",
+			"label":"Character Variant 68",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv68"]
+		},
+		"cv69": {
+			"tag":"cv69",
+			"label":"Character Variant 69",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv69"]
+		},
+		"cv70": {
+			"tag":"cv70",
+			"label":"Character Variant 70",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv70"]
+		},
+		"cv71": {
+			"tag":"cv71",
+			"label":"Character Variant 71",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv71"]
+		},
+		"cv72": {
+			"tag":"cv72",
+			"label":"Character Variant 72",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv72"]
+		},
+		"cv73": {
+			"tag":"cv73",
+			"label":"Character Variant 73",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv73"]
+		},
+		"cv74": {
+			"tag":"cv74",
+			"label":"Character Variant 74",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv74"]
+		},
+		"cv75": {
+			"tag":"cv75",
+			"label":"Character Variant 75",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv75"]
+		},
+		"cv76": {
+			"tag":"cv76",
+			"label":"Character Variant 76",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv76"]
+		},
+		"cv77": {
+			"tag":"cv77",
+			"label":"Character Variant 77",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv77"]
+		},
+		"cv78": {
+			"tag":"cv78",
+			"label":"Character Variant 78",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv78"]
+		},
+		"cv79": {
+			"tag":"cv79",
+			"label":"Character Variant 79",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv79"]
+		},
+		"cv80": {
+			"tag":"cv80",
+			"label":"Character Variant 80",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv80"]
+		},
+		"cv81": {
+			"tag":"cv81",
+			"label":"Character Variant 81",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv81"]
+		},
+		"cv82": {
+			"tag":"cv82",
+			"label":"Character Variant 82",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv82"]
+		},
+		"cv83": {
+			"tag":"cv83",
+			"label":"Character Variant 83",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv83"]
+		},
+		"cv84": {
+			"tag":"cv84",
+			"label":"Character Variant 84",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv84"]
+		},
+		"cv85": {
+			"tag":"cv85",
+			"label":"Character Variant 85",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv85"]
+		},
+		"cv86": {
+			"tag":"cv86",
+			"label":"Character Variant 86",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv86"]
+		},
+		"cv87": {
+			"tag":"cv87",
+			"label":"Character Variant 87",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv87"]
+		},
+		"cv88": {
+			"tag":"cv88",
+			"label":"Character Variant 88",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv88"]
+		},
+		"cv89": {
+			"tag":"cv89",
+			"label":"Character Variant 89",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv89"]
+		},
+		"cv90": {
+			"tag":"cv90",
+			"label":"Character Variant 90",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv90"]
+		},
+		"cv91": {
+			"tag":"cv91",
+			"label":"Character Variant 91",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv91"]
+		},
+		"cv92": {
+			"tag":"cv92",
+			"label":"Character Variant 92",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv92"]
+		},
+		"cv93": {
+			"tag":"cv93",
+			"label":"Character Variant 93",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv93"]
+		},
+		"cv94": {
+			"tag":"cv94",
+			"label":"Character Variant 94",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv94"]
+		},
+		"cv95": {
+			"tag":"cv95",
+			"label":"Character Variant 95",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv95"]
+		},
+		"cv96": {
+			"tag":"cv96",
+			"label":"Character Variant 96",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv96"]
+		},
+		"cv97": {
+			"tag":"cv97",
+			"label":"Character Variant 97",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv97"]
+		},
+		"cv98": {
+			"tag":"cv98",
+			"label":"Character Variant 98",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv98"]
+		},
+		"cv99": {
+			"tag":"cv99",
+			"label":"Character Variant 99",
+			"desc":"",
+			"type":"Registry",
+			"search":["cv99"]
+		},
+		"c2pc": {
+			"tag":"c2pc",
+			"label":"Petite Capitals From Capitals",
+			"desc":"",
+			"type":"Registry",
+			"search":["c2pc"]
+		},
+		"c2sc": {
+			"tag":"c2sc",
+			"label":localize(_global.capitalizationLabel),
+			"desc":localize(_global.capitalizationFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["c2sc"]
+		},
+		"dist": {
+			"tag":"dist",
+			"label":"Distances",
+			"desc":"",
+			"type":"Registry",
+			"search":["dist"]
+		},
+		"dlig": {
+			"tag":"dlig",
+			"label":localize(_global.otfDiscretionaryLigatureLabel),
+			"desc":localize(_global.otfDiscretionaryLigatureFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["dlig"]
+		},
+		"dnom": {
+			"tag":"dnom",
+			"label":localize(_global.positionDenominatorLabel),
+			"desc":localize(_global.positionDenominatorFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["dnom"]
+		},
+		"dtls": {
+			"tag":"dtls",
+			"label":"Dotless Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["dtls"]
+		},
+		"expt": {
+			"tag":"expt",
+			"label":"Expert Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["expt"]
+		},
+		"falt": {
+			"tag":"falt",
+			"label":"Final Glyph on Line Alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["falt"]
+		},
+		"fin2": {
+			"tag":"fin2",
+			"label":"Terminal Forms #2",
+			"desc":"",
+			"type":"Registry",
+			"search":["fin2"]
+		},
+		"fin3": {
+			"tag":"fin3",
+			"label":"Terminal Forms #3",
+			"desc":"",
+			"type":"Registry",
+			"search":["fin3"]
+		},
+		"fina": {
+			"tag":"fina",
+			"label":localize(_global.positionalFormsFinalLabel),
+			"desc":localize(_global.positionalFormsFinalFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["fina"]
+		},
+		"flac": {
+			"tag":"flac",
+			"label":"Flattened accent forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["flac"]
+		},
+		"frac": {
+			"tag":"frac",
+			"label":localize(_global.otfFractionLabel),
+			"desc":localize(_global.otfFractionFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["frac"]
+		},
+		"fwid": {
+			"tag":"fwid",
+			"label":"Full Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["fwid"]
+		},
+		"half": {
+			"tag":"half",
+			"label":"Half Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["half"]
+		},
+		"haln": {
+			"tag":"haln",
+			"label":"Halant Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["haln"]
+		},
+		"halt": {
+			"tag":"halt",
+			"label":"Alternate Half Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["halt"]
+		},
+		"hist": {
+			"tag":"hist",
+			"label":localize(_global.otfHistoricalLabel),
+			"desc":localize(_global.otfHistoricalFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["hist"]
+		},
+		"hkna": {
+			"tag":"hkna",
+			"label":localize(_global.otfHVKanaLabel),
+			"desc":localize(_global.otfHVKanaFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["hkna"]
+		},
+		"hlig": {
+			"tag":"hlig",
+			"label":"Historical Ligatures",
+			"desc":"",
+			"type":"Registry",
+			"search":["hlig"]
+		},
+		"hngl": {
+			"tag":"hngl",
+			"label":"Hangul",
+			"desc":"",
+			"type":"Registry",
+			"search":["hngl"]
+		},
+		"hojo": {
+			"tag":"hojo",
+			"label":"Hojo Kanji Forms (JIS X 0212-1990 Kanji Forms)",
+			"desc":"",
+			"type":"Registry",
+			"search":["hojo"]
+		},
+		"hwid": {
+			"tag":"hwid",
+			"label":"Half Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["hwid"]
+		},
+		"init": {
+			"tag":"init",
+			"label":localize(_global.positionalFormsInitialLabel),
+			"desc":localize(_global.positionalFormsInitialFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["init"]
+		},
+		"isol": {
+			"tag":"isol",
+			"label":localize(_global.positionalFormsIsolatedLabel),
+			"desc":localize(_global.positionalFormsIsolatedFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["isol"]
+		},
+		"ital": {
+			"tag":"ital",
+			"label":localize(_global.otfRomanItalicsLabel),
+			"desc":localize(_global.otfRomanItalicsFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["ital"]
+		},
+		"jalt": {
+			"tag":"jalt",
+			"label":localize(_global.otfJustificationAlternateLabel),
+			"desc":localize(_global.otfJustificationAlternateFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["jalt"]
+		},
+		"jp78": {
+			"tag":"jp78",
+			"label":"JIS78 Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["jp78"]
+		},
+		"jp83": {
+			"tag":"jp83",
+			"label":"JIS83 Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["jp83"]
+		},
+		"jp90": {
+			"tag":"jp90",
+			"label":"JIS90 Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["jp90"]
+		},
+		"jp04": {
+			"tag":"jp04",
+			"label":"JIS2004 Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["jp04"]
+		},
+		"kern": {
+			"tag":"kern",
+			"label":"Kerning",
+			"desc":"",
+			"type":"Registry",
+			"search":["kern"]
+		},
+		"lfbd": {
+			"tag":"lfbd",
+			"label":"Left Bounds",
+			"desc":"",
+			"type":"Registry",
+			"search":["lfbd"]
+		},
+		"liga": {
+			"tag":"liga",
+			"label":localize(_global.ligatureLabel),
+			"desc":localize(_global.ligaturesFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["liga"]
+		},
+		"ljmo": {
+			"tag":"ljmo",
+			"label":"Leading Jamo Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["ljmo"]
+		},
+		"lnum": {
+			"tag":"lnum",
+			"label":localize(_global.liningFiguresLabel),
+			"desc":"",
+			"type":"InDesign+/Registry",
+			"search":["lnum"]
+		},
+		"locl": {
+			"tag":"locl",
+			"label":"Localized Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["locl"]
+		},
+		"ltra": {
+			"tag":"ltra",
+			"label":"Left-to-right alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["ltra"]
+		},
+		"ltrm": {
+			"tag":"ltrm",
+			"label":"Left-to-right mirrored forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["ltrm"]
+		},
+		"mark": {
+			"tag":"mark",
+			"label":localize(_global.otfMarkLabel),
+			"desc":localize(_global.otfMarkFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["mark"]
+		},
+		"med2": {
+			"tag":"med2",
+			"label":"Medial Forms #2",
+			"desc":"",
+			"type":"Registry",
+			"search":["med2"]
+		},
+		"medi": {
+			"tag":"medi",
+			"label":localize(_global.positionalFormsMedialLabel),
+			"desc":localize(_global.positionalFormsInitialFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["medi"]
+		},
+		"mgrk": {
+			"tag":"mgrk",
+			"label":"Mathematical Greek",
+			"desc":"",
+			"type":"Registry",
+			"search":["mgrk"]
+		},
+		"mkmk": {
+			"tag":"mkmk",
+			"label":"Mark to Mark Positioning",
+			"desc":"",
+			"type":"Registry",
+			"search":["mkmk"]
+		},
+		"mset": {
+			"tag":"mset",
+			"label":"Mark Positioning via Substitution",
+			"desc":"",
+			"type":"Registry",
+			"search":["mset"]
+		},
+		"nalt": {
+			"tag":"nalt",
+			"label":"Alternate Annotation Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["nalt"]
+		},
+		"nlck": {
+			"tag":"nlck",
+			"label":"NLC Kanji Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["nlck"]
+		},
+		"nukt": {
+			"tag":"nukt",
+			"label":"Nukta Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["nukt"]
+		},
+		"numr": {
+			"tag":"numr",
+			"label":localize(_global.positionNumeratorLabel),
+			"desc":localize(_global.positionNumeratorFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["numr"]
+		},
+		"olsh": {
+			"tag":"olsh",
+			"label":localize(_global.otfOverlapSwashLabel),
+			"desc":"",
+			"type":"InDesign",
+			"search":[OpenTypeFeature.OVERLAP_SWASH]
+		},
+		"onum": {
+			"tag":"onum",
+			"label":localize(_global.oldstyleFiguresLabel),
+			"desc":"",
+			"type":"InDesign+/Registry",
+			"search":["onum"]
+		},
+		"opbd": {
+			"tag":"opbd",
+			"label":"Optical Bounds",
+			"desc":"",
+			"type":"Registry",
+			"search":["opbd"]
+		},
+		"ordn": {
+			"tag":"ordn",
+			"label":localize(_global.otfOrdinalLabel),
+			"desc":localize(_global.otfOrdinalFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["ordn"]
+		},
+		"ornm": {
+			"tag":"ornm",
+			"label":"Ornaments",
+			"desc":"",
+			"type":"Registry",
+			"search":["ornm"]
+		},
+		"palt": {
+			"tag":"palt",
+			"label":localize(_global.otfProportionalMetricsLabel),
+			"desc":localize(_global.otfProportionalMetricsFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["palt"]
+		},
+		"pcap": {
+			"tag":"pcap",
+			"label":"Petite Capitals",
+			"desc":"",
+			"type":"Registry",
+			"search":["pcap"]
+		},
+		"pkna": {
+			"tag":"pkna",
+			"label":"Proportional Kana",
+			"desc":"",
+			"type":"Registry",
+			"search":["pkna"]
+		},
+		"pnum": {
+			"tag":"pnum",
+			"label":localize(_global.proportionalFiguresLabel),
+			"desc":"",
+			"type":"InDesign+/Registry",
+			"search":["pnum"]
+		},
+		"pref": {
+			"tag":"pref",
+			"label":"Pre-Base Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["pref"]
+		},
+		"pres": {
+			"tag":"pres",
+			"label":"Pre-base Substitutions",
+			"desc":"",
+			"type":"Registry",
+			"search":["pres"]
+		},
+		"pstf": {
+			"tag":"pstf",
+			"label":"Post-base Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["pstf"]
+		},
+		"psts": {
+			"tag":"psts",
+			"label":"Post-base Substitutions",
+			"desc":"",
+			"type":"Registry",
+			"search":["psts"]
+		},
+		"pwid": {
+			"tag":"pwid",
+			"label":"Proportional Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["pwid"]
+		},
+		"qwid": {
+			"tag":"qwid",
+			"label":"Quarter Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["qwid"]
+		},
+		"rand": {
+			"tag":"rand",
+			"label":"Randomize",
+			"desc":"",
+			"type":"Registry",
+			"search":["rand"]
+		},
+		"rclt": {
+			"tag":"rclt",
+			"label":"Required Contextual Alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["rclt"]
+		},
+		"rkrf": {
+			"tag":"rkrf",
+			"label":"Rakar Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["rkrf"]
+		},
+		"rlig": {
+			"tag":"rlig",
+			"label":"Required Ligatures",
+			"desc":"",
+			"type":"Registry",
+			"search":["rlig"]
+		},
+		"rphf": {
+			"tag":"rphf",
+			"label":"Reph Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["rphf"]
+		},
+		"rtbd": {
+			"tag":"rtbd",
+			"label":"Right Bounds",
+			"desc":"",
+			"type":"Registry",
+			"search":["rtbd"]
+		},
+		"rtla": {
+			"tag":"rtla",
+			"label":"Right-to-left alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["rtla"]
+		},
+		"rtlm": {
+			"tag":"rtlm",
+			"label":"Right-to-left mirrored forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["rtlm"]
+		},
+		"ruby": {
+			"tag":"ruby",
+			"label":"Ruby Notation Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["ruby"]
+		},
+		"rvrn": {
+			"tag":"rvrn",
+			"label":"Required Variation Alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["rvrn"]
+		},
+		"salt": {
+			"tag":"salt",
+			"label":localize(_global.otfStylisticAlternateLabel),
+			"desc":localize(_global.otfStylisticAlternateFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["salt"]
+		},
+		"sinf": {
+			"tag":"sinf",
+			"label":"Scientific Inferiors",
+			"desc":"",
+			"type":"Registry",
+			"search":["sinf"]
+		},
+		"size": {
+			"tag":"size",
+			"label":"Optical size",
+			"desc":"",
+			"type":"Registry",
+			"search":["size"]
+		},
+		"smcp": {
+			"tag":"smcp",
+			"label":"Small Capitals",
+			"desc":"",
+			"type":"Registry",
+			"search":["smcp"]
+		},
+		"smpl": {
+			"tag":"smpl",
+			"label":"Simplified Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["smpl"]
+		},
+		"ss01": {
+			"tag":"ss01",
+			"label":localize(_global.otfStylisticSetLabel, "1"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss01"]
+		},
+		"ss02": {
+			"tag":"ss02",
+			"label":localize(_global.otfStylisticSetLabel, "2"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss02"]
+		},
+		"ss03": {
+			"tag":"ss03",
+			"label":localize(_global.otfStylisticSetLabel, "3"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss03"]
+		},
+		"ss04": {
+			"tag":"ss04",
+			"label":localize(_global.otfStylisticSetLabel, "4"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss04"]
+		},
+		"ss05": {
+			"tag":"ss05",
+			"label":localize(_global.otfStylisticSetLabel, "5"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss05"]
+		},
+		"ss06": {
+			"tag":"ss06",
+			"label":localize(_global.otfStylisticSetLabel, "6"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss06"]
+		},
+		"ss07": {
+			"tag":"ss07",
+			"label":localize(_global.otfStylisticSetLabel, "7"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss07"]
+		},
+		"ss08": {
+			"tag":"ss08",
+			"label":localize(_global.otfStylisticSetLabel, "8"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss08"]
+		},
+		"ss09": {
+			"tag":"ss09",
+			"label":localize(_global.otfStylisticSetLabel, "9"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss09"]
+		},
+		"ss10": {
+			"tag":"ss10",
+			"label":localize(_global.otfStylisticSetLabel, "10"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss10"]
+		},
+		"ss11": {
+			"tag":"ss11",
+			"label":localize(_global.otfStylisticSetLabel, "11"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss11"]
+		},
+		"ss12": {
+			"tag":"ss12",
+			"label":localize(_global.otfStylisticSetLabel, "12"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss12"]
+		},
+		"ss13": {
+			"tag":"ss13",
+			"label":localize(_global.otfStylisticSetLabel, "13"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss13"]
+		},
+		"ss14": {
+			"tag":"ss14",
+			"label":localize(_global.otfStylisticSetLabel, "14"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss14"]
+		},
+		"ss15": {
+			"tag":"ss15",
+			"label":localize(_global.otfStylisticSetLabel, "15"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss15"]
+		},
+		"ss16": {
+			"tag":"ss16",
+			"label":localize(_global.otfStylisticSetLabel, "16"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss16"]
+		},
+		"ss17": {
+			"tag":"ss17",
+			"label":localize(_global.otfStylisticSetLabel, "16"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss17"]
+		},
+		"ss18": {
+			"tag":"ss18",
+			"label":localize(_global.otfStylisticSetLabel, "18"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss18"]
+		},
+		"ss19": {
+			"tag":"ss19",
+			"label":localize(_global.otfStylisticSetLabel, "19"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss19"]
+		},
+		"ss20": {
+			"tag":"ss20",
+			"label":localize(_global.otfStylisticSetLabel, "20"),
+			"desc":"",
+			"type":"InDesign/Registry",
+			"search":["ss20"]
+		},
+		"ssty": {
+			"tag":"ssty",
+			"label":"Math script style alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["ssty"]
+		},
+		"stal": {
+			"tag":"stch",
+			"label":localize(_global.otfStretchedAlternateLabel),
+			"desc":"",
+			"type":"InDesign",
+			"search":[]
+		},
+		"stch": {
+			"tag":"stch",
+			"label":"Stretching Glyph Decomposition",
+			"desc":"",
+			"type":"Registry",
+			"search":["stch"]
+		},
+		"subs": {
+			"tag":"subs",
+			"label":localize(_global.positionSubscriptLabel),
+			"desc":localize(_global.positionSubscriptLabelDesc),
+			"type":"InDesign/Registry",
+			"search":["subs"]
+		},
+		"sups": {
+			"tag":"sups",
+			"label":localize(_global.positionSuperscriptLabel),
+			"desc":localize(_global.positionSuperscriptFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["sups"]
+		},
+		"swsh": {
+			"tag":"swsh",
+			"label":localize(_global.otfSwashLabel),
+			"desc":localize(_global.otfSwashFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["swsh"]
+		},
+		"titl": {
+			"tag":"titl",
+			"label":localize(_global.otfTitlingLabel),
+			"desc":localize(_global.otfTitlingFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["titl"]
+		},
+		"tjmo": {
+			"tag":"tjmo",
+			"label":"Trailing Jamo Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["tjmo"]
+		},
+		"tnam": {
+			"tag":"tnam",
+			"label":"Traditional Name Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["tnam"]
+		},
+		"tnum": {
+			"tag":"tnum",
+			"label":localize(_global.tabularFiguresLabel),
+			"desc":"",
+			"type":"InDesign+/Registry",
+			"search":["tnum"]
+		},
+		"trad": {
+			"tag":"trad",
+			"label":"Traditional Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["trad"]
+		},
+		"twid": {
+			"tag":"twid",
+			"label":"Third Widths",
+			"desc":"",
+			"type":"Registry",
+			"search":["twid"]
+		},
+		"unic": {
+			"tag":"unic",
+			"label":"Unicase",
+			"desc":"",
+			"type":"Registry",
+			"search":["unic"]
+		},
+		"valt": {
+			"tag":"valt",
+			"label":"Alternate Vertical Metrics",
+			"desc":"",
+			"type":"Registry",
+			"search":["valt"]
+		},
+		"vatu": {
+			"tag":"vatu",
+			"label":"Vattu Variants",
+			"desc":"",
+			"type":"Registry",
+			"search":["vatu"]
+		},
+		"vchw": {
+			"tag":"vchw",
+			"label":"Vertical Contextual Half-width Spacing",
+			"desc":"",
+			"type":"Registry",
+			"search":["vchw"]
+		},
+		"vert": {
+			"tag":"vert",
+			"label":"Vertical Writing",
+			"desc":"",
+			"type":"Registry",
+			"search":["vert"]
+		},
+		"vhal": {
+			"tag":"vhal",
+			"label":"Alternate Vertical Half Metrics",
+			"desc":"",
+			"type":"Registry",
+			"search":["vhal"]
+		},
+		"vjmo": {
+			"tag":"vjmo",
+			"label":"Vowel Jamo Forms",
+			"desc":"",
+			"type":"Registry",
+			"search":["vjmo"]
+		},
+		"vkna": {
+			"tag":"vkna",
+			"label":"Vertical Kana Alternates",
+			"desc":"",
+			"type":"Registry",
+			"search":["vkna"]
+		},
+		"vkrn": {
+			"tag":"vkrn",
+			"label":"Vertical Kerning",
+			"desc":"",
+			"type":"Registry",
+			"search":["vkrn"]
+		},
+		"vpal": {
+			"tag":"vpal",
+			"label":"Proportional Alternate Vertical Metrics",
+			"desc":"",
+			"type":"Registry",
+			"search":["vpal"]
+		},
+		"vrt2": {
+			"tag":"vrt2",
+			"label":"Vertical Alternates and Rotation",
+			"desc":"",
+			"type":"Registry",
+			"search":["vrt2"]
+		},
+		"vrtr": {
+			"tag":"vrtr",
+			"label":"Vertical Alternates for Rotation",
+			"desc":"",
+			"type":"Registry",
+			"search":["vrtr"]
+		},
+		"zero": {
+			"tag":"zero",
+			"label":localize(_global.otfSlashedZeroLabel),
+			"desc":localize(_global.otfSlashedZeroFeatureDesc),
+			"type":"InDesign/Registry",
+			"search":["zero"]
+		}
+	};
+
+	return _otfTagObj
+} /* END function __getOTFTagObject */
 
 
 
