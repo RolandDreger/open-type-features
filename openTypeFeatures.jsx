@@ -61,11 +61,9 @@ function __showOTFWindow() {
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
 	const FEATURE_GROUP_MARGINS_NARROW = [5,4,4,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:25, es:25 });
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 25, de: 25, fr:25, es:25 });
 	const SECOND_COLUMN_CHAR_NUM = localize({ en: 26, de: 26, fr:26, es:26 });
 	const THIRD_COLUMN_CHAR_NUM = localize({ en: 13, de: 13, fr: 13, es:13 });
-	const LISTBOX_MINIMUM_SIZE = [340,460];
-	const LISTBOX_MAXIMUM_SIZE = [340,460];
 
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
@@ -202,14 +200,10 @@ function __showOTFWindow() {
 	var _applyStyleToSelectionCheckbox;
 	var _displayHelpTipCheckbox;
 
-	var _extendedTabAllTagListbox;
-	var _extendedTabSelectionTagListbox;
 	var _extendedTabTagFilterEdittext;
 	var _extendedTabClearButton;
 	var _extendedTabApplyButton;
 
-	var _searchTabTagListbox;
-	var _searchTabFontListbox;
 	var _searchTabTagFilterEdittext;
 	var _searchTabFontNameFilterEdittext;
 	var _searchTabFontStyleFilterEdittext;
@@ -220,10 +214,6 @@ function __showOTFWindow() {
 	var _cStyleNameEdittext;
 	var _cStyleButton;
 
-	var _tagListboxColumnTitles = [localize(_global.tagNameTitle),localize(_global.tagLabelTitle),localize(_global.tagTypeTitle)];
-	var _tagListboxHeader = { numberOfColumns:_tagListboxColumnTitles.length, showHeaders:true, columnTitles:_tagListboxColumnTitles, columnWidths: undefined, multiselect:true };
-	var _fontListboxColumnTitles = [localize(_global.fontNameTitle),localize(_global.fontStyleTitle)];
-	var _fontListboxHeader = { numberOfColumns:_fontListboxColumnTitles.length, showHeaders:true, columnTitles:_fontListboxColumnTitles, columnWidths: undefined, multiselect:false };
 	
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
 	with (_otfWindow) { 
@@ -750,15 +740,9 @@ function __showOTFWindow() {
 					var _extendedTabC1R1Group = add("group");
 					with(_extendedTabC1R1Group) {
 						alignChildren = ["fill","fill"];
-						_extendedTabAllTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
-						with(_extendedTabAllTagListbox) {
-							alignment = ["left","top"];
-							minimumSize = LISTBOX_MINIMUM_SIZE;
-							maximumSize = LISTBOX_MAXIMUM_SIZE;
-							/* +++++++++++++++++++++++ */
-							/* + Extended – Tag List + */
-							/* +++++++++++++++++++++++ */
-						} /* END _extendedTabAllTagListbox */
+						/* ++++++++++++++++++++++++++ */
+						/* + Extended – Tag Listbox + */
+						/* ++++++++++++++++++++++++++ */
 					} /* END _extendedTabC1R1Group */
 					var _extendedTabC1R2Group = add("group");
 					with(_extendedTabC1R2Group) {
@@ -785,15 +769,9 @@ function __showOTFWindow() {
 					var _extendedTabC2R1Group = add("group");
 					with(_extendedTabC2R1Group) {
 						alignChildren = ["fill","fill"];
-						_extendedTabSelectionTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
-						with(_extendedTabSelectionTagListbox) {
-							alignment = ["right","top"];
-							minimumSize = LISTBOX_MINIMUM_SIZE;
-							maximumSize = LISTBOX_MAXIMUM_SIZE;
-							/* ++++++++++++++++++++++++ */
-							/* + Selection – Tag List + */
-							/* ++++++++++++++++++++++++ */
-						} /* END _extendedTabSelectionTagListbox */
+						/* +++++++++++++++++++++++++++ */
+						/* + Selection – Tag Listbox + */
+						/* +++++++++++++++++++++++++++ */
 					} /* END _extendedTabC2R1Group */
 					var _extendedTabC2R2Group = add("group");
 					with(_extendedTabC2R2Group) {
@@ -835,15 +813,9 @@ function __showOTFWindow() {
 					var _searchTabC1R1Group = add("group");
 					with(_searchTabC1R1Group) {
 						alignChildren = ["fill","fill"];
-						_searchTabTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
-						with(_searchTabTagListbox) {
-							alignment = ["left","top"];
-							minimumSize = LISTBOX_MINIMUM_SIZE;
-							maximumSize = LISTBOX_MAXIMUM_SIZE;
-							/* ++++++++++++++++++++++++++ */
-							/* + Search Font – Tag List + */
-							/* ++++++++++++++++++++++++++ */
-						} /* END _searchTabTagListbox */
+						/* ++++++++++++++++++++++++++ */
+						/* + Search Font – Tag List + */
+						/* ++++++++++++++++++++++++++ */
 					} /* END _searchTabC1R1Group */
 					var _searchTabC1R2Group = add("group");
 					with(_searchTabC1R2Group) {
@@ -870,15 +842,9 @@ function __showOTFWindow() {
 					var _searchTabC2R1Group = add("group");
 					with(_searchTabC2R1Group) {
 						alignChildren = ["fill","fill"];
-						_searchTabFontListbox = add("listbox", undefined, undefined, _fontListboxHeader);
-						with(_searchTabFontListbox) {
-							alignment = ["right","top"];
-							minimumSize = LISTBOX_MINIMUM_SIZE;
-							maximumSize = LISTBOX_MAXIMUM_SIZE;
-							/* +++++++++++++++++++++++++++ */
-							/* + Search Font – Font List + */
-							/* +++++++++++++++++++++++++++ */
-						} /* END _searchTabFontListbox */
+						/* ++++++++++++++++++++++++++++++ */
+						/* + Search Font – Font Listbox + */
+						/* ++++++++++++++++++++++++++++++ */
 					} /* END _searchTabC2R1Group */
 					var _searchTabC2R2Group = add("group");
 					with(_searchTabC2R2Group) {
@@ -1334,12 +1300,18 @@ function __showOTFWindow() {
 	};
 
 
-	/* Initialize Dialog */
+	/* Initialize Dialog: Basic Features */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
+	/* Initialize Dialog: Extended Features */
+	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _extendedTabAllTagListbox */
+	__createListbox(_extendedTabC2R1Group, "tag", "right", _otfTagObj, {}); /* _extendedTabSelectionTagListbox */
+	/* Initialize Dialog: Search Font */
+	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _searchTabTagListbox */
+	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* _searchTabFontListbox */
 
 	
 	/* EventListener AFTER_SELECTION_CHANGED */
@@ -2294,6 +2266,58 @@ function __applyCStyle(_cStyle, _selection) {
 
 	return true;
 } /* END function __applyCStyle */
+
+
+/**
+ * Create SUI Listbox
+ * @param {SUIGroup} _listboxGroup Container of listbox
+ * @param {String} _type Type value: tag or font
+ * @param {String} _alignment Alignment value: left or right
+ * @param {Object} _contentObj Content Object (Tag Object or Font Object)
+ * @param {Object} _filterObj Filter object for the corresponding columns ({ "column": { "one":String, "two":String, ... } })
+ * @returns SUIListbox
+ */
+function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterObj) {
+	
+	if(!_global) { return null; }
+	if(!_listboxGroup || !_listboxGroup.hasOwnProperty("add")) { return null; }
+	if(_type === null || _type === undefined || _type.constructor !== String) { return null; }
+	if(_alignment === null || _alignment === undefined || _alignment.constructor !== String) { return null; }
+	if(!_contentObj || !(_contentObj instanceof Object)) { return null; }
+	if(!_filterObj || !(_filterObj instanceof Object)) { return null; }
+	
+	const LISTBOX_MINIMUM_SIZE = [340,460];
+	const LISTBOX_MAXIMUM_SIZE = [340,460];
+
+	const _tagListboxColumnTitles = [localize(_global.tagNameTitle),localize(_global.tagLabelTitle),localize(_global.tagTypeTitle)];
+	const _tagListboxHeader = { 
+		numberOfColumns:_tagListboxColumnTitles.length, 
+		showHeaders:true, 
+		columnTitles:_tagListboxColumnTitles, 
+		columnWidths: undefined, multiselect:true 
+	};
+	const _fontListboxColumnTitles = [localize(_global.fontNameTitle),localize(_global.fontStyleTitle)];
+	const _fontListboxHeader = { 
+		numberOfColumns:_fontListboxColumnTitles.length, 
+		showHeaders:true, 
+		columnTitles:_fontListboxColumnTitles, 
+		columnWidths: undefined, multiselect:false 
+	};
+	
+	var _listboxHeader = (_type === "font") ? _fontListboxHeader : _tagListboxHeader;
+
+	var _listbox = _listboxGroup.add("listbox", undefined, undefined, _listboxHeader);
+	with(_listbox) {
+		alignment = [_alignment,"top"];
+		minimumSize = LISTBOX_MINIMUM_SIZE;
+		maximumSize = LISTBOX_MAXIMUM_SIZE;
+		
+	} /* END _listbox */
+
+	return _listbox;
+} /* END function __createListbox */
+
+
 
 
 
