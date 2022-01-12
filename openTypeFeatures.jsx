@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 11. January 2022
+	+	Last updated: 12. January 2022
 
 		
 	+	License (MIT)
@@ -61,10 +61,12 @@ function __showOTFWindow() {
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
 	const FEATURE_GROUP_MARGINS_NARROW = [5,4,4,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:28, es:28 });
-	const SECOND_COLUMN_CHAR_NUM = localize({ en: 18, de: 23, fr:26, es:26 });
-	const THIRD_COLUMN_CHAR_NUM = localize({ en: 18, de: 18, fr: 18, es:18 });
-	
+	const FIRST_COLUMN_CHAR_NUM = localize({ en: 20, de: 23, fr:25, es:25 });
+	const SECOND_COLUMN_CHAR_NUM = localize({ en: 26, de: 26, fr:26, es:26 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en: 13, de: 13, fr: 13, es:13 });
+	const LISTBOX_MINIMUM_SIZE = [340,460];
+	const LISTBOX_MAXIMUM_SIZE = [340,460];
+
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
 		return false; 
@@ -200,11 +202,29 @@ function __showOTFWindow() {
 	var _applyStyleToSelectionCheckbox;
 	var _displayHelpTipCheckbox;
 
+	var _extendedTabAllTagListbox;
+	var _extendedTabSelectionTagListbox;
+	var _extendedTabTagFilterEdittext;
+	var _extendedTabClearButton;
+	var _extendedTabApplyButton;
+
+	var _searchTabTagListbox;
+	var _searchTabFontListbox;
+	var _searchTabTagFilterEdittext;
+	var _searchTabFontNameFilterEdittext;
+	var _searchTabFontStyleFilterEdittext;
+	var _searchTabApplyFontButton;
+	
 	var _closeButton;
 	var _refreshButton;
 	var _cStyleNameEdittext;
 	var _cStyleButton;
 
+	var _tagListboxColumnTitles = [localize(_global.tagNameTitle),localize(_global.tagLabelTitle),localize(_global.tagTypeTitle)];
+	var _tagListboxHeader = { numberOfColumns:_tagListboxColumnTitles.length, showHeaders:true, columnTitles:_tagListboxColumnTitles, columnWidths: undefined, multiselect:true };
+	var _fontListboxColumnTitles = [localize(_global.fontNameTitle),localize(_global.fontStyleTitle)];
+	var _fontListboxHeader = { numberOfColumns:_fontListboxColumnTitles.length, showHeaders:true, columnTitles:_fontListboxColumnTitles, columnWidths: undefined, multiselect:false };
+	
 	var _otfWindow = new Window("palette", localize(_global.uiHeadLabel));
 	with (_otfWindow) { 
 		alignChildren = ["fill","fill"];
@@ -225,12 +245,12 @@ function __showOTFWindow() {
 			} /* END _appliedFontsGroup */
 		} /* END _headerGroup */
 		/* Tabs */
-		var _tabPanel = add ("tabbedpanel");
+		var _tabPanel = add("tabbedpanel");
 		with(_tabPanel) {
 			alignChildren = ["fill","fill"];
 			margins = [5,5,5,5];
 			/* Basic Tab */
-			var _basicTab = add ("tab", undefined, "Basis Features");
+			var _basicTab = add("tab", undefined, localize(_global.basicFeaturesTabLabel));
 			with(_basicTab) {
 				alignChildren = ["fill","fill"];
 				margins = [10,5,10,10];
@@ -719,23 +739,196 @@ function __showOTFWindow() {
 				} /* END _selectionGroup */
 			} /* END _basicTab */
 			/* extended Tab */
-			var _extendedTab = add ("tab", undefined, "Erweiterte Features");
+			var _extendedTab = add("tab", undefined, localize(_global.extendedFeaturesTabLabel));
 			with(_extendedTab) {
+				orientation = "row";
 				alignChildren = ["fill","fill"];
-
+				var _extendedTabC1Group = add("group");
+				with(_extendedTabC1Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _extendedTabC1R1Group = add("group");
+					with(_extendedTabC1R1Group) {
+						alignChildren = ["fill","fill"];
+						_extendedTabAllTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
+						with(_extendedTabAllTagListbox) {
+							alignment = ["left","top"];
+							minimumSize = LISTBOX_MINIMUM_SIZE;
+							maximumSize = LISTBOX_MAXIMUM_SIZE;
+							/* +++++++++++++++++++++++ */
+							/* + Extended – Tag List + */
+							/* +++++++++++++++++++++++ */
+						} /* END _extendedTabAllTagListbox */
+					} /* END _extendedTabC1R1Group */
+					var _extendedTabC1R2Group = add("group");
+					with(_extendedTabC1R2Group) {
+						var _extendedTabTagFilterGroup = add("group");
+						with(_extendedTabTagFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _extendedTabTagFilterLabel = add("statictext", undefined, localize(_global.tagFilterLabel));
+							with(_extendedTabTagFilterLabel) {
+								alignment = "left";
+							} /* END _extendedTabTagFilterLabel */
+							_extendedTabTagFilterEdittext = add("edittext", undefined, "");
+							with(_extendedTabTagFilterEdittext) {
+								characters = 30;
+								helpTip = localize(_global.tagFilterHelpTip);
+							} /* END _extendedTabTagFilterEdittext */
+						} /* END _extendedTabTagFilterGroup */
+					} /* END _extendedTabC1R2Group */
+				} /* END _extendedTabC1Group */
+				var _extendedTabC2Group = add("group");
+				with(_extendedTabC2Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _extendedTabC2R1Group = add("group");
+					with(_extendedTabC2R1Group) {
+						alignChildren = ["fill","fill"];
+						_extendedTabSelectionTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
+						with(_extendedTabSelectionTagListbox) {
+							alignment = ["right","top"];
+							minimumSize = LISTBOX_MINIMUM_SIZE;
+							maximumSize = LISTBOX_MAXIMUM_SIZE;
+							/* ++++++++++++++++++++++++ */
+							/* + Selection – Tag List + */
+							/* ++++++++++++++++++++++++ */
+						} /* END _extendedTabSelectionTagListbox */
+					} /* END _extendedTabC2R1Group */
+					var _extendedTabC2R2Group = add("group");
+					with(_extendedTabC2R2Group) {
+						alignChildren = ["right","bottom"];
+						var _extendedTabClearButtonGroup = add("group");
+						with(_extendedTabClearButtonGroup) {
+							orientation = "column";
+							margins.bottom = 5;
+							spacing = 5;
+							_extendedTabClearButton = add("button", undefined, localize(_global.extendedTabClearButtonLabel));
+							with(_extendedTabClearButton) {
+								preferredSize.width = 100;
+								helpTip = localize(_global.extendedTabClearButtonHelpTip);
+							} /* END _extendedTabClearButton */
+						} /* END _extendedTabClearButtonGroup */
+						var _extendedTabApplyButtonGroup = add("group");
+						with(_extendedTabApplyButtonGroup) {
+							orientation = "column";
+							margins.bottom = 5;
+							spacing = 5;
+							_extendedTabApplyButton = add("button", undefined, localize(_global.extendedTabApplyButtonLabel));
+							with(_extendedTabApplyButton) {
+								preferredSize.width = 100;
+								helpTip = localize(_global.extendedTabApplyButtonHelpTip);
+							} /* END _extendedTabApplyButton */
+						} /* END _extendedTabApplyButtonGroup */
+					} /* END _extendedTabC2R2Group */
+				} /* END _extendedTabC2Group */
 			} /* END _extendedTab */
 			/* Search Tab */
-			var _searchTab = add ("tab", undefined, "Search Font");
+			var _searchTab = add("tab", undefined, localize(_global.fontSearchTabLabel));
 			with(_searchTab) {
+				orientation = "row";
 				alignChildren = ["fill","fill"];
-
+				var _searchTabC1Group = add("group");
+				with(_searchTabC1Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _searchTabC1R1Group = add("group");
+					with(_searchTabC1R1Group) {
+						alignChildren = ["fill","fill"];
+						_searchTabTagListbox = add("listbox", undefined, undefined, _tagListboxHeader);
+						with(_searchTabTagListbox) {
+							alignment = ["left","top"];
+							minimumSize = LISTBOX_MINIMUM_SIZE;
+							maximumSize = LISTBOX_MAXIMUM_SIZE;
+							/* ++++++++++++++++++++++++++ */
+							/* + Search Font – Tag List + */
+							/* ++++++++++++++++++++++++++ */
+						} /* END _searchTabTagListbox */
+					} /* END _searchTabC1R1Group */
+					var _searchTabC1R2Group = add("group");
+					with(_searchTabC1R2Group) {
+						var _searchTabTagFilterGroup = add("group");
+						with(_searchTabTagFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _searchTabTagFilterLabel = add("statictext", undefined, localize(_global.tagFilterLabel));
+							with(_searchTabTagFilterLabel) {
+								alignment = "left";
+							} /* END _searchTabTagFilterLabel */
+							_searchTabTagFilterEdittext = add("edittext", undefined, "");
+							with(_searchTabTagFilterEdittext) {
+								characters = 30;
+								helpTip = localize(_global.tagFilterHelpTip);
+							} /* END _searchTabTagFilterEdittext */
+						} /* END _searchTabTagFilterGroup */
+					} /* END _searchTabC1R2Group */
+				} /* END _searchTabC1Group */
+				var _searchTabC2Group = add("group");
+				with(_searchTabC2Group) {
+					orientation = "column";
+					alignChildren = ["fill","fill"];
+					var _searchTabC2R1Group = add("group");
+					with(_searchTabC2R1Group) {
+						alignChildren = ["fill","fill"];
+						_searchTabFontListbox = add("listbox", undefined, undefined, _fontListboxHeader);
+						with(_searchTabFontListbox) {
+							alignment = ["right","top"];
+							minimumSize = LISTBOX_MINIMUM_SIZE;
+							maximumSize = LISTBOX_MAXIMUM_SIZE;
+							/* +++++++++++++++++++++++++++ */
+							/* + Search Font – Font List + */
+							/* +++++++++++++++++++++++++++ */
+						} /* END _searchTabFontListbox */
+					} /* END _searchTabC2R1Group */
+					var _searchTabC2R2Group = add("group");
+					with(_searchTabC2R2Group) {
+						alignment = "right";
+						var _searchTabFontNameFilterGroup = add("group");
+						with(_searchTabFontNameFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _searchTabFontNameFilterLabel = add("statictext", undefined, localize(_global.fontNameFilterLabel));
+							with(_searchTabFontNameFilterLabel) {
+								alignment = "left";
+							} /* END _searchTabFontNameFilterLabel */
+							_searchTabFontNameFilterEdittext = add("edittext", undefined, "");
+							with(_searchTabFontNameFilterEdittext) {
+								characters = 13;
+							} /* END _searchTabFontNameFilterEdittext */
+						} /* END _searchTabFontNameFilterGroup */
+						var _searchTabFontStyleFilterGroup = add("group");
+						with(_searchTabFontStyleFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _searchTabFontStyleFilterLabel = add("statictext", undefined, localize(_global.fontStyleFilterLabel));
+							with(_searchTabFontStyleFilterLabel) {
+								alignment = "left";
+							} /* END _searchTabFontStyleFilterLabel */
+							_searchTabFontStyleFilterEdittext = add("edittext", undefined, "");
+							with(_searchTabFontStyleFilterEdittext) {
+								characters = 13;
+							} /* END _searchTabFontStyleFilterEdittext */
+						} /* _searchTabFontStyleFilterGroup */
+						var _searchTabApplyFontButtonGroup = add("group");
+						with(_searchTabApplyFontButtonGroup) {
+							orientation = "column";
+							alignment = "bottom";
+							margins.bottom = 5;
+							_searchTabApplyFontButton = add("button", undefined, localize(_global.applyFontButtonLabel));
+							with(_searchTabApplyFontButton) {
+								preferredSize.width = 95;
+								helpTip = localize(_global.applyFontButtonHelpTip);
+							} /* END _searchTabApplyFontButton */
+						} /* END _searchTabApplyFontButtonGroup */
+					} /* END _searchTabC2R2Group */
+				} /* END _searchTabC2Group */
 			} /* END _searchTab */
 		} /* END _tabPanel */
 		/* General Buttons */
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
 			margins = [0,5,0,5];
-			spacing = 80;
+			spacing = 140;
 			_displayHelpTipCheckbox = add("checkbox", undefined, localize(_global.displayHelpTipCheckboxLabel));
 			with(_displayHelpTipCheckbox) {
 				alignment = ["center","bottom"];
@@ -4068,7 +4261,7 @@ function __defineLocalizeStrings() {
 		en:"Overlapping Swash",
 		de:"\u00dcberlappende Schwungschrift",
 		fr:"Lettre ornée avec chevauchement",
-		es:"Letra ornamentada con superposición"
+		es:"Letra ornada con superposición"
 	};
 
 	_global.otfMarkLabel = {
@@ -4524,6 +4717,132 @@ function __defineLocalizeStrings() {
 		de:"Wenn diese Option ausgew\u00e4hlt ist, werden Zeichen an einer isolierten Position (au\u00dferhalb eines Wortes) durch alternative Formen ersetzt.",
 		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent isolément.",
 		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan aislados."
+	};
+	
+	_global.basicFeaturesTabLabel = {
+		en:"Basic Features",
+		de:"Basisfunktionen",
+		fr:"Fonctionnalités de base",
+		es:"Funciones básicas"
+	};
+
+	_global.extendedFeaturesTabLabel = {
+		en:"Extended features",
+		de:"Erweiterte Funktionen",
+		fr:"Fonctionnalités étendues",
+		es:"Funcionalidad extendida"
+	};
+
+	_global.fontSearchTabLabel = {
+		en:"Font search",
+		de:"Schriftsuche",
+		fr:"Recherche de fontes",
+		es:"Búsqueda de fuentes"
+	};
+
+	_global.tagNameTitle  = {
+		en:"Tag",
+		de:"Tag",
+		fr:"Tag",
+		es:"Tag"
+	};
+
+	_global.tagLabelTitle = {
+		en:"Label",
+		de:"Label",
+		fr:"Label",
+		es:"Etiqueta"
+	};
+	
+	_global.tagTypeTitle = {
+		en:"Type",
+		de:"Typ",
+		fr:"Type",
+		es:"Tipo"
+	};
+
+	_global.tagFilterLabel = {
+		en:"Filter: Tag",
+		de:"Filter: Tag",
+		fr:"Filtre: Tag",
+		es:"Filtro: Tag"
+	};
+
+	_global.tagFilterHelpTip = {
+		en:"Separate multiple tags using spaces, e.g. aalt liga c2pc",
+		de:"Mehrere Tags durch Leerzeichen voneinander trennen, z.B. aalt liga c2pc",
+		fr:"Séparez les balises multiples par des espaces, par exemple : aalt liga c2pc",
+		es:"Separe varias etiquetas con espacios, por ejemplo: aalt liga c2pc"
+	};
+
+	_global.fontNameTitle = {
+		en:"Font",
+		de:"Schrift",
+		fr:"Font",
+		es:"Fuente"
+	};
+	
+	_global.fontStyleTitle = {
+		en:"Style",
+		de:"Schnitt",
+		fr:"Style",
+		es:"Estilo"
+	};
+
+	_global.applyFontButtonLabel = {
+		en:"Apply",
+		de:"Zuweisen",
+		fr:"Apply",
+		es:"Aplique"
+	};
+
+	_global.applyFontButtonHelpTip = {
+		en:"Apply selected font to the current selection in the document.",
+		de:"Ausgewählte Schrift der aktuellen Auswahl im Dokument zuweisen.",
+		fr:"Applique la fonte sélectionnée à la sélection actuelle dans le document.",
+		es:"Aplica la fuente seleccionada a la selección actual en el documento."
+	};
+
+	_global.fontNameFilterLabel = {
+		en:"Font",
+		de:"Schrift",
+		fr:"Font",
+		es:"Fuente"
+	};
+
+	_global.fontStyleFilterLabel = {
+		en:"Style",
+		de:"Schnitt",
+		fr:"Style",
+		es:"Estilo"
+	};
+
+	_global.extendedTabClearButtonLabel = {
+		en:"Clear",
+		de:"Löschen",
+		fr:"Effacer",
+		es:"Borrar"
+	};
+
+	_global.extendedTabClearButtonHelpTip = {
+		en:"Clear extended OpenType features of the current selection.",
+		de:"Erweiterte OpenType-Funktionen der aktuellen Auswahl löschen.",
+		fr:"Supprime les fonctionnalités OpenType étendues de la sélection actuelle.",
+		es:"Elimina las funciones OpenType extendidas de la selección actual."
+	};
+	
+	_global.extendedTabApplyButtonLabel = {
+		en:"Apply",
+		de:"Zuweisen",
+		fr:"Apply",
+		es:"Aplique"
+	};
+
+	_global.extendedTabApplyButtonHelpTip = {
+		en:"Apply the selected OpenType features to the current text selection in the document.",
+		de:"Die ausgewählten OpenType-Funktionen der aktuellen Textauswahl im Dokument zuweisen.",
+		fr:"Applique les fonctionnalités OpenType sélectionnées à la sélection de texte actuelle dans le document.",
+		es:"Aplica las funciones OpenType seleccionadas a la selección de texto actual en el documento."
 	};
 	
 } /* END function __defineLocalizeStrings */
