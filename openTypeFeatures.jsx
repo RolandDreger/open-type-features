@@ -1308,7 +1308,7 @@ function __showOTFWindow() {
 	__checkInputs();
 	/* Initialize Dialog: Extended Features */
 	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _extendedTabAllTagListbox */
-	__createListbox(_extendedTabC2R1Group, "tag", "right", _otfTagObj, {}); /* _extendedTabSelectionTagListbox */
+	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* _extendedTabSelectionTagListbox */
 	/* Initialize Dialog: Search Font */
 	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _searchTabTagListbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* _searchTabFontListbox */
@@ -2296,6 +2296,7 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		columnTitles:_tagListboxColumnTitles, 
 		columnWidths: undefined, multiselect:true 
 	};
+
 	const _fontListboxColumnTitles = [localize(_global.fontNameTitle),localize(_global.fontStyleTitle)];
 	const _fontListboxHeader = { 
 		numberOfColumns:_fontListboxColumnTitles.length, 
@@ -2304,16 +2305,58 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		columnWidths: undefined, multiselect:false 
 	};
 	
+
+	var _prevListbox = _listboxGroup.children && _listboxGroup.children[0];
+	if (_prevListbox && _prevListbox.hasOwnProperty("remove")) {
+		_listboxGroup.remove(_prevListbox);
+	}
+
 	var _listboxHeader = (_type === "font") ? _fontListboxHeader : _tagListboxHeader;
 
 	var _listbox = _listboxGroup.add("listbox", undefined, undefined, _listboxHeader);
-	with(_listbox) {
-		alignment = [_alignment,"top"];
-		minimumSize = LISTBOX_MINIMUM_SIZE;
-		maximumSize = LISTBOX_MAXIMUM_SIZE;
+	_listbox.alignment = [_alignment,"top"];
+	_listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
+	_listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
 		
-	} /* END _listbox */
+	
+	
+	loop: for(var _key in _contentObj) {
 
+		if(!_contentObj.hasOwnProperty(_key)) {
+			continue;
+		}
+
+		var _contentItemObj = _contentObj[_key];
+		if(!_contentItemObj) {
+			continue;
+		}
+
+		/* Filter */
+
+
+
+		var _itemName;
+		var _listboxItem;
+
+		switch(_type) {
+			case "tag":
+				_itemName = _contentItemObj["tag"] || "";
+				_listboxItem = _listbox.add("item", _itemName);
+				_listboxItem.subItems[0].text = _contentItemObj["label"] || "";
+				_listboxItem.subItems[1].text = _contentItemObj["type"] || "";
+				break;
+			case "font":
+				_itemName = _contentItemObj["name"] || "";
+				_listboxItem = _listbox.add("item", _itemName);
+				_listboxItem.subItems[0].text = _contentItemObj["style"] || "";
+				break;
+			default:
+				continue loop;
+		}
+
+		_listboxItem["payload"] = _contentItemObj;
+	}
+	
 	return _listbox;
 } /* END function __createListbox */
 
@@ -2326,8 +2369,8 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
  * 
  * Legend for type
  * ---
- * Registry: 					Registered feature* that cannot be assigned via the InDesign user interface.
- * InDesign: 					Feature that occurs only in InDesign
+ * Registry: 				Registered feature* that cannot be assigned via the InDesign user interface.
+ * InDesign: 				Feature that occurs only in InDesign
  * InDesign/Registry: 	Registered feature used in the same way in InDesign 
  * InDesign+/Registry:	Registered feature, but used differently in InDesign, e.g. as a combination of two features.
  * ---
@@ -3325,7 +3368,7 @@ function __getOTFTagObject() {
 		},
 		"hojo": {
 			"tag":"hojo",
-			"label":"Hojo Kanji Forms (JIS X 0212-1990 Kanji Forms)",
+			"label":"Hojo Kanji Forms",
 			"desc":"",
 			"type":"Registry",
 			"search":["hojo"]
