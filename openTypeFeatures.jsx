@@ -4819,7 +4819,7 @@ function __defineLocalizeStrings() {
 
 	_global.extendedTabClearButtonLabel = {
 		en:"Clear",
-		de:"Löschen",
+		de:"Enfernen",
 		fr:"Effacer",
 		es:"Borrar"
 	};
