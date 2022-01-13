@@ -201,10 +201,12 @@ function __showOTFWindow() {
 	var _displayHelpTipCheckbox;
 
 	var _extendedTabTagFilterEdittext;
+	var _extendedTabLabelFilterEdittext;
 	var _extendedTabClearButton;
 	var _extendedTabApplyButton;
 
 	var _searchTabTagFilterEdittext;
+	var _searchTabLabelFilterEdittext
 	var _searchTabFontNameFilterEdittext;
 	var _searchTabFontStyleFilterEdittext;
 	var _searchTabApplyFontButton;
@@ -756,10 +758,23 @@ function __showOTFWindow() {
 							} /* END _extendedTabTagFilterLabel */
 							_extendedTabTagFilterEdittext = add("edittext", undefined, "");
 							with(_extendedTabTagFilterEdittext) {
-								characters = 30;
+								characters = 18;
 								helpTip = localize(_global.tagFilterHelpTip);
 							} /* END _extendedTabTagFilterEdittext */
 						} /* END _extendedTabTagFilterGroup */
+						var _extendedTabLabelFilterGroup = add("group");
+						with(_extendedTabLabelFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _extendedTabLabelFilterLabel = add("statictext", undefined, localize(_global.labelFilterLabel));
+							with(_extendedTabLabelFilterLabel) {
+								alignment = "left";
+							} /* END _extendedTabLabelFilterLabel */
+							_extendedTabLabelFilterEdittext = add("edittext", undefined, "");
+							with(_extendedTabLabelFilterEdittext) {
+								characters = 18;
+							} /* END _extendedTabLabelFilterEdittext */
+						} /* END _extendedTabLabelFilterGroup */
 					} /* END _extendedTabC1R2Group */
 				} /* END _extendedTabC1Group */
 				var _extendedTabC2Group = add("group");
@@ -829,10 +844,23 @@ function __showOTFWindow() {
 							} /* END _searchTabTagFilterLabel */
 							_searchTabTagFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabTagFilterEdittext) {
-								characters = 30;
+								characters = 18;
 								helpTip = localize(_global.tagFilterHelpTip);
 							} /* END _searchTabTagFilterEdittext */
 						} /* END _searchTabTagFilterGroup */
+						var _searchTabLabelFilterGroup = add("group");
+						with(_searchTabLabelFilterGroup) {
+							orientation = "column";
+							spacing = 5;
+							var _searchTabLabelFilterLabel = add("statictext", undefined, localize(_global.labelFilterLabel));
+							with(_searchTabLabelFilterLabel) {
+								alignment = "left";
+							} /* END _searchTabLabelFilterLabel */
+							_searchTabLabelFilterEdittext = add("edittext", undefined, "");
+							with(_searchTabLabelFilterEdittext) {
+								characters = 18;
+							} /* END _searchTabLabelFilterEdittext */
+						} /* END _searchTabLabelFilterGroup */
 					} /* END _searchTabC1R2Group */
 				} /* END _searchTabC1Group */
 				var _searchTabC2Group = add("group");
@@ -859,7 +887,7 @@ function __showOTFWindow() {
 							} /* END _searchTabFontNameFilterLabel */
 							_searchTabFontNameFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabFontNameFilterEdittext) {
-								characters = 13;
+								characters = 12;
 							} /* END _searchTabFontNameFilterEdittext */
 						} /* END _searchTabFontNameFilterGroup */
 						var _searchTabFontStyleFilterGroup = add("group");
@@ -872,7 +900,7 @@ function __showOTFWindow() {
 							} /* END _searchTabFontStyleFilterLabel */
 							_searchTabFontStyleFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabFontStyleFilterEdittext) {
-								characters = 13;
+								characters = 12;
 							} /* END _searchTabFontStyleFilterEdittext */
 						} /* _searchTabFontStyleFilterGroup */
 						var _searchTabApplyFontButtonGroup = add("group");
@@ -882,7 +910,7 @@ function __showOTFWindow() {
 							margins.bottom = 5;
 							_searchTabApplyFontButton = add("button", undefined, localize(_global.applyFontButtonLabel));
 							with(_searchTabApplyFontButton) {
-								preferredSize.width = 95;
+								preferredSize.width = 80;
 								helpTip = localize(_global.applyFontButtonHelpTip);
 							} /* END _searchTabApplyFontButton */
 						} /* END _searchTabApplyFontButtonGroup */
@@ -4840,6 +4868,13 @@ function __defineLocalizeStrings() {
 		de:"Mehrere Tags durch Leerzeichen voneinander trennen, z.B. aalt liga c2pc",
 		fr:"Séparez les balises multiples par des espaces, par exemple : aalt liga c2pc",
 		es:"Separe varias etiquetas con espacios, por ejemplo: aalt liga c2pc"
+	};
+
+	_global.labelFilterLabel = {
+		en:"Label",
+		de:"Label",
+		fr:"Label",
+		es:"Etiqueta"
 	};
 
 	_global.fontNameTitle = {
