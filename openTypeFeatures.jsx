@@ -75,6 +75,11 @@ function __showOTFWindow() {
 		return false; 
 	}
 
+	var _fontObj = __getFontObj();
+	if(!_fontObj) {
+		_fontObj = {};
+	}
+
 	var _appliedFontsStatictext;
 
 	var _ligaturesGroup;
@@ -1298,29 +1303,45 @@ function __showOTFWindow() {
 		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":this.text,
 			"two":_searchTabLabelFilterEdittext.text
-		}); 
+		}, __fillFontListbox);
+		__createListbox(_searchTabC2R1Group, "font", "right", {}, {});
 	};
 	/* Search Tab: Tag Label Filter */
 	_searchTabLabelFilterEdittext.onChanging = function() {
 		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":_searchTabTagFilterEdittext.text,
 			"two":this.text
-		});
+		}, __fillFontListbox);
+		__createListbox(_searchTabC2R1Group, "font", "right", {}, {});
 	};
 	/* Search Tab: Font Name Filter */
 	_searchTabFontNameFilterEdittext.onChanging = function() {
-		__createListbox(_searchTabC2R1Group, "font", "right", {}, {
+		var _selectedFontObj = _otfWindow["selectedFonts"];
+		__createListbox(_searchTabC2R1Group, "font", "right", _selectedFontObj, {
 			"one":this.text,
 			"two":_searchTabFontStyleFilterEdittext.text
 		}); 
 	};
 	/* Search Tab: Font Style Filter */
 	_searchTabFontStyleFilterEdittext.onChanging = function() {
-		__createListbox(_searchTabC2R1Group, "font", "right", {}, {
+		var _selectedFontObj = _otfWindow["selectedFonts"];
+		__createListbox(_searchTabC2R1Group, "font", "right", _selectedFontObj, {
 			"one":_searchTabFontNameFilterEdittext.text,
 			"two":this.text
 		});
 	};
+
+	/* Search fonts with selected OpenType features */
+	function __fillFontListbox() {
+		var _selectedTagObj = __getListboxSelectionObj(this.parent);
+		var _selectedFontObj = __searchOTFFonts(_fontObj, _selectedTagObj);
+		_otfWindow["selectedFonts"] = _selectedFontObj;
+		__createListbox(_searchTabC2R1Group, "font", "right", _selectedFontObj, {
+			"one":_searchTabFontNameFilterEdittext.text,
+			"two":_searchTabFontStyleFilterEdittext.text
+		});
+	} /* END function __fillFontListbox */
+
 
 	_refreshButton.onClick = function() {
 		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
@@ -1375,12 +1396,13 @@ function __showOTFWindow() {
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
+	_otfWindow["selectedFonts"] = {};
 	__checkInputs();
 	/* Initialize Dialog: Extended Features */
 	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Extended Tab: All Tag Listbox */
 	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* Extended Tab: Selection Tag Listbox */
 	/* Initialize Dialog: Search Font */
-	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Search Tab: Tag Listbox */
+	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox); /* Search Tab: All Tag Listbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
 	
@@ -2340,21 +2362,23 @@ function __applyCStyle(_cStyle, _selection) {
 
 /**
  * Create SUI Listbox
- * @param {SUIGroup} _listboxGroup Container of listbox
+ * @param {SUIGroup} _listboxContainer Container of listbox
  * @param {String} _type Type value: tag or font
  * @param {String} _alignment Alignment value: left or right
+ * @param {Function} __callback Callback for onChange EventListener of Listbox
  * @param {Object} _contentObj Content Object (Tag Object or Font Object)
  * @param {Object} _filterObj Filter object for the corresponding columns ({ "column": { "one":String, "two":String, ... } })
  * @returns SUIListbox
  */
-function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterObj) {
+function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _filterObj, __callback) {
 	
 	if(!_global) { return null; }
-	if(!_listboxGroup || !_listboxGroup.hasOwnProperty("add")) { return null; }
+	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("add")) { return null; }
 	if(_type === null || _type === undefined || _type.constructor !== String) { return null; }
 	if(_alignment === null || _alignment === undefined || _alignment.constructor !== String) { return null; }
 	if(!_contentObj || !(_contentObj instanceof Object)) { return null; }
 	if(!_filterObj || !(_filterObj instanceof Object)) { return null; }
+	/* __callback optional */
 	
 	const LISTBOX_MINIMUM_SIZE = [340,460];
 	const LISTBOX_MAXIMUM_SIZE = [340,460];
@@ -2364,7 +2388,8 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		numberOfColumns:_tagListboxColumnTitles.length, 
 		showHeaders:true, 
 		columnTitles:_tagListboxColumnTitles, 
-		columnWidths: undefined, multiselect:true 
+		columnWidths:undefined, 
+		multiselect:true 
 	};
 
 	const _fontListboxColumnTitles = [localize(_global.fontNameTitle), localize(_global.fontStyleTitle)];
@@ -2372,18 +2397,18 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		numberOfColumns:_fontListboxColumnTitles.length, 
 		showHeaders:true, 
 		columnTitles:_fontListboxColumnTitles, 
-		columnWidths: undefined, multiselect:false 
+		columnWidths:undefined, 
+		multiselect:false 
 	};
 	
-
-	var _prevListbox = _listboxGroup.children && _listboxGroup.children[0];
+	var _prevListbox = _listboxContainer.children && _listboxContainer.children[0];
 	if (_prevListbox && _prevListbox.hasOwnProperty("remove")) {
-		_listboxGroup.remove(_prevListbox);
+		_listboxContainer.remove(_prevListbox);
 	}
 
 	var _listboxHeader = (_type === "font") ? _fontListboxHeader : _tagListboxHeader;
 
-	var _listbox = _listboxGroup.add("listbox", undefined, undefined, _listboxHeader);
+	var _listbox = _listboxContainer.add("listbox", undefined, undefined, _listboxHeader);
 	_listbox.alignment = [_alignment,"top"];
 	_listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
 	_listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
@@ -2393,6 +2418,7 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 	var _filterTermOneRegExp;
 	if(_filterTermOne) {
 		try {
+			_filterTermOne = _filterTermOne.replace(" ", "|", "g");
 			_filterTermOneRegExp = new RegExp(_filterTermOne, "i");
 		} catch (_error) {
 			_filterTermOneRegExp = new RegExp("", "i");
@@ -2460,14 +2486,154 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 				continue loop;
 		}
 
-		_listboxItem["payload"] = _contentItemObj;
+		_listboxItem["payload"] = {
+			"key":_key,
+			"object":_contentItemObj
+		};
 	}
 	
-	_listboxGroup.layout.layout(true);
+	/* Callback */
+	if(!!__callback && __callback instanceof Function) { 
+		_listbox.onChange = __callback; 
+	}
+	
+	_listboxContainer.layout.layout(true);
 
 	return _listbox;
 } /* END function __createListbox */
 
+
+/**
+ * Search Fonts with specific OpenType features
+ * @param {Object} _appFontObj All application fonts 
+ * @param {Object} _selectedTagObj Selected OpenType feature tags
+ * @returns 
+ */
+function __searchOTFFonts(_appFontObj, _selectedTagObj) {
+
+	if(!_appFontObj || !(_appFontObj instanceof Object)) { return {}; }
+	if(!_selectedTagObj || !(_selectedTagObj instanceof Object)) { return {}; }
+
+	var _selectedTagArray = [];
+	var _key;
+
+	for(_key in _selectedTagObj) {
+
+		if(!_selectedTagObj.hasOwnProperty(_key)) {
+			continue;
+		}
+
+		var _curTagObj = _selectedTagObj[_key];
+		if(!_curTagObj || !_curTagObj.hasOwnProperty("search")) {
+			continue;
+		}
+
+		var _searchTagArray = _curTagObj["search"];
+		if(!(_searchTagArray instanceof Array)) {
+			continue;
+		}
+
+		_selectedTagArray = [].concat(_selectedTagArray, _searchTagArray);
+	}
+
+	if(_selectedTagArray.length === 0) {
+		return {};
+	}
+
+	var _filteredFontObj = {};
+	
+	fontLoop: for(_key in _appFontObj) {
+
+		if(!_appFontObj.hasOwnProperty(_key)) {
+			continue;
+		}
+
+		var _curFontObj = _appFontObj[_key];
+		if(!_curFontObj || !_curFontObj.hasOwnProperty("font")) {
+			continue;
+		}
+
+		var _curFont = _curFontObj["font"];
+		if(!_curFont || !_curFont.isValid) {
+			continue;
+		}
+
+		tagLoop: for(var i=0; i<_selectedTagArray.length; i+=1) {
+
+			var _curTag = _selectedTagArray[i];
+			if(!_curTag) {
+				continue tagLoop;
+			}
+
+			try {
+				if(!_curFont.checkOpenTypeFeature(_curTag)) {
+					continue fontLoop;
+				}
+			} catch(_error) {
+				continue fontLoop;
+			}
+		}
+
+		_filteredFontObj[_key] = _curFontObj;
+	}
+
+	return _filteredFontObj;
+} /* END function __searchOTFFonts */
+
+
+/**
+ * Get Object from listbox selection
+ * @param {SUIItem} _listboxContainer 
+ * @returns Object
+ */
+function __getListboxSelectionObj(_listboxContainer) {
+
+	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("children") || _listboxContainer.children === 0) { 
+		return {}; 
+	}
+
+	var _listbox = _listboxContainer.children[0];
+	if(!_listbox || !(_listbox instanceof ListBox) || _listbox.items.length === 0 || !_listbox.selection) {
+		return {};
+	}
+
+	var _selectionObj = {};
+	var _listboxItemKey;
+	var _listboxItemObj;
+
+	var _listboxSelection = _listbox.selection;
+
+	/* Listbox: multi-selection */
+	if(_listboxSelection instanceof Array) {
+		for(var i=0; i<_listboxSelection.length; i+=1) {
+			var _curListboxItem = _listboxSelection[i];
+			if(!_curListboxItem || !_curListboxItem.hasOwnProperty("payload")) {
+				continue;
+			}
+			_listboxItemKey = _curListboxItem["payload"]["key"];
+			if(!_listboxItemKey) {
+				continue;
+			}
+			_listboxItemObj = _curListboxItem["payload"]["object"];
+			if(!_listboxItemObj) {
+				continue;
+			}
+			_selectionObj[_listboxItemKey]  = _listboxItemObj;
+		}
+	} 
+	/* Listbox: single-selection */
+	else {
+		if(_listboxSelection["payload"]) {
+			_listboxItemKey = _listboxSelection["payload"]["key"];
+			_listboxItemObj = _listboxSelection["payload"]["object"];
+			if(_listboxItemKey && _listboxItemObj) {
+				_selectionObj[_listboxItemKey]  = _listboxItemObj;
+			}
+		}
+	}
+	
+	return _selectionObj;
+} /* END function __getListboxSelectionObj */
 
 
 
@@ -4199,6 +4365,45 @@ function __getOTFTagObject() {
 
 	return _otfTagObj
 } /* END function __getOTFTagObject */
+
+
+/**
+ * Get Font Object
+ * @returns Object
+ */
+function __getFontObj() {
+
+	var _fontArray = app.fonts.everyItem().getElements();
+	var _fontObj = {};
+
+	for(var i=0; i<_fontArray.length; i+=1) {
+
+		var _curFont = _fontArray[i];
+		if(!_curFont || !_curFont.isValid || _curFont.status !== FontStatus.INSTALLED) {
+			continue;
+		}
+
+		var _fontName;
+		var _fontStyle;
+
+		try {
+			var _fontFullName = _curFont.name;
+			var _fontFullNameArray = _fontFullName.split("\t");
+			_fontName = _fontFullNameArray[0] || "";
+			_fontStyle = _fontFullNameArray[1] || "";
+		} catch(_error) {
+			continue;
+		}
+
+		_fontObj[i.toString()] = {
+			"name":_fontName,
+			"style":_fontStyle,
+			"font":_curFont
+		};
+	}
+
+	return _fontObj;
+} /* END function __getFontObj */
 
 
 
