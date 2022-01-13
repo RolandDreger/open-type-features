@@ -1396,12 +1396,12 @@ function __showOTFWindow() {
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
-	_otfWindow["selectedFonts"] = {};
 	__checkInputs();
 	/* Initialize Dialog: Extended Features */
 	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Extended Tab: All Tag Listbox */
 	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* Extended Tab: Selection Tag Listbox */
 	/* Initialize Dialog: Search Font */
+	_otfWindow["selectedFonts"] = {};
 	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox); /* Search Tab: All Tag Listbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
