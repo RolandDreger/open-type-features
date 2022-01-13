@@ -1279,6 +1279,50 @@ function __showOTFWindow() {
 		return true;
 	} /* END function __altKeyHandler */
 
+	/* Extended Tab: Tag Name Filter */
+	_extendedTabTagFilterEdittext.onChanging = function() {
+		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
+			"one":this.text,
+			"two":_extendedTabLabelFilterEdittext.text
+		}); 
+	};
+	/* Extended Tab: Tag Label Filter */
+	_extendedTabLabelFilterEdittext.onChanging = function() {
+		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
+			"one":_extendedTabTagFilterEdittext.text,
+			"two":this.text
+		});
+	};
+	/* Search Tab: Tag Name Filter */
+	_searchTabTagFilterEdittext.onChanging = function() {
+		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
+			"one":this.text,
+			"two":_searchTabLabelFilterEdittext.text
+		}); 
+	};
+	/* Search Tab: Tag Label Filter */
+	_searchTabLabelFilterEdittext.onChanging = function() {
+		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
+			"one":_searchTabTagFilterEdittext.text,
+			"two":this.text
+		});
+	};
+	/* Search Tab: Font Name Filter */
+	_searchTabFontNameFilterEdittext.onChanging = function() {
+		__createListbox(_searchTabC2R1Group, "font", "right", {}, {
+			"one":this.text,
+			"two":_searchTabFontStyleFilterEdittext.text
+		}); 
+	};
+	/* Search Tab: Font Style Filter */
+	_searchTabFontStyleFilterEdittext.onChanging = function() {
+		__createListbox(_searchTabC2R1Group, "font", "right", {}, {
+			"one":_searchTabFontNameFilterEdittext.text,
+			"two":this.text
+		});
+	};
+
+
 
 	_refreshButton.onClick = function() {
 		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
@@ -1335,11 +1379,11 @@ function __showOTFWindow() {
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
 	/* Initialize Dialog: Extended Features */
-	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _extendedTabAllTagListbox */
-	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* _extendedTabSelectionTagListbox */
+	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Extended Tab: All Tag Listbox */
+	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* Extended Tab: Selection Tag Listbox */
 	/* Initialize Dialog: Search Font */
-	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}); /* _searchTabTagListbox */
-	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* _searchTabFontListbox */
+	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Search Tab: Tag Listbox */
+	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
 	
 	/* EventListener AFTER_SELECTION_CHANGED */
@@ -2385,6 +2429,8 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		_listboxItem["payload"] = _contentItemObj;
 	}
 	
+	_listboxGroup.layout.layout(true);
+
 	return _listbox;
 } /* END function __createListbox */
 
