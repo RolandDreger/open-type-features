@@ -1322,8 +1322,6 @@ function __showOTFWindow() {
 		});
 	};
 
-
-
 	_refreshButton.onClick = function() {
 		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
 		__checkInputs();
@@ -2361,7 +2359,7 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 	const LISTBOX_MINIMUM_SIZE = [340,460];
 	const LISTBOX_MAXIMUM_SIZE = [340,460];
 
-	const _tagListboxColumnTitles = [localize(_global.tagNameTitle),localize(_global.tagLabelTitle),localize(_global.tagTypeTitle)];
+	const _tagListboxColumnTitles = [localize(_global.tagNameTitle), localize(_global.tagLabelTitle), localize(_global.tagTypeTitle)];
 	const _tagListboxHeader = { 
 		numberOfColumns:_tagListboxColumnTitles.length, 
 		showHeaders:true, 
@@ -2369,7 +2367,7 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 		columnWidths: undefined, multiselect:true 
 	};
 
-	const _fontListboxColumnTitles = [localize(_global.fontNameTitle),localize(_global.fontStyleTitle)];
+	const _fontListboxColumnTitles = [localize(_global.fontNameTitle), localize(_global.fontStyleTitle)];
 	const _fontListboxHeader = { 
 		numberOfColumns:_fontListboxColumnTitles.length, 
 		showHeaders:true, 
@@ -2389,8 +2387,26 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 	_listbox.alignment = [_alignment,"top"];
 	_listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
 	_listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
-		
 	
+	/* Filter */
+	var _filterTermOne = _filterObj["one"];
+	var _filterTermOneRegExp;
+	if(_filterTermOne) {
+		try {
+			_filterTermOneRegExp = new RegExp(_filterTermOne, "i");
+		} catch (_error) {
+			_filterTermOneRegExp = new RegExp("", "i");
+		}
+	}
+	var _filterTermTwo = _filterObj["two"];
+	var _filterTermTwoRegExp;
+	if(_filterTermTwo) {
+		try {
+			_filterTermTwoRegExp = new RegExp(_filterTermTwo, "i");
+		} catch (_error) {
+			_filterTermTwoRegExp = new RegExp("", "i");
+		}
+	}
 	
 	loop: for(var _key in _contentObj) {
 
@@ -2403,24 +2419,42 @@ function __createListbox(_listboxGroup, _type, _alignment, _contentObj, _filterO
 			continue;
 		}
 
-		/* Filter */
-
-
-
 		var _itemName;
+		var _itemLabel;
+		var _itemType;
+		var _itemStyle;
 		var _listboxItem;
 
 		switch(_type) {
 			case "tag":
 				_itemName = _contentItemObj["tag"] || "";
+				_itemLabel = _contentItemObj["label"] || "";
+				_itemType = _contentItemObj["type"] || "";
+				/* Filter: Tag Name */
+				if(_filterTermOne && !_filterTermOneRegExp.test(_itemName)) {
+					continue loop;
+				}
+				/* Filter: Tag Label */
+				if(_filterTermTwo && !_filterTermTwoRegExp.test(_itemLabel)) {
+					continue loop;
+				}
 				_listboxItem = _listbox.add("item", _itemName);
-				_listboxItem.subItems[0].text = _contentItemObj["label"] || "";
-				_listboxItem.subItems[1].text = _contentItemObj["type"] || "";
+				_listboxItem.subItems[0].text = _itemLabel;
+				_listboxItem.subItems[1].text = _itemType;
 				break;
 			case "font":
 				_itemName = _contentItemObj["name"] || "";
+				_itemStyle = _contentItemObj["style"] || "";
+				/* Filter: Font Name */
+				if(_filterTermOne && !_filterTermOneRegExp.test(_itemName)) {
+					continue loop;
+				}
+				/* Filter: Font Style */
+				if(_filterTermTwo && !_filterTermTwoRegExp.test(_itemStyle)) {
+					continue loop;
+				}
 				_listboxItem = _listbox.add("item", _itemName);
-				_listboxItem.subItems[0].text = _contentItemObj["style"] || "";
+				_listboxItem.subItems[0].text = _itemStyle;
 				break;
 			default:
 				continue loop;
