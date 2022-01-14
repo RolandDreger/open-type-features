@@ -2391,7 +2391,7 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 	const LISTBOX_MINIMUM_SIZE = [340,460];
 	const LISTBOX_MAXIMUM_SIZE = [340,460];
 
-	const _tagListboxColumnTitles = [localize(_global.tagNameTitle), localize(_global.tagLabelTitle), localize(_global.tagTypeTitle)];
+	const _tagListboxColumnTitles = [localize(_global.tagNameTitle), localize(_global.tagValueTitle), localize(_global.tagLabelTitle), localize(_global.tagTypeTitle)];
 	const _tagListboxHeader = { 
 		numberOfColumns:_tagListboxColumnTitles.length, 
 		showHeaders:true, 
@@ -2454,6 +2454,7 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 		}
 
 		var _itemName;
+		var _itemValue;
 		var _itemLabel;
 		var _itemType;
 		var _itemStyle;
@@ -2462,6 +2463,7 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 		switch(_type) {
 			case "tag":
 				_itemName = _contentItemObj["tag"] || "";
+				_itemValue = _contentItemObj["value"] || "";
 				_itemLabel = _contentItemObj["label"] || "";
 				_itemType = _contentItemObj["type"] || "";
 				/* Filter: Tag Name */
@@ -2473,8 +2475,9 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 					continue loop;
 				}
 				_listboxItem = _listbox.add("item", _itemName);
-				_listboxItem.subItems[0].text = _itemLabel;
-				_listboxItem.subItems[1].text = _itemType;
+				_listboxItem.subItems[0].text = _itemValue;
+				_listboxItem.subItems[1].text = _itemLabel;
+				_listboxItem.subItems[2].text = _itemType;
 				break;
 			case "font":
 				_itemName = _contentItemObj["name"] || "";
@@ -2713,6 +2716,7 @@ function __getOTFTagObject() {
 	const _otfTagObj = { 
 		"aalt": {
 			"tag":"aalt",
+			"value":"1",
 			"label":"Access All Alternates",
 			"desc":"",
 			"type":"Registry",
@@ -2720,6 +2724,7 @@ function __getOTFTagObject() {
 		},
 		"abvf": {
 			"tag":"abvf",
+			"value":"1",
 			"label":"Above-base Forms",
 			"desc":"",
 			"type":"Registry",
@@ -2727,6 +2732,7 @@ function __getOTFTagObject() {
 		},
 		"abvm": {
 			"tag":"abvm",
+			"value":"1",
 			"label":"Above-base Mark Positioning",
 			"desc":"",
 			"type":"Registry",
@@ -2734,6 +2740,7 @@ function __getOTFTagObject() {
 		},
 		"abvs": {
 			"tag":"abvs",
+			"value":"1",
 			"label":"Above-base Substitutions",
 			"desc":"",
 			"type":"Registry",
@@ -2741,6 +2748,7 @@ function __getOTFTagObject() {
 		},
 		"afrc": {
 			"tag":"afrc",
+			"value":"1",
 			"label":"Alternative Fractions",
 			"desc":"",
 			"type":"Registry",
@@ -2748,6 +2756,7 @@ function __getOTFTagObject() {
 		},
 		"akhn": {
 			"tag":"akhn",
+			"value":"1",
 			"label":"Akhands",
 			"desc":"",
 			"type":"Registry",
@@ -2755,6 +2764,7 @@ function __getOTFTagObject() {
 		},
 		"blwf": {
 			"tag":"blwf",
+			"value":"1",
 			"label":"Below-base Forms",
 			"desc":"",
 			"type":"Registry",
@@ -2762,6 +2772,7 @@ function __getOTFTagObject() {
 		},
 		"blwm": {
 			"tag":"blwm",
+			"value":"1",
 			"label":"Below-base Mark Positioning",
 			"desc":"",
 			"type":"Registry",
@@ -2769,6 +2780,7 @@ function __getOTFTagObject() {
 		},
 		"blws": {
 			"tag":"blws",
+			"value":"1",
 			"label":"Below-base Substitutions",
 			"desc":"",
 			"type":"Registry",
@@ -2776,6 +2788,7 @@ function __getOTFTagObject() {
 		},
 		"calt": {
 			"tag":"calt",
+			"value":"1",
 			"label":localize(_global.otfContextualAlternateLabel),
 			"desc":localize(_global.otfContextualAlternateFeatureDesc),
 			"type":"InDesign/Registry",
@@ -2783,6 +2796,7 @@ function __getOTFTagObject() {
 		},
 		"case": {
 			"tag":"case",
+			"value":"1",
 			"label":"Case-Sensitive Forms",
 			"desc":"",
 			"type":"Registry",
@@ -2790,6 +2804,7 @@ function __getOTFTagObject() {
 		},
 		"ccmp": {
 			"tag":"ccmp",
+			"value":"1",
 			"label":"Glyph Composition / Decomposition",
 			"desc":"",
 			"type":"Registry",
@@ -2797,6 +2812,7 @@ function __getOTFTagObject() {
 		},
 		"cfar": {
 			"tag":"cfar",
+			"value":"1",
 			"label":"Conjunct Form After Ro",
 			"desc":"",
 			"type":"Registry",
@@ -2804,6 +2820,7 @@ function __getOTFTagObject() {
 		},
 		"chws": {
 			"tag":"chws",
+			"value":"1",
 			"label":"Contextual Half-width Spacing",
 			"desc":"",
 			"type":"Registry",
@@ -2811,6 +2828,7 @@ function __getOTFTagObject() {
 		},
 		"cjct": {
 			"tag":"cjct",
+			"value":"1",
 			"label":"Conjunct Forms",
 			"desc":"",
 			"type":"Registry",
@@ -2818,6 +2836,7 @@ function __getOTFTagObject() {
 		},
 		"clig": {
 			"tag":"clig",
+			"value":"1",
 			"label":"Contextual Ligatures",
 			"desc":"",
 			"type":"Registry",
@@ -2825,6 +2844,7 @@ function __getOTFTagObject() {
 		},
 		"cpct": {
 			"tag":"cpct",
+			"value":"1",
 			"label":"Centered CJK Punctuation",
 			"desc":"",
 			"type":"Registry",
@@ -2832,6 +2852,7 @@ function __getOTFTagObject() {
 		},
 		"cpsp": {
 			"tag":"cpsp",
+			"value":"1",
 			"label":"Capital Spacing",
 			"desc":"",
 			"type":"Registry",
@@ -2839,6 +2860,7 @@ function __getOTFTagObject() {
 		},
 		"cswh": {
 			"tag":"cswh",
+			"value":"1",
 			"label":"Contextual Swash",
 			"desc":"",
 			"type":"Registry",
@@ -2846,6 +2868,7 @@ function __getOTFTagObject() {
 		},
 		"curs": {
 			"tag":"curs",
+			"value":"1",
 			"label":"Cursive Positioning",
 			"desc":"",
 			"type":"Registry",
@@ -2853,6 +2876,7 @@ function __getOTFTagObject() {
 		},
 		"cv01": {
 			"tag":"cv01",
+			"value":"1",
 			"label":"Character Variant 01",
 			"desc":"",
 			"type":"Registry",
@@ -2860,6 +2884,7 @@ function __getOTFTagObject() {
 		},
 		"cv02": {
 			"tag":"cv02",
+			"value":"1",
 			"label":"Character Variant 02",
 			"desc":"",
 			"type":"Registry",
@@ -2867,6 +2892,7 @@ function __getOTFTagObject() {
 		},
 		"cv03": {
 			"tag":"cv03",
+			"value":"1",
 			"label":"Character Variant 03",
 			"desc":"",
 			"type":"Registry",
@@ -2874,6 +2900,7 @@ function __getOTFTagObject() {
 		},
 		"cv04": {
 			"tag":"cv04",
+			"value":"1",
 			"label":"Character Variant 04",
 			"desc":"",
 			"type":"Registry",
@@ -2881,6 +2908,7 @@ function __getOTFTagObject() {
 		},
 		"cv05": {
 			"tag":"cv05",
+			"value":"1",
 			"label":"Character Variant 05",
 			"desc":"",
 			"type":"Registry",
@@ -2888,6 +2916,7 @@ function __getOTFTagObject() {
 		},
 		"cv06": {
 			"tag":"cv06",
+			"value":"1",
 			"label":"Character Variant 06",
 			"desc":"",
 			"type":"Registry",
@@ -2895,6 +2924,7 @@ function __getOTFTagObject() {
 		},
 		"cv07": {
 			"tag":"cv07",
+			"value":"1",
 			"label":"Character Variant 07",
 			"desc":"",
 			"type":"Registry",
@@ -2902,6 +2932,7 @@ function __getOTFTagObject() {
 		},
 		"cv08": {
 			"tag":"cv08",
+			"value":"1",
 			"label":"Character Variant 08",
 			"desc":"",
 			"type":"Registry",
@@ -2909,6 +2940,7 @@ function __getOTFTagObject() {
 		},
 		"cv09": {
 			"tag":"cv09",
+			"value":"1",
 			"label":"Character Variant 09",
 			"desc":"",
 			"type":"Registry",
@@ -2916,6 +2948,7 @@ function __getOTFTagObject() {
 		},
 		"cv10": {
 			"tag":"cv10",
+			"value":"1",
 			"label":"Character Variant 10",
 			"desc":"",
 			"type":"Registry",
@@ -2923,6 +2956,7 @@ function __getOTFTagObject() {
 		},
 		"cv11": {
 			"tag":"cv11",
+			"value":"1",
 			"label":"Character Variant 11",
 			"desc":"",
 			"type":"Registry",
@@ -2930,6 +2964,7 @@ function __getOTFTagObject() {
 		},
 		"cv12": {
 			"tag":"cv12",
+			"value":"1",
 			"label":"Character Variant 12",
 			"desc":"",
 			"type":"Registry",
@@ -2937,6 +2972,7 @@ function __getOTFTagObject() {
 		},
 		"cv13": {
 			"tag":"cv13",
+			"value":"1",
 			"label":"Character Variant 13",
 			"desc":"",
 			"type":"Registry",
@@ -2944,6 +2980,7 @@ function __getOTFTagObject() {
 		},
 		"cv14": {
 			"tag":"cv14",
+			"value":"1",
 			"label":"Character Variant 14",
 			"desc":"",
 			"type":"Registry",
@@ -2951,6 +2988,7 @@ function __getOTFTagObject() {
 		},
 		"cv15": {
 			"tag":"cv15",
+			"value":"1",
 			"label":"Character Variant 15",
 			"desc":"",
 			"type":"Registry",
@@ -2958,6 +2996,7 @@ function __getOTFTagObject() {
 		},
 		"cv16": {
 			"tag":"cv16",
+			"value":"1",
 			"label":"Character Variant 16",
 			"desc":"",
 			"type":"Registry",
@@ -2965,6 +3004,7 @@ function __getOTFTagObject() {
 		},
 		"cv17": {
 			"tag":"cv17",
+			"value":"1",
 			"label":"Character Variant 17",
 			"desc":"",
 			"type":"Registry",
@@ -2972,6 +3012,7 @@ function __getOTFTagObject() {
 		},
 		"cv18": {
 			"tag":"cv18",
+			"value":"1",
 			"label":"Character Variant 18",
 			"desc":"",
 			"type":"Registry",
@@ -2979,6 +3020,7 @@ function __getOTFTagObject() {
 		},
 		"cv19": {
 			"tag":"cv19",
+			"value":"1",
 			"label":"Character Variant 19",
 			"desc":"",
 			"type":"Registry",
@@ -2986,6 +3028,7 @@ function __getOTFTagObject() {
 		},
 		"cv20": {
 			"tag":"cv20",
+			"value":"1",
 			"label":"Character Variant 20",
 			"desc":"",
 			"type":"Registry",
@@ -2993,6 +3036,7 @@ function __getOTFTagObject() {
 		},
 		"cv21": {
 			"tag":"cv21",
+			"value":"1",
 			"label":"Character Variant 21",
 			"desc":"",
 			"type":"Registry",
@@ -3000,6 +3044,7 @@ function __getOTFTagObject() {
 		},
 		"cv22": {
 			"tag":"cv22",
+			"value":"1",
 			"label":"Character Variant 22",
 			"desc":"",
 			"type":"Registry",
@@ -3007,6 +3052,7 @@ function __getOTFTagObject() {
 		},
 		"cv23": {
 			"tag":"cv23",
+			"value":"1",
 			"label":"Character Variant 23",
 			"desc":"",
 			"type":"Registry",
@@ -3014,6 +3060,7 @@ function __getOTFTagObject() {
 		},
 		"cv24": {
 			"tag":"cv24",
+			"value":"1",
 			"label":"Character Variant 24",
 			"desc":"",
 			"type":"Registry",
@@ -3021,6 +3068,7 @@ function __getOTFTagObject() {
 		},
 		"cv25": {
 			"tag":"cv25",
+			"value":"1",
 			"label":"Character Variant 25",
 			"desc":"",
 			"type":"Registry",
@@ -3028,6 +3076,7 @@ function __getOTFTagObject() {
 		},
 		"cv26": {
 			"tag":"cv26",
+			"value":"1",
 			"label":"Character Variant 26",
 			"desc":"",
 			"type":"Registry",
@@ -3035,6 +3084,7 @@ function __getOTFTagObject() {
 		},
 		"cv27": {
 			"tag":"cv27",
+			"value":"1",
 			"label":"Character Variant 27",
 			"desc":"",
 			"type":"Registry",
@@ -3042,6 +3092,7 @@ function __getOTFTagObject() {
 		},
 		"cv28": {
 			"tag":"cv28",
+			"value":"1",
 			"label":"Character Variant 28",
 			"desc":"",
 			"type":"Registry",
@@ -3049,6 +3100,7 @@ function __getOTFTagObject() {
 		},
 		"cv29": {
 			"tag":"cv29",
+			"value":"1",
 			"label":"Character Variant 29",
 			"desc":"",
 			"type":"Registry",
@@ -3056,6 +3108,7 @@ function __getOTFTagObject() {
 		},
 		"cv30": {
 			"tag":"cv30",
+			"value":"1",
 			"label":"Character Variant 30",
 			"desc":"",
 			"type":"Registry",
@@ -3063,6 +3116,7 @@ function __getOTFTagObject() {
 		},
 		"cv31": {
 			"tag":"cv31",
+			"value":"1",
 			"label":"Character Variant 31",
 			"desc":"",
 			"type":"Registry",
@@ -3070,6 +3124,7 @@ function __getOTFTagObject() {
 		},
 		"cv32": {
 			"tag":"cv32",
+			"value":"1",
 			"label":"Character Variant 32",
 			"desc":"",
 			"type":"Registry",
@@ -3077,6 +3132,7 @@ function __getOTFTagObject() {
 		},
 		"cv33": {
 			"tag":"cv33",
+			"value":"1",
 			"label":"Character Variant 33",
 			"desc":"",
 			"type":"Registry",
@@ -3084,6 +3140,7 @@ function __getOTFTagObject() {
 		},
 		"cv34": {
 			"tag":"cv34",
+			"value":"1",
 			"label":"Character Variant 34",
 			"desc":"",
 			"type":"Registry",
@@ -3091,6 +3148,7 @@ function __getOTFTagObject() {
 		},
 		"cv35": {
 			"tag":"cv35",
+			"value":"1",
 			"label":"Character Variant 35",
 			"desc":"",
 			"type":"Registry",
@@ -3098,6 +3156,7 @@ function __getOTFTagObject() {
 		},
 		"cv36": {
 			"tag":"cv36",
+			"value":"1",
 			"label":"Character Variant 36",
 			"desc":"",
 			"type":"Registry",
@@ -3105,6 +3164,7 @@ function __getOTFTagObject() {
 		},
 		"cv37": {
 			"tag":"cv37",
+			"value":"1",
 			"label":"Character Variant 37",
 			"desc":"",
 			"type":"Registry",
@@ -3112,6 +3172,7 @@ function __getOTFTagObject() {
 		},
 		"cv38": {
 			"tag":"cv38",
+			"value":"1",
 			"label":"Character Variant 38",
 			"desc":"",
 			"type":"Registry",
@@ -3119,6 +3180,7 @@ function __getOTFTagObject() {
 		},
 		"cv39": {
 			"tag":"cv39",
+			"value":"1",
 			"label":"Character Variant 39",
 			"desc":"",
 			"type":"Registry",
@@ -3126,6 +3188,7 @@ function __getOTFTagObject() {
 		},
 		"cv40": {
 			"tag":"cv40",
+			"value":"1",
 			"label":"Character Variant 40",
 			"desc":"",
 			"type":"Registry",
@@ -3133,6 +3196,7 @@ function __getOTFTagObject() {
 		},
 		"cv41": {
 			"tag":"cv41",
+			"value":"1",
 			"label":"Character Variant 41",
 			"desc":"",
 			"type":"Registry",
@@ -3140,6 +3204,7 @@ function __getOTFTagObject() {
 		},
 		"cv42": {
 			"tag":"cv42",
+			"value":"1",
 			"label":"Character Variant 42",
 			"desc":"",
 			"type":"Registry",
@@ -3147,6 +3212,7 @@ function __getOTFTagObject() {
 		},
 		"cv43": {
 			"tag":"cv43",
+			"value":"1",
 			"label":"Character Variant 43",
 			"desc":"",
 			"type":"Registry",
@@ -3154,6 +3220,7 @@ function __getOTFTagObject() {
 		},
 		"cv44": {
 			"tag":"cv44",
+			"value":"1",
 			"label":"Character Variant 44",
 			"desc":"",
 			"type":"Registry",
@@ -3161,6 +3228,7 @@ function __getOTFTagObject() {
 		},
 		"cv45": {
 			"tag":"cv45",
+			"value":"1",
 			"label":"Character Variant 45",
 			"desc":"",
 			"type":"Registry",
@@ -3168,6 +3236,7 @@ function __getOTFTagObject() {
 		},
 		"cv46": {
 			"tag":"cv46",
+			"value":"1",
 			"label":"Character Variant 46",
 			"desc":"",
 			"type":"Registry",
@@ -3175,6 +3244,7 @@ function __getOTFTagObject() {
 		},
 		"cv47": {
 			"tag":"cv47",
+			"value":"1",
 			"label":"Character Variant 47",
 			"desc":"",
 			"type":"Registry",
@@ -3182,6 +3252,7 @@ function __getOTFTagObject() {
 		},
 		"cv48": {
 			"tag":"cv48",
+			"value":"1",
 			"label":"Character Variant 48",
 			"desc":"",
 			"type":"Registry",
@@ -3189,6 +3260,7 @@ function __getOTFTagObject() {
 		},
 		"cv49": {
 			"tag":"cv49",
+			"value":"1",
 			"label":"Character Variant 49",
 			"desc":"",
 			"type":"Registry",
@@ -3196,6 +3268,7 @@ function __getOTFTagObject() {
 		},
 		"cv50": {
 			"tag":"cv50",
+			"value":"1",
 			"label":"Character Variant 50",
 			"desc":"",
 			"type":"Registry",
@@ -3203,6 +3276,7 @@ function __getOTFTagObject() {
 		},
 		"cv51": {
 			"tag":"cv51",
+			"value":"1",
 			"label":"Character Variant 51",
 			"desc":"",
 			"type":"Registry",
@@ -3210,6 +3284,7 @@ function __getOTFTagObject() {
 		},
 		"cv52": {
 			"tag":"cv52",
+			"value":"1",
 			"label":"Character Variant 52",
 			"desc":"",
 			"type":"Registry",
@@ -3217,6 +3292,7 @@ function __getOTFTagObject() {
 		},
 		"cv53": {
 			"tag":"cv53",
+			"value":"1",
 			"label":"Character Variant 53",
 			"desc":"",
 			"type":"Registry",
@@ -3224,6 +3300,7 @@ function __getOTFTagObject() {
 		},
 		"cv54": {
 			"tag":"cv54",
+			"value":"1",
 			"label":"Character Variant 54",
 			"desc":"",
 			"type":"Registry",
@@ -3231,6 +3308,7 @@ function __getOTFTagObject() {
 		},
 		"cv55": {
 			"tag":"cv55",
+			"value":"1",
 			"label":"Character Variant 55",
 			"desc":"",
 			"type":"Registry",
@@ -3238,6 +3316,7 @@ function __getOTFTagObject() {
 		},
 		"cv56": {
 			"tag":"cv56",
+			"value":"1",
 			"label":"Character Variant 56",
 			"desc":"",
 			"type":"Registry",
@@ -3245,6 +3324,7 @@ function __getOTFTagObject() {
 		},
 		"cv57": {
 			"tag":"cv57",
+			"value":"1",
 			"label":"Character Variant 57",
 			"desc":"",
 			"type":"Registry",
@@ -3252,6 +3332,7 @@ function __getOTFTagObject() {
 		},
 		"cv58": {
 			"tag":"cv58",
+			"value":"1",
 			"label":"Character Variant 58",
 			"desc":"",
 			"type":"Registry",
@@ -3259,6 +3340,7 @@ function __getOTFTagObject() {
 		},
 		"cv59": {
 			"tag":"cv59",
+			"value":"1",
 			"label":"Character Variant 59",
 			"desc":"",
 			"type":"Registry",
@@ -3266,6 +3348,7 @@ function __getOTFTagObject() {
 		},
 		"cv60": {
 			"tag":"cv60",
+			"value":"1",
 			"label":"Character Variant 60",
 			"desc":"",
 			"type":"Registry",
@@ -3273,6 +3356,7 @@ function __getOTFTagObject() {
 		},
 		"cv61": {
 			"tag":"cv61",
+			"value":"1",
 			"label":"Character Variant 61",
 			"desc":"",
 			"type":"Registry",
@@ -3280,6 +3364,7 @@ function __getOTFTagObject() {
 		},
 		"cv62": {
 			"tag":"cv62",
+			"value":"1",
 			"label":"Character Variant 62",
 			"desc":"",
 			"type":"Registry",
@@ -3287,6 +3372,7 @@ function __getOTFTagObject() {
 		},
 		"cv63": {
 			"tag":"cv63",
+			"value":"1",
 			"label":"Character Variant 63",
 			"desc":"",
 			"type":"Registry",
@@ -3294,6 +3380,7 @@ function __getOTFTagObject() {
 		},
 		"cv64": {
 			"tag":"cv64",
+			"value":"1",
 			"label":"Character Variant 64",
 			"desc":"",
 			"type":"Registry",
@@ -3301,6 +3388,7 @@ function __getOTFTagObject() {
 		},
 		"cv65": {
 			"tag":"cv65",
+			"value":"1",
 			"label":"Character Variant 65",
 			"desc":"",
 			"type":"Registry",
@@ -3308,6 +3396,7 @@ function __getOTFTagObject() {
 		},
 		"cv66": {
 			"tag":"cv66",
+			"value":"1",
 			"label":"Character Variant 66",
 			"desc":"",
 			"type":"Registry",
@@ -3315,6 +3404,7 @@ function __getOTFTagObject() {
 		},
 		"cv67": {
 			"tag":"cv67",
+			"value":"1",
 			"label":"Character Variant 67",
 			"desc":"",
 			"type":"Registry",
@@ -3322,6 +3412,7 @@ function __getOTFTagObject() {
 		},
 		"cv68": {
 			"tag":"cv68",
+			"value":"1",
 			"label":"Character Variant 68",
 			"desc":"",
 			"type":"Registry",
@@ -3329,6 +3420,7 @@ function __getOTFTagObject() {
 		},
 		"cv69": {
 			"tag":"cv69",
+			"value":"1",
 			"label":"Character Variant 69",
 			"desc":"",
 			"type":"Registry",
@@ -3336,6 +3428,7 @@ function __getOTFTagObject() {
 		},
 		"cv70": {
 			"tag":"cv70",
+			"value":"1",
 			"label":"Character Variant 70",
 			"desc":"",
 			"type":"Registry",
@@ -3343,6 +3436,7 @@ function __getOTFTagObject() {
 		},
 		"cv71": {
 			"tag":"cv71",
+			"value":"1",
 			"label":"Character Variant 71",
 			"desc":"",
 			"type":"Registry",
@@ -3350,6 +3444,7 @@ function __getOTFTagObject() {
 		},
 		"cv72": {
 			"tag":"cv72",
+			"value":"1",
 			"label":"Character Variant 72",
 			"desc":"",
 			"type":"Registry",
@@ -3357,6 +3452,7 @@ function __getOTFTagObject() {
 		},
 		"cv73": {
 			"tag":"cv73",
+			"value":"1",
 			"label":"Character Variant 73",
 			"desc":"",
 			"type":"Registry",
@@ -3364,6 +3460,7 @@ function __getOTFTagObject() {
 		},
 		"cv74": {
 			"tag":"cv74",
+			"value":"1",
 			"label":"Character Variant 74",
 			"desc":"",
 			"type":"Registry",
@@ -3371,6 +3468,7 @@ function __getOTFTagObject() {
 		},
 		"cv75": {
 			"tag":"cv75",
+			"value":"1",
 			"label":"Character Variant 75",
 			"desc":"",
 			"type":"Registry",
@@ -3378,6 +3476,7 @@ function __getOTFTagObject() {
 		},
 		"cv76": {
 			"tag":"cv76",
+			"value":"1",
 			"label":"Character Variant 76",
 			"desc":"",
 			"type":"Registry",
@@ -3385,6 +3484,7 @@ function __getOTFTagObject() {
 		},
 		"cv77": {
 			"tag":"cv77",
+			"value":"1",
 			"label":"Character Variant 77",
 			"desc":"",
 			"type":"Registry",
@@ -3392,6 +3492,7 @@ function __getOTFTagObject() {
 		},
 		"cv78": {
 			"tag":"cv78",
+			"value":"1",
 			"label":"Character Variant 78",
 			"desc":"",
 			"type":"Registry",
@@ -3399,6 +3500,7 @@ function __getOTFTagObject() {
 		},
 		"cv79": {
 			"tag":"cv79",
+			"value":"1",
 			"label":"Character Variant 79",
 			"desc":"",
 			"type":"Registry",
@@ -3406,6 +3508,7 @@ function __getOTFTagObject() {
 		},
 		"cv80": {
 			"tag":"cv80",
+			"value":"1",
 			"label":"Character Variant 80",
 			"desc":"",
 			"type":"Registry",
@@ -3413,6 +3516,7 @@ function __getOTFTagObject() {
 		},
 		"cv81": {
 			"tag":"cv81",
+			"value":"1",
 			"label":"Character Variant 81",
 			"desc":"",
 			"type":"Registry",
@@ -3420,6 +3524,7 @@ function __getOTFTagObject() {
 		},
 		"cv82": {
 			"tag":"cv82",
+			"value":"1",
 			"label":"Character Variant 82",
 			"desc":"",
 			"type":"Registry",
@@ -3427,6 +3532,7 @@ function __getOTFTagObject() {
 		},
 		"cv83": {
 			"tag":"cv83",
+			"value":"1",
 			"label":"Character Variant 83",
 			"desc":"",
 			"type":"Registry",
@@ -3434,6 +3540,7 @@ function __getOTFTagObject() {
 		},
 		"cv84": {
 			"tag":"cv84",
+			"value":"1",
 			"label":"Character Variant 84",
 			"desc":"",
 			"type":"Registry",
@@ -3441,6 +3548,7 @@ function __getOTFTagObject() {
 		},
 		"cv85": {
 			"tag":"cv85",
+			"value":"1",
 			"label":"Character Variant 85",
 			"desc":"",
 			"type":"Registry",
@@ -3448,6 +3556,7 @@ function __getOTFTagObject() {
 		},
 		"cv86": {
 			"tag":"cv86",
+			"value":"1",
 			"label":"Character Variant 86",
 			"desc":"",
 			"type":"Registry",
@@ -3455,6 +3564,7 @@ function __getOTFTagObject() {
 		},
 		"cv87": {
 			"tag":"cv87",
+			"value":"1",
 			"label":"Character Variant 87",
 			"desc":"",
 			"type":"Registry",
@@ -3462,6 +3572,7 @@ function __getOTFTagObject() {
 		},
 		"cv88": {
 			"tag":"cv88",
+			"value":"1",
 			"label":"Character Variant 88",
 			"desc":"",
 			"type":"Registry",
@@ -3469,6 +3580,7 @@ function __getOTFTagObject() {
 		},
 		"cv89": {
 			"tag":"cv89",
+			"value":"1",
 			"label":"Character Variant 89",
 			"desc":"",
 			"type":"Registry",
@@ -3476,6 +3588,7 @@ function __getOTFTagObject() {
 		},
 		"cv90": {
 			"tag":"cv90",
+			"value":"1",
 			"label":"Character Variant 90",
 			"desc":"",
 			"type":"Registry",
@@ -3483,6 +3596,7 @@ function __getOTFTagObject() {
 		},
 		"cv91": {
 			"tag":"cv91",
+			"value":"1",
 			"label":"Character Variant 91",
 			"desc":"",
 			"type":"Registry",
@@ -3490,6 +3604,7 @@ function __getOTFTagObject() {
 		},
 		"cv92": {
 			"tag":"cv92",
+			"value":"1",
 			"label":"Character Variant 92",
 			"desc":"",
 			"type":"Registry",
@@ -3497,6 +3612,7 @@ function __getOTFTagObject() {
 		},
 		"cv93": {
 			"tag":"cv93",
+			"value":"1",
 			"label":"Character Variant 93",
 			"desc":"",
 			"type":"Registry",
@@ -3504,6 +3620,7 @@ function __getOTFTagObject() {
 		},
 		"cv94": {
 			"tag":"cv94",
+			"value":"1",
 			"label":"Character Variant 94",
 			"desc":"",
 			"type":"Registry",
@@ -3511,6 +3628,7 @@ function __getOTFTagObject() {
 		},
 		"cv95": {
 			"tag":"cv95",
+			"value":"1",
 			"label":"Character Variant 95",
 			"desc":"",
 			"type":"Registry",
@@ -3518,6 +3636,7 @@ function __getOTFTagObject() {
 		},
 		"cv96": {
 			"tag":"cv96",
+			"value":"1",
 			"label":"Character Variant 96",
 			"desc":"",
 			"type":"Registry",
@@ -3525,6 +3644,7 @@ function __getOTFTagObject() {
 		},
 		"cv97": {
 			"tag":"cv97",
+			"value":"1",
 			"label":"Character Variant 97",
 			"desc":"",
 			"type":"Registry",
@@ -3532,6 +3652,7 @@ function __getOTFTagObject() {
 		},
 		"cv98": {
 			"tag":"cv98",
+			"value":"1",
 			"label":"Character Variant 98",
 			"desc":"",
 			"type":"Registry",
@@ -3539,6 +3660,7 @@ function __getOTFTagObject() {
 		},
 		"cv99": {
 			"tag":"cv99",
+			"value":"1",
 			"label":"Character Variant 99",
 			"desc":"",
 			"type":"Registry",
@@ -3546,6 +3668,7 @@ function __getOTFTagObject() {
 		},
 		"c2pc": {
 			"tag":"c2pc",
+			"value":"1",
 			"label":"Petite Capitals From Capitals",
 			"desc":"",
 			"type":"Registry",
@@ -3553,6 +3676,7 @@ function __getOTFTagObject() {
 		},
 		"c2sc": {
 			"tag":"c2sc",
+			"value":"1",
 			"label":localize(_global.capitalizationLabel),
 			"desc":localize(_global.capitalizationFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3560,6 +3684,7 @@ function __getOTFTagObject() {
 		},
 		"dist": {
 			"tag":"dist",
+			"value":"1",
 			"label":"Distances",
 			"desc":"",
 			"type":"Registry",
@@ -3567,6 +3692,7 @@ function __getOTFTagObject() {
 		},
 		"dlig": {
 			"tag":"dlig",
+			"value":"1",
 			"label":localize(_global.otfDiscretionaryLigatureLabel),
 			"desc":localize(_global.otfDiscretionaryLigatureFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3574,6 +3700,7 @@ function __getOTFTagObject() {
 		},
 		"dnom": {
 			"tag":"dnom",
+			"value":"1",
 			"label":localize(_global.positionDenominatorLabel),
 			"desc":localize(_global.positionDenominatorFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3581,6 +3708,7 @@ function __getOTFTagObject() {
 		},
 		"dtls": {
 			"tag":"dtls",
+			"value":"1",
 			"label":"Dotless Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3588,6 +3716,7 @@ function __getOTFTagObject() {
 		},
 		"expt": {
 			"tag":"expt",
+			"value":"1",
 			"label":"Expert Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3595,6 +3724,7 @@ function __getOTFTagObject() {
 		},
 		"falt": {
 			"tag":"falt",
+			"value":"1",
 			"label":"Final Glyph on Line Alternates",
 			"desc":"",
 			"type":"Registry",
@@ -3602,6 +3732,7 @@ function __getOTFTagObject() {
 		},
 		"fin2": {
 			"tag":"fin2",
+			"value":"1",
 			"label":"Terminal Forms #2",
 			"desc":"",
 			"type":"Registry",
@@ -3609,6 +3740,7 @@ function __getOTFTagObject() {
 		},
 		"fin3": {
 			"tag":"fin3",
+			"value":"1",
 			"label":"Terminal Forms #3",
 			"desc":"",
 			"type":"Registry",
@@ -3616,6 +3748,7 @@ function __getOTFTagObject() {
 		},
 		"fina": {
 			"tag":"fina",
+			"value":"1",
 			"label":localize(_global.positionalFormsFinalLabel),
 			"desc":localize(_global.positionalFormsFinalFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3623,6 +3756,7 @@ function __getOTFTagObject() {
 		},
 		"flac": {
 			"tag":"flac",
+			"value":"1",
 			"label":"Flattened accent forms",
 			"desc":"",
 			"type":"Registry",
@@ -3630,6 +3764,7 @@ function __getOTFTagObject() {
 		},
 		"frac": {
 			"tag":"frac",
+			"value":"1",
 			"label":localize(_global.otfFractionLabel),
 			"desc":localize(_global.otfFractionFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3637,6 +3772,7 @@ function __getOTFTagObject() {
 		},
 		"fwid": {
 			"tag":"fwid",
+			"value":"1",
 			"label":"Full Widths",
 			"desc":"",
 			"type":"Registry",
@@ -3644,6 +3780,7 @@ function __getOTFTagObject() {
 		},
 		"half": {
 			"tag":"half",
+			"value":"1",
 			"label":"Half Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3651,6 +3788,7 @@ function __getOTFTagObject() {
 		},
 		"haln": {
 			"tag":"haln",
+			"value":"1",
 			"label":"Halant Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3658,6 +3796,7 @@ function __getOTFTagObject() {
 		},
 		"halt": {
 			"tag":"halt",
+			"value":"1",
 			"label":"Alternate Half Widths",
 			"desc":"",
 			"type":"Registry",
@@ -3665,6 +3804,7 @@ function __getOTFTagObject() {
 		},
 		"hist": {
 			"tag":"hist",
+			"value":"1",
 			"label":localize(_global.otfHistoricalLabel),
 			"desc":localize(_global.otfHistoricalFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3672,6 +3812,7 @@ function __getOTFTagObject() {
 		},
 		"hkna": {
 			"tag":"hkna",
+			"value":"1",
 			"label":localize(_global.otfHVKanaLabel),
 			"desc":localize(_global.otfHVKanaFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3679,6 +3820,7 @@ function __getOTFTagObject() {
 		},
 		"hlig": {
 			"tag":"hlig",
+			"value":"1",
 			"label":"Historical Ligatures",
 			"desc":"",
 			"type":"Registry",
@@ -3686,6 +3828,7 @@ function __getOTFTagObject() {
 		},
 		"hngl": {
 			"tag":"hngl",
+			"value":"1",
 			"label":"Hangul",
 			"desc":"",
 			"type":"Registry",
@@ -3693,6 +3836,7 @@ function __getOTFTagObject() {
 		},
 		"hojo": {
 			"tag":"hojo",
+			"value":"1",
 			"label":"Hojo Kanji Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3700,6 +3844,7 @@ function __getOTFTagObject() {
 		},
 		"hwid": {
 			"tag":"hwid",
+			"value":"1",
 			"label":"Half Widths",
 			"desc":"",
 			"type":"Registry",
@@ -3707,6 +3852,7 @@ function __getOTFTagObject() {
 		},
 		"init": {
 			"tag":"init",
+			"value":"1",
 			"label":localize(_global.positionalFormsInitialLabel),
 			"desc":localize(_global.positionalFormsInitialFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3714,6 +3860,7 @@ function __getOTFTagObject() {
 		},
 		"isol": {
 			"tag":"isol",
+			"value":"1",
 			"label":localize(_global.positionalFormsIsolatedLabel),
 			"desc":localize(_global.positionalFormsIsolatedFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3721,6 +3868,7 @@ function __getOTFTagObject() {
 		},
 		"ital": {
 			"tag":"ital",
+			"value":"1",
 			"label":localize(_global.otfRomanItalicsLabel),
 			"desc":localize(_global.otfRomanItalicsFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3728,6 +3876,7 @@ function __getOTFTagObject() {
 		},
 		"jalt": {
 			"tag":"jalt",
+			"value":"1",
 			"label":localize(_global.otfJustificationAlternateLabel),
 			"desc":localize(_global.otfJustificationAlternateFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3735,6 +3884,7 @@ function __getOTFTagObject() {
 		},
 		"jp78": {
 			"tag":"jp78",
+			"value":"1",
 			"label":"JIS78 Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3742,6 +3892,7 @@ function __getOTFTagObject() {
 		},
 		"jp83": {
 			"tag":"jp83",
+			"value":"1",
 			"label":"JIS83 Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3749,6 +3900,7 @@ function __getOTFTagObject() {
 		},
 		"jp90": {
 			"tag":"jp90",
+			"value":"1",
 			"label":"JIS90 Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3756,6 +3908,7 @@ function __getOTFTagObject() {
 		},
 		"jp04": {
 			"tag":"jp04",
+			"value":"1",
 			"label":"JIS2004 Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3763,6 +3916,7 @@ function __getOTFTagObject() {
 		},
 		"kern": {
 			"tag":"kern",
+			"value":"1",
 			"label":"Kerning",
 			"desc":"",
 			"type":"Registry",
@@ -3770,6 +3924,7 @@ function __getOTFTagObject() {
 		},
 		"lfbd": {
 			"tag":"lfbd",
+			"value":"1",
 			"label":"Left Bounds",
 			"desc":"",
 			"type":"Registry",
@@ -3777,6 +3932,7 @@ function __getOTFTagObject() {
 		},
 		"liga": {
 			"tag":"liga",
+			"value":"1",
 			"label":localize(_global.ligatureLabel),
 			"desc":localize(_global.ligaturesFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3784,6 +3940,7 @@ function __getOTFTagObject() {
 		},
 		"ljmo": {
 			"tag":"ljmo",
+			"value":"1",
 			"label":"Leading Jamo Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3791,6 +3948,7 @@ function __getOTFTagObject() {
 		},
 		"lnum": {
 			"tag":"lnum",
+			"value":"1",
 			"label":localize(_global.liningFiguresLabel),
 			"desc":"",
 			"type":"InDesign+/Registry",
@@ -3798,6 +3956,7 @@ function __getOTFTagObject() {
 		},
 		"locl": {
 			"tag":"locl",
+			"value":"1",
 			"label":"Localized Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3805,6 +3964,7 @@ function __getOTFTagObject() {
 		},
 		"ltra": {
 			"tag":"ltra",
+			"value":"1",
 			"label":"Left-to-right alternates",
 			"desc":"",
 			"type":"Registry",
@@ -3812,6 +3972,7 @@ function __getOTFTagObject() {
 		},
 		"ltrm": {
 			"tag":"ltrm",
+			"value":"1",
 			"label":"Left-to-right mirrored forms",
 			"desc":"",
 			"type":"Registry",
@@ -3819,6 +3980,7 @@ function __getOTFTagObject() {
 		},
 		"mark": {
 			"tag":"mark",
+			"value":"1",
 			"label":localize(_global.otfMarkLabel),
 			"desc":localize(_global.otfMarkFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3826,6 +3988,7 @@ function __getOTFTagObject() {
 		},
 		"med2": {
 			"tag":"med2",
+			"value":"1",
 			"label":"Medial Forms #2",
 			"desc":"",
 			"type":"Registry",
@@ -3833,6 +3996,7 @@ function __getOTFTagObject() {
 		},
 		"medi": {
 			"tag":"medi",
+			"value":"1",
 			"label":localize(_global.positionalFormsMedialLabel),
 			"desc":localize(_global.positionalFormsInitialFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3840,6 +4004,7 @@ function __getOTFTagObject() {
 		},
 		"mgrk": {
 			"tag":"mgrk",
+			"value":"1",
 			"label":"Mathematical Greek",
 			"desc":"",
 			"type":"Registry",
@@ -3847,6 +4012,7 @@ function __getOTFTagObject() {
 		},
 		"mkmk": {
 			"tag":"mkmk",
+			"value":"1",
 			"label":"Mark to Mark Positioning",
 			"desc":"",
 			"type":"Registry",
@@ -3854,6 +4020,7 @@ function __getOTFTagObject() {
 		},
 		"mset": {
 			"tag":"mset",
+			"value":"1",
 			"label":"Mark Positioning via Substitution",
 			"desc":"",
 			"type":"Registry",
@@ -3861,6 +4028,7 @@ function __getOTFTagObject() {
 		},
 		"nalt": {
 			"tag":"nalt",
+			"value":"1",
 			"label":"Alternate Annotation Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3868,6 +4036,7 @@ function __getOTFTagObject() {
 		},
 		"nlck": {
 			"tag":"nlck",
+			"value":"1",
 			"label":"NLC Kanji Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3875,6 +4044,7 @@ function __getOTFTagObject() {
 		},
 		"nukt": {
 			"tag":"nukt",
+			"value":"1",
 			"label":"Nukta Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3882,6 +4052,7 @@ function __getOTFTagObject() {
 		},
 		"numr": {
 			"tag":"numr",
+			"value":"1",
 			"label":localize(_global.positionNumeratorLabel),
 			"desc":localize(_global.positionNumeratorFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3889,6 +4060,7 @@ function __getOTFTagObject() {
 		},
 		"olsh": {
 			"tag":"olsh",
+			"value":"1",
 			"label":localize(_global.otfOverlapSwashLabel),
 			"desc":"",
 			"type":"InDesign",
@@ -3896,6 +4068,7 @@ function __getOTFTagObject() {
 		},
 		"onum": {
 			"tag":"onum",
+			"value":"1",
 			"label":localize(_global.oldstyleFiguresLabel),
 			"desc":"",
 			"type":"InDesign+/Registry",
@@ -3903,6 +4076,7 @@ function __getOTFTagObject() {
 		},
 		"opbd": {
 			"tag":"opbd",
+			"value":"1",
 			"label":"Optical Bounds",
 			"desc":"",
 			"type":"Registry",
@@ -3910,6 +4084,7 @@ function __getOTFTagObject() {
 		},
 		"ordn": {
 			"tag":"ordn",
+			"value":"1",
 			"label":localize(_global.otfOrdinalLabel),
 			"desc":localize(_global.otfOrdinalFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3917,6 +4092,7 @@ function __getOTFTagObject() {
 		},
 		"ornm": {
 			"tag":"ornm",
+			"value":"1",
 			"label":"Ornaments",
 			"desc":"",
 			"type":"Registry",
@@ -3924,6 +4100,7 @@ function __getOTFTagObject() {
 		},
 		"palt": {
 			"tag":"palt",
+			"value":"1",
 			"label":localize(_global.otfProportionalMetricsLabel),
 			"desc":localize(_global.otfProportionalMetricsFeatureDesc),
 			"type":"InDesign/Registry",
@@ -3931,6 +4108,7 @@ function __getOTFTagObject() {
 		},
 		"pcap": {
 			"tag":"pcap",
+			"value":"1",
 			"label":"Petite Capitals",
 			"desc":"",
 			"type":"Registry",
@@ -3938,6 +4116,7 @@ function __getOTFTagObject() {
 		},
 		"pkna": {
 			"tag":"pkna",
+			"value":"1",
 			"label":"Proportional Kana",
 			"desc":"",
 			"type":"Registry",
@@ -3945,6 +4124,7 @@ function __getOTFTagObject() {
 		},
 		"pnum": {
 			"tag":"pnum",
+			"value":"1",
 			"label":localize(_global.proportionalFiguresLabel),
 			"desc":"",
 			"type":"InDesign+/Registry",
@@ -3952,6 +4132,7 @@ function __getOTFTagObject() {
 		},
 		"pref": {
 			"tag":"pref",
+			"value":"1",
 			"label":"Pre-Base Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3959,6 +4140,7 @@ function __getOTFTagObject() {
 		},
 		"pres": {
 			"tag":"pres",
+			"value":"1",
 			"label":"Pre-base Substitutions",
 			"desc":"",
 			"type":"Registry",
@@ -3966,6 +4148,7 @@ function __getOTFTagObject() {
 		},
 		"pstf": {
 			"tag":"pstf",
+			"value":"1",
 			"label":"Post-base Forms",
 			"desc":"",
 			"type":"Registry",
@@ -3973,6 +4156,7 @@ function __getOTFTagObject() {
 		},
 		"psts": {
 			"tag":"psts",
+			"value":"1",
 			"label":"Post-base Substitutions",
 			"desc":"",
 			"type":"Registry",
@@ -3980,6 +4164,7 @@ function __getOTFTagObject() {
 		},
 		"pwid": {
 			"tag":"pwid",
+			"value":"1",
 			"label":"Proportional Widths",
 			"desc":"",
 			"type":"Registry",
@@ -3987,6 +4172,7 @@ function __getOTFTagObject() {
 		},
 		"qwid": {
 			"tag":"qwid",
+			"value":"1",
 			"label":"Quarter Widths",
 			"desc":"",
 			"type":"Registry",
@@ -3994,6 +4180,7 @@ function __getOTFTagObject() {
 		},
 		"rand": {
 			"tag":"rand",
+			"value":"1",
 			"label":"Randomize",
 			"desc":"",
 			"type":"Registry",
@@ -4001,6 +4188,7 @@ function __getOTFTagObject() {
 		},
 		"rclt": {
 			"tag":"rclt",
+			"value":"1",
 			"label":"Required Contextual Alternates",
 			"desc":"",
 			"type":"Registry",
@@ -4008,6 +4196,7 @@ function __getOTFTagObject() {
 		},
 		"rkrf": {
 			"tag":"rkrf",
+			"value":"1",
 			"label":"Rakar Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4015,6 +4204,7 @@ function __getOTFTagObject() {
 		},
 		"rlig": {
 			"tag":"rlig",
+			"value":"1",
 			"label":"Required Ligatures",
 			"desc":"",
 			"type":"Registry",
@@ -4022,6 +4212,7 @@ function __getOTFTagObject() {
 		},
 		"rphf": {
 			"tag":"rphf",
+			"value":"1",
 			"label":"Reph Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4029,6 +4220,7 @@ function __getOTFTagObject() {
 		},
 		"rtbd": {
 			"tag":"rtbd",
+			"value":"1",
 			"label":"Right Bounds",
 			"desc":"",
 			"type":"Registry",
@@ -4036,6 +4228,7 @@ function __getOTFTagObject() {
 		},
 		"rtla": {
 			"tag":"rtla",
+			"value":"1",
 			"label":"Right-to-left alternates",
 			"desc":"",
 			"type":"Registry",
@@ -4043,6 +4236,7 @@ function __getOTFTagObject() {
 		},
 		"rtlm": {
 			"tag":"rtlm",
+			"value":"1",
 			"label":"Right-to-left mirrored forms",
 			"desc":"",
 			"type":"Registry",
@@ -4050,6 +4244,7 @@ function __getOTFTagObject() {
 		},
 		"ruby": {
 			"tag":"ruby",
+			"value":"1",
 			"label":"Ruby Notation Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4057,6 +4252,7 @@ function __getOTFTagObject() {
 		},
 		"rvrn": {
 			"tag":"rvrn",
+			"value":"1",
 			"label":"Required Variation Alternates",
 			"desc":"",
 			"type":"Registry",
@@ -4064,6 +4260,7 @@ function __getOTFTagObject() {
 		},
 		"salt": {
 			"tag":"salt",
+			"value":"1",
 			"label":localize(_global.otfStylisticAlternateLabel),
 			"desc":localize(_global.otfStylisticAlternateFeatureDesc),
 			"type":"InDesign/Registry",
@@ -4071,6 +4268,7 @@ function __getOTFTagObject() {
 		},
 		"sinf": {
 			"tag":"sinf",
+			"value":"1",
 			"label":"Scientific Inferiors",
 			"desc":"",
 			"type":"Registry",
@@ -4078,6 +4276,7 @@ function __getOTFTagObject() {
 		},
 		"size": {
 			"tag":"size",
+			"value":"1",
 			"label":"Optical size",
 			"desc":"",
 			"type":"Registry",
@@ -4085,6 +4284,7 @@ function __getOTFTagObject() {
 		},
 		"smcp": {
 			"tag":"smcp",
+			"value":"1",
 			"label":"Small Capitals",
 			"desc":"",
 			"type":"Registry",
@@ -4092,6 +4292,7 @@ function __getOTFTagObject() {
 		},
 		"smpl": {
 			"tag":"smpl",
+			"value":"1",
 			"label":"Simplified Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4099,6 +4300,7 @@ function __getOTFTagObject() {
 		},
 		"ss01": {
 			"tag":"ss01",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "1"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4106,6 +4308,7 @@ function __getOTFTagObject() {
 		},
 		"ss02": {
 			"tag":"ss02",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "2"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4113,6 +4316,7 @@ function __getOTFTagObject() {
 		},
 		"ss03": {
 			"tag":"ss03",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "3"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4120,6 +4324,7 @@ function __getOTFTagObject() {
 		},
 		"ss04": {
 			"tag":"ss04",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "4"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4127,6 +4332,7 @@ function __getOTFTagObject() {
 		},
 		"ss05": {
 			"tag":"ss05",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "5"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4134,6 +4340,7 @@ function __getOTFTagObject() {
 		},
 		"ss06": {
 			"tag":"ss06",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "6"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4141,6 +4348,7 @@ function __getOTFTagObject() {
 		},
 		"ss07": {
 			"tag":"ss07",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "7"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4148,6 +4356,7 @@ function __getOTFTagObject() {
 		},
 		"ss08": {
 			"tag":"ss08",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "8"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4155,6 +4364,7 @@ function __getOTFTagObject() {
 		},
 		"ss09": {
 			"tag":"ss09",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "9"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4162,6 +4372,7 @@ function __getOTFTagObject() {
 		},
 		"ss10": {
 			"tag":"ss10",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "10"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4169,6 +4380,7 @@ function __getOTFTagObject() {
 		},
 		"ss11": {
 			"tag":"ss11",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "11"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4176,6 +4388,7 @@ function __getOTFTagObject() {
 		},
 		"ss12": {
 			"tag":"ss12",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "12"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4183,6 +4396,7 @@ function __getOTFTagObject() {
 		},
 		"ss13": {
 			"tag":"ss13",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "13"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4190,6 +4404,7 @@ function __getOTFTagObject() {
 		},
 		"ss14": {
 			"tag":"ss14",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "14"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4197,6 +4412,7 @@ function __getOTFTagObject() {
 		},
 		"ss15": {
 			"tag":"ss15",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "15"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4204,6 +4420,7 @@ function __getOTFTagObject() {
 		},
 		"ss16": {
 			"tag":"ss16",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "16"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4211,6 +4428,7 @@ function __getOTFTagObject() {
 		},
 		"ss17": {
 			"tag":"ss17",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "16"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4218,6 +4436,7 @@ function __getOTFTagObject() {
 		},
 		"ss18": {
 			"tag":"ss18",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "18"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4225,6 +4444,7 @@ function __getOTFTagObject() {
 		},
 		"ss19": {
 			"tag":"ss19",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "19"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4232,6 +4452,7 @@ function __getOTFTagObject() {
 		},
 		"ss20": {
 			"tag":"ss20",
+			"value":"1",
 			"label":localize(_global.otfStylisticSetLabel, "20"),
 			"desc":"",
 			"type":"InDesign/Registry",
@@ -4239,6 +4460,7 @@ function __getOTFTagObject() {
 		},
 		"ssty": {
 			"tag":"ssty",
+			"value":"1",
 			"label":"Math script style alternates",
 			"desc":"",
 			"type":"Registry",
@@ -4246,6 +4468,7 @@ function __getOTFTagObject() {
 		},
 		"stal": {
 			"tag":"stch",
+			"value":"1",
 			"label":localize(_global.otfStretchedAlternateLabel),
 			"desc":"",
 			"type":"InDesign",
@@ -4253,6 +4476,7 @@ function __getOTFTagObject() {
 		},
 		"stch": {
 			"tag":"stch",
+			"value":"1",
 			"label":"Stretching Glyph Decomposition",
 			"desc":"",
 			"type":"Registry",
@@ -4260,6 +4484,7 @@ function __getOTFTagObject() {
 		},
 		"subs": {
 			"tag":"subs",
+			"value":"1",
 			"label":localize(_global.positionSubscriptLabel),
 			"desc":localize(_global.positionSubscriptLabelDesc),
 			"type":"InDesign/Registry",
@@ -4267,6 +4492,7 @@ function __getOTFTagObject() {
 		},
 		"sups": {
 			"tag":"sups",
+			"value":"1",
 			"label":localize(_global.positionSuperscriptLabel),
 			"desc":localize(_global.positionSuperscriptFeatureDesc),
 			"type":"InDesign/Registry",
@@ -4274,6 +4500,7 @@ function __getOTFTagObject() {
 		},
 		"swsh": {
 			"tag":"swsh",
+			"value":"1",
 			"label":localize(_global.otfSwashLabel),
 			"desc":localize(_global.otfSwashFeatureDesc),
 			"type":"InDesign/Registry",
@@ -4281,6 +4508,7 @@ function __getOTFTagObject() {
 		},
 		"titl": {
 			"tag":"titl",
+			"value":"1",
 			"label":localize(_global.otfTitlingLabel),
 			"desc":localize(_global.otfTitlingFeatureDesc),
 			"type":"InDesign/Registry",
@@ -4288,6 +4516,7 @@ function __getOTFTagObject() {
 		},
 		"tjmo": {
 			"tag":"tjmo",
+			"value":"1",
 			"label":"Trailing Jamo Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4295,6 +4524,7 @@ function __getOTFTagObject() {
 		},
 		"tnam": {
 			"tag":"tnam",
+			"value":"1",
 			"label":"Traditional Name Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4302,6 +4532,7 @@ function __getOTFTagObject() {
 		},
 		"tnum": {
 			"tag":"tnum",
+			"value":"1",
 			"label":localize(_global.tabularFiguresLabel),
 			"desc":"",
 			"type":"InDesign+/Registry",
@@ -4309,6 +4540,7 @@ function __getOTFTagObject() {
 		},
 		"trad": {
 			"tag":"trad",
+			"value":"1",
 			"label":"Traditional Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4316,6 +4548,7 @@ function __getOTFTagObject() {
 		},
 		"twid": {
 			"tag":"twid",
+			"value":"1",
 			"label":"Third Widths",
 			"desc":"",
 			"type":"Registry",
@@ -4323,6 +4556,7 @@ function __getOTFTagObject() {
 		},
 		"unic": {
 			"tag":"unic",
+			"value":"1",
 			"label":"Unicase",
 			"desc":"",
 			"type":"Registry",
@@ -4330,6 +4564,7 @@ function __getOTFTagObject() {
 		},
 		"valt": {
 			"tag":"valt",
+			"value":"1",
 			"label":"Alternate Vertical Metrics",
 			"desc":"",
 			"type":"Registry",
@@ -4337,6 +4572,7 @@ function __getOTFTagObject() {
 		},
 		"vatu": {
 			"tag":"vatu",
+			"value":"1",
 			"label":"Vattu Variants",
 			"desc":"",
 			"type":"Registry",
@@ -4344,6 +4580,7 @@ function __getOTFTagObject() {
 		},
 		"vchw": {
 			"tag":"vchw",
+			"value":"1",
 			"label":"Vertical Contextual Half-width Spacing",
 			"desc":"",
 			"type":"Registry",
@@ -4351,6 +4588,7 @@ function __getOTFTagObject() {
 		},
 		"vert": {
 			"tag":"vert",
+			"value":"1",
 			"label":"Vertical Writing",
 			"desc":"",
 			"type":"Registry",
@@ -4358,6 +4596,7 @@ function __getOTFTagObject() {
 		},
 		"vhal": {
 			"tag":"vhal",
+			"value":"1",
 			"label":"Alternate Vertical Half Metrics",
 			"desc":"",
 			"type":"Registry",
@@ -4365,6 +4604,7 @@ function __getOTFTagObject() {
 		},
 		"vjmo": {
 			"tag":"vjmo",
+			"value":"1",
 			"label":"Vowel Jamo Forms",
 			"desc":"",
 			"type":"Registry",
@@ -4372,6 +4612,7 @@ function __getOTFTagObject() {
 		},
 		"vkna": {
 			"tag":"vkna",
+			"value":"1",
 			"label":"Vertical Kana Alternates",
 			"desc":"",
 			"type":"Registry",
@@ -4379,6 +4620,7 @@ function __getOTFTagObject() {
 		},
 		"vkrn": {
 			"tag":"vkrn",
+			"value":"1",
 			"label":"Vertical Kerning",
 			"desc":"",
 			"type":"Registry",
@@ -4386,6 +4628,7 @@ function __getOTFTagObject() {
 		},
 		"vpal": {
 			"tag":"vpal",
+			"value":"1",
 			"label":"Proportional Alternate Vertical Metrics",
 			"desc":"",
 			"type":"Registry",
@@ -4393,6 +4636,7 @@ function __getOTFTagObject() {
 		},
 		"vrt2": {
 			"tag":"vrt2",
+			"value":"1",
 			"label":"Vertical Alternates and Rotation",
 			"desc":"",
 			"type":"Registry",
@@ -4400,6 +4644,7 @@ function __getOTFTagObject() {
 		},
 		"vrtr": {
 			"tag":"vrtr",
+			"value":"1",
 			"label":"Vertical Alternates for Rotation",
 			"desc":"",
 			"type":"Registry",
@@ -4407,6 +4652,7 @@ function __getOTFTagObject() {
 		},
 		"zero": {
 			"tag":"zero",
+			"value":"1",
 			"label":localize(_global.otfSlashedZeroLabel),
 			"desc":localize(_global.otfSlashedZeroFeatureDesc),
 			"type":"InDesign/Registry",
@@ -5190,6 +5436,13 @@ function __defineLocalizeStrings() {
 		de:"Typ",
 		fr:"Type",
 		es:"Tipo"
+	};
+
+	_global.tagValueTitle = {
+		en:"Value",
+		de:"Wert",
+		fr:"Valeur",
+		es:"Valor"
 	};
 
 	_global.tagFilterLabel = {
