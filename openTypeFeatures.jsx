@@ -1342,6 +1342,13 @@ function __showOTFWindow() {
 		});
 	} /* END function __fillFontListbox */
 
+	/* Apply selected font */
+	_searchTabApplyFontButton.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		var _selectedFontObj = __getListboxSelectionObj(_searchTabC2R1Group);
+		__applyFont(_selection, _selectedFontObj, _otfWindow);
+	}
+
 
 	_refreshButton.onClick = function() {
 		_otfWindow["prevSelection"] = null; /* Reset selection to trigger recalculation of stylistic sets. */
@@ -2634,6 +2641,56 @@ function __getListboxSelectionObj(_listboxContainer) {
 	
 	return _selectionObj;
 } /* END function __getListboxSelectionObj */
+
+/**
+ * Apply font to selection
+ * @param {Text} _selection 
+ * @param {Object} _selectedFontObj 
+ * @param {SUIWindow} _window 
+ * @returns Font
+ */
+function __applyFont(_selection, _selectedFontObj, _window) {
+
+	if(!_global) { return null; }
+	if(!_selection || !_selection.hasOwnProperty("appliedFont") || !_selection.isValid) { return null; }
+	if(!_selectedFontObj || !(_selectedFontObj instanceof Object)) { return null; }
+	if(!_window || !(_window instanceof Window)) { return null; }
+
+	_window.text = localize(_global.uiHeadLabel);
+
+	var _selectedFont;
+
+	try {
+		for(var _key in _selectedFontObj) {
+			
+			if(!_selectedFontObj.hasOwnProperty(_key)) {
+				continue;
+			}
+
+			var _fontItemObj = _selectedFontObj[_key];
+			if(!_fontItemObj || !_fontItemObj.hasOwnProperty("font")) {
+				continue;
+			}
+
+			_selectedFont = _fontItemObj["font"];
+
+			if(!_selectedFont || !_selectedFont.isValid || _selectedFont.status !== FontStatus.INSTALLED) {
+				continue;
+			} else {
+				_selection.appliedFont = _selectedFont;
+
+				var _fontName = _selectedFont.name && _selectedFont.name.replace(/\t/," ") || "-";
+				_window.text = localize(_global.fontAppliedMessage, _fontName);
+				break;
+			}
+		}
+	} catch(_error) {
+		_window.text = _error.message;
+	}
+
+	return _selectedFont;
+} /* END function __applyFont */
+
 
 
 
@@ -5232,4 +5289,11 @@ function __defineLocalizeStrings() {
 		es:"Aplica las funciones OpenType seleccionadas a la selección de texto actual en el documento."
 	};
 	
+	_global.fontAppliedMessage = {
+		en:"Font applied: %1",
+		de:"Schrift zugewiesen: %1",
+		fr:"Font appliquée : %1",
+		es:"Fuente asignada: %1"
+	};
+
 } /* END function __defineLocalizeStrings */
