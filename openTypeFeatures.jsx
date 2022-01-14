@@ -915,7 +915,7 @@ function __showOTFWindow() {
 							margins.bottom = 5;
 							_searchTabApplyFontButton = add("button", undefined, localize(_global.applyFontButtonLabel));
 							with(_searchTabApplyFontButton) {
-								preferredSize.width = 80;
+								preferredSize.width = 90;
 								helpTip = localize(_global.applyFontButtonHelpTip);
 							} /* END _searchTabApplyFontButton */
 						} /* END _searchTabApplyFontButtonGroup */
