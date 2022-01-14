@@ -1346,7 +1346,8 @@ function __showOTFWindow() {
 	_searchTabApplyFontButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
 		var _selectedFontObj = __getListboxSelectionObj(_searchTabC2R1Group);
-		__applyFont(_selection, _selectedFontObj, _otfWindow);
+		__applyFont(_selection, _selectedFontObj);
+		_refreshButton.notify();
 	}
 
 
@@ -2646,18 +2647,14 @@ function __getListboxSelectionObj(_listboxContainer) {
  * Apply font to selection
  * @param {Text} _selection 
  * @param {Object} _selectedFontObj 
- * @param {SUIWindow} _window 
  * @returns Font
  */
-function __applyFont(_selection, _selectedFontObj, _window) {
+function __applyFont(_selection, _selectedFontObj) {
 
 	if(!_global) { return null; }
 	if(!_selection || !_selection.hasOwnProperty("appliedFont") || !_selection.isValid) { return null; }
 	if(!_selectedFontObj || !(_selectedFontObj instanceof Object)) { return null; }
-	if(!_window || !(_window instanceof Window)) { return null; }
-
-	_window.text = localize(_global.uiHeadLabel);
-
+	
 	var _selectedFont;
 
 	try {
@@ -2678,14 +2675,11 @@ function __applyFont(_selection, _selectedFontObj, _window) {
 				continue;
 			} else {
 				_selection.appliedFont = _selectedFont;
-
-				var _fontName = _selectedFont.name && _selectedFont.name.replace(/\t/," ") || "-";
-				_window.text = localize(_global.fontAppliedMessage, _fontName);
 				break;
 			}
 		}
 	} catch(_error) {
-		_window.text = _error.message;
+		alert(_error.message);
 	}
 
 	return _selectedFont;
