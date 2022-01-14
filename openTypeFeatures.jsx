@@ -763,7 +763,7 @@ function __showOTFWindow() {
 							} /* END _extendedTabTagFilterLabel */
 							_extendedTabTagFilterEdittext = add("edittext", undefined, "");
 							with(_extendedTabTagFilterEdittext) {
-								characters = 18;
+								characters = 17;
 								helpTip = localize(_global.tagFilterHelpTip);
 							} /* END _extendedTabTagFilterEdittext */
 						} /* END _extendedTabTagFilterGroup */
@@ -777,7 +777,7 @@ function __showOTFWindow() {
 							} /* END _extendedTabLabelFilterLabel */
 							_extendedTabLabelFilterEdittext = add("edittext", undefined, "");
 							with(_extendedTabLabelFilterEdittext) {
-								characters = 18;
+								characters = 17;
 							} /* END _extendedTabLabelFilterEdittext */
 						} /* END _extendedTabLabelFilterGroup */
 					} /* END _extendedTabC1R2Group */
@@ -849,7 +849,7 @@ function __showOTFWindow() {
 							} /* END _searchTabTagFilterLabel */
 							_searchTabTagFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabTagFilterEdittext) {
-								characters = 18;
+								characters = 17;
 								helpTip = localize(_global.tagFilterHelpTip);
 							} /* END _searchTabTagFilterEdittext */
 						} /* END _searchTabTagFilterGroup */
@@ -863,7 +863,7 @@ function __showOTFWindow() {
 							} /* END _searchTabLabelFilterLabel */
 							_searchTabLabelFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabLabelFilterEdittext) {
-								characters = 18;
+								characters = 17;
 							} /* END _searchTabLabelFilterEdittext */
 						} /* END _searchTabLabelFilterGroup */
 					} /* END _searchTabC1R2Group */
@@ -892,7 +892,7 @@ function __showOTFWindow() {
 							} /* END _searchTabFontNameFilterLabel */
 							_searchTabFontNameFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabFontNameFilterEdittext) {
-								characters = 12;
+								characters = 11;
 							} /* END _searchTabFontNameFilterEdittext */
 						} /* END _searchTabFontNameFilterGroup */
 						var _searchTabFontStyleFilterGroup = add("group");
@@ -905,7 +905,7 @@ function __showOTFWindow() {
 							} /* END _searchTabFontStyleFilterLabel */
 							_searchTabFontStyleFilterEdittext = add("edittext", undefined, "");
 							with(_searchTabFontStyleFilterEdittext) {
-								characters = 12;
+								characters = 11;
 							} /* END _searchTabFontStyleFilterEdittext */
 						} /* _searchTabFontStyleFilterGroup */
 						var _searchTabApplyFontButtonGroup = add("group");
@@ -1289,21 +1289,21 @@ function __showOTFWindow() {
 		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":this.text,
 			"two":_extendedTabLabelFilterEdittext.text
-		}); 
+		}, __changeTagValue, "onDoubleClick"); 
 	};
 	/* Extended Tab: Tag Label Filter */
 	_extendedTabLabelFilterEdittext.onChanging = function() {
 		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":_extendedTabTagFilterEdittext.text,
 			"two":this.text
-		});
+		}, __changeTagValue, "onDoubleClick");
 	};
 	/* Search Tab: Tag Name Filter */
 	_searchTabTagFilterEdittext.onChanging = function() {
 		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":this.text,
 			"two":_searchTabLabelFilterEdittext.text
-		}, __fillFontListbox);
+		}, __fillFontListbox, "onChange");
 		__createListbox(_searchTabC2R1Group, "font", "right", {}, {});
 	};
 	/* Search Tab: Tag Label Filter */
@@ -1311,7 +1311,7 @@ function __showOTFWindow() {
 		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":_searchTabTagFilterEdittext.text,
 			"two":this.text
-		}, __fillFontListbox);
+		}, __fillFontListbox, "onChange");
 		__createListbox(_searchTabC2R1Group, "font", "right", {}, {});
 	};
 	/* Search Tab: Font Name Filter */
@@ -1349,6 +1349,16 @@ function __showOTFWindow() {
 		__applyFont(_selection, _selectedFontObj);
 		_refreshButton.notify();
 	}
+
+	/* Change Tag Value */
+	function __changeTagValue() {
+		var _selectedTagObj = __getListboxSelectionObj(this.parent);
+		_otfTagObj = __setTagValue(_otfTagObj, _selectedTagObj);
+		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
+			"one":_extendedTabTagFilterEdittext.text,
+			"two":_extendedTabLabelFilterEdittext.text
+		}, __changeTagValue, "onDoubleClick");
+	} /* END function __changeTagValue */
 
 
 	_refreshButton.onClick = function() {
@@ -1406,11 +1416,11 @@ function __showOTFWindow() {
 	_otfWindow["stylisticSetCodes"] = [[]];
 	__checkInputs();
 	/* Initialize Dialog: Extended Features */
-	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}); /* Extended Tab: All Tag Listbox */
+	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}, __changeTagValue, "onDoubleClick"); /* Extended Tab: All Tag Listbox */
 	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* Extended Tab: Selection Tag Listbox */
 	/* Initialize Dialog: Search Font */
 	_otfWindow["selectedFonts"] = {};
-	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox); /* Search Tab: All Tag Listbox */
+	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox, "onChange"); /* Search Tab: All Tag Listbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
 	
@@ -2376,9 +2386,11 @@ function __applyCStyle(_cStyle, _selection) {
  * @param {Function} __callback Callback for onChange EventListener of Listbox
  * @param {Object} _contentObj Content Object (Tag Object or Font Object)
  * @param {Object} _filterObj Filter object for the corresponding columns ({ "column": { "one":String, "two":String, ... } })
+ * @param {Function} __callback Event-handler function for Listbox (optional)
+ * @param {String} _handler Event-handler name (optional)
  * @returns SUIListbox
  */
-function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _filterObj, __callback) {
+function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _filterObj, __callback, _handler) {
 	
 	if(!_global) { return null; }
 	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("add")) { return null; }
@@ -2387,7 +2399,8 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 	if(!_contentObj || !(_contentObj instanceof Object)) { return null; }
 	if(!_filterObj || !(_filterObj instanceof Object)) { return null; }
 	/* __callback optional */
-	
+	/* _handler optional */
+
 	const LISTBOX_MINIMUM_SIZE = [340,460];
 	const LISTBOX_MAXIMUM_SIZE = [340,460];
 
@@ -2462,10 +2475,14 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 
 		switch(_type) {
 			case "tag":
-				_itemName = _contentItemObj["tag"] || "";
-				_itemValue = _contentItemObj["value"] || "";
-				_itemLabel = _contentItemObj["label"] || "";
-				_itemType = _contentItemObj["type"] || "";
+				_itemName = _contentItemObj["tag"];
+				_itemName = (_itemName !== null && _itemName !== undefined && _itemName.toString()) || "";
+				_itemValue = _contentItemObj["value"];
+				_itemValue = (_itemValue !== null && _itemValue !== undefined && _itemValue.toString()) || "";
+				_itemLabel = _contentItemObj["label"];
+				_itemLabel = (_itemLabel !== null && _itemLabel !== undefined && _itemLabel.toString()) || "";
+				_itemType = _contentItemObj["type"];
+				_itemType = (_itemType !== null && _itemType !== undefined && _itemType.toString()) || "";
 				/* Filter: Tag Name */
 				if(_filterTermOne && !_filterTermOneRegExp.test(_itemName)) {
 					continue loop;
@@ -2504,14 +2521,73 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 	}
 	
 	/* Callback */
-	if(!!__callback && __callback instanceof Function) { 
-		_listbox.onChange = __callback; 
+	if(
+		!!__callback && __callback instanceof Function &&
+		!!_handler && _handler.constructor === String
+	) { 
+		_listbox[_handler] = __callback; 
 	}
 	
 	_listboxContainer.layout.layout(true);
 
 	return _listbox;
 } /* END function __createListbox */
+
+
+/**
+ * Set value of selected tag object
+ * @param {Object} _otfTagObj 
+ * @param {Object} _selectedTagObj 
+ * @returns Object
+ */
+function __setTagValue(_otfTagObj, _selectedTagObj) {
+
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return {}; }
+	if(!_selectedTagObj || !(_selectedTagObj instanceof Object)) { return {}; }
+
+	var _key;
+
+	for(_key in _selectedTagObj) {
+		if(!_selectedTagObj.hasOwnProperty(_key)) {
+			continue;
+		}
+		break;
+	}
+
+	if(!_key || !_otfTagObj.hasOwnProperty(_key)) {
+		return _otfTagObj;
+	}
+
+	var _otfTagItemObj = _otfTagObj[_key];
+	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object)) {
+		return _otfTagObj;
+	}
+
+	var _otfTagName = _otfTagItemObj["tag"] || "---";
+	var _otfTagLabel = _otfTagItemObj["label"] || "---";
+	var _otfTagValue = _otfTagItemObj["value"];
+
+	var _userInputString = prompt(_otfTagName + " | " + _otfTagLabel, _otfTagValue);
+	if(_userInputString === null) {
+		return _otfTagObj;
+	}
+
+	var _userInputNumber =  Number(_userInputString);
+	
+	/* Check: Integer value? */ 
+	if(
+		isNaN(_userInputNumber) || 
+		!isFinite(_userInputNumber) ||
+		Math.floor(_userInputNumber) !== _userInputNumber ||
+		_userInputNumber < 0
+	) {
+		return _otfTagObj;
+	}
+
+	_otfTagObj[_key]["value"] = _userInputNumber;
+
+	return _otfTagObj;
+} /* END function __setTagValue */
 
 
 /**
