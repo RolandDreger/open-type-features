@@ -46,17 +46,27 @@ _global["setups"] = {
 };
 
 
+
+/* Dialog texts and error messages */
 __defineLocalizeStrings();
-__showOTFWindow();
+
+/* State (SSOT) */
+var _otfTagObj = __getOTFTagObject();
+
+/* Show OTF Dialog */
+__showOTFWindow(_otfTagObj);
+
 
 
 /**
  * Show Dialog
- * @returns {Boolean}
+ * @param {Object} _otfTagObj
+ * @returns Boolean
  */
-function __showOTFWindow() {
+function __showOTFWindow(_otfTagObj) {
 	
 	if(!_global) { return false; }
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return false; }
 
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
@@ -67,11 +77,6 @@ function __showOTFWindow() {
 
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
-		return false; 
-	}
-
-	var _otfTagObj = __getOTFTagObject();
-	if(!_otfTagObj) { 
 		return false; 
 	}
 
