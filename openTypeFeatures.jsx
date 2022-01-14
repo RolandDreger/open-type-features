@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 12. January 2022
+	+	Last updated: 14. January 2022
 
 		
 	+	License (MIT)
@@ -4466,7 +4466,7 @@ function __getFontObj() {
 
 
 /**
- * German-English-French dialog texts and error messages
+ * Dialog texts and error messages
  */
 function __defineLocalizeStrings() {
 	
@@ -4474,7 +4474,7 @@ function __defineLocalizeStrings() {
 		en:"OpenType Features (V " + _global["version"] + ")",
 		de:"OpenType-Funktionen (V " + _global["version"] + ")",
 		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")",
-		es:"Funciones OpenType"
+		es:"Funciones OpenType (V " + _global["version"] + ")"
 	};
 	
 	_global.testGoBackLabel = { 
