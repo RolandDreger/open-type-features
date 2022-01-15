@@ -2870,7 +2870,7 @@ function __getOTFTagObject() {
 		"calt": {
 			"tag":"calt",
 			"value":"1",
-			"label":localize(_global.otfContextualAlternateLabel),
+			"label":"Contextual Alternates",
 			"desc":localize(_global.otfContextualAlternateFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["calt"]
@@ -3758,7 +3758,7 @@ function __getOTFTagObject() {
 		"c2sc": {
 			"tag":"c2sc",
 			"value":"1",
-			"label":localize(_global.capitalizationLabel),
+			"label":"All Small Caps",
 			"desc":localize(_global.capitalizationFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["c2sc"]
@@ -3774,7 +3774,7 @@ function __getOTFTagObject() {
 		"dlig": {
 			"tag":"dlig",
 			"value":"1",
-			"label":localize(_global.otfDiscretionaryLigatureLabel),
+			"label":"Discretionary Ligatures",
 			"desc":localize(_global.otfDiscretionaryLigatureFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["dlig"]
@@ -3782,7 +3782,7 @@ function __getOTFTagObject() {
 		"dnom": {
 			"tag":"dnom",
 			"value":"1",
-			"label":localize(_global.positionDenominatorLabel),
+			"label":"Denominator",
 			"desc":localize(_global.positionDenominatorFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["dnom"]
@@ -3830,7 +3830,7 @@ function __getOTFTagObject() {
 		"fina": {
 			"tag":"fina",
 			"value":"1",
-			"label":localize(_global.positionalFormsFinalLabel),
+			"label":"Final Form",
 			"desc":localize(_global.positionalFormsFinalFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["fina"]
@@ -3846,7 +3846,7 @@ function __getOTFTagObject() {
 		"frac": {
 			"tag":"frac",
 			"value":"1",
-			"label":localize(_global.otfFractionLabel),
+			"label":"Fractions",
 			"desc":localize(_global.otfFractionFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["frac"]
@@ -3886,7 +3886,7 @@ function __getOTFTagObject() {
 		"hist": {
 			"tag":"hist",
 			"value":"1",
-			"label":localize(_global.otfHistoricalLabel),
+			"label":"Historical Forms",
 			"desc":localize(_global.otfHistoricalFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["hist"]
@@ -3894,7 +3894,7 @@ function __getOTFTagObject() {
 		"hkna": {
 			"tag":"hkna",
 			"value":"1",
-			"label":localize(_global.otfHVKanaLabel),
+			"label":"H/V Kana Alternates",
 			"desc":localize(_global.otfHVKanaFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["hkna"]
@@ -3934,7 +3934,7 @@ function __getOTFTagObject() {
 		"init": {
 			"tag":"init",
 			"value":"1",
-			"label":localize(_global.positionalFormsInitialLabel),
+			"label":"Inital Form",
 			"desc":localize(_global.positionalFormsInitialFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["init"]
@@ -3942,7 +3942,7 @@ function __getOTFTagObject() {
 		"isol": {
 			"tag":"isol",
 			"value":"1",
-			"label":localize(_global.positionalFormsIsolatedLabel),
+			"label":"Isolated Form",
 			"desc":localize(_global.positionalFormsIsolatedFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["isol"]
@@ -3950,7 +3950,7 @@ function __getOTFTagObject() {
 		"ital": {
 			"tag":"ital",
 			"value":"1",
-			"label":localize(_global.otfRomanItalicsLabel),
+			"label":"Roman Italics",
 			"desc":localize(_global.otfRomanItalicsFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["ital"]
@@ -3958,7 +3958,7 @@ function __getOTFTagObject() {
 		"jalt": {
 			"tag":"jalt",
 			"value":"1",
-			"label":localize(_global.otfJustificationAlternateLabel),
+			"label":"Justification Alternates",
 			"desc":localize(_global.otfJustificationAlternateFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["jalt"]
@@ -4014,7 +4014,7 @@ function __getOTFTagObject() {
 		"liga": {
 			"tag":"liga",
 			"value":"1",
-			"label":localize(_global.ligatureLabel),
+			"label":"Ligatures",
 			"desc":localize(_global.ligaturesFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["liga"]
@@ -4030,7 +4030,7 @@ function __getOTFTagObject() {
 		"lnum": {
 			"tag":"lnum",
 			"value":"1",
-			"label":localize(_global.liningFiguresLabel),
+			"label":"Lining Figures",
 			"desc":"",
 			"type":"InDesign+/Registry",
 			"search":["lnum"]
@@ -4062,7 +4062,7 @@ function __getOTFTagObject() {
 		"mark": {
 			"tag":"mark",
 			"value":"1",
-			"label":localize(_global.otfMarkLabel),
+			"label":"Mark Positioning",
 			"desc":localize(_global.otfMarkFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["mark"]
@@ -4078,7 +4078,7 @@ function __getOTFTagObject() {
 		"medi": {
 			"tag":"medi",
 			"value":"1",
-			"label":localize(_global.positionalFormsMedialLabel),
+			"label":"Medial Form",
 			"desc":localize(_global.positionalFormsInitialFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["medi"]
@@ -4134,7 +4134,7 @@ function __getOTFTagObject() {
 		"numr": {
 			"tag":"numr",
 			"value":"1",
-			"label":localize(_global.positionNumeratorLabel),
+			"label":"Numerator",
 			"desc":localize(_global.positionNumeratorFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["numr"]
@@ -4142,7 +4142,7 @@ function __getOTFTagObject() {
 		"olsh": {
 			"tag":"olsh",
 			"value":"1",
-			"label":localize(_global.otfOverlapSwashLabel),
+			"label":"Overlapping Swash",
 			"desc":"",
 			"type":"InDesign",
 			"search":[OpenTypeFeature.OVERLAP_SWASH]
@@ -4166,7 +4166,7 @@ function __getOTFTagObject() {
 		"ordn": {
 			"tag":"ordn",
 			"value":"1",
-			"label":localize(_global.otfOrdinalLabel),
+			"label":"Ordinal",
 			"desc":localize(_global.otfOrdinalFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["ordn"]
@@ -4182,7 +4182,7 @@ function __getOTFTagObject() {
 		"palt": {
 			"tag":"palt",
 			"value":"1",
-			"label":localize(_global.otfProportionalMetricsLabel),
+			"label":"Proportional Metrics",
 			"desc":localize(_global.otfProportionalMetricsFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["palt"]
@@ -4206,7 +4206,7 @@ function __getOTFTagObject() {
 		"pnum": {
 			"tag":"pnum",
 			"value":"1",
-			"label":localize(_global.proportionalFiguresLabel),
+			"label":"Proportional Figures",
 			"desc":"",
 			"type":"InDesign+/Registry",
 			"search":["pnum"]
@@ -4342,7 +4342,7 @@ function __getOTFTagObject() {
 		"salt": {
 			"tag":"salt",
 			"value":"1",
-			"label":localize(_global.otfStylisticAlternateLabel),
+			"label":"Stylistic Alternates",
 			"desc":localize(_global.otfStylisticAlternateFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["salt"]
@@ -4382,7 +4382,7 @@ function __getOTFTagObject() {
 		"ss01": {
 			"tag":"ss01",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "1"),
+			"label":"Stylistic Set 1",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss01"]
@@ -4390,7 +4390,7 @@ function __getOTFTagObject() {
 		"ss02": {
 			"tag":"ss02",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "2"),
+			"label":"Stylistic Set 2",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss02"]
@@ -4398,7 +4398,7 @@ function __getOTFTagObject() {
 		"ss03": {
 			"tag":"ss03",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "3"),
+			"label":"Stylistic Set 3",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss03"]
@@ -4406,7 +4406,7 @@ function __getOTFTagObject() {
 		"ss04": {
 			"tag":"ss04",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "4"),
+			"label":"Stylistic Set 4",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss04"]
@@ -4414,7 +4414,7 @@ function __getOTFTagObject() {
 		"ss05": {
 			"tag":"ss05",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "5"),
+			"label":"Stylistic Set 5",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss05"]
@@ -4422,7 +4422,7 @@ function __getOTFTagObject() {
 		"ss06": {
 			"tag":"ss06",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "6"),
+			"label":"Stylistic Set 6",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss06"]
@@ -4430,7 +4430,7 @@ function __getOTFTagObject() {
 		"ss07": {
 			"tag":"ss07",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "7"),
+			"label":"Stylistic Set 7",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss07"]
@@ -4438,7 +4438,7 @@ function __getOTFTagObject() {
 		"ss08": {
 			"tag":"ss08",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "8"),
+			"label":"Stylistic Set 8",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss08"]
@@ -4446,7 +4446,7 @@ function __getOTFTagObject() {
 		"ss09": {
 			"tag":"ss09",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "9"),
+			"label":"Stylistic Set 9",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss09"]
@@ -4454,7 +4454,7 @@ function __getOTFTagObject() {
 		"ss10": {
 			"tag":"ss10",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "10"),
+			"label":"Stylistic Set 10",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss10"]
@@ -4462,7 +4462,7 @@ function __getOTFTagObject() {
 		"ss11": {
 			"tag":"ss11",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "11"),
+			"label":"Stylistic Set 11",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss11"]
@@ -4470,7 +4470,7 @@ function __getOTFTagObject() {
 		"ss12": {
 			"tag":"ss12",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "12"),
+			"label":"Stylistic Set 12",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss12"]
@@ -4478,7 +4478,7 @@ function __getOTFTagObject() {
 		"ss13": {
 			"tag":"ss13",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "13"),
+			"label":"Stylistic Set 13",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss13"]
@@ -4486,7 +4486,7 @@ function __getOTFTagObject() {
 		"ss14": {
 			"tag":"ss14",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "14"),
+			"label":"Stylistic Set 14",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss14"]
@@ -4494,7 +4494,7 @@ function __getOTFTagObject() {
 		"ss15": {
 			"tag":"ss15",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "15"),
+			"label":"Stylistic Set 15",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss15"]
@@ -4502,7 +4502,7 @@ function __getOTFTagObject() {
 		"ss16": {
 			"tag":"ss16",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "16"),
+			"label":"Stylistic Set 16",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss16"]
@@ -4510,7 +4510,7 @@ function __getOTFTagObject() {
 		"ss17": {
 			"tag":"ss17",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "16"),
+			"label":"Stylistic Set 16",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss17"]
@@ -4518,7 +4518,7 @@ function __getOTFTagObject() {
 		"ss18": {
 			"tag":"ss18",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "18"),
+			"label":"Stylistic Set 18",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss18"]
@@ -4526,7 +4526,7 @@ function __getOTFTagObject() {
 		"ss19": {
 			"tag":"ss19",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "19"),
+			"label":"Stylistic Set 19",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss19"]
@@ -4534,7 +4534,7 @@ function __getOTFTagObject() {
 		"ss20": {
 			"tag":"ss20",
 			"value":"1",
-			"label":localize(_global.otfStylisticSetLabel, "20"),
+			"label":"Stylistic Set 20",
 			"desc":"",
 			"type":"InDesign/Registry",
 			"search":["ss20"]
@@ -4548,9 +4548,9 @@ function __getOTFTagObject() {
 			"search":["ssty"]
 		},
 		"stal": {
-			"tag":"stch",
+			"tag":"stal",
 			"value":"1",
-			"label":localize(_global.otfStretchedAlternateLabel),
+			"label":"Stretched Alternate",
 			"desc":"",
 			"type":"InDesign",
 			"search":[]
@@ -4566,7 +4566,7 @@ function __getOTFTagObject() {
 		"subs": {
 			"tag":"subs",
 			"value":"1",
-			"label":localize(_global.positionSubscriptLabel),
+			"label":"Subscript/Inferior",
 			"desc":localize(_global.positionSubscriptLabelDesc),
 			"type":"InDesign/Registry",
 			"search":["subs"]
@@ -4574,7 +4574,7 @@ function __getOTFTagObject() {
 		"sups": {
 			"tag":"sups",
 			"value":"1",
-			"label":localize(_global.positionSuperscriptLabel),
+			"label":"Superscript/Superior",
 			"desc":localize(_global.positionSuperscriptFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["sups"]
@@ -4582,7 +4582,7 @@ function __getOTFTagObject() {
 		"swsh": {
 			"tag":"swsh",
 			"value":"1",
-			"label":localize(_global.otfSwashLabel),
+			"label":"Swash",
 			"desc":localize(_global.otfSwashFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["swsh"]
@@ -4590,7 +4590,7 @@ function __getOTFTagObject() {
 		"titl": {
 			"tag":"titl",
 			"value":"1",
-			"label":localize(_global.otfTitlingLabel),
+			"label":"Titling Alternates",
 			"desc":localize(_global.otfTitlingFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["titl"]
@@ -4614,7 +4614,7 @@ function __getOTFTagObject() {
 		"tnum": {
 			"tag":"tnum",
 			"value":"1",
-			"label":localize(_global.tabularFiguresLabel),
+			"label":"Tabular Figures",
 			"desc":"",
 			"type":"InDesign+/Registry",
 			"search":["tnum"]
@@ -4734,7 +4734,7 @@ function __getOTFTagObject() {
 		"zero": {
 			"tag":"zero",
 			"value":"1",
-			"label":localize(_global.otfSlashedZeroLabel),
+			"label":"Slashed Zero",
 			"desc":localize(_global.otfSlashedZeroFeatureDesc),
 			"type":"InDesign/Registry",
 			"search":["zero"]
