@@ -4553,7 +4553,7 @@ function __getOTFTagObject() {
 			"label":"Stretched Alternate",
 			"desc":"",
 			"type":"InDesign",
-			"search":[]
+			"search":[OpenTypeFeature.STRETCHED_ALTERNATE]
 		},
 		"stch": {
 			"tag":"stch",
