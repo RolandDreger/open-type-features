@@ -1296,6 +1296,11 @@ function __showOTFWindow(_otfTagObj) {
 
 
 
+
+
+
+
+
 	/* Extended Tab: Tag Name Filter */
 	_extendedTabTagFilterEdittext.onChanging = function() {
 		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
@@ -1314,14 +1319,14 @@ function __showOTFWindow(_otfTagObj) {
 	_extendedTabClearButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
 		__clearExtendedOTFeatures(_selection);
-		_refreshButton.notify();
+		__checkInputs("extendedFeatures");
 	};
 	/* Extended Tab: Apply OT feature Button*/
 	_extendedTabApplyButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
 		var _selectedTagObj = __getListboxSelectionObj(_extendedTabC1R1Group);
 		__applyExtendedOTFeatures(_selection, _selectedTagObj);
-		_refreshButton.notify();
+		__checkInputs("extendedFeatures");
 	};
 	
 	/* Search Tab: Tag Name Filter */
@@ -1440,16 +1445,20 @@ function __showOTFWindow(_otfTagObj) {
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
-	__checkInputs();
+
 	/* Initialize Dialog: Extended Features */
 	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}, __changeTagValue, "onDoubleClick"); /* Extended Tab: All Tag Listbox */
 	__createListbox(_extendedTabC2R1Group, "tag", "right", {}, {}); /* Extended Tab: Selection Tag Listbox */
+
 	/* Initialize Dialog: Search Font */
 	_otfWindow["selectedFonts"] = {};
 	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox, "onChange"); /* Search Tab: All Tag Listbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
+	/* Set all Inputs (after listbox creation) */
+	__checkInputs();
 	
+
 	/* EventListener AFTER_SELECTION_CHANGED */
 	var _selectionEventListener = app.addEventListener(Application.AFTER_SELECTION_CHANGED, __checkInputs);
 	
@@ -1457,9 +1466,7 @@ function __showOTFWindow(_otfTagObj) {
 	/* Check inputs */
 	function __checkInputs(_flag) {
 		
-		if(!_global) {
-			return false;
-		}
+		if(!_global) { return false; }
 		
 		if(_flag !== null && _flag !== undefined && _flag instanceof Event) {
 			_flag.stopPropagation();
@@ -1575,6 +1582,10 @@ function __showOTFWindow(_otfTagObj) {
 			__checkOTFeature("positionalForm", "medi", _selection, _otfWindow, _positionalFormsMedialCheckbox);
 			__checkOTFeature("positionalForm", "fina", _selection, _otfWindow, _positionalFormsFinalCheckbox);
 			__checkOTFeature("positionalForm", "isol", _selection, _otfWindow, _positionalFormsIsolatedCheckbox);
+		}
+
+		if(!_flag || _flag === "extendedFeatures") {
+			__checkExtendedOTFeatures(_selection, _otfWindow, _extendedTabC2R1Group, _otfTagObj);
 		}
 	} /* END function __checkInputs */ 
 	
@@ -2131,30 +2142,30 @@ function __applyBackgroundColor(_suiItem, _bgColorArray, _flag) {
 
 /**
  * Set value of OTF property
- * @param {String} _otfFeatureName 
- * @param {Any} _otfFeatureValue 
+ * @param {String} _otfName 
+ * @param {Any} _otfValue 
  * @param {SUIWindow} _otfWindow 
  * @returns {Boolean}
  */
-function __setValue(_otfFeatureName, _otfFeatureValue, _window) {
+function __setValue(_otfName, _otfValue, _window) {
 
 	if(!_global) { return false; }
 	if(
-		!_otfFeatureName || _otfFeatureName.constructor !== String ||
+		!_otfName || _otfName.constructor !== String ||
 		!_window || !(_window instanceof Window) ||
-		_otfFeatureValue === null || _otfFeatureValue === undefined
+		_otfValue === null || _otfValue === undefined
 	) { 
 		_window.text = localize(_global.setValueAlert);
 		return false; 
 	}
 
 	var _selection = __getSelection(_window);
-	if(!_selection || !_selection.hasOwnProperty(_otfFeatureName) || !_selection.isValid) {
+	if(!_selection || !_selection.hasOwnProperty(_otfName) || !_selection.isValid) {
 		return false;
 	}
 
 	try {
-		_selection[_otfFeatureName] = _otfFeatureValue;
+		_selection[_otfName] = _otfValue;
 	} catch(_error) {
 		_window.text = _error.message;
 		return false;
@@ -2863,7 +2874,93 @@ function __clearExtendedOTFeatures(_selection) {
 } /* END function __applyExtendedOTFeatures */
 
 
+/**
+ * Get and insert extended OpenType feature in listbox
+ * @param {Text} _selection 
+ * @param {SUIWindow} _window 
+ * @param {SUIGroup} _listboxContainer 
+ * @param {Object} _otfTagObj 
+ * @returns Boolean
+ */
+function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfTagObj) {
 
+	if(!_global) { return false; }
+	if(!_selection || !_selection.hasOwnProperty("textStyleRanges") || !_selection.isValid) { return false; }
+	if(!_window || !(_window instanceof Window)) { return false; }
+	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("children")) { return false; }
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return false; }
+
+	const MAX_NUM_OF_ENTRIES = 30;
+
+	var _listbox = _listboxContainer.children[0];
+	if(!_listbox || !(_listbox instanceof ListBox)) {
+		return false;
+	}
+
+	/* Clear listbox */
+	if(_listbox.items.length > 0) {
+		_listbox.removeAll();
+	}
+	
+	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
+
+	for(var i=0; i<_textStyleRangeArray.length; i+=1) {
+
+		var _curTextStyleRange = _textStyleRangeArray[i];
+		if(!_curTextStyleRange || !_curTextStyleRange.isValid) {
+			continue;
+		}
+
+		var _extendedOTFeatureArray;
+
+		try {
+			_extendedOTFeatureArray = _curTextStyleRange.opentypeFeatures;
+		} catch(_error) {
+			_extendedOTFeatureArray = [];
+		}
+		
+		var _otfListboxItem;
+
+		if(_extendedOTFeatureArray.length > 0) {
+			for(var n=0; n<_extendedOTFeatureArray.length; n+=1) {
+				var _curOTFeature = _extendedOTFeatureArray[n];
+				if(!_curOTFeature || !(_curOTFeature instanceof Array) || _curOTFeature.length !== 2) {
+					continue;
+				}
+				var _otfTag = _curOTFeature[0];
+				if(!_otfTag || _otfTag.constructor !== String || _otfTag.length !== 4) {
+					continue;
+				}
+				_otfListboxItem = _listbox.add("item", _otfTag);
+				var _otfValue = _curOTFeature[1];
+				if(isNaN(_otfValue)) {
+					continue;
+				}
+				_otfListboxItem.subItems[0].text = _otfValue.toString();
+				var _otfLabel = "-";
+				var _otfItemTagObj = _otfTagObj[_otfTag];
+				if(_otfItemTagObj && _otfItemTagObj.hasOwnProperty("label")) {
+					_otfLabel = _otfItemTagObj["label"];
+				}
+				_otfListboxItem.subItems[1].text = _otfLabel;
+			}
+		} else {
+			_otfListboxItem = _listbox.add("item", "–");
+			_otfListboxItem.subItems[0].text = "–";
+			_otfListboxItem.subItems[1].text = "–";
+			_otfListboxItem.subItems[2].text = "–";
+		}
+		
+		/* Separator for multiple text style ranges */
+		if(i === _textStyleRangeArray.length - 1 || i > MAX_NUM_OF_ENTRIES) {
+			break;
+		}
+
+		_listbox.add("item", " ");
+	}
+
+	return true;
+} /* END function __checkExtendedOTFeatures */
 
 
 
