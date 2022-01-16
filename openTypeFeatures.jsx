@@ -1289,6 +1289,13 @@ function __showOTFWindow(_otfTagObj) {
 		return true;
 	} /* END function __altKeyHandler */
 
+
+	/* ToDo */
+	/* _refreshButton.notify(); // for Click on tabs */
+
+
+
+
 	/* Extended Tab: Tag Name Filter */
 	_extendedTabTagFilterEdittext.onChanging = function() {
 		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
@@ -1303,6 +1310,20 @@ function __showOTFWindow(_otfTagObj) {
 			"two":this.text
 		}, __changeTagValue, "onDoubleClick");
 	};
+	/* Extended Tab: Apply OT feature Button*/
+	_extendedTabClearButton.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		__clearExtendedOTFeatures(_selection);
+		_refreshButton.notify();
+	};
+	/* Extended Tab: Apply OT feature Button*/
+	_extendedTabApplyButton.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		var _selectedTagObj = __getListboxSelectionObj(_extendedTabC1R1Group);
+		__applyExtendedOTFeatures(_selection, _selectedTagObj);
+		_refreshButton.notify();
+	};
+	
 	/* Search Tab: Tag Name Filter */
 	_searchTabTagFilterEdittext.onChanging = function() {
 		__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
@@ -1347,7 +1368,7 @@ function __showOTFWindow(_otfTagObj) {
 		});
 	} /* END function __fillFontListbox */
 
-	/* Apply selected font */
+	/* Search Tab: Apply selected font */
 	_searchTabApplyFontButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
 		var _selectedFontObj = __getListboxSelectionObj(_searchTabC2R1Group);
@@ -2435,6 +2456,7 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 	var _listboxHeader = (_type === "font") ? _fontListboxHeader : _tagListboxHeader;
 
 	var _listbox = _listboxContainer.add("listbox", undefined, undefined, _listboxHeader);
+
 	_listbox.alignment = [_alignment,"top"];
 	_listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
 	_listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
@@ -2768,6 +2790,78 @@ function __applyFont(_selection, _selectedFontObj) {
 
 	return _selectedFont;
 } /* END function __applyFont */
+
+
+/**
+ * Apply extended OpenType features to selected text
+ * e.g. app.selection[0].opentypeFeatures = [["hlig",1],["cv84",2]];
+ * @param {Text} _selection 
+ * @param {Object} _selectedTagObj 
+ * @returns Array
+ */
+function __applyExtendedOTFeatures(_selection, _selectedTagObj) {
+
+	if(!_global) { return []; }
+	if(!_selection || !_selection.hasOwnProperty("opentypeFeatures") || !_selection.isValid) { return []; }
+	if(!_selectedTagObj || !(_selectedTagObj instanceof Object)) { return []; }
+
+	var _extendedOTFTagArray = [];
+
+	for(var _key in _selectedTagObj) {
+			
+		if(!_selectedTagObj.hasOwnProperty(_key)) {
+			continue;
+		}
+
+		var _tagItemObj = _selectedTagObj[_key];
+		if(!_tagItemObj || !_tagItemObj.hasOwnProperty("tag") ||!_tagItemObj.hasOwnProperty("value") ) {
+			continue;
+		}
+
+		var _tag = _tagItemObj["tag"];
+		var _value = Number(_tagItemObj["value"]);
+
+		if(
+			_tag === null || _tag === undefined || _tag.constructor !== String || _tag.length !== 4 ||
+			isNaN(_value) || !isFinite(_value) || Math.floor(_value) !== _value || _value < 0
+		) {
+			continue;
+		}
+
+		_extendedOTFTagArray.push([_tag, _value]);
+	}
+
+	try {
+		_selection.opentypeFeatures = _extendedOTFTagArray;
+	} catch(_error) {
+		alert(_error.message);
+		return [];
+	}
+	
+	return _extendedOTFTagArray;
+} /* END function __applyExtendedOTFeatures */
+
+
+/**
+ * Clear extended OpenType features on selected text
+ * @param {Text} _selection 
+ * @param {Object} _selectedTagObj 
+ * @returns Array
+ */
+function __clearExtendedOTFeatures(_selection) {
+
+	if(!_global) { return []; }
+	if(!_selection || !_selection.hasOwnProperty("opentypeFeatures") || !_selection.isValid) { return []; }
+	
+	try {
+		_selection.opentypeFeatures = [];
+	} catch(_error) {
+		alert(_error.message);
+	}
+	
+	return [];
+} /* END function __applyExtendedOTFeatures */
+
 
 
 
