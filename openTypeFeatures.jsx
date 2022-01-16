@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 14. January 2022
+	+	Last updated: 16. January 2022
 
 		
 	+	License (MIT)
@@ -50,7 +50,7 @@ _global["setups"] = {
 /* Dialog texts and error messages */
 __defineLocalizeStrings();
 
-/* State (SSOT) */
+/* State Object (SSOT) */
 var _otfTagObj = __getOTFTagObject();
 
 /* Show OTF Dialog */
@@ -4040,7 +4040,7 @@ function __getOTFTagObject() {
 			"value":"1",
 			"label":"Localized Forms",
 			"desc":"",
-			"type":"Registry",
+			"type":"InDesign/Registry",
 			"search":["locl"]
 		},
 		"ltra": {
