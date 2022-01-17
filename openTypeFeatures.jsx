@@ -1,4 +1,4 @@
-﻿/* DESCRIPTION: OpenType features of installed fonts */ 
+﻿/* DESCRIPTION: OpenType features of selection */ 
 
 /*
 	
@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 16. January 2022
+	+	Last updated: 17. January 2022
 
 		
 	+	License (MIT)
@@ -1290,16 +1290,19 @@ function __showOTFWindow(_otfTagObj) {
 	} /* END function __altKeyHandler */
 
 
-	/* ToDo */
-	/* _refreshButton.notify(); // for Click on tabs */
-
-
-
-
-
-
-
-
+	/* Refresh tabs */
+	_tabPanel.onChange = function() {
+		switch (this.selection) {
+			case _basicTab:
+				_refreshButton.notify();
+				break;
+			case _extendedTab:
+				__checkInputs("extendedFeatures");
+				break;
+			case _searchTab:
+				break;
+		};
+	};
 
 	/* Extended Tab: Tag Name Filter */
 	_extendedTabTagFilterEdittext.onChanging = function() {
