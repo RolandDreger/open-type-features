@@ -1455,7 +1455,7 @@ function __showOTFWindow(_otfTagObj) {
 	__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {}, __fillFontListbox, "onChange"); /* Search Tab: All Tag Listbox */
 	__createListbox(_searchTabC2R1Group, "font", "right", {}, {}); /* Search Tab: Font Listbox */
 
-	/* Set all Inputs (after listbox creation) */
+	/* Get and set all inputs (after listbox creation) */
 	__checkInputs();
 	
 
@@ -1482,6 +1482,10 @@ function __showOTFWindow(_otfTagObj) {
 			return false;
 		}
 		
+		if(!_flag || _flag === "extendedFeatures") {
+			__checkExtendedOTFeatures(_selection, _otfWindow, _extendedTabC2R1Group, _otfTagObj);
+		}
+
 		if(!_flag || _flag === "ligatures") {
 			__checkOTFeature("ligatures", "liga", _selection, _otfWindow, _ligaturesCheckbox);
 		}
@@ -1582,10 +1586,6 @@ function __showOTFWindow(_otfTagObj) {
 			__checkOTFeature("positionalForm", "medi", _selection, _otfWindow, _positionalFormsMedialCheckbox);
 			__checkOTFeature("positionalForm", "fina", _selection, _otfWindow, _positionalFormsFinalCheckbox);
 			__checkOTFeature("positionalForm", "isol", _selection, _otfWindow, _positionalFormsIsolatedCheckbox);
-		}
-
-		if(!_flag || _flag === "extendedFeatures") {
-			__checkExtendedOTFeatures(_selection, _otfWindow, _extendedTabC2R1Group, _otfTagObj);
 		}
 	} /* END function __checkInputs */ 
 	
