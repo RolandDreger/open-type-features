@@ -47,6 +47,8 @@ _global["setups"] = {
 };
 
 
+/* Progressbar */
+_global["progressbar"] = __createProgressbar();
 
 /* Dialog texts and error messages */
 __defineLocalizeStrings();
@@ -81,10 +83,7 @@ function __showOTFWindow(_otfTagObj) {
 		return false; 
 	}
 
-	var _fontObj = __getFontObj();
-	if(!_fontObj) {
-		_fontObj = {};
-	}
+	var _fontObj;
 
 	var _appliedFontsStatictext;
 
@@ -1301,6 +1300,9 @@ function __showOTFWindow(_otfTagObj) {
 				__checkInputs("extendedFeatures");
 				break;
 			case _searchTab:
+				if(!_fontObj) {
+					_fontObj = __getFontObj() || {};
+				}
 				break;
 		};
 	};
@@ -2989,6 +2991,172 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 
 	return true;
 } /* END function __checkExtendedOTFeatures */
+
+
+
+
+/**
+ * Confirm dialog
+ * @param {String} _dialogLabel 
+ */
+function __showConfirmDialog(_dialogLabel) {
+	
+	if(!_global) { return false; }
+	if(_dialogLabel == null || _dialogLabel.constructor !== String) { return false; }
+	
+	var _yesButton;
+	var _noButton;
+	var _closeValue;
+
+	var _confirmDialog = new Window("dialog", localize(_global.confirmDialogTitle), undefined, { closeButton: true });
+	with(_confirmDialog) {
+		orientation = "row";
+		alignChildren = ["fill","fill"];
+		spacing = 15;
+		var _dialogLabelGroup = add("panel");
+		with(_dialogLabelGroup) {
+			orientation = "column";
+			alignChildren = ["fill","fill"];
+			margins = [20,20,20,20];
+			spacing = 10;
+			var _dialogLabelStatictext = add("statictext", undefined, _dialogLabel, { multiline:true });
+			with(_dialogLabelStatictext) {
+				characters = 35;
+			} /* END _dialogLabelStatictext */
+		} /* END _dialogLabelGroup */
+		/* Action Buttons */
+		var _buttonGroup = add("group");
+		with(_buttonGroup) {
+			orientation = "column";
+			alignChildren = ["fill","middle"];
+			margins = [0,0,0,0];
+			spacing = 8;
+			_yesButton = add("button", undefined, localize(_global.yesButtonLabel), { name:"OK"});
+			with(_yesButton) {
+				helpTip = localize(_global.yesButtonHelpTip);
+			} /* END _yesButton */
+			_noButton = add("button", undefined, localize(_global.noButtonLabel), { name:"CANCEL"});
+			with(_noButton) {
+				helpTip = localize(_global.noButtonHelpTip);
+			} /* END _noButton */
+		} /* END _buttonGroup */
+	} /* END _confirmDialog */
+	
+	
+	/* Callbacks */
+	_noButton.onClick = function() {
+		_confirmDialog.hide();
+		_confirmDialog.close(2);
+	};
+
+	_yesButton.onClick = function() {
+		_confirmDialog.hide();
+		_confirmDialog.close(1);
+	};
+	/* END Callbacks */
+	
+	
+	/* Dialog aufrufen */
+	_closeValue = _confirmDialog.show();
+	if(_closeValue === 2) { 
+		return false; 
+	}
+	
+	return true;
+} /* END function __showConfirmDialog */
+
+
+/**
+ * Progressbar
+ * @returns {SUIWindow}
+ */
+function __createProgressbar() {
+	
+	var _progressbar;
+	var _labelText;
+	var _progressWindow = new Window ("palette", undefined, undefined, { borderless:true });
+	with(_progressWindow) {	
+		spacing = 10;
+		margins = [20,10,20,20];
+		alignChildren = ["fill","center"];
+		_labelText = add("statictext");
+		with(_labelText) {
+			characters = 30; /* Breitenvorgabe des Fensters */
+			justify = "center";
+		} /* END _labelText */
+		_progressbar = add("progressbar", undefined, 0, 0);
+		with(_progressbar) {
+			minimumSize.width = 340;
+			maximumSize.height = 6;
+		}
+	} /* END _progressWindow */
+
+	_progressWindow.initialize = function(_title, _start, _stop, _visible) {
+		_progressWindow.text = (_title && _title.toString()) || "";
+		_progressbar.value = (_start && !isNaN(_start) && Number(_start)) || 0;
+		_progressbar.maxvalue = (_stop && !isNaN(_stop) && Number(_stop)) || 0;
+		_progressbar.visible = !!_visible;
+		this.show();
+	}; /* END function initialize */
+
+	_progressWindow.push = function(_label, _step) {
+		_labelText.text = (_label && _label.toString()) || "";
+		_progressbar.value = (_step && !isNaN(_step) && Number(_step)) || _progressbar.value + 1;
+		this.update();
+	}; /* END function push */
+	
+	return _progressWindow;
+} /* END function __createProgressbar */
+
+
+
+
+/**
+ * Get Font Object
+ * @returns Object
+ */
+function __getFontObj() {
+
+	if(!_global) { return false; }
+
+	var _fontArray = app.fonts.everyItem().getElements();
+	var _fontObj = {};
+
+	_global["progressbar"].initialize(undefined, 0, _fontArray.length, true);
+
+	for(var i=0; i<_fontArray.length; i+=1) {
+
+		_global["progressbar"].push(localize(_global.readFontsProgressbarLabel), i);
+
+		var _curFont = _fontArray[i];
+		if(!_curFont || !_curFont.isValid || _curFont.status !== FontStatus.INSTALLED) {
+			continue;
+		}
+
+		var _fontName;
+		var _fontStyle;
+
+		try {
+			var _fontFullName = _curFont.name;
+			var _fontFullNameArray = _fontFullName.split("\t");
+			_fontName = _fontFullNameArray[0] || "";
+			_fontStyle = _fontFullNameArray[1] || "";
+		} catch(_error) {
+			continue;
+		}
+
+		_fontObj[i.toString()] = {
+			"name":_fontName,
+			"style":_fontStyle,
+			"font":_curFont
+		};
+	}
+
+	_global["progressbar"].close();
+
+	return _fontObj;
+} /* END function __getFontObj */
+
 
 
 
@@ -4964,119 +5132,6 @@ function __getOTFTagObject() {
 } /* END function __getOTFTagObject */
 
 
-/**
- * Get Font Object
- * @returns Object
- */
-function __getFontObj() {
-
-	var _fontArray = app.fonts.everyItem().getElements();
-	var _fontObj = {};
-
-	for(var i=0; i<_fontArray.length; i+=1) {
-
-		var _curFont = _fontArray[i];
-		if(!_curFont || !_curFont.isValid || _curFont.status !== FontStatus.INSTALLED) {
-			continue;
-		}
-
-		var _fontName;
-		var _fontStyle;
-
-		try {
-			var _fontFullName = _curFont.name;
-			var _fontFullNameArray = _fontFullName.split("\t");
-			_fontName = _fontFullNameArray[0] || "";
-			_fontStyle = _fontFullNameArray[1] || "";
-		} catch(_error) {
-			continue;
-		}
-
-		_fontObj[i.toString()] = {
-			"name":_fontName,
-			"style":_fontStyle,
-			"font":_curFont
-		};
-	}
-
-	return _fontObj;
-} /* END function __getFontObj */
-
-
-
-
-/**
- * Confirm dialog
- * @param {String} _dialogLabel 
- */
-function __showConfirmDialog(_dialogLabel) {
-	
-	if(!_global) { return false; }
-	if(_dialogLabel == null || _dialogLabel.constructor !== String) { return false; }
-	
-	var _yesButton;
-	var _noButton;
-	var _closeValue;
-
-	var _confirmDialog = new Window("dialog", localize(_global.confirmDialogTitle), undefined, { closeButton: true });
-	with(_confirmDialog) {
-		orientation = "row";
-		alignChildren = ["fill","fill"];
-		spacing = 15;
-		var _dialogLabelGroup = add("panel");
-		with(_dialogLabelGroup) {
-			orientation = "column";
-			alignChildren = ["fill","fill"];
-			margins = [20,20,20,20];
-			spacing = 10;
-			var _dialogLabelStatictext = add("statictext", undefined, _dialogLabel, { multiline:true });
-			with(_dialogLabelStatictext) {
-				characters = 35;
-			} /* END _dialogLabelStatictext */
-		} /* END _dialogLabelGroup */
-		/* Action Buttons */
-		var _buttonGroup = add("group");
-		with(_buttonGroup) {
-			orientation = "column";
-			alignChildren = ["fill","middle"];
-			margins = [0,0,0,0];
-			spacing = 8;
-			_yesButton = add("button", undefined, localize(_global.yesButtonLabel), { name:"OK"});
-			with(_yesButton) {
-				helpTip = localize(_global.yesButtonHelpTip);
-			} /* END _yesButton */
-			_noButton = add("button", undefined, localize(_global.noButtonLabel), { name:"CANCEL"});
-			with(_noButton) {
-				helpTip = localize(_global.noButtonHelpTip);
-			} /* END _noButton */
-		} /* END _buttonGroup */
-	} /* END _confirmDialog */
-	
-	
-	/* Callbacks */
-	_noButton.onClick = function() {
-		_confirmDialog.hide();
-		_confirmDialog.close(2);
-	};
-
-	_yesButton.onClick = function() {
-		_confirmDialog.hide();
-		_confirmDialog.close(1);
-	};
-	/* END Callbacks */
-	
-	
-	/* Dialog aufrufen */
-	_closeValue = _confirmDialog.show();
-	if(_closeValue === 2) { 
-		return false; 
-	}
-	
-	return true;
-} /* END function __showConfirmDialog */
-
-
-
 
 /**
  * Dialog texts and error messages
@@ -5914,6 +5969,13 @@ function __defineLocalizeStrings() {
 		de:"Schrift zugewiesen: %1",
 		fr:"Font appliquée : %1",
 		es:"Fuente asignada: %1"
+	};
+
+	_global.readFontsProgressbarLabel = {
+		en:"Read fonts ...",
+		de:"Schriften einlesen ...",
+		fr:"Lire les fontes ...",
+		es:"Lea las fuentes ..."
 	};
 
 	_global.textStyleRangeConfirmDialogMessage = { 
