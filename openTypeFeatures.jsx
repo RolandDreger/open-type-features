@@ -42,7 +42,8 @@ var _global = {
 
 _global["setups"] = {
 	"isHelpTipDisplayed":false, /* Display OFT help tips. Values: true or false */
-	"isStyleAppliedToSelection":true /* Apply style to selection. Values: true or false */
+	"isStyleAppliedToSelection":true, /* Apply style to selection. Values: true or false */
+	"textStyleRangeLimit": 30 /* Number of text style ranges of selection that trigger a warning message (Performance) and will be displayed in the list box (extended feature tag). Value: Integer */
 };
 
 
@@ -1448,6 +1449,7 @@ function __showOTFWindow(_otfTagObj) {
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
 	_displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["isHelpTipDisplayed"] = _setupObj["isHelpTipDisplayed"];
+	_otfWindow["textStyleRangeLimit"] = _setupObj["textStyleRangeLimit"];
 	_otfWindow["stylisticSetCodes"] = [[]];
 	_otfWindow["areWarningsDisplayed"] = true;
 
@@ -2214,8 +2216,9 @@ function __getSelection(_window) {
 
 	/* Check: To many text style ranges? */
 	if(_window["areWarningsDisplayed"] === true) {
+		var _textStyleRangeLimit = _window["textStyleRangeLimit"] || 30;
 		var _numOfTextStyleRanges = _selection.textStyleRanges.length;
-		if(_numOfTextStyleRanges > 30) {
+		if(_numOfTextStyleRanges > _textStyleRangeLimit) {
 			var _response = __showConfirmDialog(localize(_global.textStyleRangeConfirmDialogMessage));
 			if(_response === false) {  
 				return null;
@@ -2908,7 +2911,7 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("children")) { return false; }
 	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return false; }
 
-	const MAX_NUM_OF_ENTRIES = 30;
+	const _maxNumOfEntries = _window["textStyleRangeLimit"] || 30;
 
 	var _listbox = _listboxContainer.children[0];
 	if(!_listbox || !(_listbox instanceof ListBox)) {
@@ -2970,7 +2973,7 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 		}
 		
 		/* Separator for multiple text style ranges */
-		if(i === _textStyleRangeArray.length - 1 || i > MAX_NUM_OF_ENTRIES) {
+		if(i === _textStyleRangeArray.length - 1 || i > _maxNumOfEntries) {
 			break;
 		}
 
@@ -5021,7 +5024,7 @@ function __showConfirmDialog(_dialogLabel) {
 			spacing = 10;
 			var _dialogLabelStatictext = add("statictext", undefined, _dialogLabel, { multiline:true });
 			with(_dialogLabelStatictext) {
-				characters = 40;
+				characters = 35;
 			} /* END _dialogLabelStatictext */
 		} /* END _dialogLabelGroup */
 		/* Action Buttons */
@@ -5907,10 +5910,10 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.textStyleRangeConfirmDialogMessage = { 
-		en:"Currently, many text style ranges are selected. This may cause a delayed execution of the script.\n\nContinue anyway?",
-		de:"Aktuell sind viele Textstellen mit unterschiedlicher Formatierung ausgewählt. Dies kann zu einer verzögerten Ausführung des Skriptes führen.\n\nTrotzdem fortfahren?",
-		fr:"Actuellement, de nombreux passages de texte sont sélectionnés avec un formatage différent. Cela peut entraîner un retard dans l'exécution du script.\n\nContinuer quand même ?",
-		es:"Actualmente, se seleccionan muchos pasajes de texto con un formato diferente. Esto puede causar un retraso en la ejecución del script.\n\n¿Continuar de todos modos?"
+		en:"Currently, many text style ranges are selected. This may cause a delayed display of the values.\n\nContinue anyway?",
+		de:"Aktuell sind viele unterschiedlich formatierte Textstellen ausgewählt. Dies kann zu einer verzögerten Darstellung der Werte führen.\n\nTrotzdem fortfahren?",
+		fr:"Actuellement, de nombreuses zones de style de texte sont sélectionnées. Cela peut entraîner un retard dans l'affichage des valeurs.\n\nContinuer quand même ?",
+		es:"Actualmente, se seleccionan muchos campos de estilo de texto. Esto puede provocar un retraso en la visualización de los valores.\n\n¿Continuar de todos modos?"
 	};
 
 	_global.confirmDialogTitle = { 
@@ -5943,7 +5946,7 @@ function __defineLocalizeStrings() {
 	
 	_global.yesButtonHelpTip = { 
 		en:"OpenType features properties are read out", 
-		de:"OpenType-Eigenschaften werden nicht ausgelesen",
+		de:"OpenType-Eigenschaften werden ausgelesen",
 		fr:"Les propriétés des caractéristiques OpenType sont lues",
 		es:"Las propiedades de las características OpenType se leen"
 	};
