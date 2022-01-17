@@ -1446,8 +1446,10 @@ function __showOTFWindow(_otfTagObj) {
 	/* Initialize Dialog: Basic Features */
 	_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
 	_applyStyleToSelectionCheckbox.value = _setupObj["isStyleAppliedToSelection"];
-	_otfWindow["isHelpTipDisplayed"] = _displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
+	_displayHelpTipCheckbox.value = _setupObj["isHelpTipDisplayed"];
+	_otfWindow["isHelpTipDisplayed"] = _setupObj["isHelpTipDisplayed"];
 	_otfWindow["stylisticSetCodes"] = [[]];
+	_otfWindow["areWarningsDisplayed"] = true;
 
 	/* Initialize Dialog: Extended Features */
 	__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {}, __changeTagValue, "onDoubleClick"); /* Extended Tab: All Tag Listbox */
@@ -1471,6 +1473,11 @@ function __showOTFWindow(_otfTagObj) {
 		
 		if(!_global) { return false; }
 		
+		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			return false;
+		}
+		
 		if(_flag !== null && _flag !== undefined && _flag instanceof Event) {
 			_flag.stopPropagation();
 			_flag = undefined;
@@ -1478,11 +1485,6 @@ function __showOTFWindow(_otfTagObj) {
 		
 		if(!_flag) {
 			_appliedFontsStatictext.text = __getAppliedFonts(_otfWindow);
-		}
-		
-		var _selection = __getSelection(_otfWindow);
-		if(!_selection) {
-			return false;
 		}
 		
 		if(!_flag || _flag === "extendedFeatures") {
@@ -2205,11 +2207,24 @@ function __getSelection(_window) {
 			break;
 	}
 
-	if(!_selection.isValid || !_selection.hasOwnProperty("opentypeFeatures")) {
+	if(!_selection.isValid || !_selection.hasOwnProperty("opentypeFeatures") || !_selection.hasOwnProperty("textStyleRanges")) {
 		_window.text = localize(_global.invalidSelectionAlert);
 		return null;
 	}
 
+	/* Check: To many text style ranges? */
+	if(_window["areWarningsDisplayed"] === true) {
+		var _numOfTextStyleRanges = _selection.textStyleRanges.length;
+		if(_numOfTextStyleRanges > 30) {
+			var _response = __showConfirmDialog(localize(_global.textStyleRangeConfirmDialogMessage));
+			if(_response === false) {  
+				return null;
+			} else {
+				_window["areWarningsDisplayed"] = false; /* Save response */
+			}
+		}
+	}
+	
 	return _selection;
 } /* END function __getSelection */
 
@@ -4981,6 +4996,79 @@ function __getFontObj() {
 
 
 /**
+ * Confirm dialog
+ * @param {String} _dialogLabel 
+ */
+function __showConfirmDialog(_dialogLabel) {
+	
+	if(!_global) { return false; }
+	if(_dialogLabel == null || _dialogLabel.constructor !== String) { return false; }
+	
+	var _yesButton;
+	var _noButton;
+	var _closeValue;
+
+	var _confirmDialog = new Window("dialog", localize(_global.confirmDialogTitle), undefined, { closeButton: true });
+	with(_confirmDialog) {
+		orientation = "row";
+		alignChildren = ["fill","fill"];
+		spacing = 15;
+		var _dialogLabelGroup = add("panel");
+		with(_dialogLabelGroup) {
+			orientation = "column";
+			alignChildren = ["fill","fill"];
+			margins = [20,20,20,20];
+			spacing = 10;
+			var _dialogLabelStatictext = add("statictext", undefined, _dialogLabel, { multiline:true });
+			with(_dialogLabelStatictext) {
+				characters = 40;
+			} /* END _dialogLabelStatictext */
+		} /* END _dialogLabelGroup */
+		/* Action Buttons */
+		var _buttonGroup = add("group");
+		with(_buttonGroup) {
+			orientation = "column";
+			alignChildren = ["fill","middle"];
+			margins = [0,0,0,0];
+			spacing = 8;
+			_yesButton = add("button", undefined, localize(_global.yesButtonLabel), { name:"OK"});
+			with(_yesButton) {
+				helpTip = localize(_global.yesButtonHelpTip);
+			} /* END _yesButton */
+			_noButton = add("button", undefined, localize(_global.noButtonLabel), { name:"CANCEL"});
+			with(_noButton) {
+				helpTip = localize(_global.noButtonHelpTip);
+			} /* END _noButton */
+		} /* END _buttonGroup */
+	} /* END _confirmDialog */
+	
+	
+	/* Callbacks */
+	_noButton.onClick = function() {
+		_confirmDialog.hide();
+		_confirmDialog.close(2);
+	};
+
+	_yesButton.onClick = function() {
+		_confirmDialog.hide();
+		_confirmDialog.close(1);
+	};
+	/* END Callbacks */
+	
+	
+	/* Dialog aufrufen */
+	_closeValue = _confirmDialog.show();
+	if(_closeValue === 2) { 
+		return false; 
+	}
+	
+	return true;
+} /* END function __showConfirmDialog */
+
+
+
+
+/**
  * Dialog texts and error messages
  */
 function __defineLocalizeStrings() {
@@ -5818,4 +5906,45 @@ function __defineLocalizeStrings() {
 		es:"Fuente asignada: %1"
 	};
 
+	_global.textStyleRangeConfirmDialogMessage = { 
+		en:"Currently, many text style ranges are selected. This may cause a delayed execution of the script.\n\nContinue anyway?",
+		de:"Aktuell sind viele Textstellen mit unterschiedlicher Formatierung ausgewählt. Dies kann zu einer verzögerten Ausführung des Skriptes führen.\n\nTrotzdem fortfahren?",
+		fr:"Actuellement, de nombreux passages de texte sont sélectionnés avec un formatage différent. Cela peut entraîner un retard dans l'exécution du script.\n\nContinuer quand même ?",
+		es:"Actualmente, se seleccionan muchos pasajes de texto con un formato diferente. Esto puede causar un retraso en la ejecución del script.\n\n¿Continuar de todos modos?"
+	};
+
+	_global.confirmDialogTitle = { 
+		en:"Request",
+		de:"Abfrage",
+		fr:"Requête",
+		es:"Solicite"
+	};
+	
+	_global.noButtonLabel = { 
+		en:"No", 
+		de:"Nein",
+		fr:"Non",
+		es:"No"
+	};
+	
+	_global.noButtonHelpTip = { 
+		en:"OpenType features properties are not read out", 
+		de:"OpenType-Eigenschaften werden nicht ausgelesen",
+		fr:"Les propriétés des caractéristiques OpenType ne sont pas lues",
+		es:"Las propiedades de las características OpenType no se leen"
+	};
+	
+	_global.yesButtonLabel = { 
+		en:"Yes", 
+		de:"Ja",
+		fr:"Oui",
+		es:"Sí"
+	};
+	
+	_global.yesButtonHelpTip = { 
+		en:"OpenType features properties are read out", 
+		de:"OpenType-Eigenschaften werden nicht ausgelesen",
+		fr:"Les propriétés des caractéristiques OpenType sont lues",
+		es:"Las propiedades de las características OpenType se leen"
+	};
 } /* END function __defineLocalizeStrings */
