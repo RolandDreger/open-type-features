@@ -2923,6 +2923,8 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 		_listbox.removeAll();
 	}
 	
+	_listbox.helpTip = localize(_global.textStyleRangeLimitHelpText, _maxNumOfEntries);
+
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
 
 	for(var i=0; i<_textStyleRangeArray.length; i+=1) {
@@ -5949,5 +5951,12 @@ function __defineLocalizeStrings() {
 		de:"OpenType-Eigenschaften werden ausgelesen",
 		fr:"Les propriétés des caractéristiques OpenType sont lues",
 		es:"Las propiedades de las características OpenType se leen"
+	};
+
+	_global.textStyleRangeLimitHelpText = { 
+		en:"Text style ranges are separated by blank lines. Maximum number: %1", 
+		de:"Bereich mit unterschiedlicher Formatierung werden durch Leerzeilen getrennt. Maximal Anzahl: %1",
+		fr:"Les plages de format sont séparées par des lignes vides. Nombre maximum : %1",
+		es:"Los rangos de formato están separados por líneas vacías. Número máximo: %1"
 	};
 } /* END function __defineLocalizeStrings */
