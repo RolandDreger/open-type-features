@@ -72,9 +72,9 @@ function __showOTFWindow(_otfTagObj) {
 	const PANEL_MARGINS = [5,10,5,5];
 	const FEATURE_GROUP_MARGINS = [5,5,5,0];
 	const FEATURE_GROUP_MARGINS_NARROW = [5,4,4,0];
-	const FIRST_COLUMN_CHAR_NUM = localize({ en: 25, de: 25, fr:25, es:25 });
-	const SECOND_COLUMN_CHAR_NUM = localize({ en: 26, de: 26, fr:26, es:26 });
-	const THIRD_COLUMN_CHAR_NUM = localize({ en: 13, de: 13, fr: 13, es:13 });
+	const FIRST_COLUMN_CHAR_NUM = localize({ en:24, de:24, fr:25, es:24 });
+	const SECOND_COLUMN_CHAR_NUM = localize({ en:24, de:24, fr:26, es:26 });
+	const THIRD_COLUMN_CHAR_NUM = localize({ en:18, de:20, fr:15, es:16 });
 
 	var _setupObj = _global["setups"];
 	if(!_setupObj || !(_setupObj instanceof Object)) { 
@@ -2911,6 +2911,8 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("children")) { return false; }
 	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return false; }
 
+	const LISTBOX_MINIMUM_SIZE = [340,460];
+	const LISTBOX_MAXIMUM_SIZE = [340,460];
 	const _maxNumOfEntries = _window["textStyleRangeLimit"] || 30;
 
 	var _listbox = _listboxContainer.children[0];
@@ -2923,6 +2925,9 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 		_listbox.removeAll();
 	}
 	
+	// _listbox.alignment = ["right","top"];
+	// _listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
+	// _listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
 	_listbox.helpTip = localize(_global.textStyleRangeLimitHelpText, _maxNumOfEntries);
 
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
