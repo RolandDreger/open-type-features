@@ -6007,10 +6007,10 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.extendedTabClearButtonHelpTip = {
-		en:"Clear extended OpenType features of the current selection.",
-		de:"Erweiterte OpenType-Funktionen der aktuellen Auswahl löschen.",
-		fr:"Supprime les fonctionnalités OpenType étendues de la sélection actuelle.",
-		es:"Elimina las funciones OpenType extendidas de la selección actual."
+		en:"Clear all extended OpenType features of the current selection.",
+		de:"Alle erweiterte OpenType-Funktionen der aktuellen Auswahl entfernen.",
+		fr:"Efface toutes les fonctionnalités OpenType étendues de la sélection actuelle.",
+		es:"Borra todas las funciones OpenType extendidas de la selección actual."
 	};
 	
 	_global.extendedTabApplyButtonLabel = {
@@ -6021,10 +6021,10 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.extendedTabApplyButtonHelpTip = {
-		en:"Apply the selected OpenType features to the current text selection in the document.",
-		de:"Die ausgewählten OpenType-Funktionen der aktuellen Textauswahl im Dokument zuweisen.",
-		fr:"Applique les fonctionnalités OpenType sélectionnées à la sélection de texte actuelle dans le document.",
-		es:"Aplica las funciones OpenType seleccionadas a la selección de texto actual en el documento."
+		en:"Apply the OpenType features selected in the left list to the current text selection in the document.",
+		de:"Die in der linke Liste ausgewählten OpenType-Funktionen der aktuellen Textauswahl im Dokument zuweisen.",
+		fr:"Appliquez les fonctionnalités OpenType sélectionnées dans la liste de gauche à la sélection de texte actuelle dans le document.",
+		es:"Aplicar las funciones OpenType seleccionadas en la lista de la izquierda a la selección de texto actual en el documento."
 	};
 	
 	_global.fontAppliedMessage = {
