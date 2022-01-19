@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 17. January 2022
+	+	Last updated: 19. January 2022
 
 		
 	+	License (MIT)
@@ -2980,8 +2980,6 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 	if(!_listboxContainer || !_listboxContainer.hasOwnProperty("children")) { return false; }
 	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return false; }
 
-	const LISTBOX_MINIMUM_SIZE = [340,460];
-	const LISTBOX_MAXIMUM_SIZE = [340,460];
 	const _maxNumOfEntries = _window["textStyleRangeLimit"] || 30;
 
 	var _listbox = _listboxContainer.children[0];
@@ -2994,9 +2992,6 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 		_listbox.removeAll();
 	}
 	
-	// _listbox.alignment = ["right","top"];
-	// _listbox.minimumSize = LISTBOX_MINIMUM_SIZE;
-	// _listbox.maximumSize = LISTBOX_MAXIMUM_SIZE;
 	_listbox.helpTip = localize(_global.textStyleRangeLimitHelpText, _maxNumOfEntries);
 
 	var _textStyleRangeArray = _selection.textStyleRanges.everyItem().getElements();
@@ -3053,7 +3048,8 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 			break;
 		}
 
-		_listbox.add("item", " ");
+		_otfListboxItem = _listbox.add("item", " ");
+		_otfListboxItem.enabled = false;
 	}
 
 	return true;
