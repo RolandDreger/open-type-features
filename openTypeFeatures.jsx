@@ -1389,12 +1389,19 @@ function __showOTFWindow(_otfTagObj) {
 
 	/* Change Tag Value */
 	function __changeTagValue() {
-		var _selectedTagObj = __getListboxSelectionObj(this.parent);
-		_otfTagObj = __setTagValue(_otfTagObj, _selectedTagObj);
-		__createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
+		var _selectedListboxItem = __getSelectedListboxItem(this);
+		if(!_selectedListboxItem || !_selectedListboxItem["payload"]) {
+			return false;
+		}
+		var _selectedIndexArray = [_selectedListboxItem.index];
+		var _tagKey = _selectedListboxItem["payload"]["key"] || "";
+		var _tagValue = __requestTagValue(_otfTagObj, _tagKey);
+		_otfTagObj = __setTagValue(_otfTagObj, _tagKey, _tagValue);
+		var _createdListbox = __createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
 			"one":_extendedTabTagFilterEdittext.text,
 			"two":_extendedTabLabelFilterEdittext.text
 		}, __changeTagValue, "onDoubleClick");
+		__selectListboxItems(_createdListbox, _selectedIndexArray);
 	} /* END function __changeTagValue */
 
 
@@ -2596,41 +2603,78 @@ function __createListbox(_listboxContainer, _type, _alignment, _contentObj, _fil
 
 
 /**
- * Set value of selected tag object
- * @param {Object} _otfTagObj 
- * @param {Object} _selectedTagObj 
- * @returns Object
+ * Get selected item of listbox 
+ * (first item if multi-selection)
+ * @param {SUIListbox} _listbox 
+ * @returns SUIListboxItem
  */
-function __setTagValue(_otfTagObj, _selectedTagObj) {
+function __getSelectedListboxItem(_listbox) {
 
-	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return {}; }
-	if(!_selectedTagObj || !(_selectedTagObj instanceof Object)) { return {}; }
-
-	var _key;
-
-	for(_key in _selectedTagObj) {
-		if(!_selectedTagObj.hasOwnProperty(_key)) {
-			continue;
+		if(!_listbox || !(_listbox instanceof ListBox) || _listbox.items.length === 0 || !_listbox.selection) { return null; }
+	
+		var _selectedListboxItem;
+		var _listboxSelection = _listbox.selection;
+	
+		/* Listbox: multi-selection */
+		if(_listboxSelection instanceof Array) {
+			_selectedListboxItem = _listboxSelection[0];
+		} 
+		/* Listbox: single-selection */
+		else {
+			_selectedListboxItem = _listboxSelection;
 		}
-		break;
+		
+		if(!_selectedListboxItem) {
+			return null;
+		}
+
+		return _selectedListboxItem;
+} /* END function __getSelectedListboxItem */
+
+
+/**
+ * Select listbox item(s)
+ * @param {SUIListbox} _listbox 
+ * @param {Array} _indexArray 
+ * @returns 
+ */
+function __selectListboxItems(_listbox, _indexArray) {
+
+	if(!_listbox || !(_listbox instanceof ListBox) || _listbox.items.length === 0) { return false; }
+	if(!_indexArray || !(_indexArray instanceof Array) || _indexArray.length === 0) { return false; }
+
+	if(_listbox.properties.multiselect) {
+		_listbox.selection = _indexArray;
+	} else {
+		_listbox.selection = _indexArray[0];
 	}
 
-	if(!_key || !_otfTagObj.hasOwnProperty(_key)) {
-		return _otfTagObj;
-	}
+	return true;
+} /* END function __selectListboxItems */
 
-	var _otfTagItemObj = _otfTagObj[_key];
+
+/**
+ * Show prompt for input tag value
+ * @param {Object} _selectedTagObj 
+ * @returns Number|null
+ */
+function __requestTagValue(_otfTagObj, _tagKey) {
+
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return NaN; }
+	if(!_tagKey || _tagKey.constructor !== String) { return NaN; }
+
+	var _otfTagItemObj = _otfTagObj[_tagKey];
 	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object)) {
-		return _otfTagObj;
+		return NaN;
 	}
 
 	var _otfTagName = _otfTagItemObj["tag"] || "---";
 	var _otfTagLabel = _otfTagItemObj["label"] || "---";
-	var _otfTagValue = _otfTagItemObj["value"];
+	var _otfTagValue = _otfTagItemObj["value"] || "";
 
-	var _userInputString = prompt(_otfTagName + " | " + _otfTagLabel, _otfTagValue);
+	var _userInputString = prompt(_otfTagName + "\u2003|\u2003" + _otfTagLabel, _otfTagValue.toString());
 	if(_userInputString === null) {
-		return _otfTagObj;
+		return NaN;
 	}
 
 	var _userInputNumber =  Number(_userInputString);
@@ -2642,10 +2686,32 @@ function __setTagValue(_otfTagObj, _selectedTagObj) {
 		Math.floor(_userInputNumber) !== _userInputNumber ||
 		_userInputNumber < 0
 	) {
+		return NaN;
+	}
+
+	return _userInputNumber;
+} /* END function __requestTagValue */
+
+
+/**
+ * Set value of selected tag object in _otfTagObj (state)
+ * @param {Object} _otfTagObj 
+ * @param {Object} _selectedTagObj 
+ * @param {Number} _tagValue
+ * @returns Object
+ */
+function __setTagValue(_otfTagObj, _tagKey, _tagValue) {
+
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return _otfTagObj; }
+	if(!_tagKey || _tagKey.constructor !== String) { return _otfTagObj; }
+	if(isNaN(_tagValue) || !isFinite(_tagValue) || Math.floor(_tagValue) !== _tagValue || _tagValue < 0) { return _otfTagObj; }
+
+	var _otfTagItemObj = _otfTagObj[_tagKey];
+	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object)) {
 		return _otfTagObj;
 	}
 
-	_otfTagObj[_key]["value"] = _userInputNumber;
+	_otfTagObj[_tagKey]["value"] = _tagValue;
 
 	return _otfTagObj;
 } /* END function __setTagValue */
@@ -2782,6 +2848,7 @@ function __getListboxSelectionObj(_listboxContainer) {
 	
 	return _selectionObj;
 } /* END function __getListboxSelectionObj */
+
 
 /**
  * Apply font to selection
