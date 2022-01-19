@@ -6085,7 +6085,7 @@ function __defineLocalizeStrings() {
 
 	_global.textStyleRangeLimitHelpText = { 
 		en:"Text style ranges are separated by blank lines. Maximum number: %1", 
-		de:"Bereich mit unterschiedlicher Formatierung werden durch Leerzeilen getrennt. Maximal Anzahl: %1",
+		de:"Bereich mit unterschiedlicher Formatierung werden durch Leerzeilen getrennt. Maximale Anzahl: %1",
 		fr:"Les plages de format sont séparées par des lignes vides. Nombre maximum : %1",
 		es:"Los rangos de formato están separados por líneas vacías. Número máximo: %1"
 	};
