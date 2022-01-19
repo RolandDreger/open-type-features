@@ -931,7 +931,7 @@ function __showOTFWindow(_otfTagObj) {
 		/* General Buttons */
 		var _buttonGroup = add("group");
 		with(_buttonGroup) {
-			margins = [0,5,0,5];
+			margins = [0,8,0,5];
 			spacing = 140;
 			_displayHelpTipCheckbox = add("checkbox", undefined, localize(_global.displayHelpTipCheckboxLabel));
 			with(_displayHelpTipCheckbox) {
