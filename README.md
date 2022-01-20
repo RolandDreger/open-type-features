@@ -2,13 +2,11 @@
 
 The idea behind this script is to test the OpenType features of an installed font in InDesign - without flyouts, dropdowns, and the like.
 
-<img width="1444" alt="otf_script_screenshot" src="https://user-images.githubusercontent.com/19747449/133749014-584aa060-c4bc-4d36-9ad8-d7726c6fa74a.png">
+<img width="1441" alt="basic_features" src="https://user-images.githubusercontent.com/19747449/150305148-a3856d90-1b29-4a19-8dad-42cf777ef2a3.png">
 
-Some of the OpenType features are also not accessible from the English or German user interface of InDesign.
+Some of the OpenType features are also not accessible from the English or German user interface of InDesign.[^1] Some features are only accessible via script.
 
-To get full functionality for Japanese/CJK or Arabic OpenType features in InDesign, read [this article](https://ken-lunde.medium.com/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6).
-
-Some features are only accessible via script.
+[^1]:To get full functionality for Japanese/CJK or Arabic OpenType features in InDesign, read [this article](https://ken-lunde.medium.com/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6).
 
 # Script usage
 
@@ -55,6 +53,8 @@ The OpenType features on tab »Advanced Features« can only be applied via scrip
 
 **Please note:** The setting via "Extended features" tab has priority and overwrites the "Basic features". Thus, in case of same functionality, assigning or removing a "Basic Feature" no longer has any effect.
 
+<img width="1436" alt="extended_features" src="https://user-images.githubusercontent.com/19747449/150305102-a29fd301-8b43-49da-89fe-b98187db4623.png">
+
 ## Filter
 
 At the bottom of the tab there are two filters that can be used to limit the displayed features. Multiple tags are separated by spaces, e.g. `hlig liga cv84`
@@ -69,6 +69,10 @@ By double-clicking on one of the entries in the list, you can change the feature
 2. Mark one or more features in the list on the left
 3. Click on the button `Apply`
 
+If you activate the button for style overrides in the paragraph style panel, these text passages are highlighted in the normal document view.
+
+<img width="917" alt="style_overrides" src="https://user-images.githubusercontent.com/19747449/150302952-a1854b69-538c-4fd9-8ea0-b240cd9b5e61.png">
+
 ## Remove All Features
 
 1. Select the relevant text in document 
@@ -77,6 +81,8 @@ By double-clicking on one of the entries in the list, you can change the feature
 # Tab: Font Search
 
 The "Font Search" tab can be used to search for fonts with specific OpenType features. 
+
+<img width="1437" alt="font_search" src="https://user-images.githubusercontent.com/19747449/150305207-869b41ed-e71f-4117-8f9e-5989d77fd824.png">
 
 The list on the left shows the available features. After selecting one or more entries, the script analyzes all available fonts. The matching fonts are displayed in the list on the right.
 
