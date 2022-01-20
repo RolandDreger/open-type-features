@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 19. January 2022
+	+	Last updated: 20. January 2022
 
 		
 	+	License (MIT)
@@ -1324,13 +1324,25 @@ function __showOTFWindow(_otfTagObj) {
 	/* Extended Tab: Apply OT feature Button*/
 	_extendedTabClearButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			alert(localize(_global.noTextSelectedMessage));
+			return false;
+		}
 		__clearExtendedOTFeatures(_selection);
 		__checkInputs("extendedFeatures");
 	};
 	/* Extended Tab: Apply OT feature Button*/
 	_extendedTabApplyButton.onClick = function() {
 		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			alert(localize(_global.noTextSelectedMessage));
+			return false;
+		}
 		var _selectedTagObj = __getListboxSelectionObj(_extendedTabC1R1Group);
+		if(_selectedTagObj.__count__ === 0) {
+			alert(localize(_global.noExtendedFeatureSelectedMessage));
+			return false;
+		}
 		__applyExtendedOTFeatures(_selection, _selectedTagObj);
 		__checkInputs("extendedFeatures");
 	};
@@ -6106,8 +6118,15 @@ function __defineLocalizeStrings() {
 
 	_global.noFontSelectedMessage = { 
 		en:"No font selected\nPlease select a font from the list on the right.", 
-		de:"Keine Schrift ausgewählt\nBitte wählen Sie eine Schrift aus der Liste auf der rechten Seite.",
+		de:"Keine Schrift ausgewählt\nBitte wählen Sie eine Schrift in der Liste auf der rechten Seite.",
 		fr:"Aucune fonte sélectionnée\nVeuillez sélectionner une fonte dans la liste à droite.",
 		es:"No se ha seleccionado ninguna fuente.\nSeleccione un tipo de fuente de la lista de la derecha."
+	};
+
+	_global.noExtendedFeatureSelectedMessage = { 
+		en:"No OpenType feature selected\nPlease select one or more OpenType features from the list on the left.", 
+		de:"Keine OpenType Funktion ausgewählt\nBitte wählen Sie eine oder mehrere OpenType-Funktionen in der Liste auf der linken Seite.",
+		fr:"Aucune fonction OpenType sélectionnée\nVeuillez sélectionner une ou plusieurs fonctionnalités OpenType dans la liste à gauche.",
+		es:"No se ha seleccionado la función OpenType\nSeleccione una o varias funciones OpenType de la lista de la izquierda."
 	};
 } /* END function __defineLocalizeStrings */
