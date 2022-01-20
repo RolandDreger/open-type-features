@@ -1,4 +1,4 @@
-﻿/* DESCRIPTION: OpenType features Dialog */ 
+﻿/* DESCRIPTION: OpenType Features Dialog */ 
 
 /*
 	
