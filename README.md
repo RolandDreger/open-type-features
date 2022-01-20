@@ -10,6 +10,10 @@ Some of the OpenType features are also not accessible from the English or German
 
 # Script usage
 
+Download the script via `Code` ‣ `Download ZIP`
+
+<img width="930" alt="download_zip" src="https://user-images.githubusercontent.com/19747449/150357885-c60fa14e-faf7-4b4f-88c6-f6429c3d2f7b.png">
+
 Put the script into the script folder of InDesign and start it from the script panel via double click. By selecting a checkbox, the corresponding OpenType feature is enabled in the current selection of your document.
 
 Here are some short short Video on how to use the [»Basic Features«](https://vimeo.com/606686469), the [»Extended Features«](https://vimeo.com/667300122) and [search for a font](https://vimeo.com/666012220) with specific OpenType features.
