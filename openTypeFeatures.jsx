@@ -1367,6 +1367,21 @@ function __showOTFWindow(_otfTagObj) {
 			"two":this.text
 		});
 	};
+	/* Search Tab: Apply selected font */
+	_searchTabApplyFontButton.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			alert(localize(_global.noTextSelectedMessage));
+			return false;
+		}
+		var _selectedFontObj = __getListboxSelectionObj(_searchTabC2R1Group);
+		if(_selectedFontObj.__count__ === 0) {
+			alert(localize(_global.noFontSelectedMessage));
+			return false;
+		}
+		__applyFont(_selection, _selectedFontObj);
+		_refreshButton.notify();
+	};
 
 	/* Search fonts with selected OpenType features */
 	function __fillFontListbox() {
@@ -1378,14 +1393,6 @@ function __showOTFWindow(_otfTagObj) {
 			"two":_searchTabFontStyleFilterEdittext.text
 		});
 	} /* END function __fillFontListbox */
-
-	/* Search Tab: Apply selected font */
-	_searchTabApplyFontButton.onClick = function() {
-		var _selection = __getSelection(_otfWindow);
-		var _selectedFontObj = __getListboxSelectionObj(_searchTabC2R1Group);
-		__applyFont(_selection, _selectedFontObj);
-		_refreshButton.notify();
-	}
 
 	/* Change Tag Value */
 	function __changeTagValue() {
@@ -6088,5 +6095,19 @@ function __defineLocalizeStrings() {
 		de:"Bereich mit unterschiedlicher Formatierung werden durch Leerzeilen getrennt. Maximale Anzahl: %1",
 		fr:"Les plages de format sont séparées par des lignes vides. Nombre maximum : %1",
 		es:"Los rangos de formato están separados por líneas vacías. Número máximo: %1"
+	};
+
+	_global.noTextSelectedMessage = { 
+		en:"No text selected\nPlease select the desired text in the document.", 
+		de:"Kein Text ausgewählt\nBitte den gewünschten Text im Dokument auswählen.",
+		fr:"Aucun texte sélectionné\nVeuillez sélectionner le texte souhaité dans le document.",
+		es:"No hay texto seleccionado\nSeleccione el texto deseado en el documento."
+	};
+
+	_global.noFontSelectedMessage = { 
+		en:"No font selected\nPlease select a font from the list on the right.", 
+		de:"Keine Schrift ausgewählt\nBitte wählen Sie eine Schrift aus der Liste auf der rechten Seite.",
+		fr:"Aucune fonte sélectionnée\nVeuillez sélectionner une fonte dans la liste à droite.",
+		es:"No se ha seleccionado ninguna fuente.\nSeleccione un tipo de fuente de la lista de la derecha."
 	};
 } /* END function __defineLocalizeStrings */
