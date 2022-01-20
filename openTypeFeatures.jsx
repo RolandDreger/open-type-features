@@ -43,7 +43,7 @@ var _global = {
 _global["setups"] = {
 	"isHelpTipDisplayed":false, /* Display OFT help tips. Values: true or false */
 	"isStyleAppliedToSelection":true, /* Apply style to selection. Values: true or false */
-	"textStyleRangeLimit": 30 /* Number of text style ranges of selection that trigger a warning message (Performance) and will be displayed in the list box (extended feature tag). Value: Integer */
+	"textStyleRangeLimit": 20 /* Number of text style ranges of selection that trigger a warning message (Performance) and will be displayed in the list box (extended feature tag). Value: Integer */
 };
 
 
@@ -6061,10 +6061,10 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.textStyleRangeConfirmDialogMessage = { 
-		en:"Currently, many text style ranges are selected. This may cause a delayed display of the values.\n\nContinue anyway?",
-		de:"Aktuell sind viele unterschiedlich formatierte Textstellen ausgewählt. Dies kann zu einer verzögerten Darstellung der Werte führen.\n\nTrotzdem fortfahren?",
-		fr:"Actuellement, de nombreuses zones de style de texte sont sélectionnées. Cela peut entraîner un retard dans l'affichage des valeurs.\n\nContinuer quand même ?",
-		es:"Actualmente, se seleccionan muchos campos de estilo de texto. Esto puede provocar un retraso en la visualización de los valores.\n\n¿Continuar de todos modos?"
+		en:"Currently, many text style ranges are selected. This can lead to poor performance and delayed updating of values.\n\nContinue anyway?",
+		de:"Aktuell sind viele unterschiedlich formatierte Textstellen ausgewählt. Dies kann zu einer verzögerten Aktualisierung der Werte führen.\n\nTrotzdem fortfahren?",
+		fr:"Actuellement, de nombreuses zones de style de texte sont sélectionnées. Cela peut entraîner un retard dans la mise à jour des valeurs.\n\nContinuer quand même ?",
+		es:"Actualmente, se seleccionan muchos campos de estilo de texto. Esto puede provocar un retraso en la actualización de los valores.\n\n¿Continuar de todos modos?"
 	};
 
 	_global.confirmDialogTitle = { 
