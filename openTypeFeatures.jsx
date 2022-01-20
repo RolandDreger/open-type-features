@@ -1,4 +1,4 @@
-﻿/* DESCRIPTION: OpenType features of selection */ 
+﻿/* DESCRIPTION: OpenType features Dialog */ 
 
 /*
 	
