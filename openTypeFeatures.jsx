@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: 30. August 2021
 	
-	+	Last updated: 20. January 2022
+	+	Last updated: 21. January 2022
 
 		
 	+	License (MIT)
@@ -2200,7 +2200,7 @@ function __setValue(_otfName, _otfValue, _window) {
 	}
 
 	try {
-		_selection[_otfName] = _otfValue;
+		_selection[_otfName] = _otfValue; /* -> Document */
 	} catch(_error) {
 		_window.text = _error.message;
 		return false;
@@ -2431,7 +2431,7 @@ function __createCStyle(_styleName, _inputObj) {
 	}
 
 	try {
-		_style = _doc.characterStyles.add({ "name":_styleName }); /* -> DOC */
+		_style = _doc.characterStyles.add({ "name":_styleName });  /* -> Document */
 		_style.properties = _properties;
 	} catch(_error) {
 		alert(_error.message);
@@ -2454,7 +2454,7 @@ function __applyCStyle(_cStyle, _selection) {
 	if(!_selection || !_selection.hasOwnProperty("applyCharacterStyle") || !_selection.isValid) { return false; }
 
 	try {
-		_selection.applyCharacterStyle(_cStyle);
+		_selection.applyCharacterStyle(_cStyle); /* -> Document */
 	} catch(_error) {
 		alert(_error.message);
 		return false;
@@ -2900,7 +2900,7 @@ function __applyFont(_selection, _selectedFontObj) {
 			if(!_selectedFont || !_selectedFont.isValid || _selectedFont.status !== FontStatus.INSTALLED) {
 				continue;
 			} else {
-				_selection.appliedFont = _selectedFont;
+				_selection.appliedFont = _selectedFont; /* -> Document */
 				break;
 			}
 		}
@@ -2952,7 +2952,7 @@ function __applyExtendedOTFeatures(_selection, _selectedTagObj) {
 	}
 
 	try {
-		_selection.opentypeFeatures = _extendedOTFTagArray;
+		_selection.opentypeFeatures = _extendedOTFTagArray; /* -> Document */
 	} catch(_error) {
 		alert(_error.message);
 		return [];
@@ -2974,7 +2974,7 @@ function __clearExtendedOTFeatures(_selection) {
 	if(!_selection || !_selection.hasOwnProperty("opentypeFeatures") || !_selection.isValid) { return []; }
 	
 	try {
-		_selection.opentypeFeatures = [];
+		_selection.opentypeFeatures = []; /* -> Document */
 	} catch(_error) {
 		alert(_error.message);
 	}
@@ -5220,6 +5220,8 @@ function __getOTFTagObject() {
  */
 function __defineLocalizeStrings() {
 	
+	if(!_global) { return false; }
+
 	_global.uiHeadLabel = {
 		en:"OpenType Features (V " + _global["version"] + ")",
 		de:"OpenType-Funktionen (V " + _global["version"] + ")",
