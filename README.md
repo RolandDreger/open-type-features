@@ -45,7 +45,7 @@ This is sometimes useful when values are assigned but this OpenType feature is n
 
 ## Refresh UI
 
-The user interface of the script is updated when the selection in the active document changes. If this is not done correctly, the update can be triggered by pressing the Refresh button.
+The user interface of the script is updated when the selection in the active document changes. If this is not done correctly, the update can be triggered by pressing the `Refresh` button.
 
 ## Character Style
 
@@ -59,21 +59,22 @@ The OpenType features on tab »Advanced Features« can only be applied via scrip
 
 <img width="1436" alt="extended_features" src="https://user-images.githubusercontent.com/19747449/150305102-a29fd301-8b43-49da-89fe-b98187db4623.png">
 
+If more than one text style range is selected, they will be displayed in the right list separated by a blank line.
 ## Filter
 
 At the bottom of the tab there are two filters that can be used to limit the displayed features. Multiple tags are separated by spaces, e.g. `hlig liga cv84`
 
 ## Change List Entry
 
-By double-clicking on one of the entries in the list, you can change the feature value. Only positive integers are allowed as values.
+By double-clicking on one of the entries in the list on the left, you can change the feature value (shown in the *Value* column). Only positive integers are allowed as values.
 
-## Apply Feature
+## Apply Feature to Text
 
-1. Select the desired text in document 
+1. Select the desired text in your document 
 2. Mark one or more features in the list on the left
-3. Click on the button `Apply`
+3. Click on the `Apply` button 
 
-If you activate the button for style overrides in the paragraph style panel, these text passages are highlighted in the normal document view.
+**Hint:** If you activate the button for style overrides in the paragraph style panel in the InDesign user interface, these text passages are highlighted in the normal document view.
 
 <img width="917" alt="style_overrides" src="https://user-images.githubusercontent.com/19747449/150302952-a1854b69-538c-4fd9-8ea0-b240cd9b5e61.png">
 
@@ -99,6 +100,11 @@ Error messages are displayed in the title bar of the dialog.
 ## Credits
 
 Thanks for tips and discussion to [Dirk Becker](https://twitter.com/dirkbecker)/[IxtaTypeUI](https://twitter.com/IxtaTypeUI) and [Ken Lunde](https://twitter.com/ken_lunde).
+
+## Support
+If you want to support the development of the script: 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=roland%2edreger%40a1%2enet&lc=AT&item_name=Roland%20Dreger%20%2f%20Donation%20for%20script%20development%20OpenType-Feature-Dialog&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 ## License
 
