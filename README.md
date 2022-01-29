@@ -39,7 +39,7 @@ If the fonts contained in the selection have different availabilities for the sa
 
 ## ALT + Click
 
-If a checkbox is grayed out (Mode »enable«), it is possible to activate it with an ALT + click.
+If a checkbox is grayed out (Mode »enable«), it is possible to activate it with an `ALT + click`.
 
 This is sometimes useful when values are assigned but this OpenType feature is not available for the font in the selection or this feature should be included in the character style.
 
@@ -49,17 +49,25 @@ The user interface of the script is updated when the selection in the active doc
 
 ## Character Style
 
-The selected features can be transferred to a character style. To do this, enter the desired name in the input field (bottom right) and click on the "Character Style" button.
+The selected features can be transferred to a character style. To do this, enter the desired name in the input field (bottom right) and click on the `Character Style` button.
 
 # Tab: Extended Features
 
-The OpenType features on tab »Advanced Features« can only be applied via script. Unfortunately, they cannot be saved in a character style.
+The OpenType features on tab »Extended Features« can only be applied via script. Unfortunately, they cannot be saved in a character style.
 
-**Please note:** The setting via "Extended features" tab has priority and overwrites the "Basic features". Thus, in case of same functionality, assigning or removing a "Basic Feature" no longer has any effect.
+**Please note:** The setting via »Extended features« tab has priority and overwrites the »Basic features«. Thus, in case of same functionality, assigning or removing a »Basic Feature« no longer has any effect.
 
 <img width="1436" alt="extended_features" src="https://user-images.githubusercontent.com/19747449/150305102-a29fd301-8b43-49da-89fe-b98187db4623.png">
 
 If more than one text style range is selected, they will be displayed in the right list separated by a blank line.
+
+## Legend for Type
+ * Registry: Registered feature[^2] that cannot be assigned via the InDesign user interface.
+ * InDesign: Feature that occurs only in InDesign
+ * InDesign/Registry: Registered feature used in the same way in InDesign 
+ * InDesign+/Registry: Registered feature, but used differently in InDesign, e.g. as a combination of two features.
+  
+ [^2]:»OpenType Layout Tag Registry«, Microsoft, <https://docs.microsoft.com/de-de/typography/opentype/spec/featurelist>
 ## Filter
 
 At the bottom of the tab there are two filters that can be used to limit the displayed features. Multiple tags are separated by spaces, e.g. `hlig liga cv84`
@@ -85,7 +93,7 @@ By double-clicking on one of the entries in the list on the left, you can change
 
 # Tab: Font Search
 
-The "Font Search" tab can be used to search for fonts with specific OpenType features. 
+The »Font Search« tab can be used to search for fonts with specific OpenType features. 
 
 <img width="1437" alt="font_search" src="https://user-images.githubusercontent.com/19747449/150305207-869b41ed-e71f-4117-8f9e-5989d77fd824.png">
 
