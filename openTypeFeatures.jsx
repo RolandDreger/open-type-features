@@ -927,6 +927,40 @@ function __showOTFWindow(_otfTagObj) {
 					} /* END _searchTabC2R2Group */
 				} /* END _searchTabC2Group */
 			} /* END _searchTab */
+			var _prefsTab = add("tab", undefined, localize(_global.preferencesTabLabel));
+			with(_prefsTab) {
+				orientation = "row";
+				alignChildren = ["fill","fill"];
+				var _prefsTabC1Group = add("group");
+				with(_prefsTabC1Group) {
+					orientation = "column";
+					alignChildren = ["fill","top"];
+					var _prefsTabTextPreferencesPanel = add("panel", undefined, localize(_global.prefsTabTextPreferencesPanelLabel));
+					with(_prefsTabTextPreferencesPanel) {
+						alignChildren = ["fill","fill"];
+						margins = [15,20,15,15];
+						var _prefsTabShaperGroup = add("group");
+						with(_prefsTabShaperGroup) {
+							alignChildren = ["left","top"];
+							var _prefsTabShaperLabelGroup = add("group");
+							with(_prefsTabShaperLabelGroup) {
+								add("statictext", undefined, (localize(_global.prefsTabShaperLabel) + ":"));
+							} /* END _prefsTabShaperLabelGroup */
+							var _prefsTabShaperRadioButtonGroup = add("group");
+							with(_prefsTabShaperRadioButtonGroup) {
+								var _prefsTabShaperLipikaRadio = add("radiobutton", undefined, localize(_global.prefsTabShaperLipikaLabel));
+								with(_prefsTabShaperLipikaRadio) {
+									helpTip = localize(_global.prefsTabShaperLipikaHelptip);
+								} /* END _prefsTabShaperLipikaRadio */
+								var _prefsTabShaperHarfbuzzRadio = add("radiobutton", undefined, localize(_global.prefsTabShaperHarfbuzzLabel));
+								with(_prefsTabShaperHarfbuzzRadio) {
+									helpTip = localize(_global.prefsTabShaperHarfbuzzHelptip);
+								} /* END _prefsTabShaperHarfbuzzRadio */
+							} /* END _prefsTabShaperRadioButtonGroup */	
+						} /* END _prefsTabShaperGroup */
+					} /* END _prefsTabTextPreferencesPanel */
+				} /* END _prefsTabC1Group */
+			} /* END _prefsTab */
 		} /* END _tabPanel */
 		/* General Buttons */
 		var _buttonGroup = add("group");
@@ -1304,6 +1338,9 @@ function __showOTFWindow(_otfTagObj) {
 					_fontObj = __getFontObj() || {};
 				}
 				break;
+			case _prefsTab:
+				__checkInputs("shapingEngine");
+				break;
 		};
 	};
 
@@ -1455,6 +1492,16 @@ function __showOTFWindow(_otfTagObj) {
 		}
 	});
 
+	_prefsTabShaperLipikaRadio.onClick = 
+	_prefsTabShaperHarfbuzzRadio.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			alert(localize(_global.noTextSelectedMessage));
+			return false;
+		}
+		__setShapingEngine(_selection, _prefsTabShaperLipikaRadio, _prefsTabShaperHarfbuzzRadio);
+	}; 
+
 	_displayHelpTipCheckbox.onClick = function() {
 		_otfWindow["isHelpTipDisplayed"] = this.value;
 		_refreshButton.notify();
@@ -1519,6 +1566,10 @@ function __showOTFWindow(_otfTagObj) {
 		
 		if(!_flag || _flag === "extendedFeatures") {
 			__checkExtendedOTFeatures(_selection, _otfWindow, _extendedTabC2R1Group, _otfTagObj);
+		}
+
+		if(!_flag || _flag === "shapingEngine") {
+			__checkShapingEngine(_prefsTabShaperLipikaRadio, _prefsTabShaperHarfbuzzRadio);
 		}
 
 		if(!_flag || _flag === "ligatures") {
@@ -2906,6 +2957,7 @@ function __applyFont(_selection, _selectedFontObj) {
 		}
 	} catch(_error) {
 		alert(_error.message);
+		return null;
 	}
 
 	return _selectedFont;
@@ -3075,6 +3127,86 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 } /* END function __checkExtendedOTFeatures */
 
 
+/**
+ * Check active Shaping Engine (Lipika or Harfbuzz) in Adobe World Ready Composer
+ * InDesign 2020+ only
+ * @param {SUIRadioButton} _lipikaRadioButton 
+ * @param {SUIRadioButton} _harfbuzzRadioButton 
+ * @returns Boolean
+ */
+function __checkShapingEngine(_lipikaRadioButton, _harfbuzzRadioButton) {
+
+	if(!_global) { return false; }
+	if(!_lipikaRadioButton || !(_lipikaRadioButton instanceof RadioButton)) { return false; }
+	if(!_harfbuzzRadioButton || !(_harfbuzzRadioButton instanceof RadioButton)) { return false; }
+
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { 
+		return false; 
+	}
+
+	var _doc = app.documents.firstItem();
+	if(!_doc.isValid) {
+		return false;
+	}
+
+	var _docTextPrefs = _doc.textPreferences;
+	if(!_docTextPrefs.hasOwnProperty("shapeIndicAndLatinWithHarbuzz")) {
+		_lipikaRadioButton.value = true;
+		_harfbuzzRadioButton.enabled = false;
+		return false;
+	} else {
+		_harfbuzzRadioButton.enabled = true;
+	}
+
+	if(!_docTextPrefs.shapeIndicAndLatinWithHarbuzz) {
+		_lipikaRadioButton.value = true;
+	} else {
+		_harfbuzzRadioButton.value = true;
+	}
+
+	return true;
+} /* END function __checkShapingEngine */
+
+
+/**
+ * Set Shaping Engine (Lipika or Harfbuzz) in Adobe World Ready Composer
+ * InDesign 2020+ only
+ * @param {Text} _selection
+ * @param {SUIRadioButton} _lipikaRadioButton 
+ * @param {SUIRadioButton} _harfbuzzRadioButton 
+ * @returns Boolean
+ */
+function __setShapingEngine(_selection, _lipikaRadioButton, _harfbuzzRadioButton) {
+
+	if(!_global) { return false; }
+	if(!_selection || !_selection.hasOwnProperty("recompose") || !_selection.isValid) { return false; }
+	if(!_lipikaRadioButton || !(_lipikaRadioButton instanceof RadioButton)) { return false; }
+	if(!_harfbuzzRadioButton || !(_harfbuzzRadioButton instanceof RadioButton)) { return false; }
+
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { 
+		return false; 
+	}
+
+	var _doc = app.documents.firstItem();
+	if(!_doc.isValid) {
+		return false;
+	}
+
+	var _docTextPrefs = _doc.textPreferences;
+	if(!_docTextPrefs.hasOwnProperty("shapeIndicAndLatinWithHarbuzz")) {
+		return false;
+	}
+
+	try {
+		_docTextPrefs.shapeIndicAndLatinWithHarbuzz = _harfbuzzRadioButton.value;
+		_selection.recompose();
+	} catch(_error) {
+		alert(_error.message);
+		return false;
+	}
+
+	return true;
+} /* END function __setShapingEngine */
 
 
 /**
@@ -5929,6 +6061,13 @@ function __defineLocalizeStrings() {
 		es:"Búsqueda de fuentes"
 	};
 
+	_global.preferencesTabLabel = {
+		en:"Preferences",
+		de:"Einstellungen",
+		fr:"Préférences",
+		es:"preferencias"
+	};
+
 	_global.tagNameTitle  = {
 		en:"Tag",
 		de:"Tag",
@@ -6130,5 +6269,47 @@ function __defineLocalizeStrings() {
 		de:"Keine OpenType Funktion ausgewählt\nBitte wählen Sie eine oder mehrere OpenType-Funktionen in der Liste auf der linken Seite.",
 		fr:"Aucune fonction OpenType sélectionnée\nVeuillez sélectionner une ou plusieurs fonctionnalités OpenType dans la liste à gauche.",
 		es:"No se ha seleccionado la función OpenType\nSeleccione una o varias funciones OpenType de la lista de la izquierda."
+	};
+
+	_global.prefsTabTextPreferencesPanelLabel = { 
+		en:"Text Preferences", 
+		de:"Text-Einstellungen",
+		fr:"Préférences de texte",
+		es:"Preferencias de texto"
+	};
+
+	_global.prefsTabShaperLabel = { 
+		en:"Shaping engine", 
+		de:"Formgebung",
+		fr:"Engin de shape",
+		es:"Dando forma a"
+	};
+
+	_global.prefsTabShaperLipikaLabel = { 
+		en:"Lipika", 
+		de:"Lipika",
+		fr:"Lipika",
+		es:"Lipika"
+	};
+
+	_global.prefsTabShaperHarfbuzzLabel = { 
+		en:"Harfbuzz", 
+		de:"Harfbuzz",
+		fr:"Harfbuzz",
+		es:"Harfbuzz"
+	}; 
+
+	_global.prefsTabShaperLipikaHelptip = { 
+		en:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.", 
+		de:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.",
+		fr:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.",
+		es:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation."
+	};
+
+	_global.prefsTabShaperHarfbuzzHelptip = { 
+		en:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.", 
+		de:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		fr:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		es:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only."
 	};
 } /* END function __defineLocalizeStrings */
