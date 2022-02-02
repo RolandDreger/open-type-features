@@ -4,9 +4,9 @@
 	
 	+	Adobe InDesign Version: CS2020+
 	+	Autor: Roland Dreger
-	+	Date: 30. August 2021
+	+	Date: August 30,  2021
 	
-	+	Last updated: 21. January 2022
+	+	Last updated: February 2, 2020
 
 		
 	+	License (MIT)
@@ -37,7 +37,7 @@
 
 var _global = {
 	"projectName":"OpenType Features",
-	"version":"2.0"
+	"version":"2.1"
 };
 
 _global["setups"] = {
@@ -5355,10 +5355,10 @@ function __defineLocalizeStrings() {
 	if(!_global) { return false; }
 
 	_global.uiHeadLabel = {
-		en:"OpenType Features (V " + _global["version"] + ")",
-		de:"OpenType-Funktionen (V " + _global["version"] + ")",
-		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")",
-		es:"Funciones OpenType (V " + _global["version"] + ")"
+		en:"OpenType Features (v" + _global["version"] + ")",
+		de:"OpenType-Funktionen (v" + _global["version"] + ")",
+		fr:"Fonctionnalités OpenType (v" + _global["version"] + ")",
+		es:"Funciones OpenType (v" + _global["version"] + ")"
 	};
 	
 	_global.testGoBackLabel = { 
