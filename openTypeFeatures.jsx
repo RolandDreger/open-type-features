@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: August 30,  2021
 	
-	+	Last updated: February 2, 2020
+	+	Last updated: February 3, 2020
 
 		
 	+	License (MIT)
@@ -6272,10 +6272,10 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.prefsTabTextPreferencesPanelLabel = { 
-		en:"Text Preferences", 
-		de:"Text-Einstellungen",
-		fr:"Préférences de texte",
-		es:"Preferencias de texto"
+		en:"Text", 
+		de:"Text",
+		fr:"Texte",
+		es:"Texto"
 	};
 
 	_global.prefsTabShaperLabel = { 
@@ -6286,30 +6286,30 @@ function __defineLocalizeStrings() {
 	};
 
 	_global.prefsTabShaperLipikaLabel = { 
-		en:"Lipika", 
-		de:"Lipika",
-		fr:"Lipika",
-		es:"Lipika"
+		en:"Lipika (Default)", 
+		de:"Lipika (Standard)",
+		fr:"Lipika (Défaut)",
+		es:"Lipika (Predeterminado)"
 	};
 
 	_global.prefsTabShaperHarfbuzzLabel = { 
-		en:"Harfbuzz", 
-		de:"Harfbuzz",
-		fr:"Harfbuzz",
-		es:"Harfbuzz"
+		en:"Harfbuzz (Adobe World Ready Composer) ", 
+		de:"Harfbuzz (Globaler Adobe-Absatzsetzer)",
+		fr:"Harfbuzz (Le compositeur de paragraphe universel)",
+		es:"Harfbuzz (Composición de párrafo internacional)"
 	}; 
 
 	_global.prefsTabShaperLipikaHelptip = { 
-		en:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.", 
-		de:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.",
-		fr:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation.",
-		es:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation."
+		en:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.", 
+		de:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.",
+		fr:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.",
+		es:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation."
 	};
 
 	_global.prefsTabShaperHarfbuzzHelptip = { 
-		en:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.", 
-		de:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
-		fr:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
-		es:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World-Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only."
+		en:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.", 
+		de:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		fr:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		es:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only."
 	};
 } /* END function __defineLocalizeStrings */
