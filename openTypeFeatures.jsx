@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: August 30,  2021
 	
-	+	Last updated: February 3, 2020
+	+	Last updated: February 13, 2020
 
 		
 	+	License (MIT)
@@ -1337,6 +1337,10 @@ function __showOTFWindow(_otfTagObj) {
 				if(!_fontObj) {
 					_fontObj = __getFontObj() || {};
 				}
+				__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
+					"one":_searchTabTagFilterEdittext.text,
+					"two":_searchTabLabelFilterEdittext.text
+				}, __fillFontListbox, "onChange");
 				break;
 			case _prefsTab:
 				__checkInputs("shapingEngine");
@@ -1449,15 +1453,16 @@ function __showOTFWindow(_otfTagObj) {
 		if(!_selectedListboxItem || !_selectedListboxItem["payload"]) {
 			return false;
 		}
-		var _selectedIndexArray = [_selectedListboxItem.index];
 		var _tagKey = _selectedListboxItem["payload"]["key"] || "";
 		var _tagValue = __requestTagValue(_otfTagObj, _tagKey);
-		_otfTagObj = __setTagValue(_otfTagObj, _tagKey, _tagValue);
-		var _createdListbox = __createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
-			"one":_extendedTabTagFilterEdittext.text,
-			"two":_extendedTabLabelFilterEdittext.text
-		}, __changeTagValue, "onDoubleClick");
-		__selectListboxItems(_createdListbox, _selectedIndexArray);
+		var _setTagValueResultObj = __setTagValue(_otfTagObj, _tagKey, _tagValue);
+		_otfTagObj = _setTagValueResultObj["object"];
+		var _isSet = _setTagValueResultObj["isSet"];
+		if(_isSet && _selectedListboxItem.subItems.length > 0) {
+			_selectedListboxItem.subItems[0].text = _tagValue;
+			this.hide();
+			this.show();
+		}
 	} /* END function __changeTagValue */
 
 
@@ -2726,7 +2731,7 @@ function __selectListboxItems(_listbox, _indexArray) {
 /**
  * Show prompt for input tag value
  * @param {Object} _selectedTagObj 
- * @returns Number|null
+ * @returns Number
  */
 function __requestTagValue(_otfTagObj, _tagKey) {
 
@@ -2766,24 +2771,30 @@ function __requestTagValue(_otfTagObj, _tagKey) {
 /**
  * Set value of selected tag object in _otfTagObj (state)
  * @param {Object} _otfTagObj 
- * @param {Object} _selectedTagObj 
+ * @param {String} _tagKey 
  * @param {Number} _tagValue
  * @returns Object
  */
 function __setTagValue(_otfTagObj, _tagKey, _tagValue) {
 
-	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return _otfTagObj; }
-	if(!_tagKey || _tagKey.constructor !== String) { return _otfTagObj; }
-	if(isNaN(_tagValue) || !isFinite(_tagValue) || Math.floor(_tagValue) !== _tagValue || _tagValue < 0) { return _otfTagObj; }
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return { "object":_otfTagObj, "isSet":false }; }
+	if(!_tagKey || _tagKey.constructor !== String) { return { "object":_otfTagObj, "isSet":false }; }
+	if(isNaN(_tagValue) || !isFinite(_tagValue) || Math.floor(_tagValue) !== _tagValue || _tagValue < 0) { return { "object":_otfTagObj, "isSet":false }; }
 
 	var _otfTagItemObj = _otfTagObj[_tagKey];
-	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object)) {
-		return _otfTagObj;
+	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object) || !_otfTagItemObj.hasOwnProperty("value")) {
+		return {
+			"object":_otfTagObj, 
+			"isSet":false
+		};
 	}
 
-	_otfTagObj[_tagKey]["value"] = _tagValue;
+	_otfTagItemObj["value"] = _tagValue;
 
-	return _otfTagObj;
+	return {
+		"object":_otfTagObj, 
+		"isSet":true
+	};
 } /* END function __setTagValue */
 
 
