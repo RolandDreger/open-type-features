@@ -4,9 +4,9 @@
 	
 	+	Adobe InDesign Version: CS2020+
 	+	Autor: Roland Dreger
-	+	Date: 30. August 2021
+	+	Date: August 30,  2021
 	
-	+	Last updated: 21. January 2022
+	+	Last updated: February 13, 2020
 
 		
 	+	License (MIT)
@@ -37,7 +37,7 @@
 
 var _global = {
 	"projectName":"OpenType Features",
-	"version":"2.0"
+	"version":"2.1"
 };
 
 _global["setups"] = {
@@ -927,6 +927,40 @@ function __showOTFWindow(_otfTagObj) {
 					} /* END _searchTabC2R2Group */
 				} /* END _searchTabC2Group */
 			} /* END _searchTab */
+			var _prefsTab = add("tab", undefined, localize(_global.preferencesTabLabel));
+			with(_prefsTab) {
+				orientation = "row";
+				alignChildren = ["fill","fill"];
+				var _prefsTabC1Group = add("group");
+				with(_prefsTabC1Group) {
+					orientation = "column";
+					alignChildren = ["fill","top"];
+					var _prefsTabTextPreferencesPanel = add("panel", undefined, localize(_global.prefsTabTextPreferencesPanelLabel));
+					with(_prefsTabTextPreferencesPanel) {
+						alignChildren = ["fill","fill"];
+						margins = [15,20,15,15];
+						var _prefsTabShaperGroup = add("group");
+						with(_prefsTabShaperGroup) {
+							alignChildren = ["left","top"];
+							var _prefsTabShaperLabelGroup = add("group");
+							with(_prefsTabShaperLabelGroup) {
+								add("statictext", undefined, (localize(_global.prefsTabShaperLabel) + ":"));
+							} /* END _prefsTabShaperLabelGroup */
+							var _prefsTabShaperRadioButtonGroup = add("group");
+							with(_prefsTabShaperRadioButtonGroup) {
+								var _prefsTabShaperLipikaRadio = add("radiobutton", undefined, localize(_global.prefsTabShaperLipikaLabel));
+								with(_prefsTabShaperLipikaRadio) {
+									helpTip = localize(_global.prefsTabShaperLipikaHelptip);
+								} /* END _prefsTabShaperLipikaRadio */
+								var _prefsTabShaperHarfbuzzRadio = add("radiobutton", undefined, localize(_global.prefsTabShaperHarfbuzzLabel));
+								with(_prefsTabShaperHarfbuzzRadio) {
+									helpTip = localize(_global.prefsTabShaperHarfbuzzHelptip);
+								} /* END _prefsTabShaperHarfbuzzRadio */
+							} /* END _prefsTabShaperRadioButtonGroup */	
+						} /* END _prefsTabShaperGroup */
+					} /* END _prefsTabTextPreferencesPanel */
+				} /* END _prefsTabC1Group */
+			} /* END _prefsTab */
 		} /* END _tabPanel */
 		/* General Buttons */
 		var _buttonGroup = add("group");
@@ -1303,6 +1337,13 @@ function __showOTFWindow(_otfTagObj) {
 				if(!_fontObj) {
 					_fontObj = __getFontObj() || {};
 				}
+				__createListbox(_searchTabC1R1Group, "tag", "left", _otfTagObj, {
+					"one":_searchTabTagFilterEdittext.text,
+					"two":_searchTabLabelFilterEdittext.text
+				}, __fillFontListbox, "onChange");
+				break;
+			case _prefsTab:
+				__checkInputs("shapingEngine");
 				break;
 		};
 	};
@@ -1412,15 +1453,16 @@ function __showOTFWindow(_otfTagObj) {
 		if(!_selectedListboxItem || !_selectedListboxItem["payload"]) {
 			return false;
 		}
-		var _selectedIndexArray = [_selectedListboxItem.index];
 		var _tagKey = _selectedListboxItem["payload"]["key"] || "";
 		var _tagValue = __requestTagValue(_otfTagObj, _tagKey);
-		_otfTagObj = __setTagValue(_otfTagObj, _tagKey, _tagValue);
-		var _createdListbox = __createListbox(_extendedTabC1R1Group, "tag", "left", _otfTagObj, {
-			"one":_extendedTabTagFilterEdittext.text,
-			"two":_extendedTabLabelFilterEdittext.text
-		}, __changeTagValue, "onDoubleClick");
-		__selectListboxItems(_createdListbox, _selectedIndexArray);
+		var _setTagValueResultObj = __setTagValue(_otfTagObj, _tagKey, _tagValue);
+		_otfTagObj = _setTagValueResultObj["object"];
+		var _isSet = _setTagValueResultObj["isSet"];
+		if(_isSet && _selectedListboxItem.subItems.length > 0) {
+			_selectedListboxItem.subItems[0].text = _tagValue;
+			this.hide();
+			this.show();
+		}
 	} /* END function __changeTagValue */
 
 
@@ -1454,6 +1496,16 @@ function __showOTFWindow(_otfTagObj) {
 			_cStyleButton.active = true;
 		}
 	});
+
+	_prefsTabShaperLipikaRadio.onClick = 
+	_prefsTabShaperHarfbuzzRadio.onClick = function() {
+		var _selection = __getSelection(_otfWindow);
+		if(!_selection) {
+			alert(localize(_global.noTextSelectedMessage));
+			return false;
+		}
+		__setShapingEngine(_selection, _prefsTabShaperLipikaRadio, _prefsTabShaperHarfbuzzRadio);
+	}; 
 
 	_displayHelpTipCheckbox.onClick = function() {
 		_otfWindow["isHelpTipDisplayed"] = this.value;
@@ -1519,6 +1571,10 @@ function __showOTFWindow(_otfTagObj) {
 		
 		if(!_flag || _flag === "extendedFeatures") {
 			__checkExtendedOTFeatures(_selection, _otfWindow, _extendedTabC2R1Group, _otfTagObj);
+		}
+
+		if(!_flag || _flag === "shapingEngine") {
+			__checkShapingEngine(_prefsTabShaperLipikaRadio, _prefsTabShaperHarfbuzzRadio);
 		}
 
 		if(!_flag || _flag === "ligatures") {
@@ -2675,7 +2731,7 @@ function __selectListboxItems(_listbox, _indexArray) {
 /**
  * Show prompt for input tag value
  * @param {Object} _selectedTagObj 
- * @returns Number|null
+ * @returns Number
  */
 function __requestTagValue(_otfTagObj, _tagKey) {
 
@@ -2715,24 +2771,30 @@ function __requestTagValue(_otfTagObj, _tagKey) {
 /**
  * Set value of selected tag object in _otfTagObj (state)
  * @param {Object} _otfTagObj 
- * @param {Object} _selectedTagObj 
+ * @param {String} _tagKey 
  * @param {Number} _tagValue
  * @returns Object
  */
 function __setTagValue(_otfTagObj, _tagKey, _tagValue) {
 
-	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return _otfTagObj; }
-	if(!_tagKey || _tagKey.constructor !== String) { return _otfTagObj; }
-	if(isNaN(_tagValue) || !isFinite(_tagValue) || Math.floor(_tagValue) !== _tagValue || _tagValue < 0) { return _otfTagObj; }
+	if(!_otfTagObj || !(_otfTagObj instanceof Object)) { return { "object":_otfTagObj, "isSet":false }; }
+	if(!_tagKey || _tagKey.constructor !== String) { return { "object":_otfTagObj, "isSet":false }; }
+	if(isNaN(_tagValue) || !isFinite(_tagValue) || Math.floor(_tagValue) !== _tagValue || _tagValue < 0) { return { "object":_otfTagObj, "isSet":false }; }
 
 	var _otfTagItemObj = _otfTagObj[_tagKey];
-	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object)) {
-		return _otfTagObj;
+	if(!_otfTagItemObj || !(_otfTagItemObj instanceof Object) || !_otfTagItemObj.hasOwnProperty("value")) {
+		return {
+			"object":_otfTagObj, 
+			"isSet":false
+		};
 	}
 
-	_otfTagObj[_tagKey]["value"] = _tagValue;
+	_otfTagItemObj["value"] = _tagValue;
 
-	return _otfTagObj;
+	return {
+		"object":_otfTagObj, 
+		"isSet":true
+	};
 } /* END function __setTagValue */
 
 
@@ -2906,6 +2968,7 @@ function __applyFont(_selection, _selectedFontObj) {
 		}
 	} catch(_error) {
 		alert(_error.message);
+		return null;
 	}
 
 	return _selectedFont;
@@ -3075,6 +3138,86 @@ function __checkExtendedOTFeatures(_selection, _window, _listboxContainer, _otfT
 } /* END function __checkExtendedOTFeatures */
 
 
+/**
+ * Check active Shaping Engine (Lipika or Harfbuzz) in Adobe World Ready Composer
+ * InDesign 2020+ only
+ * @param {SUIRadioButton} _lipikaRadioButton 
+ * @param {SUIRadioButton} _harfbuzzRadioButton 
+ * @returns Boolean
+ */
+function __checkShapingEngine(_lipikaRadioButton, _harfbuzzRadioButton) {
+
+	if(!_global) { return false; }
+	if(!_lipikaRadioButton || !(_lipikaRadioButton instanceof RadioButton)) { return false; }
+	if(!_harfbuzzRadioButton || !(_harfbuzzRadioButton instanceof RadioButton)) { return false; }
+
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { 
+		return false; 
+	}
+
+	var _doc = app.documents.firstItem();
+	if(!_doc.isValid) {
+		return false;
+	}
+
+	var _docTextPrefs = _doc.textPreferences;
+	if(!_docTextPrefs.hasOwnProperty("shapeIndicAndLatinWithHarbuzz")) {
+		_lipikaRadioButton.value = true;
+		_harfbuzzRadioButton.enabled = false;
+		return false;
+	} else {
+		_harfbuzzRadioButton.enabled = true;
+	}
+
+	if(!_docTextPrefs.shapeIndicAndLatinWithHarbuzz) {
+		_lipikaRadioButton.value = true;
+	} else {
+		_harfbuzzRadioButton.value = true;
+	}
+
+	return true;
+} /* END function __checkShapingEngine */
+
+
+/**
+ * Set Shaping Engine (Lipika or Harfbuzz) in Adobe World Ready Composer
+ * InDesign 2020+ only
+ * @param {Text} _selection
+ * @param {SUIRadioButton} _lipikaRadioButton 
+ * @param {SUIRadioButton} _harfbuzzRadioButton 
+ * @returns Boolean
+ */
+function __setShapingEngine(_selection, _lipikaRadioButton, _harfbuzzRadioButton) {
+
+	if(!_global) { return false; }
+	if(!_selection || !_selection.hasOwnProperty("recompose") || !_selection.isValid) { return false; }
+	if(!_lipikaRadioButton || !(_lipikaRadioButton instanceof RadioButton)) { return false; }
+	if(!_harfbuzzRadioButton || !(_harfbuzzRadioButton instanceof RadioButton)) { return false; }
+
+	if(app.documents.length === 0 || app.layoutWindows.length === 0) { 
+		return false; 
+	}
+
+	var _doc = app.documents.firstItem();
+	if(!_doc.isValid) {
+		return false;
+	}
+
+	var _docTextPrefs = _doc.textPreferences;
+	if(!_docTextPrefs.hasOwnProperty("shapeIndicAndLatinWithHarbuzz")) {
+		return false;
+	}
+
+	try {
+		_docTextPrefs.shapeIndicAndLatinWithHarbuzz = _harfbuzzRadioButton.value;
+		_selection.recompose();
+	} catch(_error) {
+		alert(_error.message);
+		return false;
+	}
+
+	return true;
+} /* END function __setShapingEngine */
 
 
 /**
@@ -5223,10 +5366,10 @@ function __defineLocalizeStrings() {
 	if(!_global) { return false; }
 
 	_global.uiHeadLabel = {
-		en:"OpenType Features (V " + _global["version"] + ")",
-		de:"OpenType-Funktionen (V " + _global["version"] + ")",
-		fr:"Fonctionnalités OpenType (V " + _global["version"] + ")",
-		es:"Funciones OpenType (V " + _global["version"] + ")"
+		en:"OpenType Features (v" + _global["version"] + ")",
+		de:"OpenType-Funktionen (v" + _global["version"] + ")",
+		fr:"Fonctionnalités OpenType (v" + _global["version"] + ")",
+		es:"Funciones OpenType (v" + _global["version"] + ")"
 	};
 	
 	_global.testGoBackLabel = { 
@@ -5929,6 +6072,13 @@ function __defineLocalizeStrings() {
 		es:"Búsqueda de fuentes"
 	};
 
+	_global.preferencesTabLabel = {
+		en:"Preferences",
+		de:"Einstellungen",
+		fr:"Préférences",
+		es:"preferencias"
+	};
+
 	_global.tagNameTitle  = {
 		en:"Tag",
 		de:"Tag",
@@ -6130,5 +6280,47 @@ function __defineLocalizeStrings() {
 		de:"Keine OpenType Funktion ausgewählt\nBitte wählen Sie eine oder mehrere OpenType-Funktionen in der Liste auf der linken Seite.",
 		fr:"Aucune fonction OpenType sélectionnée\nVeuillez sélectionner une ou plusieurs fonctionnalités OpenType dans la liste à gauche.",
 		es:"No se ha seleccionado la función OpenType\nSeleccione una o varias funciones OpenType de la lista de la izquierda."
+	};
+
+	_global.prefsTabTextPreferencesPanelLabel = { 
+		en:"Text", 
+		de:"Text",
+		fr:"Texte",
+		es:"Texto"
+	};
+
+	_global.prefsTabShaperLabel = { 
+		en:"Shaping engine", 
+		de:"Formgebung",
+		fr:"Engin de shape",
+		es:"Dando forma a"
+	};
+
+	_global.prefsTabShaperLipikaLabel = { 
+		en:"Lipika (Default)", 
+		de:"Lipika (Standard)",
+		fr:"Lipika (Défaut)",
+		es:"Lipika (Predeterminado)"
+	};
+
+	_global.prefsTabShaperHarfbuzzLabel = { 
+		en:"Harfbuzz (Adobe World Ready Composer) ", 
+		de:"Harfbuzz (Globaler Adobe-Absatzsetzer)",
+		fr:"Harfbuzz (Le compositeur de paragraphe universel)",
+		es:"Harfbuzz (Composición de párrafo internacional)"
+	}; 
+
+	_global.prefsTabShaperLipikaHelptip = { 
+		en:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.", 
+		de:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.",
+		fr:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation.",
+		es:"Set Lipika as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation."
+	};
+
+	_global.prefsTabShaperHarfbuzzHelptip = { 
+		en:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.", 
+		de:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		fr:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only.",
+		es:"Set Harfbuzz as the shaping engine for Latin and Indic script in Adobe World Ready Composer for active document. The selected text will be recomposed after activation. InDesign 2020+ only."
 	};
 } /* END function __defineLocalizeStrings */

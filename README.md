@@ -99,6 +99,18 @@ The »Font Search« tab can be used to search for fonts with specific OpenType f
 
 The list on the left shows the available features. After selecting one or more entries, the script analyzes all available fonts. The matching fonts are displayed in the list on the right.
 
+# Tab: Preferences
+
+## Shaping Engine
+
+Set Lipika or Harfbuzz as the shaping engine for Latin and Indic script. If `Harfbuzz` is checked harfbuzz shaping is set for all languages for world ready composer. 
+
+This setting is used for the active document. After activation (only) the selected text will be recomposed. Available for InDesign 2020+.
+
+Lipika is the name for default shaping engine in Adobe World Ready Composer. Harfbuzz as an alternative shaping engine supports the latest indic shaping specifications.[^3]
+
+[^3]: [Script for enabling Harfbuzz workflow in InDesign](https://community.adobe.com/t5/indesign-discussions/script-for-enabling-harfbuzz-workflow-in-indesign/td-p/11295166)
+
 ---
 
 ## Error Messages
