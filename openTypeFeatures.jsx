@@ -6,7 +6,7 @@
 	+	Autor: Roland Dreger
 	+	Date: August 30,  2021
 	
-	+	Last updated: February 13, 2020
+	+	Last updated: February 26, 2022
 
 		
 	+	License (MIT)
@@ -4791,6 +4791,14 @@ function __getOTFTagObject() {
 			"type":"Registry",
 			"search":["ornm"]
 		},
+		"ovlp": {
+			"tag":"ovlp",
+			"value":"1",
+			"label":"Overlapping swash",
+			"desc":localize(_global.otfOverlappingSwashFeatureDesc),
+			"type":"InDesign",
+			"search":["ovlp"]
+		},
 		"palt": {
 			"tag":"palt",
 			"value":"1",
@@ -5174,6 +5182,23 @@ function __getOTFTagObject() {
 			"desc":"",
 			"type":"Registry",
 			"search":["stch"]
+		},
+		"strl": {
+			"tag":"strl",
+			"value":"1",
+			"label":"Stretched Alternates (left side)",
+			"desc":localize(_global.stretchedAlternatesLeftSideFeaturesDesc),
+			"type":"InDesign",
+			"search":["strr"]
+		},
+		
+		"strr": {
+			"tag":"strr",
+			"value":"1",
+			"label":"Stretched Alternates (right side)",
+			"desc":localize(_global.stretchedAlternatesRightSideFeaturesDesc),
+			"type":"InDesign",
+			"search":["strr"]
 		},
 		"subs": {
 			"tag":"subs",
@@ -6050,7 +6075,28 @@ function __defineLocalizeStrings() {
 		fr:"Si cette option est sélectionnée, les glyphes des caractères qui ont des propriétés de jonction applicables seront remplacés par une autre forme lorsqu'ils apparaissent isolément.",
 		es:"Si se selecciona esta opción, los glifos de los caracteres que tienen propiedades de unión aplicables serán sustituidos por otra forma cuando aparezcan aislados."
 	};
-	
+
+	_global.otfOverlappingSwashFeatureDesc  = {
+		en:"Similar to »swsh« feature except for positioning. The »ovlp« usually has a shorter width, to allow the following text to overlap.",
+		de:"Similar to »swsh« feature except for positioning. The »ovlp« usually has a shorter width, to allow the following text to overlap.",
+		fr:"Similar to »swsh« feature except for positioning. The »ovlp« usually has a shorter width, to allow the following text to overlap.",
+		es:"Similar to »swsh« feature except for positioning. The »ovlp« usually has a shorter width, to allow the following text to overlap."
+	};
+
+	_global.stretchedAlternatesLeftSideFeaturesDesc = {
+		en:"»strl« is only relevant when used with »strr« feature. »strl« elongates the left side of a connection in a cursive script/font.",
+		de:"»strl« is only relevant when used with »strr« feature. »strl« elongates the left side of a connection in a cursive script/font.",
+		fr:"»strl« is only relevant when used with »strr« feature. »strl« elongates the left side of a connection in a cursive script/font.",
+		es:"»strl« is only relevant when used with »strr« feature. »strl« elongates the left side of a connection in a cursive script/font."
+	};
+
+	_global.stretchedAlternatesRightSideFeaturesDesc = {
+		en:"»strr« is only relevant when used with »strl« feature. »strr« elongates the right side of a connection in a cursive script/font.",
+		de:"»strr« is only relevant when used with »strl« feature. »strr« elongates the right side of a connection in a cursive script/font.",
+		fr:"»strr« is only relevant when used with »strl« feature. »strr« elongates the right side of a connection in a cursive script/font.",
+		es:"»strr« is only relevant when used with »strl« feature. »strr« elongates the right side of a connection in a cursive script/font."
+	};
+
 	_global.basicFeaturesTabLabel = {
 		en:"Basic Features",
 		de:"Basisfunktionen",
