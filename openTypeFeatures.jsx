@@ -37,7 +37,7 @@
 
 var _global = {
 	"projectName":"OpenType Features",
-	"version":"2.1"
+	"version":"2.2"
 };
 
 _global["setups"] = {
