@@ -119,7 +119,7 @@ Error messages are displayed in the title bar of the dialog.
 
 ## Credits
 
-Thanks for tips and discussion to [Dirk Becker](https://twitter.com/dirkbecker)/[IxtaTypeUI](https://twitter.com/IxtaTypeUI) and [Ken Lunde](https://twitter.com/ken_lunde).
+Thanks for tips and discussion to [Dirk Becker](https://twitter.com/dirkbecker)/[IxtaTypeUI](https://twitter.com/IxtaTypeUI) and [Ken Lunde](https://twitter.com/ken_lunde). And also a big thank you to @indiscripts and @dhinostroza for help with the translation.
 
 ## Support
 If you want to support the development of the script: 
