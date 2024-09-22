@@ -5623,7 +5623,7 @@ function __defineLocalizeStrings() {
 
 	_global.otfMarkLabel = {
 		en:"Mark Positioning",
-		de:"Markierte Positionierung",
+		de:"Zeichen-Positioning",
 		fr:"Positionnement de marque",
 		es:"Posicionamiento de la marca"
 	};
