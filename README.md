@@ -8,7 +8,12 @@ Some of the OpenType features are also not accessible from the English or German
 
 [^1]:To get full functionality for Japanese/CJK or Arabic OpenType features in InDesign, read [this article](https://ken-lunde.medium.com/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6).
 
-# Script usage
+### Articles
+
+- [Finally, a Clean “OpenType Features” Dialog in InDesign!](https://indiscripts.com/post/2021/09/finally-a-clean-opentype-features-dialog-in-indesign)
+
+
+## Script usage
 
 Download the script via `Code` ‣ `Download ZIP`
 
@@ -18,7 +23,7 @@ Put the script into the script folder of InDesign and start it from the script p
 
 Here are some short short Video on how to use the [»Basic Features«](https://vimeo.com/606686469), the [»Extended Features«](https://vimeo.com/667300122) and [search for a font](https://vimeo.com/666012220) with specific OpenType features.
 
-## Selection
+### Selection
 
 **Insertion Point**: If the insertion point is placed in a paragraph, the feature is enabled in the entire paragraph.
 
@@ -26,32 +31,32 @@ Here are some short short Video on how to use the [»Basic Features«](https://v
 
 **Text**: If a range of text is selected, the feature is enabled in this text only.
 
-# Tab: Basic Features
+## Tab: Basic Features
 
 All OpenType features in Tab »Basic Features« are also accessible via InDesign user interface (albeit deeply hidden in the panel menus ) and can be saved in a character style.  
-## Different Values
+### Different Values
 
 If the current selection contains different values for the same OpenType feature, the background of the checkbox is highlighted in red. In the help text of the checkbox, this fact is pointed out again.
 
-## Different Availability
+### Different Availability
 
 If the fonts contained in the selection have different availabilities for the same OpenType feature, the background of the checkbox is grayed out.
 
-## ALT + Click
+### ALT + Click
 
 If a checkbox is grayed out (Mode »enable«), it is possible to activate it with an `ALT + click`.
 
 This is sometimes useful when values are assigned but this OpenType feature is not available for the font in the selection or this feature should be included in the character style.
 
-## Refresh UI
+### Refresh UI
 
 The user interface of the script is updated when the selection in the active document changes. If this is not done correctly, the update can be triggered by pressing the `Refresh` button.
 
-## Character Style
+### Character Style
 
 The selected features can be transferred to a character style. To do this, enter the desired name in the input field (bottom right) and click on the `Character Style` button.
 
-# Tab: Extended Features
+## Tab: Extended Features
 
 The OpenType features on tab »Extended Features« can only be applied via script. Unfortunately, they cannot be saved in a character style.
 
@@ -61,22 +66,22 @@ The OpenType features on tab »Extended Features« can only be applied via scrip
 
 If more than one text style range is selected, they will be displayed in the right list separated by a blank line.
 
-## Legend for Type
+### Legend for Type
  * Registry: Registered feature[^2] that cannot be assigned via the InDesign user interface.
  * InDesign: Feature that occurs only in InDesign
  * InDesign/Registry: Registered feature used in the same way in InDesign 
  * InDesign+/Registry: Registered feature, but used differently in InDesign, e.g. as a combination of two features.
   
  [^2]:»OpenType Layout Tag Registry«, Microsoft, <https://docs.microsoft.com/de-de/typography/opentype/spec/featurelist>
-## Filter
+### Filter
 
 At the bottom of the tab there are two filters that can be used to limit the displayed features. Multiple tags are separated by spaces, e.g. `hlig liga cv84`
 
-## Change List Entry
+### Change List Entry
 
 By double-clicking on one of the entries in the list on the left, you can change the feature value (shown in the *Value* column). Only positive integers are allowed as values.
 
-## Apply Feature to Text
+### Apply Feature to Text
 
 1. Select the desired text in your document 
 2. Mark one or more features in the list on the left
@@ -86,12 +91,12 @@ By double-clicking on one of the entries in the list on the left, you can change
 
 <img width="917" alt="style_overrides" src="https://user-images.githubusercontent.com/19747449/150302952-a1854b69-538c-4fd9-8ea0-b240cd9b5e61.png">
 
-## Remove All Features
+### Remove All Features
 
 1. Select the relevant text in document 
 2. Click on the button `Clear`
 
-# Tab: Font Search
+## Tab: Font Search
 
 The »Font Search« tab can be used to search for fonts with specific OpenType features. 
 
@@ -99,9 +104,9 @@ The »Font Search« tab can be used to search for fonts with specific OpenType f
 
 The list on the left shows the available features. After selecting one or more entries, the script analyzes all available fonts. The matching fonts are displayed in the list on the right.
 
-# Tab: Preferences
+## Tab: Preferences
 
-## Shaping Engine
+### Shaping Engine
 
 Set Lipika or Harfbuzz as the shaping engine for Latin and Indic script. If `Harfbuzz` is checked harfbuzz shaping is set for all languages for world ready composer. 
 
